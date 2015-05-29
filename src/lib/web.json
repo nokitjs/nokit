@@ -19,14 +19,18 @@
         ".ico": "image/x-icon"
     },
     "handlers": {
-        "*": "./static",
-        ".md": "./markdown",
-        ".less": "./less",
-        ".css": "./css"
+        "*": "./handlers/static",
+        "^/__res__/": "./handlers/resource",
+        ".md": "./handlers/markdown",
+        ".less": "./handlers/less",
+        ".css": "./handlers/css"
     },
     "responsePages": {
-        "500": "./500.html",
-        "404": "./404.html",
-        "dir": "./dir.html"
+        "500": "./templates/500.html",
+        "404": "./templates/404.html",
+        "dir": "./templates/dir.html"
+    },
+    "folders":{
+        "statics":"./statics"
     }
 }

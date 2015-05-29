@@ -6,10 +6,7 @@ var url = require("url");
 var console = require("./console");
 var utils = require("./utils");
 
-var CONFIG_FILE = './web.json',
-    HANDLERS_PATH = './handlers',
-    STATICS_PATH = './statics',
-    RESPONSE_PAGES_PATH = './templates';
+var CONFIG_FILE = './web.json';
 
 //定义Server.
 var Server = function(options) {
@@ -25,10 +22,10 @@ Server.prototype.infiConfigs = function(callback) {
     var systemConfigFile = path.resolve(installPath, CONFIG_FILE);
     var systemConfigs = utils.readJSONSync(systemConfigFile);
     utils.each(systemConfigs.handlers, function(name, _path) {
-        systemConfigs.handlers[name] = path.resolve(path.resolve(installPath, HANDLERS_PATH), _path);
+        systemConfigs.handlers[name] = path.resolve(installPath, _path);
     });
     utils.each(systemConfigs.responsePages, function(name, _path) {
-        systemConfigs.responsePages[name] = path.resolve(path.resolve(installPath, RESPONSE_PAGES_PATH), _path);
+        systemConfigs.responsePages[name] = path.resolve(installPath, _path);
     });
     //应用配置 
     var appConfigFile = path.resolve(self.options.root, CONFIG_FILE);
@@ -73,9 +70,23 @@ Server.prototype.loadResponsePages = function() {
     });
 };
 
-Server.prototype.handleRequest = function(req, res, error) {
+Server.prototype.matchHandler = function(req, res) {
     var self = this;
-    var handler = self.handlers[req.extname] || self.handlers["*"];
+    var handler = (function() {
+        return utils.each(self.handlers, function(name, _handler) {
+            if (name == '*') return;
+            var exp = new RegExp(name);
+            if (exp.test(req.url)) {
+                return _handler;
+            }
+        });
+    }()) || self.handlers[req.extname] || self.handlers["*"];
+    return handler;
+};
+
+Server.prototype.handleRequest = function(req, res) {
+    var self = this;
+    var handler = self.matchHandler(req, res);
     handler.handleRequest(req, res);
 };
 
@@ -121,7 +132,7 @@ Server.prototype.createServer = function() {
         req.postData = ''; //这里的 Post Data 只处理表单，不关心文件上传
         req.url = decodeURI(req.url || "");
         req.withoutQueryStringURL = req.url.split('?')[0].split('#')[0];
-        req.staticPath = path.resolve(self.configs.root, STATICS_PATH);
+        req.staticPath = path.resolve(self.configs.root, self.configs.folders.statics);
         req.physicalPath = path.normalize(req.staticPath + '/' + req.withoutQueryStringURL);
         req.extname = path.extname(req.physicalPath);
         req.mime = self.configs.mimeType[req.extname] || self.configs.mimeType["*"];

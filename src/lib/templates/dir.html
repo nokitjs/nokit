@@ -1,16 +1,25 @@
 <!doctype html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>folder</title>
+    <link rel="stylesheet" href="/__res__/common.css">
+    <link rel="stylesheet" href="/__res__/dir.css">
 </head>
+
 <body>
     <% $(this.request.url) %>
-    <hr/>
-    <ul>
-    <% $.each(this.items,function(i,item){ %>
-        <li><a href="<% $(item.name) %>"><% $(item.name) %></a></li>
-    <% }) %>
-    </ul>
+        <hr/>
+        <ul>
+            <% $.each(this.items,function(i,item){ %>
+                <li>
+                    <a href="<% $(item.name) %>">
+                        <% $(item.name) %>
+                    </a>
+                </li>
+            <% }) %>
+        </ul>
 </body>
+
 </html>
