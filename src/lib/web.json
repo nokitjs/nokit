@@ -1,0 +1,32 @@
+{
+    "port": 8000,
+    "defaults": ["index.html"],
+    "mimeType": {
+        "*": "application/octet-stream",
+        ".html": "text/html",
+        ".htm": "text/html",
+        ".md": "text/markdown",
+        ".css": "text/css",
+        ".less": "text/less",
+        ".txt": "text/plain",
+        ".js": "text/javascript",
+        ".json": "application/x-javascript",
+        ".png": "image/png",
+        ".jpg": "image/jpg",
+        ".jpeg": "image/jpeg",
+        ".gif": "image/gif",
+        ".bmp": "image/bmp",
+        ".ico": "image/x-icon"
+    },
+    "handlers": {
+        "*": "./static",
+        ".md": "./markdown",
+        ".less": "./less",
+        ".css": "./css"
+    },
+    "responsePages": {
+        "500": "./500.html",
+        "404": "./404.html",
+        "dir": "./dir.html"
+    }
+}

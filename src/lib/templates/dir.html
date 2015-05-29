@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>folder</title>
+</head>
+<body>
+    <% $(this.request.url) %>
+    <hr/>
+    <ul>
+    <% $.each(this.items,function(i,item){ %>
+        <li><a href="<% $(item.name) %>"><% $(item.name) %></a></li>
+    <% }) %>
+    </ul>
+</body>
+</html>

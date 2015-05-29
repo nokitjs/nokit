@@ -1,0 +1,4 @@
+{
+    "name":"less",
+    "main":"./handler.js"
+}

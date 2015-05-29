@@ -1,0 +1,1 @@
+/*csd*/exports.createDefine=function(a){return function(e,c,b){var d=b;if(typeof c==="function"){d=c;}if(typeof e==="id"){d=e;}d(a.require,a.exports,a);};};

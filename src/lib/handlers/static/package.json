@@ -1,0 +1,4 @@
+{
+    "name":"static",
+    "main":"./handler.js"
+}

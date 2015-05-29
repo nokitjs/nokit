@@ -1,0 +1,1 @@
+/*csd*/exports.encodeBase64=function(a){return new Buffer(a).toString("base64");};

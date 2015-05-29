@@ -1,0 +1,1 @@
+/*csd*/function initRhinoTest(){process={title:"dummy"};less.tree.functions.add=function(c,d){return new (less.tree.Dimension)(c.value+d.value);};less.tree.functions.increment=function(b){return new (less.tree.Dimension)(b.value+1);};less.tree.functions._color=function(a){if(a.value==="evil red"){return new (less.tree.Color)("600");}};}initRhinoTest();

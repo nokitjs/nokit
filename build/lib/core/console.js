@@ -1,0 +1,1 @@
+/*csd*/var fs=require("fs");var self=exports;var PREFIX_LOG="[Nokit][L]: ",PREFIX_INFO="[Nokit][I]: ",PREFIX_WARN="[Nokit][W]: ",PREFIX_ERROR="[Nokit][E]: ";self.log=function(a){console.error(PREFIX_LOG+a);};self.info=function(a){console.error(PREFIX_INFO+a);};self.warn=function(a){console.error(PREFIX_WARN+a);};self.error=function(a){console.error(PREFIX_ERROR+a);};

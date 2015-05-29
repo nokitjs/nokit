@@ -1,0 +1,4 @@
+{
+    "name":"forward",
+    "main":"./handler.js"
+}

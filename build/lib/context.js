@@ -1,1 +1,0 @@
-/*csd*/function Context(b,a){this.response=b;this.request=a;}Context.prototype.respone={};Context.prototype.request={};Context.prototype.files=[];module.exports=Context;
