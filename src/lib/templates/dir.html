@@ -14,7 +14,7 @@
         <ul>
             <% $.each(this.items,function(i,item){ %>
                 <li>
-                    <a href="<% $(item.name) %>">
+                    <a href="./<% $(item.name) %><% $(item.type=='folder'?'/':'') %>">
                         <% $(item.name) %>
                     </a>
                 </li>

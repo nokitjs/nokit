@@ -62,6 +62,10 @@ Handler.prototype.findDefaultFile = function(folder) {
 Handler.prototype.writeFolder = function(req, res) {
     var self = this;
     fs.readdir(req.physicalPath, function(err, files) {
+        if (err) {
+            self.server.responseError(req, res, err);
+            return;
+        }
         var items = [];
         files.forEach(function(item) {
             var itemPath = path.normalize(req.physicalPath + '/' + item);
