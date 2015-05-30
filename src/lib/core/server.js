@@ -79,7 +79,7 @@ Server.prototype.matchHandler = function(context) {
     var self = this;
     var handler = (function() {
         return utils.each(self.handlers, function(name, _handler) {
-            if (name == '*') return;
+            if (name == null || name == '*' || name[0] == '.') return;
             var exp = new RegExp(name);
             if (exp.test(context.request.url)) {
                 return _handler;
@@ -95,6 +95,17 @@ Server.prototype.handleRequest = function(context) {
     handler.handleRequest(context);
 };
 
+//查找默认文档
+Server.prototype.findDefaultFile = function(folder) {
+    var self = this;
+    return utils.each(self.configs.defaults, function(i, filename) {
+        var defaultFile = path.resolve(folder, filename);
+        if (fs.existsSync(defaultFile)) {
+            return defaultFile;
+        }
+    });
+};
+
 Server.prototype.createServer = function() {
     var self = this;
     self.httpServer = http.createServer(function(req, res) {
@@ -102,9 +113,23 @@ Server.prototype.createServer = function() {
         req.url = decodeURI(req.url || "");
         req.withoutQueryStringURL = req.url.split('?')[0].split('#')[0];
         req.publicPath = path.resolve(self.configs.root, self.configs.folders.public);
-        req.physicalPath = path.normalize(req.publicPath + '/' + req.withoutQueryStringURL);
-        req.extname = path.extname(req.physicalPath);
-        req.mime = self.configs.mimeType[req.extname] || self.configs.mimeType["*"];
+        req._setPhysicalPath = function(_path) {
+            req.physicalPath = _path;
+            req.extname = path.extname(req.physicalPath);
+            req.mime = self.configs.mimeType[req.extname] || self.configs.mimeType["*"];
+            req.physicalPathExists = fs.existsSync(req.physicalPath);
+            if (req.physicalPathExists) {
+                req.physicalPathStats = fs.statSync(req.physicalPath);
+                req.physicalPathType = req.physicalPathStats.isDirectory() ? 'folder' : 'file'
+            }
+        };
+        req._setPhysicalPath(path.normalize(req.publicPath + '/' + req.withoutQueryStringURL));
+        if (req.physicalPathType === 'folder') {
+            var defaultFile = self.findDefaultFile(req.physicalPath);
+            if (defaultFile) {
+                req._setPhysicalPath(defaultFile);
+            }
+        }
         req.addListener("data", function(postDataChunk) {
             req.postData += postDataChunk;
         });

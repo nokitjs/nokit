@@ -1,10 +1,11 @@
 {
     "port": 8000,
-    "defaults": ["index.html"],
+    "defaults": ["index.html","index.nsp"],
     "mimeType": {
         "*": "application/octet-stream",
         ".html": "text/html",
         ".htm": "text/html",
+        ".nsp": "text/html",
         ".md": "text/markdown",
         ".css": "text/css",
         ".less": "text/less",
@@ -21,6 +22,7 @@
     "handlers": {
         "*": "./handlers/static",
         "^/__res__/": "./handlers/resource",
+        ".nsp": "./handlers/nsp",
         ".md": "./handlers/markdown",
         ".less": "./handlers/less",
         ".css": "./handlers/css"
@@ -30,7 +32,7 @@
         "404": "./templates/404.html",
         "dir": "./templates/dir.html"
     },
-    "folders":{
-        "public":"./public"
+    "folders": {
+        "public": "./public"
     }
 }

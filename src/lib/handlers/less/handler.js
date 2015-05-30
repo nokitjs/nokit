@@ -10,23 +10,21 @@ var Handler = module.exports = function(server) {
 //处理请求
 Handler.prototype.handleRequest = function(context) {
     var self = this;
-    fs.exists(context.request.physicalPath, function(exists) {
-        if (exists) {
-            fs.readFile(context.request.physicalPath, function(err, data) {
-                if (err) {
-                    context.responseError(err);
-                } else {
-                    less.render(data.toString(), function(err, cssText) {
-                        if (err) {
-                            context.responseError(err);
-                        } else {
-                            context.responseContent(cssText, self.configs.mimeType['.css']);
-                        }
-                    });
-                }
-            });
-        } else {
-            context.responseNotFound();
-        }
-    });
+    if (context.request.physicalPathExists) {
+        fs.readFile(context.request.physicalPath, function(err, data) {
+            if (err) {
+                context.responseError(err);
+            } else {
+                less.render(data.toString(), function(err, cssText) {
+                    if (err) {
+                        context.responseError(err);
+                    } else {
+                        context.responseContent(cssText, self.configs.mimeType['.css']);
+                    }
+                });
+            }
+        });
+    } else {
+        context.responseNotFound();
+    }
 };

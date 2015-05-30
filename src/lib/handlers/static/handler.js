@@ -8,6 +8,7 @@ var Handler = module.exports = function(server) {
     var self = this;
     self.server = server;
     self.configs = self.server.configs;
+    self.utils = self.server.require('./core/utils');
 };
 
 //处理请求
@@ -24,38 +25,15 @@ Handler.prototype.handleRequest = function(context) {
 Handler.prototype.handleFileSystem = function(context) {
     var self = this;
     //处理物理文件
-    fs.exists(context.request.physicalPath, function(exists) {
-        if (exists) {
-            fs.stat(context.request.physicalPath, function(err, stats) {
-                if (stats.isDirectory()) {
-                    var defaultFile = self.findDefaultFile(context.request.physicalPath);
-                    if (defaultFile) {
-                        context.request.physicalPath = defaultFile;
-                        context.request.mime = self.configs.mimeType['.html'];
-                        self.writeFile(context);
-                    } else {
-                        self.writeFolder(context);
-                    }
-                } else {
-                    self.writeFile(context);
-                }
-            });
+    if (context.request.physicalPathExists) {
+        if (context.request.physicalPathType == 'folder') {
+            self.writeFolder(context);
         } else {
-            context.responseNotFound();
+            self.writeFile(context);
         }
-    });
-};
-
-//查找默认文档
-Handler.prototype.findDefaultFile = function(folder) {
-    var self = this;
-    var utils = self.server.require('./core/utils');
-    return utils.each(self.server.configs.defaults, function(i, filename) {
-        var defaultFile = path.resolve(folder, filename);
-        if (fs.existsSync(defaultFile)) {
-            return defaultFile;
-        }
-    });
+    } else {
+        context.responseNotFound();
+    }
 };
 
 //输出目录

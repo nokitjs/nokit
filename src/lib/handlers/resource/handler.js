@@ -13,7 +13,9 @@ var Handler = module.exports = function(server) {
 //处理请求
 Handler.prototype.handleRequest = function(context) {
     var self = this;
-    context.request.physicalPath = path.resolve(self.server.installPath, context.request.url.replace(URL_PREFIX, RESOURCE_PATH));
+    //console.log('____res_____');
+    var resPath = path.resolve(self.server.installPath, context.request.url.replace(URL_PREFIX, RESOURCE_PATH));
+    context.request._setPhysicalPath(resPath);
     if (self.server.handlers['*']) {
         self.server.handlers['*'].handleRequest(context);
     } else {
