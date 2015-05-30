@@ -16,8 +16,10 @@
     </div>
     <div class='footer'>
         Powered By
-        <% $(this.server.packageInfo.name) %>
-        <% $(this.server.packageInfo.version) %>
+        <a href="<% $(this.server.packageInfo.website) %>" target="_blank">
+            <% $(this.server.packageInfo.name) %>
+            <% $(this.server.packageInfo.version) %>
+        </a>
     </div>
 </body>
 

@@ -1,0 +1,12 @@
+.path {
+    padding-bottom: 5px;
+    border-bottom: solid 1px #eaeaea;
+}
+.list {
+    list-style-type: none;
+    margin: 0px;
+    padding: 10px;
+}
+.prefix {
+    color: #666;
+}
