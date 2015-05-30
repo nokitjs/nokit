@@ -1,1 +1,0 @@
-/*csd*/describe("less.js browser behaviour",function(){testLessEqualsInDocument();it("has some log messages",function(){expect(logMessages.length).toBeGreaterThan(0);});for(var a=0;a<testFiles.length;a++){var b=testSheets[a];testSheet(b);}});

@@ -1,0 +1,38 @@
+{
+    "port": 8000,
+    "defaults": ["index.html","index.nsp"],
+    "mimeType": {
+        "*": "application/octet-stream",
+        ".html": "text/html",
+        ".htm": "text/html",
+        ".nsp": "text/html",
+        ".md": "text/markdown",
+        ".css": "text/css",
+        ".less": "text/less",
+        ".txt": "text/plain",
+        ".js": "text/javascript",
+        ".json": "application/x-javascript",
+        ".png": "image/png",
+        ".jpg": "image/jpg",
+        ".jpeg": "image/jpeg",
+        ".gif": "image/gif",
+        ".bmp": "image/bmp",
+        ".ico": "image/x-icon"
+    },
+    "handlers": {
+        "*": "./handlers/static",
+        "^/__res__/": "./handlers/resource",
+        ".nsp": "./handlers/nsp",
+        ".md": "./handlers/markdown",
+        ".less": "./handlers/less",
+        ".css": "./handlers/css"
+    },
+    "responsePages": {
+        "500": "./templates/500.html",
+        "404": "./templates/404.html",
+        "dir": "./templates/dir.html"
+    },
+    "folders": {
+        "public": "./public"
+    }
+}

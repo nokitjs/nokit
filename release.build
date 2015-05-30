@@ -1,4 +1,4 @@
 {
     "inDir":"./src",
-    "outDir":"./build"
+    "outDir":"./build/nokit"
 }

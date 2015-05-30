@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello NSP</title>
+    <link rel="stylesheet" href="css/test.css">
+</head>
+<body>
+<% $.include("./head.nsp") %>
+<%= "Hello NSP!" %>
+<iframe src="readme.md"></iframe>
+<% $.include("./head.nsp") %>
+</body>
+</html>

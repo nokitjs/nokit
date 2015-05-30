@@ -1,0 +1,8 @@
+{
+    "name": "Nokit",
+    "description": "最简单易用的 Nodejs 开发框架",
+    "version": "1.0.0",
+    "author": "Houfeng",
+    "email":"admin@xhou.net",
+    "main":"./lib/index.js"
+}
