@@ -6,26 +6,33 @@ var url = require("url");
 var console = require("./console");
 var utils = require("./utils");
 
-var CONFIG_FILE = './web.json';
+var CONFIG_FILE = './web.json',
+    PACKAGE_FILE = '../package.json';
 
 //定义Server.
 var Server = function(options) {
     var self = this;
     self.options = options || {};
+    self.installPath = path.dirname(path.dirname(module.filename));
     self.init(options);
+};
+
+Server.prototype.loadPackageInfo = function() {
+    var self = this;
+    var packageFile = path.resolve(self.installPath, PACKAGE_FILE);
+    self.packageInfo = utils.readJSONSync(packageFile);
 };
 
 Server.prototype.infiConfigs = function(callback) {
     var self = this;
     //公共配置
-    var installPath = path.dirname(path.dirname(module.filename));
-    var systemConfigFile = path.resolve(installPath, CONFIG_FILE);
+    var systemConfigFile = path.resolve(self.installPath, CONFIG_FILE);
     var systemConfigs = utils.readJSONSync(systemConfigFile);
     utils.each(systemConfigs.handlers, function(name, _path) {
-        systemConfigs.handlers[name] = path.resolve(installPath, _path);
+        systemConfigs.handlers[name] = path.resolve(self.installPath, _path);
     });
     utils.each(systemConfigs.responsePages, function(name, _path) {
-        systemConfigs.responsePages[name] = path.resolve(installPath, _path);
+        systemConfigs.responsePages[name] = path.resolve(self.installPath, _path);
     });
     //应用配置 
     var appConfigFile = path.resolve(self.options.root, CONFIG_FILE);
@@ -41,9 +48,6 @@ Server.prototype.infiConfigs = function(callback) {
     self.configs = utils.mix(self.configs, systemConfigs, true, null, 2, true);
     self.configs = utils.mix(self.configs, appConfigs, true, null, 2, true);
     self.configs = utils.mix(self.configs, self.options, true, null, 2, true);
-    //其它
-    self.installPath = installPath;
-    self.root = self.configs.root;
     //
     if (callback) callback();
 };
@@ -173,6 +177,7 @@ Server.prototype.init = function(options) {
     if (!self.options.root) {
         return console.error("创建 Server 实例时发生异常，必需指定一个存在的根目录。");
     }
+    self.loadPackageInfo();
     self.infiConfigs();
     self.loadHandlers();
     self.loadResponsePages();

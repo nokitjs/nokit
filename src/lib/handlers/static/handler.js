@@ -76,7 +76,8 @@ Handler.prototype.writeFolder = function(req, res) {
             });
         });
         var model = {
-            server: self,
+            server: self.server,
+            handler: self,
             request: req,
             items: items
         };

@@ -31,8 +31,10 @@ Handler.prototype.handleRequest = function(req, res) {
 //读样式
 Handler.prototype.readStyle = function() {
     var self = this;
-    if (self.styleCache) return styleCache;
-    var styleFile = __dirname + "/markdown/markdown.css";
+    if (self.styleCache) {
+        return self.styleCache;
+    }
+    var styleFile = __dirname + "/markdown.css";
     if (fs.existsSync(styleFile)) {
         self.styleCache = fs.readFileSync(styleFile);
     }
