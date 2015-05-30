@@ -13,37 +13,52 @@ var Handler = module.exports = function(server) {
 Handler.prototype.handleRequest = function(context) {
     var self = this;
     if (context.request.physicalPathExists) {
-        fs.readFile(context.request.physicalPath, function(err, buffer) {
-            if (err) {
-                context.responseError(err);
-            } else {
-                var page = self.tp.compile(buffer.toString(), {
-                    extend: self.createExtendObject(context)
-                });
-                self.execPage(context, page);
-            }
-        });
+        var page = self.compilePage(context, context.request.physicalPath);
+        var content = self.execPage(context, page);
+        context.responseContent(content);
     } else {
         context.responseNotFound();
     }
 };
 
+Handler.prototype.compilePage = function(context, _path) {
+    var self = this;
+    var buffer = fs.readFileSync(_path);
+    var page = self.tp.compile(buffer.toString(), {
+        extend: self.createExtendObject(context)
+    });
+    return page;
+};
+
+
+Handler.prototype.resolvePath = function(context, _path) {
+    var self = this;
+    return path.resolve(path.dirname(context.request.physicalPath), _path);
+};
+
 Handler.prototype.createExtendObject = function(context) {
     var self = this;
-    var extendObject = {};
-    self.utils.copy(self.utils, extendObject);
-    extendObject.require = function(_path) {
-        try {
-            return require(_path);
-        } catch (ex) {
+    var extendObject = {
+        "require": function(_path) {
             try {
-                var resolvePath = path.resolve(path.dirname(context.request.physicalPath), _path);
-                return require(resolvePath);
+                return require(_path);
             } catch (ex) {
-                context.responseError('在 $.require 时 " ' + _path + ' " 没有找到');
+                try {
+                    var resolvePath = self.resolvePath(context, _path);
+                    return require(resolvePath);
+                } catch (ex) {
+                    context.responseError('在 $.require 时 " ' + _path + ' " 没有找到');
+                }
             }
+        },
+        "include": function(_path) {
+            var resolvePath = self.resolvePath(context, _path);
+            var page = self.compilePage(context, resolvePath);
+            var content = self.execPage(context, page);
+            return content;
         }
     };
+    self.utils.copy(self.utils, extendObject);
     return extendObject;
 };
 
@@ -56,6 +71,5 @@ Handler.prototype.execPage = function(context, page) {
         request: context.request,
         response: context.response
     };
-    var content = page(model);
-    context.responseContent(content);
+    return page(model);
 };
