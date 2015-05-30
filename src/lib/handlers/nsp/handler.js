@@ -23,11 +23,15 @@ Handler.prototype.handleRequest = function(context) {
 
 Handler.prototype.compilePage = function(context, _path) {
     var self = this;
-    var buffer = fs.readFileSync(_path);
-    var page = self.tp.compile(buffer.toString(), {
-        extend: self.createExtendObject(context)
-    });
-    return page;
+    try {
+        var buffer = fs.readFileSync(_path);
+        var page = self.tp.compile(buffer.toString(), {
+            extend: self.createExtendObject(context)
+        });
+        return page;
+    } catch (ex) {
+        context.responseError(ex.message);
+    }
 };
 
 
@@ -73,5 +77,9 @@ Handler.prototype.execPage = function(context, page) {
         request: context.request,
         response: context.response
     };
-    return page(model);
+    try {
+        return page(model);
+    } catch (ex) {
+        context.responseError(ex.message);
+    }
 };
