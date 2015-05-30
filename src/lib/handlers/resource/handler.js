@@ -11,12 +11,12 @@ var Handler = module.exports = function(server) {
 };
 
 //处理请求
-Handler.prototype.handleRequest = function(req, res) {
+Handler.prototype.handleRequest = function(context) {
     var self = this;
-    req.physicalPath = path.resolve(self.server.installPath, req.url.replace(URL_PREFIX, RESOURCE_PATH));
+    context.request.physicalPath = path.resolve(self.server.installPath, context.request.url.replace(URL_PREFIX, RESOURCE_PATH));
     if (self.server.handlers['*']) {
-        self.server.handlers['*'].handleRequest(req, res);
+        self.server.handlers['*'].handleRequest(context);
     } else {
-        self.server.responseNotFound(req, res);
+        context.responseNotFound();
     }
 };

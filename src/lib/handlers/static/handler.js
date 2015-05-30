@@ -11,37 +11,37 @@ var Handler = module.exports = function(server) {
 };
 
 //处理请求
-Handler.prototype.handleRequest = function(req, res) {
+Handler.prototype.handleRequest = function(context) {
     var self = this;
     try {
-        self.handleFileSystem(req, res);
+        self.handleFileSystem(context);
     } catch (ex) {
-        self.server.responseError(req, res, ex.message);
+        context.responseError(ex.message);
     }
 };
 
 //处理文件系统
-Handler.prototype.handleFileSystem = function(req, res) {
+Handler.prototype.handleFileSystem = function(context) {
     var self = this;
     //处理物理文件
-    fs.exists(req.physicalPath, function(exists) {
+    fs.exists(context.request.physicalPath, function(exists) {
         if (exists) {
-            fs.stat(req.physicalPath, function(err, stats) {
+            fs.stat(context.request.physicalPath, function(err, stats) {
                 if (stats.isDirectory()) {
-                    var defaultFile = self.findDefaultFile(req.physicalPath);
+                    var defaultFile = self.findDefaultFile(context.request.physicalPath);
                     if (defaultFile) {
-                        req.physicalPath = defaultFile;
-                        req.mime = self.configs.mimeType['.html'];
-                        self.writeFile(req, res);
+                        context.request.physicalPath = defaultFile;
+                        context.request.mime = self.configs.mimeType['.html'];
+                        self.writeFile(context);
                     } else {
-                        self.writeFolder(req, res);
+                        self.writeFolder(context);
                     }
                 } else {
-                    self.writeFile(req, res);
+                    self.writeFile(context);
                 }
             });
         } else {
-            self.server.responseNotFound(req, res);
+            context.responseNotFound();
         }
     });
 };
@@ -59,16 +59,16 @@ Handler.prototype.findDefaultFile = function(folder) {
 };
 
 //输出目录
-Handler.prototype.writeFolder = function(req, res) {
+Handler.prototype.writeFolder = function(context) {
     var self = this;
-    fs.readdir(req.physicalPath, function(err, files) {
+    fs.readdir(context.request.physicalPath, function(err, files) {
         if (err) {
-            self.server.responseError(req, res, err);
+            context.responseError(err);
             return;
         }
         var items = [];
         files.forEach(function(item) {
-            var itemPath = path.normalize(req.physicalPath + '/' + item);
+            var itemPath = path.normalize(context.request.physicalPath + '/' + item);
             var stats = fs.statSync(itemPath); //临时用同步方式
             items.push({
                 name: item,
@@ -78,21 +78,21 @@ Handler.prototype.writeFolder = function(req, res) {
         var model = {
             server: self.server,
             handler: self,
-            request: req,
+            request: context.request,
             items: items
         };
-        self.server.responseContent(req, res, self.server.responsePages['dir'](model), self.configs.mimeType['.html']);
+        context.responseContent(self.server.responsePages['dir'](model), self.configs.mimeType['.html']);
     });
 };
 
 //输出静态文件
-Handler.prototype.writeFile = function(req, res) {
+Handler.prototype.writeFile = function(context) {
     var self = this;
-    fs.readFile(req.physicalPath, function(err, data) {
+    fs.readFile(context.request.physicalPath, function(err, data) {
         if (err) {
-            self.server.responseError(req, res, err);
+            context.responseError(err);
         } else {
-            self.server.responseContent(req, res, data);
+            context.responseContent(data);
         }
     });
 };

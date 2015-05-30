@@ -5,6 +5,7 @@ var querystring = require("querystring");
 var url = require("url");
 var console = require("./console");
 var utils = require("./utils");
+var Context = require("./context");
 
 var CONFIG_FILE = './web.json',
     PACKAGE_FILE = '../package.json';
@@ -74,60 +75,24 @@ Server.prototype.loadResponsePages = function() {
     });
 };
 
-Server.prototype.matchHandler = function(req, res) {
+Server.prototype.matchHandler = function(context) {
     var self = this;
     var handler = (function() {
         return utils.each(self.handlers, function(name, _handler) {
             if (name == '*') return;
             var exp = new RegExp(name);
-            if (exp.test(req.url)) {
+            if (exp.test(context.request.url)) {
                 return _handler;
             }
         });
-    }()) || self.handlers[req.extname] || self.handlers["*"];
+    }()) || self.handlers[context.request.extname] || self.handlers["*"];
     return handler;
 };
 
-Server.prototype.handleRequest = function(req, res) {
+Server.prototype.handleRequest = function(context) {
     var self = this;
-    var handler = self.matchHandler(req, res);
-    handler.handleRequest(req, res);
-};
-
-Server.prototype.responseError = function(req, res, errorMessage) {
-    var self = this;
-    res.writeHead(500, {
-        'Content-Type': self.configs.mimeType['.html'],
-        'url': req.url
-    });
-    var model = {
-        errorMessage: errorMessage,
-        server: self,
-        request: req
-    };
-    res.end(self.responsePages["500"](model));
-};
-
-Server.prototype.responseNotFound = function(req, res) {
-    var self = this;
-    res.writeHead(404, {
-        'Content-Type': self.configs.mimeType['.html'],
-        'url': req.url
-    });
-    var model = {
-        server: self,
-        request: req
-    };
-    res.end(self.responsePages["404"](model));
-};
-
-Server.prototype.responseContent = function(req, res, content, mime) {
-    var self = this;
-    res.writeHead(200, {
-        'Content-Type': mime || req.mime,
-        'url': req.url
-    });
-    res.end(content);
+    var handler = self.matchHandler(context);
+    handler.handleRequest(context);
 };
 
 Server.prototype.createServer = function() {
@@ -136,8 +101,8 @@ Server.prototype.createServer = function() {
         req.postData = ''; //这里的 Post Data 只处理表单，不关心文件上传
         req.url = decodeURI(req.url || "");
         req.withoutQueryStringURL = req.url.split('?')[0].split('#')[0];
-        req.staticPath = path.resolve(self.configs.root, self.configs.folders.statics);
-        req.physicalPath = path.normalize(req.staticPath + '/' + req.withoutQueryStringURL);
+        req.publicPath = path.resolve(self.configs.root, self.configs.folders.public);
+        req.physicalPath = path.normalize(req.publicPath + '/' + req.withoutQueryStringURL);
         req.extname = path.extname(req.physicalPath);
         req.mime = self.configs.mimeType[req.extname] || self.configs.mimeType["*"];
         req.addListener("data", function(postDataChunk) {
@@ -145,7 +110,7 @@ Server.prototype.createServer = function() {
         });
         req.addListener("end", function() {
             req.postData = querystring.parse(req.postData);
-            self.handleRequest(req, res);
+            self.handleRequest(new Context(self, req, res));
         });
     });
 };

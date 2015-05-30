@@ -8,25 +8,25 @@ var Handler = module.exports = function(server) {
 };
 
 //处理请求
-Handler.prototype.handleRequest = function(req, res) {
+Handler.prototype.handleRequest = function(context) {
     var self = this;
-    fs.exists(req.physicalPath, function(exists) {
+    fs.exists(context.request.physicalPath, function(exists) {
         if (exists) {
-            fs.readFile(req.physicalPath, function(err, data) {
+            fs.readFile(context.request.physicalPath, function(err, data) {
                 if (err) {
-                    self.server.responseError(req, res, err);
+                    context.responseError(err);
                 } else {
                     less.render(data.toString(), function(err, cssText) {
                         if (err) {
-                            self.server.responseError(req, res, err);
+                            context.responseError(err);
                         } else {
-                            self.server.responseContent(req, res, cssText, self.configs.mimeType['.css']);
+                            context.responseContent(cssText, self.configs.mimeType['.css']);
                         }
                     });
                 }
             });
         } else {
-            self.server.responseNotFound(req, res);
+            context.responseNotFound();
         }
     });
 };

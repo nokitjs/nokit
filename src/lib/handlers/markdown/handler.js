@@ -8,22 +8,22 @@ var Handler = module.exports = function(server) {
 };
 
 //处理请求
-Handler.prototype.handleRequest = function(req, res) {
+Handler.prototype.handleRequest = function(context) {
     var self = this;
-    fs.exists(req.physicalPath, function(exists) {
+    fs.exists(context.request.physicalPath, function(exists) {
         if (exists) {
-            fs.readFile(req.physicalPath, function(err, data) {
+            fs.readFile(context.request.physicalPath, function(err, data) {
                 if (err) {
-                    self.server.responseError(req, res, err);
+                    context.responseError(err);
                 } else {
                     var style = self.readStyle();
                     var body = markdown.toHTML(data.toString());
                     var html = "<html>\r\n<head>\r\n<title>Markdown Preview</title>\r\n<meta charset=\"UTF-8\"/>\r\n<style>\r\n" + style + "\r\n</style>\r\n</head>\r\n<body>\r\n" + body + "\r\n</body>\r\n</html>";
-                    self.server.responseContent(req, res, html, self.configs.mimeType['.html']);
+                    context.responseContent(html, self.configs.mimeType['.html']);
                 }
             });
         } else {
-            self.server.responseNotFound(req, res);
+            context.responseNotFound();
         }
     });
 };

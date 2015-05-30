@@ -31,6 +31,6 @@
         "dir": "./templates/dir.html"
     },
     "folders":{
-        "statics":"./statics"
+        "public":"./public"
     }
 }
