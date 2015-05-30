@@ -8,14 +8,23 @@ body {
     color: #333;
 }
 .header {
-    background-color: #222;
+    background-color: #303030;
     padding: 10px 15px;
-    color: #eee;
+    color: #f3f3f3;
     font-size: 18px;
     font-weight: bold;
 }
 .content {
     padding: 25px 15px;
+}
+.content a {
+    color: #333;
+}
+.quote {
+    margin: 0px;
+    padding: 10px;
+    font-style: italic;
+    color: #666;
 }
 .footer {
     padding: 10px 15px;
@@ -24,9 +33,6 @@ body {
     color: #888;
     font-size: 14px;
 }
-.quote {
-    margin: 0px;
-    padding: 10px;
-    font-style: italic;
-    color: #666;
+.footer a {
+    color: #888;
 }
