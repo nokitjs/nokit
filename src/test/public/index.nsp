@@ -5,8 +5,9 @@
     <title>Hello NSP</title>
 </head>
 <body>
-<%= $.include("./head.nsp") %>
+<% $.include("./head.nsp") %>
 <%= "Hello NSP!" %>
 <iframe src="readme.md"></iframe>
+<% $.include("./head.nsp") %>
 </body>
 </html>

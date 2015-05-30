@@ -40,6 +40,7 @@ Handler.prototype.createExtendObject = function(context) {
     var self = this;
     var extendObject = {
         "require": function(_path) {
+            var $ = this;
             try {
                 return require(_path);
             } catch (ex) {
@@ -52,10 +53,11 @@ Handler.prototype.createExtendObject = function(context) {
             }
         },
         "include": function(_path) {
+            var $ = this;
             var resolvePath = self.resolvePath(context, _path);
             var page = self.compilePage(context, resolvePath);
             var content = self.execPage(context, page);
-            return content;
+            $(content);
         }
     };
     self.utils.copy(self.utils, extendObject);
