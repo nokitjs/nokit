@@ -9,8 +9,7 @@ var Context = function(server, req, res) {
 Context.prototype.responseError = function(errorMessage) {
     var self = this;
     self.response.writeHead(500, {
-        'Content-Type': self.configs.mimeType['.html'],
-        'url': self.request.url
+        'Content-Type': self.configs.mimeType['.html']
     });
     var model = {
         errorMessage: errorMessage,
@@ -25,8 +24,7 @@ Context.prototype.responseError = function(errorMessage) {
 Context.prototype.responseNotFound = function() {
     var self = this;
     self.response.writeHead(404, {
-        'Content-Type': self.configs.mimeType['.html'],
-        'url': self.request.url
+        'Content-Type': self.configs.mimeType['.html']
     });
     var model = {
         server: self.server,
@@ -40,8 +38,7 @@ Context.prototype.responseNotFound = function() {
 Context.prototype.responseContent = function(content, mime) {
     var self = this;
     self.response.writeHead(200, {
-        'Content-Type': mime || self.request.mime,
-        'url': self.request.url
+        'Content-Type': mime || self.request.mime
     });
     self.response.end(content);
 };

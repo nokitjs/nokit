@@ -1,14 +1,17 @@
 var http = require('http');
 var fs = require('fs');
 var path = require('path');
-var querystring = require("querystring");
+var qs = require("querystring");
 var url = require("url");
 var console = require("./console");
 var utils = require("./utils");
 var Context = require("./context");
+var Cookie = require("./Cookie");
 
 var CONFIG_FILE = './web.json',
-    PACKAGE_FILE = '../package.json';
+    PACKAGE_FILE = '../package.json',
+    HEADER_MARK_NAME = 'X-Powered-By',
+    SESSION_ID_NAME = '__session_id__';
 
 //定义Server.
 var Server = function(options) {
@@ -24,7 +27,7 @@ Server.prototype.loadPackageInfo = function() {
     self.packageInfo = utils.readJSONSync(packageFile);
 };
 
-Server.prototype.infiConfigs = function(callback) {
+Server.prototype.initConfigs = function(callback) {
     var self = this;
     //公共配置
     var systemConfigFile = path.resolve(self.installPath, CONFIG_FILE);
@@ -35,6 +38,9 @@ Server.prototype.infiConfigs = function(callback) {
     utils.each(systemConfigs.responsePages, function(name, _path) {
         systemConfigs.responsePages[name] = path.resolve(self.installPath, _path);
     });
+    if (systemConfigs.session && systemConfigs.session.provider) {
+        systemConfigs.session.provider = path.resolve(self.installPath, systemConfigs.session.provider);
+    }
     //应用配置 
     var appConfigFile = path.resolve(self.options.root, CONFIG_FILE);
     var appConfigs = utils.readJSONSync(appConfigFile);
@@ -44,6 +50,9 @@ Server.prototype.infiConfigs = function(callback) {
     utils.each(appConfigs.responsePages, function(name, _path) {
         appConfigs.responsePages[name] = path.resolve(self.options.root, _path);
     });
+    if (appConfigs.session && appConfigs.session.provider) {
+        appConfigs.session.provider = path.resolve(self.options.root, appConfigs.session.provider);
+    }
     //合并
     self.configs = {};
     self.configs = utils.mix(self.configs, systemConfigs, true, null, 2, true);
@@ -106,36 +115,103 @@ Server.prototype.findDefaultFile = function(folder) {
     });
 };
 
+Server.prototype.setHeaders = function(context) {
+    var self = this;
+    var req = context.request,
+        res = context.response;
+    res.setHeader(HEADER_MARK_NAME, self.packageInfo.name);
+    utils.each(self.configs.headers, function(name, value) {
+        res.setHeader(name, value);
+    });
+};
+
+Server.prototype.handleRequestPath = function(context) {
+    var self = this;
+    var req = context.request,
+        res = context.response;
+    req.url = decodeURI(req.url || "");
+    req.withoutQueryStringURL = req.url.split('?')[0].split('#')[0];
+    req.queryString = (req.url.split('?')[1] || '').split('#')[0];
+    req.publicPath = path.resolve(self.configs.root, self.configs.folders.public);
+    req._setPhysicalPath = function(_path) {
+        req.physicalPath = _path;
+        req.extname = path.extname(req.physicalPath);
+        req.mime = self.configs.mimeType[req.extname] || self.configs.mimeType["*"];
+        req.physicalPathExists = fs.existsSync(req.physicalPath);
+        if (req.physicalPathExists) {
+            req.physicalPathStats = fs.statSync(req.physicalPath);
+            req.physicalPathType = req.physicalPathStats.isDirectory() ? 'folder' : 'file'
+        }
+    };
+    req._setPhysicalPath(path.normalize(req.publicPath + '/' + req.withoutQueryStringURL));
+    if (req.physicalPathType === 'folder') {
+        var defaultFile = self.findDefaultFile(req.physicalPath);
+        if (defaultFile) {
+            req._setPhysicalPath(defaultFile);
+        }
+    }
+};
+
+Server.prototype.handleRequestData = function(context) {
+    var self = this;
+    var req = context.request,
+        res = context.response;
+    req.queryData = qs.parse(req.queryString) || {};
+    req.formData = qs.parse(req.postBuffer) || {};
+};
+
+Server.prototype.handleCookie = function(context) {
+    var self = this;
+    var req = context.request,
+        res = context.response;
+    req.cookie = new Cookie({
+        content: req.headers["cookie"]
+    });
+    res.cookie = new Cookie({
+        response: res
+    });
+};
+
+Server.prototype.handleSession = function(context) {
+    var self = this;
+    if (!self.configs.session.state) return;
+    var req = context.request,
+        res = context.response;
+    req.sessionId = (req.cookie.get(SESSION_ID_NAME) || {}).value;
+    if (!req.sessionId) {
+        req.sessionId = utils.newGuid();
+        res.cookie.add(SESSION_ID_NAME, req.sessionId);
+    }
+    //--
+    context.session = new self.SessionProvier({
+        sessionId: req.sessionId,
+        server: self
+    });
+};
+
+Server.prototype.loadSessionProvider = function() {
+    var self = this;
+    if (!self.configs.session.state) return;
+    self.SessionProvier = require(self.configs.session.provider);
+};
+
 Server.prototype.createServer = function() {
     var self = this;
     self.httpServer = http.createServer(function(req, res) {
-        req.postData = ''; //这里的 Post Data 只处理表单，不关心文件上传
-        req.url = decodeURI(req.url || "");
-        req.withoutQueryStringURL = req.url.split('?')[0].split('#')[0];
-        req.publicPath = path.resolve(self.configs.root, self.configs.folders.public);
-        req._setPhysicalPath = function(_path) {
-            req.physicalPath = _path;
-            req.extname = path.extname(req.physicalPath);
-            req.mime = self.configs.mimeType[req.extname] || self.configs.mimeType["*"];
-            req.physicalPathExists = fs.existsSync(req.physicalPath);
-            if (req.physicalPathExists) {
-                req.physicalPathStats = fs.statSync(req.physicalPath);
-                req.physicalPathType = req.physicalPathStats.isDirectory() ? 'folder' : 'file'
-            }
-        };
-        req._setPhysicalPath(path.normalize(req.publicPath + '/' + req.withoutQueryStringURL));
-        if (req.physicalPathType === 'folder') {
-            var defaultFile = self.findDefaultFile(req.physicalPath);
-            if (defaultFile) {
-                req._setPhysicalPath(defaultFile);
-            }
-        }
-        req.addListener("data", function(postDataChunk) {
-            req.postData += postDataChunk;
+        var context = new Context(self, req, res);
+        self.handleRequestPath(context);
+        self.setHeaders(context);
+        self.handleCookie(context);
+        self.handleSession(context);
+        //接收数据handleSession
+        req.postBuffer = ''; //这里的 Post Data 只处理表单，不关心文件上传
+        req.addListener("data", function(chunk) {
+            req.postBuffer += chunk;
         });
+        //--
         req.addListener("end", function() {
-            req.postData = querystring.parse(req.postData);
-            self.handleRequest(new Context(self, req, res));
+            self.handleRequestData(context);
+            self.handleRequest(context);
         });
     });
 };
@@ -168,8 +244,9 @@ Server.prototype.init = function(options) {
         return console.error("创建 Server 实例时发生异常，必需指定一个存在的根目录。");
     }
     self.loadPackageInfo();
-    self.infiConfigs();
+    self.initConfigs();
     self.loadHandlers();
+    self.loadSessionProvider();
     self.loadResponsePages();
     self.createServer();
 };

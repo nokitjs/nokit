@@ -4,11 +4,32 @@
     <meta charset="UTF-8">
     <title>Hello NSP</title>
     <link rel="stylesheet" href="css/test.css">
+    <style>
+        body{padding:20px;}
+        label{display:block;margin-top:20px;font-weight:600;}
+    </style>
 </head>
 <body>
 <% $.include("./head.nsp") %>
 <%= "Hello NSP!" %>
-<iframe src="readme.md"></iframe>
-<% $.include("./head.nsp") %>
+<label>queryData:</label>
+<%= JSON.stringify(this.request.queryData) %>
+<label>formData:</label>
+<%= JSON.stringify(this.request.formData) %>
+<label>headers</label>
+<%= JSON.stringify(this.request.headers) %>
+<label>cookies</label>
+<%= JSON.stringify(this.request.cookie||"null") %>
+<form method='post'>
+    <label>name</label> <input type="text" name="name">
+    <label>age</label> <input type="text" name="age">
+    <input type="submit" value="submit">
+</form>
+<%
+    var x=this.context.session.get('test')||0;
+    x++;
+    this.context.session.add('test',x);
+    $(x);
+%>
 </body>
 </html>
