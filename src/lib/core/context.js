@@ -8,6 +8,7 @@ var Context = function(server, req, res) {
 
 Context.prototype.responseError = function(errorMessage) {
     var self = this;
+    if (self.invalid) return;
     self.response.writeHead(500, {
         'Content-Type': self.configs.mimeType['.html']
     });
@@ -19,10 +20,12 @@ Context.prototype.responseError = function(errorMessage) {
         response: self.response
     };
     self.response.end(self.server.responsePages["500"](model));
+    self.invalid = true;
 };
 
 Context.prototype.responseNotFound = function() {
     var self = this;
+    if (self.invalid) return;
     self.response.writeHead(404, {
         'Content-Type': self.configs.mimeType['.html']
     });
@@ -33,16 +36,28 @@ Context.prototype.responseNotFound = function() {
         response: self.response
     };
     self.response.end(self.server.responsePages["404"](model));
+    self.invalid = true;
 };
 
 Context.prototype.responseContent = function(content, mime) {
     var self = this;
+    if (self.invalid) return;
     self.response.writeHead(200, {
         'Content-Type': mime || self.request.mime
     });
     self.response.end(content);
+    self.invalid = true;
 };
 
+Context.prototype.redirect = function(url) {
+    var self = this;
+    if (self.invalid) return;
+    self.response.writeHead(302, {
+        'Location': url
+    });
+    self.response.end();
+    self.invalid = true;
+};
 
 module.exports = Context;
 /*end*/

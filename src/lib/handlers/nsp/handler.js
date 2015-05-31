@@ -14,7 +14,9 @@ Handler.prototype.handleRequest = function(context) {
     var self = this;
     if (context.request.physicalPathExists) {
         var page = self.compilePage(context, context.request.physicalPath);
+        if (page == null) return;
         var content = self.execPage(context, page);
+        if (content == null) return;
         context.responseContent(content);
     } else {
         context.responseNotFound();
@@ -32,6 +34,7 @@ Handler.prototype.compilePage = function(context, _path) {
     } catch (ex) {
         context.responseError(ex.message);
     }
+    return null;
 };
 
 
@@ -82,4 +85,5 @@ Handler.prototype.execPage = function(context, page) {
     } catch (ex) {
         context.responseError(ex.message);
     }
+    return null;
 };

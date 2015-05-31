@@ -30,6 +30,9 @@
     x++;
     this.context.session.add('test',x);
     $(x);
+    if(x>10){
+        this.context.redirect('http://www.baidu.com');
+    }
 %>
 </body>
 </html>
