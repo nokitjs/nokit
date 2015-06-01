@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Nokit</title>
+    <link rel="stylesheet" href="./style/common.css">
+</head>
+
+<body>
+    <% $.include("./layout/head.nsp") %>
+    <div class='content'>
+        <%= "Welcome to Nokit!" %>
+    </div>
+    <div class='footer'>
+        Create By Nokit , <%= new Date()%> 
+    </div>
+</body>
+
+</html>

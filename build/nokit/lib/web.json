@@ -1,6 +1,6 @@
 {
     "port": 8000,
-    "defaults": ["index.html","index.nsp"],
+    "defaults": ["index.html", "index.nsp"],
     "mimeType": {
         "*": "application/octet-stream",
         ".html": "text/html",
@@ -19,6 +19,9 @@
         ".bmp": "image/bmp",
         ".ico": "image/x-icon"
     },
+    "headers": {
+        "X-UA-Compatible": "IE=Edge,chrome=1"
+    },
     "handlers": {
         "*": "./handlers/static",
         "^/__res__/": "./handlers/resource",
@@ -34,5 +37,11 @@
     },
     "folders": {
         "public": "./public"
+    },
+    "session": {
+        "state": true,
+        "timeout": 30,
+        "provider": "./core/session"
     }
+
 }

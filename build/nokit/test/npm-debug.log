@@ -1,0 +1,57 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'addUser' ]
+2 info using npm@2.10.1
+3 info using node@v0.12.4
+4 warn Username must be lowercase
+5 verbose adduser before first PUT { _id: 'org.couchdb.user:houfeng',
+5 verbose adduser   name: 'houfeng',
+5 verbose adduser   password: 'XXXXX',
+5 verbose adduser   email: 'admin@xhou.net',
+5 verbose adduser   type: 'user',
+5 verbose adduser   roles: [],
+5 verbose adduser   date: '2015-05-31T15:54:19.588Z' }
+6 verbose request uri https://registry.npmjs.org/-/user/org.couchdb.user:houfeng
+7 verbose request new user, so can't send auth
+8 info attempt registry request try #1 at 23:54:19
+9 verbose request id 0b0e056f333e578a
+10 http request PUT https://registry.npmjs.org/-/user/org.couchdb.user:houfeng
+11 http 400 https://registry.npmjs.org/-/user/org.couchdb.user:houfeng
+12 verbose headers { 'content-type': 'application/json',
+12 verbose headers   'cache-control': 'max-age=60',
+12 verbose headers   'content-length': '57',
+12 verbose headers   'accept-ranges': 'bytes',
+12 verbose headers   date: 'Sun, 31 May 2015 15:54:19 GMT',
+12 verbose headers   via: '1.1 varnish',
+12 verbose headers   connection: 'keep-alive',
+12 verbose headers   'x-served-by': 'cache-hkg6822-HKG',
+12 verbose headers   'x-cache': 'MISS',
+12 verbose headers   'x-cache-hits': '0',
+12 verbose headers   'x-timer': 'S1433087658.937995,VS0,VE622' }
+13 verbose request invalidating C:\Users\Houfeng\AppData\Roaming\npm-cache\registry.npmjs.org\-\user\org.couchdb.user_3Ahoufeng on PUT
+14 verbose adduser back [ { [Error: Unknown error while authenticating : -/user/org.couchdb.user:houfeng] statusCode: 400, code: 'E400' },
+14 verbose adduser   { ok: false, error: 'Unknown error while authenticating' },
+14 verbose adduser   '{"ok":false,"error":"Unknown error while authenticating"}' ]
+15 verbose stack Error: Unknown error while authenticating : -/user/org.couchdb.user:houfeng
+15 verbose stack     at CachingRegistryClient.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:247:14)
+15 verbose stack     at Request._callback (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:170:14)
+15 verbose stack     at Request.self.callback (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:368:22)
+15 verbose stack     at Request.emit (events.js:110:17)
+15 verbose stack     at Request.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:1219:14)
+15 verbose stack     at Request.emit (events.js:129:20)
+15 verbose stack     at IncomingMessage.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:1167:12)
+15 verbose stack     at IncomingMessage.emit (events.js:129:20)
+15 verbose stack     at _stream_readable.js:908:16
+15 verbose stack     at process._tickCallback (node.js:355:11)
+16 verbose statusCode 400
+17 verbose cwd H:\dev\MyProjects\nokit\src\test
+18 error Windows_NT 6.3.9600
+19 error argv "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "addUser"
+20 error node v0.12.4
+21 error npm  v2.10.1
+22 error code E400
+23 error Unknown error while authenticating : -/user/org.couchdb.user:houfeng
+24 error If you need help, you may report this error at:
+24 error     <https://github.com/npm/npm/issues>
+25 verbose exit [ 1, true ]

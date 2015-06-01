@@ -31,7 +31,7 @@
     this.context.session.add('test',x);
     $(x);
     if(x>10){
-        this.context.redirect('http://www.baidu.com');
+        //this.context.redirect('index1.html');
     }
 %>
 </body>

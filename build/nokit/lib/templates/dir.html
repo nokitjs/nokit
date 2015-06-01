@@ -3,25 +3,35 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>folder</title>
+    <title>EXPLORER</title>
     <link rel="stylesheet" href="/__res__/common.css">
     <link rel="stylesheet" href="/__res__/dir.css">
 </head>
 
 <body>
-    <% $(this.request.url) %>
-        <hr/>
-        <ul>
-            <% $.each(this.items,function(i,item){ %>
-                <li>
-                    <a href="./<% $(item.name) %><% $(item.type=='folder'?'/':'') %>">
-                        <% $(item.name) %>
-                    </a>
-                </li>
-            <% }) %>
+    <div class='header'>EXPLORER</div>
+    <div class='content'>
+        <div class='path'>
+            <span class='prefix'>[位置]</span> <% $(this.request.url) %>
+        </div>
+        <ul class="list">
+        <% $.each(this.items,function(i,item){ %>
+            <li>
+                <span class='prefix'>[<% $(item.type=='folder'?'目录':'文件') %>]</span>  
+                <a href="./<% $(item.name) %><% $(item.type=='folder'?'/':'') %>">
+                    <% $(item.name) %>
+                </a>
+            </li>
+        <% }) %>
         </ul>
-         <hr>
-    Powered By <% $(this.server.packageInfo.name) %> <% $(this.server.packageInfo.version) %>
+    </div>
+    <div class='footer'>
+        Powered By
+        <a href="<% $(this.server.packageInfo.website) %>" target="_blank">
+            <% $(this.server.packageInfo.name) %>
+            <% $(this.server.packageInfo.version) %>
+        </a>
+    </div>
 </body>
 
 </html>

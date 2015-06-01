@@ -31,7 +31,7 @@ Server.prototype.initConfigs = function(callback) {
     var self = this;
     //公共配置
     var systemConfigFile = path.resolve(self.installPath, CONFIG_FILE);
-    var systemConfigs = utils.readJSONSync(systemConfigFile);
+    var systemConfigs = utils.readJSONSync(systemConfigFile) || {};
     utils.each(systemConfigs.handlers, function(name, _path) {
         systemConfigs.handlers[name] = path.resolve(self.installPath, _path);
     });
@@ -43,7 +43,7 @@ Server.prototype.initConfigs = function(callback) {
     }
     //应用配置 
     var appConfigFile = path.resolve(self.options.root, CONFIG_FILE);
-    var appConfigs = utils.readJSONSync(appConfigFile);
+    var appConfigs = utils.readJSONSync(appConfigFile) || {};
     utils.each(appConfigs.handlers, function(name, _path) {
         appConfigs.handlers[name] = path.resolve(self.options.root, _path);
     });
@@ -220,10 +220,14 @@ Server.prototype.createServer = function() {
 Server.prototype.start = function(callback) {
     var self = this;
     try {
-        self.httpServer.listen(self.configs.port, callback);
-        console.log('已在 "' + self.configs.root + ":" + self.configs.port + '" 启动服务。');
+        if (self.httpServer) {
+            self.httpServer.listen(self.configs.port, callback);
+            return console.log('已在 "http://localhost:' + self.configs.port + '" 启动服务。');
+        } else {
+            return console.log('没有创建 Server 实例');
+        }
     } catch (ex) {
-        console.error(ex.message);
+        return console.error(ex.message);
     }
 };
 
@@ -231,10 +235,14 @@ Server.prototype.start = function(callback) {
 Server.prototype.stop = function(callback) {
     var self = this;
     try {
-        self.httpServer.close(callback);
-        console.log('已在 "' + self.configs.root + ":" + self.configs.port + '" 停止服务。');
+        if (self.httpServer) {
+            self.httpServer.close(callback);
+            return console.log('已在 "http://localhost:' + self.configs.port + '" 停止服务。');
+        } else {
+            return console.log('没有创建 Server 实例');
+        }
     } catch (ex) {
-        console.error(ex.message);
+        return console.error(ex.message);
     }
 };
 

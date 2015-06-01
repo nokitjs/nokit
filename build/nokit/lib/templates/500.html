@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>SERVER ERROR (500)</title>
     <link rel="stylesheet" href="/__res__/common.css">
-    <link rel="stylesheet" href="/__res__/404.css">
+    <link rel="stylesheet" href="/__res__/500.css">
 </head>
 
 <body>
@@ -18,8 +18,10 @@
     </div>
     <div class='footer'>
         Powered By
-        <% $(this.server.packageInfo.name) %>
-        <% $(this.server.packageInfo.version) %>
+        <a href="<% $(this.server.packageInfo.website) %>" target="_blank">
+            <% $(this.server.packageInfo.name) %>
+            <% $(this.server.packageInfo.version) %>
+        </a>
     </div>
 </body>
 

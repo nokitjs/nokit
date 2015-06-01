@@ -374,33 +374,16 @@ owner.newGuid = function() {
 };
 
 /**
- * 同步读取 JSON
- **/
-owner.readJSONSync = function(jsonFile) {
-    if (fs.existsSync(jsonFile)) {
-        var jsonText = fs.readFileSync(jsonFile);
-        return JSON.parse(jsonText);
-    } else {
-        return null;
-    }
-};
-
-/**
- * 编译一个模板
- **/
-owner.compileTemplateSync = function(templateFile) {
-    if (fs.existsSync(templateFile)) {
-        var buffer = fs.readFileSync(templateFile);
-        return tp.compile(buffer.toString(), {
-            extend: owner
-        });
-    } else {
-        return null;
-    }
-};
-
-
-
+ * 合并对象
+ * @method mix
+ * @return 合并后的对象
+ * @param {Object} r 目标对象
+ * @param {Object} s 源对象
+ * @param {Boolean} ov 是否覆盖
+ * @param {Object} wl 白名单
+ * @param {Number} mode 模式
+ * @param {Boolean} merge 深度合并
+ */
 owner.mix = function(r, s, ov, wl, mode, merge) {
     if (!s || !r) {
         return r || owner;
@@ -447,4 +430,55 @@ owner.mix = function(r, s, ov, wl, mode, merge) {
         }
     }
     return r;
+};
+
+/***** 以上来自 mokit/utils *****/
+
+/**
+ * 同步读取 JSON
+ **/
+owner.readJSONSync = function(jsonFile) {
+    if (fs.existsSync(jsonFile)) {
+        var jsonText = fs.readFileSync(jsonFile);
+        return JSON.parse(jsonText);
+    } else {
+        return null;
+    }
+};
+
+/**
+ * 编译一个模板
+ **/
+owner.compileTemplateSync = function(templateFile) {
+    if (fs.existsSync(templateFile)) {
+        var buffer = fs.readFileSync(templateFile);
+        return tp.compile(buffer.toString(), {
+            extend: owner
+        });
+    } else {
+        return null;
+    }
+};
+
+/**
+ * 拷贝一个目录
+ */
+owner.copyDir = function(src, dst) {
+    var self = this;
+    if (fs.existsSync(src)) {
+        if (!fs.existsSync(dst)) {
+            fs.mkdirSync(dst);
+        }
+        var files = fs.readdirSync(src);
+        files.forEach(function(file, index) {
+            var subSrc = src + "/" + file;
+            var subDst = dst + "/" + file;
+            if (fs.statSync(subSrc).isDirectory()) {
+                self.copyDir(subSrc, subDst);
+            } else {
+                var buffer = fs.readFileSync(subSrc);
+                fs.writeFileSync(subDst, buffer);
+            }
+        });
+    }
 };
