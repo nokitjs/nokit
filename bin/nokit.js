@@ -15,6 +15,7 @@ if (args.length < 1 || args[0] == '?') {
     console.log("\r\n用例(<...>:必需参数 ; [...]可选参数):");
     console.log("    创建: nokit create <name:应用名称> [path:创建位置(默认为当前目录)]");
     console.log("    启动: nokit <root:应用根目录> [port:使用的端口] [public:可以访问的目录(根目录的相对路径)]");
+    console.log("\r\n");
     return;
 }
 
