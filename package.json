@@ -1,0 +1,35 @@
+{
+    "name": "nokit-runtime",
+    "version": "1.0.1",
+    "description": "最简单易用的 Nodejs 开发框架",
+    "main": "./lib/index.js",
+    "bin": {
+        "nokit": "./bin/nokit.js"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "nokit",
+        "nokit-runtime",
+        "runtime",
+        "nsp",
+        "mvc",
+        "nsf",
+        "web"
+    ],
+    "author": {
+        "name": "Houfeng",
+        "email": "admin@xhou.net"
+    },
+    "homepage": "http://houfeng.net/nokit",
+    "bugs": {
+        "url": "https://github.com/Houfeng/nokit/issues",
+        "email": "admin@xhou.net"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Houfeng/nokit.git"
+    }
+}

@@ -1,6 +1,0 @@
-{
-    "defaults": ["index.nsp","index.html"],
-    "session":{
-        "state":true
-    }
-}
