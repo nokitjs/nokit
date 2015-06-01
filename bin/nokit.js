@@ -9,7 +9,8 @@ var cwd = process.cwd();
 //输出版本信息
 if (args.length < 1 || args[0] == '?') {
     var packageInfo = nokit.utils.readJSONSync(path.resolve(__dirname, path.normalize("../package.json")));
-    packageInfo.name = packageInfo.name.split('-')[0];
+    packageInfo.name = nokit.utils.firstUpper(packageInfo.name.split('-')[0]);
+    //
     console.log(packageInfo.name + " " + packageInfo.version);
     console.log("\r\n用例(<...>:必需参数 ; [...]可选参数):");
     console.log("    创建: nokit create <name:应用名称> [path:创建位置(默认为当前目录)]");

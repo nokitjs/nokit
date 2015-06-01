@@ -42,6 +42,6 @@
         "state": true,
         "timeout": 30,
         "provider": "./core/session"
-    }
-
+    },
+    "displayDir": true
 }
