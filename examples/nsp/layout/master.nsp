@@ -1,3 +1,20 @@
-<div class='header'>Hello Nokit, By Master Page</div>
-<% $.placeHolder("body") %>
-<div class='header'>Hello Nokit, By Master Page</div>
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Nokit</title>
+    <link rel="stylesheet" href="/style/common.css">
+</head>
+
+<body>
+    <div class='header'>Hello Nokit</div>
+    <div class='content'>
+       <% $.placeHolder("content") %>
+    </div>
+    <div class='footer'>
+        Create By Nokit , <% $.include("./date.nsp") %>
+    </div>
+</body>
+
+</html>
