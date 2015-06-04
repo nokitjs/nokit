@@ -1,0 +1,4 @@
+<% $.master("../layout/master.nsp") %>
+<% $.placeBegin("body") %>
+    <p><%= "Hello Nokit，By Content page" %></p>
+<% $.placeEnd() %>

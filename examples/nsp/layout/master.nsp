@@ -1,0 +1,3 @@
+<div class='header'>Hello Nokit, By Master Page</div>
+<% $.placeHolder("body") %>
+<div class='header'>Hello Nokit, By Master Page</div>

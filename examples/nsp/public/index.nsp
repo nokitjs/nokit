@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <% $.include("./layout/head.nsp") %>
+    <% $.include("../layout/head.nsp") %>
     <div class='content'>
         <%= "Welcome to Nokit!" %>
     </div>
