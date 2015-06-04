@@ -30,9 +30,48 @@
         <h3>
 <a id="nokit-简介" class="anchor" href="#nokit-%E7%AE%80%E4%BB%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>Nokit 简介</h3>
 
-<p>最简单易用的 nodejs 开发框架，如果您曾经写过 asp / php 服务端代码，或者您曾经写过 JavaScript 客户端代码，
-那么您会非常易于上手，Nokit 不同于常见的 nodejs 框架，Nokit 提供了多种开发模式，包括 NSP / MVC ，开发人员
+<p>最简单易用的 nodejs 开发框架，如果您曾经写过 asp / php 等代码，或者您曾经写过 JavaScript 客户端代码，
+那么您会非常易于上手，Nokit 不同于常见的 nodejs 框架，Nokit 提供了多种开发模式，包括 MVC / NSP / RESTful Service ，开发人员
 也可以方便扩展新的模式。</p>
+
+<h3>
+<a id="安装-nokit" class="anchor" href="#%E5%AE%89%E8%A3%85-nokit" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装 nokit</h3>
+
+<p>nokit 依赖 nodejs，所以需先安装 nodejs，具体请参考 nodejs 网站</p>
+
+<blockquote>
+<p><a href="https://nodejs.org/">https://nodejs.org/</a></p>
+</blockquote>
+
+<h5>
+<a id="安装-nokit-1" class="anchor" href="#%E5%AE%89%E8%A3%85-nokit-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装 nokit</h5>
+
+<div class="highlight highlight-javascript"><pre>npm install <span class="pl-k">-</span>g nokit<span class="pl-k">-</span>runtime</pre></div>
+
+<h5>
+<a id="更新-nokit" class="anchor" href="#%E6%9B%B4%E6%96%B0-nokit" aria-hidden="true"><span class="octicon octicon-link"></span></a>更新 nokit</h5>
+
+<div class="highlight highlight-javascript"><pre>npm update <span class="pl-k">-</span>g nokit<span class="pl-k">-</span>runtime</pre></div>
+
+<h3>
+<a id="运行-nokit-应用" class="anchor" href="#%E8%BF%90%E8%A1%8C-nokit-%E5%BA%94%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>运行 nokit 应用</h3>
+
+<p>nokit 应用只需在磁盘建立应用目录，并新建 web.json 配置文件，以及其它相关目录即可，为了更方便 nokit 提供了命令行工具。</p>
+
+<h5>
+<a id="创建-nokit-应用" class="anchor" href="#%E5%88%9B%E5%BB%BA-nokit-%E5%BA%94%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>创建 nokit 应用</h5>
+
+<div class="highlight highlight-javascript"><pre>nokit create <span class="pl-k">&lt;</span>应用名称<span class="pl-k">&gt;</span> [目标文件夹，默认为当前目录] [类型，默认为 nsp]</pre></div>
+
+<p>以上命令会生成一个最简单的应用所需要的目录结构和配置。</p>
+
+<h5>
+<a id="运行-nokit-应用-1" class="anchor" href="#%E8%BF%90%E8%A1%8C-nokit-%E5%BA%94%E7%94%A8-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>运行 nokit 应用</h5>
+
+<div class="highlight highlight-javascript"><pre>nokit <span class="pl-k">&lt;</span>应用根目录<span class="pl-k">&gt;</span> [port，也可以在 web.json 中指定，启动命令指定的端口优先级高于 web.json，如果都省略将使用默认端口]</pre></div>
+
+<p>看到启动提示后，浏览器访问 "http://localhost:8000" (端口请换成具体应用的正确的端口)，
+如简单的示例 <a href="http://www.xhou.net:8000">http://www.xhou.net:8000</a></p>
       </section>
     </div>
     <footer>
