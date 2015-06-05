@@ -15,8 +15,8 @@
         "runtime",
         "nsp",
         "mvc",
-        "nsf",
-        "web"
+        "restful",
+        "webapi"
     ],
     "author": {
         "name": "Houfeng",

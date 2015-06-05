@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Nokit</title>
+    <link rel="stylesheet" href="/style/common.css">
+</head>
+
+<body>
+    <div class='header'>Hello Nokit</div>
+    <div class='content'>
+        <strong> RESTFul Demo </strong>
+        <p>
+            <a href='/api/user/nokit'>user</a>
+        </p>
+    </div>
+    <div class='footer'>
+        Create By Nokit <%= new Date %>
+    </div>
+</body>
+
+</html>

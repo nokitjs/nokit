@@ -33,11 +33,13 @@
     "responsePages": {
         "500": "./templates/500.html",
         "404": "./templates/404.html",
+        "405": "./templates/405.html",
         "dir": "./templates/dir.html"
     },
     "folders": {
         "public": "./public"
     },
+    "denys": [".nsp.js$", "web.json$", "package.json$", ".tp$"],
     "session": {
         "state": true,
         "timeout": 30,

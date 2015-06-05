@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>DENY (404)</title>
+    <link rel="stylesheet" href="/__res__/common.css">
+    <link rel="stylesheet" href="/__res__/404.css">
+</head>
+
+<body>
+    <div class='header'>DENY (405)</div>
+    <div class='content'>
+        资源 "<% $(this.request.url) %>" 拒绝访问
+    </div>
+    <div class='footer'>
+        Powered By
+        <a href="<% $(this.server.packageInfo.homepage) %>" target="_blank">
+            <% $(this.server.packageInfo.name) %>
+            <% $(this.server.packageInfo.version) %>
+        </a>
+    </div>
+</body>
+
+</html>

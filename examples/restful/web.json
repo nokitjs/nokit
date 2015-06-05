@@ -5,8 +5,5 @@
     "routes": [{
         "pattern": "/api/user/{userId}",
         "target": "./restful/user"
-    },{
-        "pattern": "/api/user",
-        "target": "./restful/user"
     }]
 }
