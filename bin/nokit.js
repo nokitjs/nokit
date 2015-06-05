@@ -12,7 +12,7 @@ if (args.length < 1 || args[0] == '?') {
     packageInfo.name = nokit.utils.firstUpper(packageInfo.name.split('-')[0]);
     //
     console.log(packageInfo.name + " " + packageInfo.version);
-    console.log("\r\n用例(<...>:必需参数 ; [...]可选参数):");
+    console.log("\r\n用例(<必需参数>,[可选参数]):");
     console.log("    创建: nokit create <应用名称> [目标目录(默认为当前目录)] [类型(默认为nsp)]");
     console.log("    启动: nokit <应用根目录> [端口(也可在web.json中指定或省略)]");
     console.log("\r\n");

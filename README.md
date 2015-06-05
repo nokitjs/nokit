@@ -30,5 +30,16 @@ nokit create <应用名称> [目标目录(默认为当前目录)] [类型(默认
 ```javascript
 nokit <应用根目录> [端口(也可在web.json中指定或省略)]
 ```
+
+#####代码方式运行 nokit 应用
+```javascript
+var nokit = require("nokit-runtime");
+var server = nokit.Server({
+    root : "应用根目录",
+    path : 8000
+});
+server.start();
+```
+
 看到启动提示后，浏览器访问 "http://localhost:8000" (端口请换成具体应用的正确的端口)，
 如简单的示例 [http://www.xhou.net:8000](http://www.xhou.net:8000)
