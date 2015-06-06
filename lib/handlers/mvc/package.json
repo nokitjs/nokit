@@ -1,0 +1,4 @@
+{
+    "name":"mvc",
+    "main":"./handler.js"
+}

@@ -1,13 +1,13 @@
 function User() {};
 
-User.prototype.post = function(out) {
+User.prototype.post = function() {
     var self = this;
-    out("By POST，" + self.context.routeData["userId"]);
+    self.out("By POST，" + self.context.routeData["userId"]);
 };
 
-User.prototype.get = function(out) {
+User.prototype.get = function() {
     var self = this;
-    out("By GET，" + self.context.routeData["userId"]);
+    self.out("By GET，" + self.context.routeData["userId"]);
 };
 
 module.exports = User;
