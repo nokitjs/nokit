@@ -22,13 +22,13 @@ nokit 应用只需在磁盘建立应用目录，并新建 web.json 配置文件�
 
 #####创建 nokit 应用
 ```javascript
-nokit  create  <应用名称>  [目标目录(默认为当前目录)]  [类型(默认为nsp)]
+nokit create <应用名称> [目标目录(默认为当前目录)] [类型(默认为nsp)]
 ```
 以上命令会生成一个最简单的应用所需要的目录结构和配置。
 
 #####运行 nokit 应用
 ```javascript
-nokit  <应用根目录>  [端口(也可在web.json中指定或省略)]
+nokit <应用根目录> [端口(也可在web.json中指定或省略)]
 ```
 
 #####代码方式运行 nokit 应用
