@@ -34,7 +34,7 @@ nokit <应用根目录> [端口(也可在web.json中指定或省略)]
 #####代码方式运行 nokit 应用
 ```javascript
 var nokit = require("nokit-runtime");
-var server = nokit.Server({
+var server = new nokit.Server({
     root : "应用根目录",
     path : 8000
 });
