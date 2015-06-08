@@ -72,9 +72,31 @@ NSP 支持 include 引用其它页面，也支持 master 母板页持术。
 ##MVC
 Nokit MVC 是一种设计简约、符合 MVC 模式 Web 应用开发模式。
 
+一般目录结构
+
+```javascript
+根目录
+│ web.json
+├─controllers
+├─models
+└─views
+```
+
 ##RESTful
 Nokit 用来开发 RESTful Server 是非常方便和简单的，通过简洁的 URL 路由配置，抽象出和资源对应的请求处理程序文件即可，
 可以在处理程序中，根据需求实现 get / post / put 等 http Method 即可。
+
+一般目录结构
+```javascript
+根目录
+│  web.json
+├─public
+│  │  index.nsp
+│  └─style
+│       common.css
+└─restful
+      user.js
+```
 
 
 
