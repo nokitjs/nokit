@@ -79,6 +79,7 @@ Nokit MVC 是一种设计简约、符合 MVC 模式 Web 应用开发模式。
 │ web.json
 ├─controllers
 ├─models
+├─public
 └─views
 ```
 
@@ -89,7 +90,7 @@ Nokit 用来开发 RESTful Server 是非常方便和简单的，通过简洁的 
 一般目录结构
 ```javascript
 根目录
-│  web.json
+│ web.json
 ├─public
 │  │  index.nsp
 │  └─style
