@@ -39,7 +39,8 @@
     "folders": {
         "public": "./public"
     },
-    "denys": [".nsp.js$", "web.json$", "package.json$", ".tp$"],
+    "caches": [".html$", ".css$", ".js$", ".less$", ".md$"],
+    "denys": [".nsp.js$", "web.json$", "package.json$", ".tp$", ".tp.html$", ".tp.htm$"],
     "session": {
         "state": true,
         "timeout": 30,
