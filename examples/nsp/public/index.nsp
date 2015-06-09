@@ -1,5 +1,5 @@
 <% $.master("../layout/master.nsp") %> 
 
 <% $.placeBegin("content") %>
-Welcome to Nokit!
+Welcome to Nokit NSP!
 <% $.placeEnd() %>
