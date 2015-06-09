@@ -102,7 +102,7 @@ Nokit 用来开发 RESTful Server 是非常方便和简单的，通过简洁的 
 │  └─style
 │       common.css
 └─restful
-     user.js
+      user.js
 ```
 
 
