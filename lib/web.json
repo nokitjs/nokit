@@ -25,6 +25,7 @@
     "handlers": {
         "*": "./handlers/static",
         "^/__res__/": "./handlers/resource",
+        "^/--res--/": "./handlers/resource",
         ".nsp": "./handlers/nsp",
         ".md": "./handlers/markdown",
         ".less": "./handlers/less",

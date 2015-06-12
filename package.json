@@ -1,6 +1,6 @@
 {
     "name": "nokit-runtime",
-    "version": "1.0.22",
+    "version": "1.0.23",
     "description": "最简单易用的 Nodejs 开发框架",
     "main": "./lib/index.js",
     "bin": {
