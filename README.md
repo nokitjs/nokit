@@ -78,6 +78,7 @@ NSP 页面 (*.nsp) 基本介绍
 
 <!-- 循环 -->
 <ul> 
+<!-- this 指向页面处理器，无处理器页面指向默信处理器对象 -->
 <% $.each(this.list,function(i,item){ %>
     <li><%= item.name %></li>
 <% }) %>
