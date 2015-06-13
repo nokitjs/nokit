@@ -128,7 +128,9 @@ Index.prototype.init = function(context) {
     self.context //当前请上下文对象
     self.request //同 context.request，请求对象
     self.response //同 context.response 响应对象
-    self.render() //由于 nokit 为异步处理，调用 render() 方法向浏览器呈现页面，不要在 init 方法调用。
+    //由于 nokit 为异步处理，调用 render() 方法向浏览器呈现页面.
+    //不要在 init 方法调用。
+    self.render() 
     */
     self.name = 'Nokit NSP';
 };
