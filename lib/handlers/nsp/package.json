@@ -1,4 +1,7 @@
 {
-    "name":"nsp",
-    "main":"./handler.js"
+    "name": "nsp",
+    "main": "./handler.js",
+    "dependencies": {
+        "cheerio": "0.19.0"
+    }
 }

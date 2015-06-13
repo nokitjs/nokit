@@ -1,4 +1,7 @@
 {
-    "name":"less",
-    "main":"./handler.js"
+    "name": "less",
+    "main": "./handler.js",
+    "dependencies": {
+        "less": "1.7.0"
+    }
 }
