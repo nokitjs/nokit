@@ -115,11 +115,11 @@ NSP 支持 include 引用其它页面，也支持 master 母板页持术。</p>
 
 <div class="highlight highlight-html"><pre><span class="pl-c">&lt;!-- 输出内容 --&gt;</span>
 &lt;<span class="pl-ent">p</span>&gt; &lt;%= "输出内容" %&gt; &lt;/<span class="pl-ent">p</span>&gt;
+<span class="pl-c">&lt;!-- this 指向页面处理器，无处理器页面指向默信处理器对象 --&gt;</span>
 &lt;<span class="pl-ent">p</span>&gt; &lt;%= this.context.request.formData("name") %&gt; &lt;/<span class="pl-ent">p</span>&gt;
 
 <span class="pl-c">&lt;!-- 循环 --&gt;</span>
 &lt;<span class="pl-ent">ul</span>&gt; 
-<span class="pl-c">&lt;!-- this 指向页面处理器，无处理器页面指向默信处理器对象 --&gt;</span>
 &lt;% $.each(this.list,function(i,item){ %&gt;
     &lt;<span class="pl-ent">li</span>&gt;&lt;%= item.name %&gt;&lt;/<span class="pl-ent">li</span>&gt;
 &lt;% }) %&gt;
