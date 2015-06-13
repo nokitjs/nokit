@@ -32,7 +32,8 @@
 
 <p>最简单易用的 nodejs 开发框架，如果您曾经写过 asp / php 等代码，或者您曾经写过 JavaScript 客户端代码，
 那么您会非常易于上手，Nokit 不同于常见的 nodejs 框架，Nokit 提供了多种开发模式，包括 MVC / NSP / RESTful Service ，
-开发人员也可以方便的扩展新模式。</p>
+开发人员也可以方便的扩展新模式。
+Nokit 开发交流 QQ 群: 240603160</p>
 
 <h2>
 <a id="安装和更新" class="anchor" href="#%E5%AE%89%E8%A3%85%E5%92%8C%E6%9B%B4%E6%96%B0" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装和更新</h2>
@@ -109,6 +110,102 @@ NSP 支持 include 引用其它页面，也支持 master 母板页持术。</p>
     │  index.nsp.js
     └─style
          common.css</pre></div>
+
+<p>NSP 页面 (*.nsp) 基本介绍</p>
+
+<div class="highlight highlight-html"><pre><span class="pl-c">&lt;!-- 输出内容 --&gt;</span>
+&lt;<span class="pl-ent">p</span>&gt; &lt;%= "输出内容" %&gt; &lt;/<span class="pl-ent">p</span>&gt;
+&lt;<span class="pl-ent">p</span>&gt; &lt;%= this.context.request.formData("name") %&gt; &lt;/<span class="pl-ent">p</span>&gt;
+
+<span class="pl-c">&lt;!-- 循环 --&gt;</span>
+&lt;<span class="pl-ent">ul</span>&gt; 
+<span class="pl-c">&lt;!-- this 指向页面处理器，无处理器页面指向默信处理器对象 --&gt;</span>
+&lt;% $.each(this.list,function(i,item){ %&gt;
+    &lt;<span class="pl-ent">li</span>&gt;&lt;%= item.name %&gt;&lt;/<span class="pl-ent">li</span>&gt;
+&lt;% }) %&gt;
+&lt;/<span class="pl-ent">ul</span>&gt;
+
+<span class="pl-c">&lt;!-- 分支 --&gt;</span>
+&lt;% if(this.type=='a'){ %&gt;
+&lt;<span class="pl-ent">span</span>&gt;a&lt;/<span class="pl-ent">span</span>&gt;
+&lt;% }else{ %&gt;
+&lt;<span class="pl-ent">span</span>&gt;b&lt;/<span class="pl-ent">span</span>&gt;
+&lt;% } %&gt;
+
+<span class="pl-c">&lt;!-- 包含 --&gt;</span>
+&lt;% $.include("../layout/head.nsp") %&gt;
+
+<span class="pl-c">&lt;!-- 母板页 --&gt;</span>
+&lt;<span class="pl-ent">html</span>&gt;
+...
+&lt;<span class="pl-ent">div</span>&gt; &lt;% $.placeHolder("content1") %&gt; &lt;/<span class="pl-ent">div</span>&gt;
+...
+&lt;<span class="pl-ent">div</span>&gt; &lt;% $.placeHolder("content2") %&gt; &lt;/<span class="pl-ent">div</span>&gt;
+...
+&lt;/<span class="pl-ent">html</span>&gt;
+
+<span class="pl-c">&lt;!-- 内容页 --&gt;</span>
+&lt;% $.master("./master.nsp") %&gt;
+
+&lt;% $.placeBegin("content1") %&gt;
+&lt;<span class="pl-ent">span</span>&gt;content1&lt;/<span class="pl-ent">span</span>&gt;
+&lt;% $.placeEnd() %&gt;
+
+&lt;% $.placeBegin("content2") %&gt;
+&lt;<span class="pl-ent">span</span>&gt;content2&lt;/<span class="pl-ent">span</span>&gt;
+&lt;% $.placeEnd() %&gt;</pre></div>
+
+<p>NSP 页面处理器 (*.nsp.js) 基本介绍</p>
+
+<div class="highlight highlight-javascript"><pre><span class="pl-c">//定义页面处理器类型</span>
+<span class="pl-k">var</span> Index <span class="pl-k">=</span> <span class="pl-c1">module</span>.<span class="pl-en">exports</span> <span class="pl-k">=</span> <span class="pl-k">function</span>() {};
+
+<span class="pl-c">//初始化方法，每次回发都将触发 init 方法</span>
+<span class="pl-c1">Index</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">init</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(<span class="pl-smi">context</span>) {
+    <span class="pl-k">var</span> self <span class="pl-k">=</span> <span class="pl-v">this</span>;
+    <span class="pl-c">/*</span>
+<span class="pl-c">    self.server //当前 server 实例</span>
+<span class="pl-c">    self.context //当前请上下文对象</span>
+<span class="pl-c">    self.request //同 context.request，请求对象</span>
+<span class="pl-c">    self.response //同 context.response 响应对象</span>
+<span class="pl-c">    //由于 nokit 为异步处理，调用 render() 方法向浏览器呈现页面.</span>
+<span class="pl-c">    //不要在 init 方法调用。</span>
+<span class="pl-c">    self.render() </span>
+<span class="pl-c">    */</span>
+    self.<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>Nokit NSP<span class="pl-pds">'</span></span>;
+};
+
+<span class="pl-c">//默认方法，首次打开页面，会触发 load 方法</span>
+<span class="pl-c1">Index</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">load</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(<span class="pl-smi">context</span>) {
+    <span class="pl-k">var</span> self <span class="pl-k">=</span> <span class="pl-v">this</span>;
+    self.render();
+};
+
+<span class="pl-c">//事件方法，可以绑定到页面中的 html 控件</span>
+<span class="pl-c1">Index</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">add</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(<span class="pl-smi">context</span>) {
+    <span class="pl-k">var</span> self <span class="pl-k">=</span> <span class="pl-v">this</span>;
+    <span class="pl-k">var</span> val <span class="pl-k">=</span> <span class="pl-c1">parseInt</span>(self.numBox.val());
+    self.numBox.val(<span class="pl-k">++</span>val);
+    self.numBox.css(<span class="pl-s"><span class="pl-pds">"</span>border<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>solid 1px red<span class="pl-pds">"</span></span>);
+    self.render();
+};</pre></div>
+
+<p>页面绑定</p>
+
+<div class="highlight highlight-html"><pre><span class="pl-c">&lt;!-- 绑定到处理器方法 --&gt;</span>
+&lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">onclick</span>=<span class="pl-s"><span class="pl-pds">"</span>nsp.call('add')<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">'</span>add<span class="pl-pds">'</span></span> /&gt;</pre></div>
+
+<p>共享元素，通过 "nsp-id" 声明为，客户端和服务端的共享元素，便可以在客户端和服务端同时操作指定元素，
+并能在回发时保持状态，类似 Asp.NET 的 WebForms，但理念、原理又非常不同，NSP 共享元素非常轻量，更简洁易用。</p>
+
+<div class="highlight highlight-html"><pre><span class="pl-c">&lt;!-- 此元素可以在服务端和客户端同时访问 --&gt;</span>
+&lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>hello<span class="pl-pds">"</span></span> <span class="pl-e">nsp-id</span>=<span class="pl-s"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span> /&gt;</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="pl-c1">Index</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">add</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(<span class="pl-smi">context</span>) {
+    <span class="pl-k">var</span> self <span class="pl-k">=</span> <span class="pl-v">this</span>;
+    self.test.val(<span class="pl-s"><span class="pl-pds">'</span>你好<span class="pl-pds">'</span></span>); <span class="pl-c">//服务端提供类 jQuery 的元素操作 API (兼容部分常用 jQUery API)</span>
+    self.render();
+};</pre></div>
 
 <h2>
 <a id="mvc" class="anchor" href="#mvc" aria-hidden="true"><span class="octicon octicon-link"></span></a>MVC</h2>
