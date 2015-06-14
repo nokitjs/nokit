@@ -43,7 +43,7 @@ nokit <应用根目录> [端口(也可在web.json中指定或省略)]
 var nokit = require("nokit-runtime");
 var server = new nokit.Server({
     root : "应用根目录",
-    path : 8000
+    port : 8000
 });
 server.start();
 ```
