@@ -166,7 +166,8 @@ Index.prototype.add = function(context) {
 ```javascript
 Index.prototype.add = function(context) {
     var self = this;
-    self.test.val('你好'); //服务端提供类 jQuery 的元素操作 API (兼容部分常用 jQUery API)
+    //服务端提供类 jQuery 的元素操作 API (兼容部分常用 jQUery API)
+    self.test.val('你好'); 
     self.render();
 };
 ```
@@ -202,7 +203,10 @@ MVC 的控制器示例
 //定义控制器类型
 var Home = module.exports = function() {};
 
-//默认 action ，通常用户直接请求某一 url 会被路由到，指定 controller 的默认 action
+/*
+默认 action ，
+通常用户直接请求某一 url 会被路由到，指定 controller 的默认 action
+*/
 Home.prototype.index = function() {
     var self = this;
     
@@ -226,23 +230,26 @@ MVC 的 web.json 配置
 {
     /*
     配置 handler ，将指定的请求交由 MVC Handler 处理，支持正则表达式，
-    如示例，将应用的所有请求都交由 MVC 处理 (在找不到匹配的路由配置时，会转由 Static Handler 处理)
+    如示例，将应用的所有请求都交由 MVC 处理，
+    在找不到匹配的路由配置时，会转由 Static Handler 处理
     */
     "handlers": {
         "^/": "$./handlers/mvc"
     },
     "mvc": {
         /*
-        配置 MVC 相关代码文件的存放目录，指定 controller 和 view 的目录位置，model 不用配置。
+        配置 MVC 相关代码文件的存放目录，指定 controller 和 view 的目录位置，
+        model 不用配置。
         */
         "paths": {
             "controller": "./controllers",
             "view": "./views"
         },
         /*
-        routes 配置节较为重要，每一个路由至少需要指定 pattern(URL匹配模式) 和 target(目标contrller)
-        如果需要指向具体的 action ，还需要配置 action 项指定对应的 action (controller方式)。
-        pattern 格式示例 "/user/{userId}" 其中 userId 是占位符变量，可以在 controller 中通过 context.routeData['userId'] 获取。
+        每一个路由至少需要指定 pattern(URL匹配模式) 和 target(目标contrller)
+        还可以通过配置 action 项指定对应的 action (controller方式)。
+        pattern 格式示例 "/user/{userId}" 其中 userId 是占位符变量，
+        可以在 controller 中通过 context.routeData['userId'] 获取。
         */
         "routes": [{
             "pattern": "/home",
@@ -290,13 +297,14 @@ User.prototype.post = function() {
     self.context.data("name") 可以获取客户端传过来的 queryString 或 formData
     */
     
-    self.out("Welcome to Nokit REST, By POST, routeData:" + self.context.routeData["userId"]);
+    var routeData = self.context.routeData;
+    self.out("routeData:" + routeData["userId"]);
 };
 
 //针对 User 的 get HttpMethod 处理方法
 User.prototype.get = function() {
     var self = this;
-    self.out("Welcome to Nokit REST, By GET, routeData:" + self.context.routeData["userId"]);
+    self.out("routeData:" + routeData["userId"]);
 };
 
 /*
@@ -319,8 +327,9 @@ REST 的 web.json 配置
     "restful": {
         "path": "./restful", //指定资源控制器的存放目录
         /*
-        routes 配置节较为重要，每一个路由至少需要指定 pattern(URL匹配模式) 和 target(目标contrller)
-        pattern 格式示例 "/user/{userId}" 其中 userId 是占位符变量，REST 的路由配置没有 action 配置项。
+        每一个路由至少需要指定 pattern(URL匹配模式) 和 target(目标contrller)
+        pattern 格式示例 "/user/{userId}" 其中 userId 是占位符变量，
+        REST 的路由配置没有 action 配置项。
         */
         "routes": [{
             "pattern": "/api/user/{userId}",
