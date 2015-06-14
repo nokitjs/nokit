@@ -19,7 +19,7 @@ npm update -g nokit-runtime
 ```
 
 ##命令行工具
-nokit 应用只需在磁盘建立应用目录，并新建 web.json 配置文件，以及其它相关目录即可，为了更方便 nokit 提供了命令行工具。
+nokit 应用只需在磁盘建立应用目录，并新建 web.json 配置文件，以及其它相关目录即可， nokit 提供了方便的命令行工具。
 
 ####查看版本
 ```javascript
@@ -74,7 +74,7 @@ NSP 页面 (*.nsp) 基本介绍
 ```html
 <!-- 输出内容 -->
 <p> <%= "输出内容" %> </p>
-<!-- this 指向页面处理器，无处理器页面指向默信处理器对象 -->
+<!-- this 指向页面处理器，无处理器页面指向默认处理器对象 -->
 <p> <%= this.context.request.formData("name") %> </p>
 
 <!-- 循环 -->
@@ -191,6 +191,71 @@ Nokit MVC 是一种设计简约、符合 MVC 模式 Web 应用开发模式。
      home.html
      master.html
 ```
+views 目录存放的是视图，视图和 NSP 的页面相似，支持 include 和 master，语法也完全相同，
+不同是在 mvc 的视图中 this 指向的是模型，视图具有单一的责职 ，就是呈现模型中的数据。
+controllers 是控制器目录，单个文件为一个控制器，用来响应接受来自用户的请求，并传递给模型，
+然后，完成模型和视图的装配。
+models 为模型目录，nokit 对模型没有统一的要求和控制，应用的业务逻辑应在模型中完成。
+
+MVC 的控制器示例
+```javascript
+//定义控制器类型
+var Home = module.exports = function() {};
+
+//默认 action ，通常用户直接请求某一 url 会被路由到，指定 controller 的默认 action
+Home.prototype.index = function() {
+    var self = this;
+    
+    /*
+    self.context 可以访问当前请求上下文对象
+    self.context.routeData["name"] 可以获取路由数据
+    self.context.queryData['name'] 可以获取 queryString 对应数据
+    self.context.formData['name'] 可以获取 post 数据
+    self.context.data("name") 可以获取客户端传过来的 queryString 或 formData
+    */
+    
+    //通过 self.render 方法呈现指定的视图，并进行模型绑定
+    self.render("home.html", {
+        "name": "Nokit MVC"
+    });
+};
+```
+
+MVC 的 web.json 配置
+```javascript
+{
+    /*
+    配置 handler ，将指定的请求交由 MVC Handler 处理，支持正则表达式，
+    如示例，将应用的所有请求都交由 MVC 处理 (在找不到匹配的路由配置时，会转由 Static Handler 处理)
+    */
+    "handlers": {
+        "^/": "$./handlers/mvc"
+    },
+    "mvc": {
+        /*
+        配置 MVC 相关代码文件的存放目录，指定 controller 和 view 的目录位置，model 不用配置。
+        */
+        "paths": {
+            "controller": "./controllers",
+            "view": "./views"
+        },
+        /*
+        routes 配置节较为重要，每一个路由至少需要指定 pattern(URL匹配模式) 和 target(目标contrller)
+        如果需要指向具体的 action ，还需要配置 action 项指定对应的 action (controller方式)。
+        pattern 格式示例 "/user/{userId}" 其中 userId 是占位符变量，可以在 controller 中通过 context.routeData['userId'] 获取。
+        */
+        "routes": [{
+            "pattern": "/home",
+            "target": "./home.js"
+        },{
+            "pattern": "/",
+            "target": "./home.js"
+        }]
+    }
+}
+```
+
+
 
 ##RESTful
 Nokit 用来开发 RESTful Server 是非常方便和简单的，通过简洁的 URL 路由配置，抽象出和资源对应的请求处理程序文件即可，
@@ -206,6 +271,63 @@ Nokit 用来开发 RESTful Server 是非常方便和简单的，通过简洁的 
 │       common.css
 └─restful
       user.js
+```
+
+REST 的资源控制器示例
+```javascript
+//定义资源控制器类型，通常一个资源类型视为一个控制器
+function User() {};
+
+//针对 User 的 post HttpMethod 处理方法
+User.prototype.post = function() {
+    var self = this;
+        
+    /*
+    self.context 可以访问当前请求上下文对象
+    self.context.routeData["name"] 可以获取路由数据
+    self.context.queryData['name'] 可以获取 queryString 对应数据
+    self.context.formData['name'] 可以获取 post 数据
+    self.context.data("name") 可以获取客户端传过来的 queryString 或 formData
+    */
+    
+    self.out("Welcome to Nokit REST, By POST, routeData:" + self.context.routeData["userId"]);
+};
+
+//针对 User 的 get HttpMethod 处理方法
+User.prototype.get = function() {
+    var self = this;
+    self.out("Welcome to Nokit REST, By GET, routeData:" + self.context.routeData["userId"]);
+};
+
+/*
+根据需求实现对应的 httpMethod 处理方法即可
+*/
+
+module.exports = User;
+```
+
+REST 的 web.json 配置
+```javascript
+{
+    /*
+    配置 handler ，将指定的请求交由 REST Handler 处理，支持正则表达式，
+    如示例，/api/... 开头的请求，交由 REST Handler 处理
+    */
+    "handlers": {
+        "^/api/": "$./handlers/restful"
+    },
+    "restful": {
+        "path": "./restful", //指定资源控制器的存放目录
+        /*
+        routes 配置节较为重要，每一个路由至少需要指定 pattern(URL匹配模式) 和 target(目标contrller)
+        pattern 格式示例 "/user/{userId}" 其中 userId 是占位符变量，REST 的路由配置没有 action 配置项。
+        */
+        "routes": [{
+            "pattern": "/api/user/{userId}",
+            "target": "./user.js"
+        }]
+    }
+}
 ```
 
 
