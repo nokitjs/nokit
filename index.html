@@ -18,7 +18,7 @@
     <div class="wrapper">
       <header>
         <h1>Nokit</h1>
-        <p>最简单易用的 nodejs 开发框架</p>
+        <p>A Web development framework!</p>
         <p class="view"><a href="https://github.com/Houfeng/nokit">View the Project on GitHub <small>Houfeng/nokit</small></a></p>
         <ul>
           <li><a href="https://github.com/Houfeng/nokit/zipball/master">Download <strong>ZIP File</strong></a></li>
@@ -57,7 +57,7 @@ Nokit 开发交流 QQ 群: 240603160</p>
 <h2>
 <a id="命令行工具" class="anchor" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7" aria-hidden="true"><span class="octicon octicon-link"></span></a>命令行工具</h2>
 
-<p>nokit 应用只需在磁盘建立应用目录，并新建 web.json 配置文件，以及其它相关目录即可，为了更方便 nokit 提供了命令行工具。</p>
+<p>nokit 应用只需在磁盘建立应用目录，并新建 web.json 配置文件，以及其它相关目录即可， nokit 提供了方便的命令行工具。</p>
 
 <h4>
 <a id="查看版本" class="anchor" href="#%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC" aria-hidden="true"><span class="octicon octicon-link"></span></a>查看版本</h4>
@@ -115,7 +115,7 @@ NSP 支持 include 引用其它页面，也支持 master 母板页持术。</p>
 
 <div class="highlight highlight-html"><pre><span class="pl-c">&lt;!-- 输出内容 --&gt;</span>
 &lt;<span class="pl-ent">p</span>&gt; &lt;%= "输出内容" %&gt; &lt;/<span class="pl-ent">p</span>&gt;
-<span class="pl-c">&lt;!-- this 指向页面处理器，无处理器页面指向默信处理器对象 --&gt;</span>
+<span class="pl-c">&lt;!-- this 指向页面处理器，无处理器页面指向默认处理器对象 --&gt;</span>
 &lt;<span class="pl-ent">p</span>&gt; &lt;%= this.context.request.formData("name") %&gt; &lt;/<span class="pl-ent">p</span>&gt;
 
 <span class="pl-c">&lt;!-- 循环 --&gt;</span>
@@ -227,6 +227,68 @@ NSP 支持 include 引用其它页面，也支持 master 母板页持术。</p>
      home.html
      master.html</pre></div>
 
+<p>views 目录存放的是视图，视图和 NSP 的页面相似，支持 include 和 master，语法也完全相同，
+不同是在 mvc 的视图中 this 指向的是模型，视图具有单一的责职 ，就是呈现模型中的数据。
+controllers 是控制器目录，单个文件为一个控制器，用来响应接受来自用户的请求，并传递给模型，
+然后，完成模型和视图的装配。
+models 为模型目录，nokit 对模型没有统一的要求和控制，应用的业务逻辑应在模型中完成。</p>
+
+<p>MVC 的控制器示例</p>
+
+<div class="highlight highlight-javascript"><pre><span class="pl-c">//定义控制器类型</span>
+<span class="pl-k">var</span> Home <span class="pl-k">=</span> <span class="pl-c1">module</span>.<span class="pl-en">exports</span> <span class="pl-k">=</span> <span class="pl-k">function</span>() {};
+
+<span class="pl-c">//默认 action ，通常用户直接请求某一 url 会被路由到，指定 controller 的默认 action</span>
+<span class="pl-c1">Home</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">index</span> <span class="pl-k">=</span> <span class="pl-k">function</span>() {
+    <span class="pl-k">var</span> self <span class="pl-k">=</span> <span class="pl-v">this</span>;
+
+    <span class="pl-c">/*</span>
+<span class="pl-c">    self.context 可以访问当前请求上下文对象</span>
+<span class="pl-c">    self.context.routeData["name"] 可以获取路由数据</span>
+<span class="pl-c">    self.context.queryData['name'] 可以获取 queryString 对应数据</span>
+<span class="pl-c">    self.context.formData['name'] 可以获取 post 数据</span>
+<span class="pl-c">    self.context.data("name") 可以获取客户端传过来的 queryString 或 formData</span>
+<span class="pl-c">    */</span>
+
+    <span class="pl-c">//通过 self.render 方法呈现指定的视图，并进行模型绑定</span>
+    self.render(<span class="pl-s"><span class="pl-pds">"</span>home.html<span class="pl-pds">"</span></span>, {
+        <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Nokit MVC<span class="pl-pds">"</span></span>
+    });
+};</pre></div>
+
+<p>MVC 的 web.json 配置</p>
+
+<div class="highlight highlight-javascript"><pre>{
+    <span class="pl-c">/*</span>
+<span class="pl-c">    配置 handler ，将指定的请求交由 MVC Handler 处理，支持正则表达式，</span>
+<span class="pl-c">    如示例，将应用的所有请求都交由 MVC 处理 (在找不到匹配的路由配置时，会转由 Static Handler 处理)</span>
+<span class="pl-c">    */</span>
+    <span class="pl-s"><span class="pl-pds">"</span>handlers<span class="pl-pds">"</span></span><span class="pl-k">:</span> {
+        <span class="pl-s"><span class="pl-pds">"</span>^/<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>$./handlers/mvc<span class="pl-pds">"</span></span>
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>mvc<span class="pl-pds">"</span></span><span class="pl-k">:</span> {
+        <span class="pl-c">/*</span>
+<span class="pl-c">        配置 MVC 相关代码文件的存放目录，指定 controller 和 view 的目录位置，model 不用配置。</span>
+<span class="pl-c">        */</span>
+        <span class="pl-s"><span class="pl-pds">"</span>paths<span class="pl-pds">"</span></span><span class="pl-k">:</span> {
+            <span class="pl-s"><span class="pl-pds">"</span>controller<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>./controllers<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>view<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>./views<span class="pl-pds">"</span></span>
+        },
+        <span class="pl-c">/*</span>
+<span class="pl-c">        routes 配置节较为重要，每一个路由至少需要指定 pattern(URL匹配模式) 和 target(目标contrller)</span>
+<span class="pl-c">        如果需要指向具体的 action ，还需要配置 action 项指定对应的 action (controller方式)。</span>
+<span class="pl-c">        pattern 格式示例 "/user/{userId}" 其中 userId 是占位符变量，可以在 controller 中通过 context.routeData['userId'] 获取。</span>
+<span class="pl-c">        */</span>
+        <span class="pl-s"><span class="pl-pds">"</span>routes<span class="pl-pds">"</span></span><span class="pl-k">:</span> [{
+            <span class="pl-s"><span class="pl-pds">"</span>pattern<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>/home<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>target<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>./home.js<span class="pl-pds">"</span></span>
+        },{
+            <span class="pl-s"><span class="pl-pds">"</span>pattern<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>/<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>target<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>./home.js<span class="pl-pds">"</span></span>
+        }]
+    }
+}</pre></div>
+
 <h2>
 <a id="restful" class="anchor" href="#restful" aria-hidden="true"><span class="octicon octicon-link"></span></a>RESTful</h2>
 
@@ -243,6 +305,61 @@ NSP 支持 include 引用其它页面，也支持 master 母板页持术。</p>
 │       common.css
 └─restful
       user.js</pre></div>
+
+<p>REST 的资源控制器示例</p>
+
+<div class="highlight highlight-javascript"><pre><span class="pl-c">//定义资源控制器类型，通常一个资源类型视为一个控制器</span>
+<span class="pl-k">function</span> <span class="pl-en">User</span>() {};
+
+<span class="pl-c">//针对 User 的 post HttpMethod 处理方法</span>
+<span class="pl-c1">User</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">post</span> <span class="pl-k">=</span> <span class="pl-k">function</span>() {
+    <span class="pl-k">var</span> self <span class="pl-k">=</span> <span class="pl-v">this</span>;
+
+    <span class="pl-c">/*</span>
+<span class="pl-c">    self.context 可以访问当前请求上下文对象</span>
+<span class="pl-c">    self.context.routeData["name"] 可以获取路由数据</span>
+<span class="pl-c">    self.context.queryData['name'] 可以获取 queryString 对应数据</span>
+<span class="pl-c">    self.context.formData['name'] 可以获取 post 数据</span>
+<span class="pl-c">    self.context.data("name") 可以获取客户端传过来的 queryString 或 formData</span>
+<span class="pl-c">    */</span>
+
+    self.out(<span class="pl-s"><span class="pl-pds">"</span>Welcome to Nokit REST, By POST, routeData:<span class="pl-pds">"</span></span> <span class="pl-k">+</span> self.context.routeData[<span class="pl-s"><span class="pl-pds">"</span>userId<span class="pl-pds">"</span></span>]);
+};
+
+<span class="pl-c">//针对 User 的 get HttpMethod 处理方法</span>
+<span class="pl-c1">User</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">get</span> <span class="pl-k">=</span> <span class="pl-k">function</span>() {
+    <span class="pl-k">var</span> self <span class="pl-k">=</span> <span class="pl-v">this</span>;
+    self.out(<span class="pl-s"><span class="pl-pds">"</span>Welcome to Nokit REST, By GET, routeData:<span class="pl-pds">"</span></span> <span class="pl-k">+</span> self.context.routeData[<span class="pl-s"><span class="pl-pds">"</span>userId<span class="pl-pds">"</span></span>]);
+};
+
+<span class="pl-c">/*</span>
+<span class="pl-c">根据需求实现对应的 httpMethod 处理方法即可</span>
+<span class="pl-c">*/</span>
+
+<span class="pl-c1">module</span>.exports <span class="pl-k">=</span> User;</pre></div>
+
+<p>REST 的 web.json 配置</p>
+
+<div class="highlight highlight-javascript"><pre>{
+    <span class="pl-c">/*</span>
+<span class="pl-c">    配置 handler ，将指定的请求交由 REST Handler 处理，支持正则表达式，</span>
+<span class="pl-c">    如示例，/api/... 开头的请求，交由 REST Handler 处理</span>
+<span class="pl-c">    */</span>
+    <span class="pl-s"><span class="pl-pds">"</span>handlers<span class="pl-pds">"</span></span><span class="pl-k">:</span> {
+        <span class="pl-s"><span class="pl-pds">"</span>^/api/<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>$./handlers/restful<span class="pl-pds">"</span></span>
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>restful<span class="pl-pds">"</span></span><span class="pl-k">:</span> {
+        <span class="pl-s"><span class="pl-pds">"</span>path<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>./restful<span class="pl-pds">"</span></span>, <span class="pl-c">//指定资源控制器的存放目录</span>
+        <span class="pl-c">/*</span>
+<span class="pl-c">        routes 配置节较为重要，每一个路由至少需要指定 pattern(URL匹配模式) 和 target(目标contrller)</span>
+<span class="pl-c">        pattern 格式示例 "/user/{userId}" 其中 userId 是占位符变量，REST 的路由配置没有 action 配置项。</span>
+<span class="pl-c">        */</span>
+        <span class="pl-s"><span class="pl-pds">"</span>routes<span class="pl-pds">"</span></span><span class="pl-k">:</span> [{
+            <span class="pl-s"><span class="pl-pds">"</span>pattern<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>/api/user/{userId}<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>target<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>./user.js<span class="pl-pds">"</span></span>
+        }]
+    }
+}</pre></div>
       </section>
     </div>
     <footer>
