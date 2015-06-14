@@ -247,7 +247,7 @@ MVC 的 web.json 配置
         },
         /*
         每一个路由至少需要指定 pattern(URL匹配模式) 和 target(目标contrller)
-        还可以通过配置 action 项指定对应的 action (controller方式)。
+        还可以通过配置 action 项指定对应的 action (controller方法)。
         pattern 格式示例 "/user/{userId}" 其中 userId 是占位符变量，
         可以在 controller 中通过 context.routeData['userId'] 获取。
         */
