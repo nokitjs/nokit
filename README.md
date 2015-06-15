@@ -53,7 +53,7 @@ server.start();
 
 ##NSP
 NSP 全称为 Nokit Server Pages 也可以理解为 Node Server Pages，是一种类似 asp / php 的 Web 应用开发模式，
-NSP 支持 include 引用其它页面，也支持 master 母板页持术。
+NSP 支持 include 引用其它页面，也支持 master 母板页技术。
 
 一般目录结构
 ```javascript
