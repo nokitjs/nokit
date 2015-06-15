@@ -1,6 +1,6 @@
 {
     "name": "nokit-runtime",
-    "version": "1.0.36",
+    "version": "1.0.37",
     "description": "A Web development framework!",
     "main": "./lib/index.js",
     "bin": {
