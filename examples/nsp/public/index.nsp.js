@@ -12,9 +12,8 @@ Index.prototype.load = function(context) {
 
 Index.prototype.add = function(context) {
     var self = this;
-    var val = parseInt(self.aumBox.val());
-    self.box.find('[nsp-id="aumBox"]').css("padding","20px");
-    self.aumBox.val(++val);
-    self.aumBox.css("border","solid 1px red");
+    var val = parseInt(self.numBox.val());
+    self.numBox.val(++val);
+    self.numBox.css("border","solid 1px red");
     self.render();
 };
