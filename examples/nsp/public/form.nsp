@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>form test</title>
+</head>
+
+<body>
+    <form method='post' enctype='text/plain'>
+        <label>账号</label>
+        <input type="text" name="accout" id="">
+        <br/>
+        <label>密码</label>
+        <input type="password" name="username" id="">
+        <br/>
+        <label>头像</label>
+        <input type="file" name="photo" id="" multiple="multiple">
+        <br/>
+        <input type="submit" value="提交">
+    </form>
+</body>
+
+</html>

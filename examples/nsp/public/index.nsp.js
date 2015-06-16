@@ -1,6 +1,6 @@
 var Index = module.exports = function() {};
 
-Index.prototype.init = function() {
+Index.prototype.init = function(context) {
     var self = this;
     self.name = 'Nokit NSP';
 };

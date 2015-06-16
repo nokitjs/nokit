@@ -1,0 +1,4 @@
+{
+    "name":"urlencoded",
+    "main":"./parser.js"
+}

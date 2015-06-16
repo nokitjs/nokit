@@ -31,6 +31,13 @@
         ".less": "./handlers/less",
         ".css": "./handlers/css"
     },
+    "parsers": {
+        "*": "./parsers/urlencoded",
+        "multipart/form-data": "./parsers/multipart",
+        "application/x-www-form-urlencoded": "./parsers/urlencoded",
+        "text/plain": "./parsers/plain",
+        "text/json": "./parsers/json"
+    },
     "responsePages": {
         "500": "./templates/500.html",
         "404": "./templates/404.html",
