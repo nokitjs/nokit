@@ -4,7 +4,7 @@
 开发人员也可以方便的扩展新模式。
 Nokit 开发交流 QQ 群: 240603160
 
-[![npm version](https://badge.fury.io/js/nokit-runtime.png)](http://badge.fury.io/js/nokit-runtime)
+[![npm version](https://badge.fury.io/js/nokit-runtime.png)](http://badge.fury.io/js/nokit-runtime)  [![Build status](https://ci.appveyor.com/api/projects/status/github/houfeng/nokit?svg=true)](https://ci.appveyor.com/project/houfeng/nokit) [![Deps Up to Date](https://david-dm.org/houfeng/nokit.svg?style=flat)](https://david-dm.org/houfeng/nokit)
 
 ##安装和更新
 nokit 依赖 nodejs，所以需先安装 nodejs，具体请参考 nodejs 网站
