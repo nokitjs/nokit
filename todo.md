@@ -1,4 +1,2 @@
-1. 应用全局模块（global.js）
-2. 日志
+1. filter 和 应用全局模块（global.js）
 2. 国际化支持
-3. filter

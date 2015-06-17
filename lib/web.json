@@ -20,7 +20,6 @@
         ".ico": "image/x-icon"
     },
     "headers": {
-        "X-UA-Compatible": "IE=Edge,chrome=1"
     },
     "handlers": {
         "*": "./handlers/static",
@@ -38,6 +37,8 @@
         "text/plain": "./parsers/plain",
         "text/json": "./parsers/json"
     },
+    "global": "./global.js",
+    "filters": {},
     "responsePages": {
         "500": "./templates/500.html",
         "404": "./templates/404.html",
@@ -48,11 +49,15 @@
         "public": "./public"
     },
     "caches": [".html$", ".css$", ".js$", ".less$", ".md$"],
-    "denys": [".nsp.js$", "web.json$", "package.json$", ".tp$", ".tp.html$", ".tp.htm$"],
+    "denys": [".nsp.js$", "web.json$", "global.js$", "package.json$", ".tp$", ".tp.html$", ".tp.htm$"],
     "session": {
         "state": true,
         "timeout": 30,
         "provider": "./core/session"
     },
-    "displayDir": true
+    "displayDir": true,
+    "log": {
+        "provider": "./core/logger",
+        "path": "./logs"
+    }
 }
