@@ -19,8 +19,7 @@
         ".bmp": "image/bmp",
         ".ico": "image/x-icon"
     },
-    "headers": {
-    },
+    "headers": {},
     "handlers": {
         "*": "./handlers/static",
         "^/__res__/": "./handlers/resource",
@@ -49,7 +48,7 @@
         "public": "./public"
     },
     "caches": [".html$", ".css$", ".js$", ".less$", ".md$"],
-    "denys": [".nsp.js$", "web.json$", "global.js$", "package.json$", ".tp$", ".tp.html$", ".tp.htm$"],
+    "denys": [".nsp.js$", "web.json$", "global.js$", "package.json$", ".tp$", ".tp.html$", ".tp.htm$", ".log$"],
     "session": {
         "state": true,
         "timeout": 30,

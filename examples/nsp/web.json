@@ -1,3 +1,6 @@
 {
-    "defaults": ["index.nsp"]
+    "defaults": ["index.nsp"],
+    "filters": {
+        "^/mgr": "./filter.js"
+    }
 }
