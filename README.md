@@ -54,7 +54,7 @@ server.start();
 如简单的示例 [http://www.xhou.net:8000](http://www.xhou.net:8000)
 
 ##NSP
-NSP 全称为 Nokit Server Pages 也可以理解为 Node Server Pages，是一种类似 asp / php 的 Web 应用开发模式，
+NSP 全称为 Nokit Server Pages 是一种类似 asp / php 的 Web 应用开发模式，
 NSP 支持 include 引用其它页面，也支持 master 母板页技术。
 
 一般目录结构
@@ -159,7 +159,7 @@ Index.prototype.add = function(context) {
 <input type="button" onclick="nsp.call('add')" value='add' />
 ```
 
-共享元素，通过 "nsp-id" 声明为，客户端和服务端的共享元素，便可以在客户端和服务端同时操作指定元素，
+共享元素，将普通 DOM 元素通过 "nsp-id" 声明为客户端和服务端的共享元素，便可以在客户端和服务端同时操作指定元素，
 并能在回发时保持状态，类似 Asp.NET 的 WebForms，但理念、原理又非常不同，NSP 共享元素非常轻量，更简洁易用。
 ```html
 <!-- 此元素可以在服务端和客户端同时访问 -->
@@ -267,8 +267,8 @@ MVC 的 web.json 配置
 
 
 ##RESTful
-Nokit 用来开发 RESTful Server 是非常方便和简单的，通过简洁的 URL 路由配置，抽象出和资源对应的请求处理程序文件即可，
-可以在处理程序中，根据需求实现 get / post / put 等 http Method 即可。
+Nokit 用来开发 RESTful Service 是非常方便和简单的，通过简洁的 URL 路由配置，抽象出和资源对应的请求处理程序文件即可，
+可以在处理程序中，根据需求实现 get / post / put 等 HttpMethod 即可。
 
 一般目录结构
 ```javascript
