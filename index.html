@@ -1,33 +1,25 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Nokit</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-dark.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <meta charset="UTF-8">
+    <title>Nokit by Houfeng</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Nokit</h1>
-        <p>A Web development framework!</p>
-        <p class="view"><a href="https://github.com/Houfeng/nokit">View the Project on GitHub <small>Houfeng/nokit</small></a></p>
-        <ul>
-          <li><a href="https://github.com/Houfeng/nokit/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/Houfeng/nokit/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/Houfeng/nokit">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h2>
+    <section class="page-header">
+      <h1 class="project-name">Nokit</h1>
+      <h2 class="project-tagline">A Web development framework!</h2>
+      <a href="https://github.com/Houfeng/nokit" class="btn">View on GitHub</a>
+      <a href="https://github.com/Houfeng/nokit/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/Houfeng/nokit/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h2>
 <a id="nokit-简介" class="anchor" href="#nokit-%E7%AE%80%E4%BB%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>Nokit 简介</h2>
 
 <p>最简单易用的 nodejs 开发框架，如果您曾经写过 asp / php 等代码，或者您曾经写过 JavaScript 客户端代码，
@@ -96,7 +88,7 @@ server.<span class="pl-c1">start</span>();</pre></div>
 <h2>
 <a id="nsp" class="anchor" href="#nsp" aria-hidden="true"><span class="octicon octicon-link"></span></a>NSP</h2>
 
-<p>NSP 全称为 Nokit Server Pages 也可以理解为 Node Server Pages，是一种类似 asp / php 的 Web 应用开发模式，
+<p>NSP 全称为 Nokit Server Pages 是一种类似 asp / php 的 Web 应用开发模式，
 NSP 支持 include 引用其它页面，也支持 master 母板页技术。</p>
 
 <p>一般目录结构</p>
@@ -197,7 +189,7 @@ NSP 支持 include 引用其它页面，也支持 master 母板页技术。</p>
 <div class="highlight highlight-html"><pre><span class="pl-c">&lt;!-- 绑定到处理器方法 --&gt;</span>
 &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">onclick</span>=<span class="pl-s"><span class="pl-pds">"</span>nsp.call('add')<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">'</span>add<span class="pl-pds">'</span></span> /&gt;</pre></div>
 
-<p>共享元素，通过 "nsp-id" 声明为，客户端和服务端的共享元素，便可以在客户端和服务端同时操作指定元素，
+<p>共享元素，将普通 DOM 元素通过 "nsp-id" 声明为客户端和服务端的共享元素，便可以在客户端和服务端同时操作指定元素，
 并能在回发时保持状态，类似 Asp.NET 的 WebForms，但理念、原理又非常不同，NSP 共享元素非常轻量，更简洁易用。</p>
 
 <div class="highlight highlight-html"><pre><span class="pl-c">&lt;!-- 此元素可以在服务端和客户端同时访问 --&gt;</span>
@@ -301,8 +293,8 @@ models 为模型目录，nokit 对模型没有统一的要求和控制，应用�
 <h2>
 <a id="restful" class="anchor" href="#restful" aria-hidden="true"><span class="octicon octicon-link"></span></a>RESTful</h2>
 
-<p>Nokit 用来开发 RESTful Server 是非常方便和简单的，通过简洁的 URL 路由配置，抽象出和资源对应的请求处理程序文件即可，
-可以在处理程序中，根据需求实现 get / post / put 等 http Method 即可。</p>
+<p>Nokit 用来开发 RESTful Service 是非常方便和简单的，通过简洁的 URL 路由配置，抽象出和资源对应的请求处理程序文件即可，
+可以在处理程序中，根据需求实现 get / post / put 等 HttpMethod 即可。</p>
 
 <p>一般目录结构</p>
 
@@ -371,13 +363,16 @@ models 为模型目录，nokit 对模型没有统一的要求和控制，应用�
         }]
     }
 }</pre></div>
-      </section>
-    </div>
-    <footer>
-      <p>Project maintained by <a href="https://github.com/Houfeng">Houfeng</a></p>
-      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
-    </footer>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/Houfeng/nokit">Nokit</a> is maintained by <a href="https://github.com/Houfeng">Houfeng</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
   </body>
 </html>
+
