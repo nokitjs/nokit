@@ -47,11 +47,19 @@
     "folders": {
         "public": "./public"
     },
-    "caches": [".html$", ".css$", ".js$", ".less$", ".md$"],
+    "cache": {
+        "client": {
+            "match": [".html$", ".htm$", ".css$", ".js$", ".less$", ".sass$", ".md$", ".png$", ".jpg$", ".jpeg$", ".gif$", ".bmp$", ".swf$"],
+            "maxAge": 1800
+        },
+        "server": {
+            "match": [".html$", ".htm$", ".css$", ".js$", ".less$", ".sass$", ".md$"]
+        }
+    },
     "denys": [".nsp.js$", "web.json$", "global.js$", "package.json$", ".tp$", ".tp.html$", ".tp.htm$", ".log$"],
     "session": {
         "state": true,
-        "timeout": 30,
+        "timeout": 1800,
         "provider": "./core/session"
     },
     "displayDir": true,
