@@ -49,11 +49,11 @@
     },
     "cache": {
         "client": {
-            "match": [".html$", ".htm$", ".css$", ".js$", ".less$", ".sass$", ".md$", ".png$", ".jpg$", ".jpeg$", ".gif$", ".bmp$", ".swf$"],
+            "match": [".html$", ".htm$", ".css$", ".js$", ".icon$", ".ico$", ".less$", ".sass$", ".md$", ".png$", ".jpg$", ".jpeg$", ".gif$", ".bmp$", ".swf$"],
             "maxAge": 1800
         },
         "server": {
-            "match": [".html$", ".htm$", ".css$", ".js$", ".less$", ".sass$", ".md$"]
+            "match": [".html$", ".htm$", ".css$", ".js$", ".icon$", ".ico$", ".less$", ".sass$", ".md$"]
         }
     },
     "denys": [".nsp.js$", "web.json$", "global.js$", "package.json$", ".tp$", ".tp.html$", ".tp.htm$", ".log$"],
