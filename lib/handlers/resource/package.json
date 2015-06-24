@@ -1,4 +1,11 @@
 {
-    "name":"resource",
-    "main":"./handler.js"
+    "name": "nokit-resource-handler",
+    "version": "1.0.0",
+    "description": "handler of nokit",
+    "main": "./handler.js",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Houfeng/nokit-resource-handler.git"
+    }
 }

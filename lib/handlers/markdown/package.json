@@ -1,4 +1,11 @@
 {
-    "name":"markdown",
-    "main":"./handler.js"
+    "name": "nokit-markdown-handler",
+    "version": "1.0.0",
+    "description": "handler of nokit",
+    "main": "./handler.js",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Houfeng/nokit-markdown-handler.git"
+    }
 }

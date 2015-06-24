@@ -1,7 +1,11 @@
 {
-    "name": "less",
+    "name": "nokit-less-handler",
+    "version": "1.0.0",
+    "description": "handler of nokit",
     "main": "./handler.js",
-    "dependencies": {
-        "less": "1.7.0"
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Houfeng/nokit-less-handler.git"
     }
 }
