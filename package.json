@@ -1,6 +1,6 @@
 {
     "name": "nokit-runtime",
-    "version": "1.0.51",
+    "version": "1.0.52",
     "description": "A Web development framework!",
     "main": "./lib/index.js",
     "bin": {
@@ -23,7 +23,7 @@
         "name": "Houfeng",
         "email": "admin@xhou.net"
     },
-    "homepage": "http://houfeng.net/nokit",
+    "homepage": "http://nokit.org",
     "bugs": {
         "url": "https://github.com/Houfeng/nokit/issues",
         "email": "admin@xhou.net"
