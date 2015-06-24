@@ -1,4 +1,5 @@
 {
+    "hosts": [],
     "port": 8000,
     "defaults": ["index.html", "index.nsp"],
     "mimeType": {
