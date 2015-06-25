@@ -69,14 +69,24 @@ Nokit 开发交流 QQ 群: 240603160</p>
 <h4>
 <a id="创建应用" class="anchor" href="#%E5%88%9B%E5%BB%BA%E5%BA%94%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>创建应用</h4>
 
-<div class="highlight highlight-javascript"><pre>nokit create <span class="pl-k">&lt;</span>应用名称<span class="pl-k">&gt;</span> [目标目录(默认为当前目录)] [类型(默认为nsp)]</pre></div>
+<div class="highlight highlight-javascript"><pre>nokit create <span class="pl-k">&lt;</span>应用名称<span class="pl-k">&gt;</span> [应用目录] [应用类型]</pre></div>
 
 <p>以上命令会生成一个最简单的应用所需要的目录结构和配置。</p>
 
 <h4>
 <a id="运行应用" class="anchor" href="#%E8%BF%90%E8%A1%8C%E5%BA%94%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>运行应用</h4>
 
-<div class="highlight highlight-javascript"><pre>nokit <span class="pl-k">&lt;</span>应用根目录<span class="pl-k">&gt;</span> [端口(也可在web.json中指定或省略)]</pre></div>
+<div class="highlight highlight-javascript"><pre>nokit start <span class="pl-k">&lt;</span>应用目录<span class="pl-k">&gt;</span> [应用端口] [<span class="pl-k">--</span>debug]</pre></div>
+
+<h4>
+<a id="停止应用" class="anchor" href="#%E5%81%9C%E6%AD%A2%E5%BA%94%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>停止应用</h4>
+
+<div class="highlight highlight-javascript"><pre>nokit stop [进程<span class="pl-c1">ID</span>|all]</pre></div>
+
+<h4>
+<a id="查看运行中的应用" class="anchor" href="#%E6%9F%A5%E7%9C%8B%E8%BF%90%E8%A1%8C%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>查看运行中的应用</h4>
+
+<div class="highlight highlight-javascript"><pre>nokit list (list命令没有参数)</pre></div>
 
 <h2>
 <a id="代码引用" class="anchor" href="#%E4%BB%A3%E7%A0%81%E5%BC%95%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>代码引用</h2>
@@ -103,6 +113,7 @@ NSP 支持 include 引用其它页面，也支持 master 母板页技术。</p>
 
 <div class="highlight highlight-javascript"><pre>根目录
 │ web.json
+│ app.js
 ├─layout
 │     date.nsp
 │     master.nsp
@@ -218,6 +229,7 @@ NSP 支持 include 引用其它页面，也支持 master 母板页技术。</p>
 
 <div class="highlight highlight-javascript"><pre>根目录
 │ web.json
+│ app.js
 ├─controllers
 │    home.js
 ├─models
@@ -307,6 +319,7 @@ models 为模型目录，nokit 对模型没有统一的要求和控制，应用�
 
 <div class="highlight highlight-javascript"><pre>根目录
 │ web.json
+│ app.js
 ├─<span class="pl-k">public</span>
 │  │  index.nsp
 │  └─style
