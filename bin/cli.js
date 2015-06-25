@@ -38,7 +38,7 @@ dm.run(function() {
         packageInfo.name = nokit.utils.firstUpper(packageInfo.name.split('-')[0]);
         //
         console.log(packageInfo.name + " " + packageInfo.version + '\r\n', true);
-        console.log("创建 : nokit create <应用名称>   [应用目录] [应用类型]", true);
+        console.log("创建 : nokit create <应用名称>   [目标目录] [应用类型]", true);
         console.log("启动 : nokit start  <应用目录>   [应用端口] [--debug]", true);
         console.log("停止 : nokit stop   [进程ID|all]", true);
         console.log("查看 : nokit list   (list命令没有参数)\r\n", true);
@@ -103,9 +103,10 @@ dm.run(function() {
     };
 
     var startDebugger = function() {
-        exitTimeout += 1000;
+        exitTimeout += 2000;
         var cmdName = 'node';
         var cmdArgs = [path.normalize(path.dirname(__dirname) + '/node_modules/node-inspector/bin/inspector.js')];
+        cmdArgs.push('--hidden=\'["' + path.dirname(__dirname) + '"]\'');
         return startChildProcess(cmdName, cmdArgs);
     };
 

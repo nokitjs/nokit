@@ -30,7 +30,7 @@ nokit 或 nokit ?
 
 ####创建应用
 ```javascript
-nokit create <应用名称> [应用目录] [应用类型]
+nokit create <应用名称> [目标目录] [应用类型]
 ```
 以上命令会生成一个最简单的应用所需要的目录结构和配置。
 
