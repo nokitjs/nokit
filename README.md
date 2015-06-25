@@ -30,13 +30,23 @@ nokit 或 nokit ?
 
 ####创建应用
 ```javascript
-nokit create <应用名称> [目标目录(默认为当前目录)] [类型(默认为nsp)]
+nokit create <应用名称> [应用目录] [应用类型]
 ```
 以上命令会生成一个最简单的应用所需要的目录结构和配置。
 
 ####运行应用
 ```javascript
-nokit <应用根目录> [端口(也可在web.json中指定或省略)]
+nokit start <应用目录> [应用端口] [--debug]
+```
+
+####停止应用
+```javascript
+nokit stop [进程ID|all]
+```
+
+####查看运行中的应用
+```javascript
+nokit list (list命令没有参数)
 ```
 
 ##代码引用
@@ -61,6 +71,7 @@ NSP 支持 include 引用其它页面，也支持 master 母板页技术。
 ```javascript
 根目录
 │ web.json
+│ app.js
 ├─layout
 │     date.nsp
 │     master.nsp
@@ -182,6 +193,7 @@ Nokit MVC 是一种设计简约、符合 MVC 模式 Web 应用开发模式。
 ```javascript
 根目录
 │ web.json
+│ app.js
 ├─controllers
 │    home.js
 ├─models
@@ -273,6 +285,7 @@ Nokit 用来开发 RESTful Service 是非常方便和简单的，通过简洁的
 ```javascript
 根目录
 │ web.json
+│ app.js
 ├─public
 │  │  index.nsp
 │  └─style

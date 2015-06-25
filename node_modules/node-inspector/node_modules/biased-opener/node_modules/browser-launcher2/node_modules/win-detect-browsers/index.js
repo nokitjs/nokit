@@ -1,0 +1,45 @@
+var browsers  = require('./lib/browsers')
+  , after     = require('after')
+  , Finder    = require('./lib/finder')
+  , xtend     = require('xtend')
+  , defaults  = {lucky: false, version: true}
+  , path      = require('path')
+  , fs        = require('fs')
+
+module.exports = function (names, opts, complete) {
+  if (typeof names == 'string')
+    names = [names]
+  else if (!Array.isArray(names))
+    complete = opts, opts = names, names = null
+
+  if (!names || !names.length)
+    names = Object.keys(browsers)
+
+  if (typeof opts == 'function')
+    complete = opts, opts = xtend(defaults)
+  else
+    opts = xtend(defaults, opts)
+
+  var found = []
+
+  var end = after(names.length, function(){
+    if (opts.version) found = found.filter(function(b){
+      return b.version
+    })
+    complete(found)
+  })
+
+  names.forEach(function(name){
+    var finder = new Finder(name, browsers[name])
+
+    finder.find(opts, function(err, result){
+      var step = after(result.length, end)
+
+      result.forEach(function(browser){
+        found.push(browser)
+        if (opts.version) browser.getVersion(step)
+        else step()
+      })
+    })
+  })
+}

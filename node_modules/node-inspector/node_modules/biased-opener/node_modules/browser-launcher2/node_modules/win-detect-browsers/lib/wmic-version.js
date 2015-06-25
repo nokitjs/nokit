@@ -1,0 +1,49 @@
+var exec    = require('./exec')
+  , running = false
+  , queue   = []
+  , debug   = require('debug')('win-detect-browsers')
+
+// Retrieve version number with WMIC. Runs 
+// sequential, because WMIC can't handle 
+// concurrent calls on WinXP.
+module.exports = function(path, cb) {
+  queue.push([path, cb])
+  run()
+}
+
+function run() {
+  if (running) return
+  running = true
+
+  var item = queue.shift()
+
+  if (item == null) {
+    running = false
+    return
+  }
+
+  var path = item[0], cb = item[1]
+
+  // Escape much?
+  var escaped = path.replace(/\\|\//g, '\\\\')
+
+  var args = [
+    'datafile where Name="' + escaped + '"', 
+    'get Version /format:value'
+  ]
+  
+  debug("get version with 'wmic %s'", args.join(' '))
+
+  exec('wmic', args, function(err, out){
+    if (err) cb(err)
+    else {
+      // "Version=xx"
+      var version = out.split('=')[1]
+      if (!version) cb(new Error('Could not parse version: "'+out+'"'))
+      else cb(null, version)
+    }
+
+    running = false
+    setImmediate(run)
+  })
+}

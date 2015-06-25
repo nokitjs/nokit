@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+var argv = require('yargs')
+  .boolean('lucky').alias('l', 'lucky')
+  .boolean('version').alias('v', 'version')
+  .default({ lucky : false, version : true })
+  .argv;
+
+var detect = require('../')
+
+detect(argv._, argv, function(browsers){
+  var format = "\n%s %s\n  @ %s"
+  browsers.forEach(function(b){
+    console.log(format, b.name, b.version || '', b.path)
+  })
+})
+
+// detect(fn)
+// detect('chrome', fn)
+// detect('chrome', {lucky: true, version: false}, fn)
+// detect(['ie', 'firefox'], fn)

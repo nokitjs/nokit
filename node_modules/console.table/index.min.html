@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>console.table</title>
+    <script src="dist/console.table.min.js"></script>
+  </head>
+  <body>
+    <div id="example">
+      <p>This is <strong>console.table</strong> minified example.
+      Open JavaScript console and look a the output</p>
+    </div>
+    <script>
+    if (typeof console.table !== 'function') {
+      throw new Error('Cannot find console.table function');
+    }
+    console.log('printing document.body');
+    var names = [
+      {
+        name: 'foo',
+        age: 10
+      },
+      {
+        name: 'bar',
+        age: 20
+      },
+      {
+        name: 'baz',
+        age: 30
+      }
+    ];
+    console.table(names);
+    </script>
+  </body>
+</html>
