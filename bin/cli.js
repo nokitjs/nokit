@@ -33,10 +33,10 @@ dm.run(function() {
     args = args.splice(1);
 
     //输出版本信息
+    var packageInfo = nokit.utils.readJSONSync(path.resolve(__dirname, path.normalize("../package.json")));
+    packageInfo._name = packageInfo.name;
+    packageInfo.name = nokit.utils.firstUpper(packageInfo.name.split('-')[0]);
     if (!command || command == '?') {
-        var packageInfo = nokit.utils.readJSONSync(path.resolve(__dirname, path.normalize("../package.json")));
-        packageInfo.name = nokit.utils.firstUpper(packageInfo.name.split('-')[0]);
-        //
         console.log(packageInfo.name + " " + packageInfo.version + '\r\n', true);
         console.log("创建 : nokit create <应用名称>   [目标目录] [应用类型]", true);
         console.log("启动 : nokit start  <应用目录>   [应用端口] [--debug]", true);
@@ -106,7 +106,7 @@ dm.run(function() {
         exitTimeout += 2000;
         var cmdName = 'node';
         var cmdArgs = [path.normalize(path.dirname(__dirname) + '/node_modules/node-inspector/bin/inspector.js')];
-        cmdArgs.push('--hidden=\'["' + path.dirname(__dirname) + '"]\'');
+        cmdArgs.push("--hidden=" + packageInfo._name);
         return startChildProcess(cmdName, cmdArgs);
     };
 
