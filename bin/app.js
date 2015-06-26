@@ -1,6 +1,7 @@
 var nokit = require("../");
 var path = require("path");
 var domain = require("domain");
+var processLog = require('./processlog');
 var console = nokit.console;
 
 var dm = domain.create();
@@ -29,4 +30,7 @@ dm.run(function() {
     //启动 server
     var server = new nokit.Server(options);
     server.start();
+
+    //向进程记录中补充其它信息
+    processLog.supply(process.pid, server);
 });

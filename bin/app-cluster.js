@@ -1,6 +1,7 @@
 var nokit = require("../");
 var path = require("path");
 var domain = require("domain");
+var processLog = require('./processlog');
 var console = nokit.console;
 var cluster = require('cluster');
 var cpuTotal = require('os').cpus().length
@@ -47,5 +48,9 @@ if (cluster.isMaster) {
         //启动 server
         var server = new nokit.Server(options);
         server.start();
+
+        //向进程记录中补充其它信息
+        processLog.supply(process.pid, server);
+
     });
 }

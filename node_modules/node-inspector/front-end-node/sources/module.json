@@ -1,8 +1,0 @@
-{
-    "dependencies": [
-        "sources"
-    ],
-    "scripts": [
-        "SourcesOverrides.js"
-    ]
-}
