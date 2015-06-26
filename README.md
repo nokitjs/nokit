@@ -44,6 +44,11 @@ nokit start <应用目录> [应用端口] [--debug]
 nokit stop [进程ID|all]
 ```
 
+####重启应用
+```javascript
+nokit restart [进程ID|all]
+```
+
 ####查看运行中的应用
 ```javascript
 nokit list (list命令没有参数)
