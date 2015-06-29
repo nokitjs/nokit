@@ -9,7 +9,10 @@ var console = nokit.console;
 var spawn = child_process.spawn;
 var exec = child_process.exec;
 
-var engineName = isWin ? path.normalize(__dirname + '/node.vbs ') : 'node';
+var engineName = path.parse(process.argv[0]).name || 'node';
+var startCommandName = isWin ? path.normalize(__dirname + '/' + engineName + '.vbs ') : engineName;
+
+console.log(startCommandName);
 
 //cli进程延迟存活时间
 exports.exitTimeout = 0;
@@ -69,7 +72,7 @@ var dedcodeStartInfo = function(startInfo) {
 exports.startApp = function(startInfo) {
     //将启动信息加入到自身，用于重启
     startInfo.push('-start-info:' + endcodeStartInfo(startInfo));
-    this.start(engineName, startInfo);
+    this.start(startCommandName, startInfo);
 };
 
 exports.restartApp = function(pid) {
