@@ -59,7 +59,8 @@ Nokit 开发交流 QQ 群: 240603160</p>
 <h2>
 <a id="命令行工具" class="anchor" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7" aria-hidden="true"><span class="octicon octicon-link"></span></a>命令行工具</h2>
 
-<p>nokit 应用只需在磁盘建立应用目录，并新建 web.json 配置文件，以及其它相关目录即可， nokit 提供了方便的命令行工具。</p>
+<p>nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录即可， nokit 提供了方便的命令行工具。
+命令行工具还提供进程管理相关功能，确保应用能够持续稳定的运行，并能在遇到故障时自动恢复。</p>
 
 <h4>
 <a id="查看版本" class="anchor" href="#%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC" aria-hidden="true"><span class="octicon octicon-link"></span></a>查看版本</h4>
@@ -96,7 +97,8 @@ Nokit 开发交流 QQ 群: 240603160</p>
 <h2>
 <a id="代码引用" class="anchor" href="#%E4%BB%A3%E7%A0%81%E5%BC%95%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>代码引用</h2>
 
-<p>除了使用命令行工具，也可以在代码中引用 nokit 的方式来运行 nokit 应用</p>
+<p>除了使用命令行工具，也可以在代码中引用 nokit 的方式来运行 nokit 应用，
+在代码中引用 nokit，将不能利用 nokit 的进程管理功能，这时可以直接运行，或者使用 pm2 / forever 等工具进行管理。</p>
 
 <div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> nokit <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">"</span>nokit-runtime<span class="pl-pds">"</span></span>);
 <span class="pl-k">var</span> server <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">nokit.Server</span>({
