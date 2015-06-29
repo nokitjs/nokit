@@ -36,7 +36,7 @@ nokit create <应用名称> [目标目录] [应用类型]
 
 ####运行应用
 ```javascript
-nokit start <应用目录> [应用端口] [--debug]
+nokit start <应用目录> [应用端口] [-debug] [-cluster[:num]]
 ```
 
 ####停止应用

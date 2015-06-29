@@ -50,21 +50,24 @@ ProcessLog.prototype.toPrintArray = function() {
     var logArray = this.readArray();
     logArray = logArray.map(function(log) {
         return {
-            pid: log.pid,
-            host: log.host,
-            port: log.port,
-            path: log.path,
-            mode: log.mode
+            PID: log.pid,
+            WPID: log.wpid,
+            HOST: log.host,
+            PORT: log.port,
+            PATH: log.path,
+            DEBUG: log.debug,
+            CLUSTER: log.cluster
         };
     });
     return logArray;
 };
 
-ProcessLog.prototype.supply = function(pid, instanse) {
+ProcessLog.prototype.supply = function(pid, info) {
     var log = this.get(pid);
     if (!log || log.supplyed) return;
-    log.host = (instanse.configs.hosts || [])[0] || 'localhost';
-    log.port = instanse.configs.port;
+    log.host = (info.hosts || [])[0] || 'localhost';
+    log.port = info.port;
+    log.wpid = info.wpid;
     log.supplyed = true;
     this.remove(log.pid);
     this.add(log);

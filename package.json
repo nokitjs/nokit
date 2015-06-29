@@ -1,6 +1,6 @@
 {
     "name": "nokit-runtime",
-    "version": "1.0.59",
+    "version": "1.0.63",
     "description": "A Web development framework!",
     "main": "./lib/index.js",
     "bin": {
@@ -36,7 +36,7 @@
     "dependencies": {
         "formidable": "1.0.17",
         "cheerio": "0.19.0",
-        "less": "2.5.1",
-        "console.table": "0.4.0"
+        "console.table": "0.4.0",
+        "less": "2.5.1"
     }
 }
