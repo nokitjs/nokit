@@ -12,8 +12,6 @@ var exec = child_process.exec;
 var engineName = path.parse(process.argv[0]).name || 'node';
 var startCommandName = isWin ? path.normalize(__dirname + '/' + engineName + '.vbs ') : engineName;
 
-console.log(startCommandName);
-
 //cli进程延迟存活时间
 exports.exitTimeout = 0;
 exports.isWin = isWin;
