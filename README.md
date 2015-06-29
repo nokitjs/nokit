@@ -21,7 +21,8 @@ npm update -g nokit-runtime
 ```
 
 ##命令行工具
-nokit 应用只需在磁盘建立应用目录，并新建 web.json 配置文件，以及其它相关目录即可， nokit 提供了方便的命令行工具。
+nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录即可， nokit 提供了方便的命令行工具。
+命令行工具还提供进程管理相关功能，确保应用能够持续稳定的运行，并能在遇到故障时自动恢复。
 
 ####查看版本
 ```javascript
@@ -55,7 +56,8 @@ nokit list (list命令没有参数)
 ```
 
 ##代码引用
-除了使用命令行工具，也可以在代码中引用 nokit 的方式来运行 nokit 应用
+除了使用命令行工具，也可以在代码中引用 nokit 的方式来运行 nokit 应用，
+在代码中引用 nokit，将不能利用 nokit 的进程管理功能，这时可以直接运行，或者使用 pm2 / forever 等工具进行管理。
 ```javascript
 var nokit = require("nokit-runtime");
 var server = new nokit.Server({
