@@ -11,6 +11,7 @@ nokit 依赖 nodejs 或 iojs，所以需先安装 nodejs 或 iojs，具体请参
 >1. [https://nodejs.org/](https://nodejs.org/)
 >2. [https://iojs.org/](https://iojs.org/)
 
+
 ####安装 nokit
 ```javascript
 [sudo] npm install -g nokit-runtime
