@@ -31,28 +31,33 @@ nokit 或 nokit ?
 
 ####创建应用
 ```javascript
-nokit create <应用名称> [目标目录] [应用类型]
+nokit create <name> [folder] [mvc|nsp|restful]
 ```
 以上命令会生成一个最简单的应用所需要的目录结构和配置。
 
 ####运行应用
 ```javascript
-nokit start <应用目录> [应用端口] [-debug] [-cluster[:num]]
+nokit start <root> [port] [-debug] [-cluster[:num]] [-watch[:.ext,...]]
 ```
+-debug 选项可以开启 debug 模式，开启后可以使用 nodejs 内置调试工具调式，也可以使用 node-inspector 等工具进行调试。
+-cluster 选项可以开启 "单机集群模式"，使应用可以在核CPU上发挥更大的效能，也使应用更加健壮可靠，
+-cluster 选项可以指定进程数，如 -cluster:4 ，不指定进程数时默认为 CPU 核数。
+-watch 选项开启后，可以应用文件发生改变时，自动完成热部署，默认任何文件生成变动都会触发热部署，
+也可以指定文件类型，如 -watch:.js,.html,.css
 
 ####停止应用
 ```javascript
-nokit stop [进程ID|all]
+nokit stop [pid|all]
 ```
 
 ####重启应用
 ```javascript
-nokit restart [进程ID|all]
+nokit restart [pid|all]
 ```
 
 ####查看运行中的应用
 ```javascript
-nokit list (list命令没有参数)
+nokit list
 ```
 
 ##代码引用

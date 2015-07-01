@@ -18,11 +18,11 @@ var cwd = process.cwd();
  **/
 function printVersionAndHelp(packageInfo) {
     console.log(packageInfo.name + " " + packageInfo.version + '\r\n', true);
-    console.log("创建 : nokit create  <应用名称> [目标目录] [应用类型]", true);
-    console.log("启动 : nokit start   <应用目录> [应用端口] [-debug] [-cluster[:num]]", true);
-    console.log("停止 : nokit stop    [进程ID|all]", true);
-    console.log("重启 : nokit restart [进程ID|all]", true);
-    console.log("查看 : nokit list    (list命令没有参数)\r\n", true);
+    console.log(" 1) nokit create  <name> [folder] [mvc|nsp|restful]", true);
+    console.log(" 2) nokit start   <root> [port] [-debug] [-cluster[:num]] [-watch[:.ext,...]]", true);
+    console.log(" 3) nokit stop    [pid|all]", true);
+    console.log(" 4) nokit restart [pid|all]", true);
+    console.log(" 5) nokit list    (no args)\r\n", true);
 };
 
 var dm = domain.create();
