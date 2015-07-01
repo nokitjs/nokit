@@ -40,21 +40,24 @@ Nokit 开发交流 QQ 群: 240603160</p>
 <h2>
 <a id="安装和更新" class="anchor" href="#%E5%AE%89%E8%A3%85%E5%92%8C%E6%9B%B4%E6%96%B0" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装和更新</h2>
 
-<p>nokit 依赖 nodejs，所以需先安装 nodejs，具体请参考 nodejs 网站</p>
+<p>nokit 依赖 nodejs 或 iojs，所以需先安装 nodejs 或 iojs，具体请参考 nodejs 或 iojs 网站</p>
 
 <blockquote>
-<p><a href="https://nodejs.org/">https://nodejs.org/</a></p>
+<ol>
+<li><a href="https://nodejs.org/">https://nodejs.org/</a></li>
+<li><a href="https://iojs.org/">https://iojs.org/</a></li>
+</ol>
 </blockquote>
 
 <h4>
 <a id="安装-nokit" class="anchor" href="#%E5%AE%89%E8%A3%85-nokit" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装 nokit</h4>
 
-<div class="highlight highlight-javascript"><pre>npm install <span class="pl-k">-</span>g nokit<span class="pl-k">-</span>runtime</pre></div>
+<div class="highlight highlight-javascript"><pre>[sudo] npm install <span class="pl-k">-</span>g nokit<span class="pl-k">-</span>runtime</pre></div>
 
 <h4>
 <a id="更新-nokit" class="anchor" href="#%E6%9B%B4%E6%96%B0-nokit" aria-hidden="true"><span class="octicon octicon-link"></span></a>更新 nokit</h4>
 
-<div class="highlight highlight-javascript"><pre>npm update <span class="pl-k">-</span>g nokit<span class="pl-k">-</span>runtime</pre></div>
+<div class="highlight highlight-javascript"><pre>[sudo] npm update <span class="pl-k">-</span>g nokit<span class="pl-k">-</span>runtime</pre></div>
 
 <h2>
 <a id="命令行工具" class="anchor" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7" aria-hidden="true"><span class="octicon octicon-link"></span></a>命令行工具</h2>
@@ -65,34 +68,40 @@ Nokit 开发交流 QQ 群: 240603160</p>
 <h4>
 <a id="查看版本" class="anchor" href="#%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC" aria-hidden="true"><span class="octicon octicon-link"></span></a>查看版本</h4>
 
-<div class="highlight highlight-javascript"><pre>nokit 或 nokit <span class="pl-k">?</span></pre></div>
+<div class="highlight highlight-javascript"><pre>[sudo] nokit [<span class="pl-k">?</span>]</pre></div>
 
 <h4>
 <a id="创建应用" class="anchor" href="#%E5%88%9B%E5%BB%BA%E5%BA%94%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>创建应用</h4>
 
-<div class="highlight highlight-javascript"><pre>nokit create <span class="pl-k">&lt;</span>应用名称<span class="pl-k">&gt;</span> [目标目录] [应用类型]</pre></div>
+<div class="highlight highlight-javascript"><pre>[sudo] nokit create <span class="pl-k">&lt;</span>name<span class="pl-k">&gt;</span> [folder] [mvc|nsp|restful]</pre></div>
 
 <p>以上命令会生成一个最简单的应用所需要的目录结构和配置。</p>
 
 <h4>
 <a id="运行应用" class="anchor" href="#%E8%BF%90%E8%A1%8C%E5%BA%94%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>运行应用</h4>
 
-<div class="highlight highlight-javascript"><pre>nokit start <span class="pl-k">&lt;</span>应用目录<span class="pl-k">&gt;</span> [应用端口] [<span class="pl-k">-</span>debug] [<span class="pl-k">-</span>cluster[<span class="pl-k">:</span>num]]</pre></div>
+<div class="highlight highlight-javascript"><pre>[sudo] nokit start <span class="pl-k">&lt;</span>root<span class="pl-k">&gt;</span> [port] [<span class="pl-k">-</span>debug] [<span class="pl-k">-</span>cluster[<span class="pl-k">:</span>num]] [<span class="pl-k">-</span>watch[<span class="pl-k">:</span>.ext,...]]</pre></div>
+
+<ol>
+<li>-debug 选项可以开启 debug 模式，开启后可以使用 nodejs 内置调试工具调式，也可以使用 node-inspector 等工具进行调试。</li>
+<li>-cluster 选项可以开启 "单机集群模式"，使应用可以在核CPU上发挥更大的效能，也使应用更加健壮可靠，-cluster 选项可以指定进程数，如 -cluster:4 ，不指定进程数时默认为 CPU 核数。</li>
+<li>-watch 选项开启后，可以应用文件发生改变时，自动完成热部署，默认任何文件生成变动都会触发热部署，也可以指定文件类型，如 -watch:.js,.html,.css</li>
+</ol>
 
 <h4>
 <a id="停止应用" class="anchor" href="#%E5%81%9C%E6%AD%A2%E5%BA%94%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>停止应用</h4>
 
-<div class="highlight highlight-javascript"><pre>nokit stop [进程<span class="pl-c1">ID</span>|all]</pre></div>
+<div class="highlight highlight-javascript"><pre>[sudo] nokit stop [pid|all]</pre></div>
 
 <h4>
 <a id="重启应用" class="anchor" href="#%E9%87%8D%E5%90%AF%E5%BA%94%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>重启应用</h4>
 
-<div class="highlight highlight-javascript"><pre>nokit restart [进程<span class="pl-c1">ID</span>|all]</pre></div>
+<div class="highlight highlight-javascript"><pre>[sudo] nokit restart [pid|all]</pre></div>
 
 <h4>
 <a id="查看运行中的应用" class="anchor" href="#%E6%9F%A5%E7%9C%8B%E8%BF%90%E8%A1%8C%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>查看运行中的应用</h4>
 
-<div class="highlight highlight-javascript"><pre>nokit list (list命令没有参数)</pre></div>
+<div class="highlight highlight-javascript"><pre>[sudo] nokit list</pre></div>
 
 <h2>
 <a id="代码引用" class="anchor" href="#%E4%BB%A3%E7%A0%81%E5%BC%95%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>代码引用</h2>
@@ -188,6 +197,12 @@ NSP 支持 include 引用其它页面，也支持 master 母板页技术。</p>
 <span class="pl-c">    self.context //当前请上下文对象</span>
 <span class="pl-c">    self.request //同 context.request，请求对象</span>
 <span class="pl-c">    self.response //同 context.response 响应对象</span>
+<span class="pl-c">    self.context.request.queryData['name'] 可以获取 queryString 对应数据</span>
+<span class="pl-c">    self.context.request.formData['name'] 可以获取 post 数据</span>
+<span class="pl-c">    self.context.data("name") 可以获取客户端传过来的 queryString 或 formData</span>
+<span class="pl-c">    self.context.request.cookie 获取来自客户的 cookie</span>
+<span class="pl-c">    self.context.respone.cookie 向客户端发送 cookie</span>
+<span class="pl-c">    se轩.context.session 访问 session 数据</span>
 <span class="pl-c">    */</span>
     self.<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>Nokit NSP<span class="pl-pds">'</span></span>;
 };
@@ -269,9 +284,12 @@ models 为模型目录，nokit 对模型没有统一的要求和控制，应用�
     <span class="pl-c">/*</span>
 <span class="pl-c">    self.context 可以访问当前请求上下文对象</span>
 <span class="pl-c">    self.context.routeData["name"] 可以获取路由数据</span>
-<span class="pl-c">    self.context.queryData['name'] 可以获取 queryString 对应数据</span>
-<span class="pl-c">    self.context.formData['name'] 可以获取 post 数据</span>
+<span class="pl-c">    self.context.request.queryData['name'] 可以获取 queryString 对应数据</span>
+<span class="pl-c">    self.context.request.formData['name'] 可以获取 post 数据</span>
 <span class="pl-c">    self.context.data("name") 可以获取客户端传过来的 queryString 或 formData</span>
+<span class="pl-c">    self.context.request.cookie 获取来自客户的 cookie</span>
+<span class="pl-c">    self.context.respone.cookie 向客户端发送 cookie</span>
+<span class="pl-c">    se轩.context.session 访问 session 数据</span>
 <span class="pl-c">    */</span>
 
     <span class="pl-c">//通过 self.render 方法呈现指定的视图，并进行模型绑定</span>
@@ -346,8 +364,8 @@ models 为模型目录，nokit 对模型没有统一的要求和控制，应用�
     <span class="pl-c">/*</span>
 <span class="pl-c">    self.context 可以访问当前请求上下文对象</span>
 <span class="pl-c">    self.context.routeData["name"] 可以获取路由数据</span>
-<span class="pl-c">    self.context.queryData['name'] 可以获取 queryString 对应数据</span>
-<span class="pl-c">    self.context.formData['name'] 可以获取 post 数据</span>
+<span class="pl-c">    self.context.request.queryData['name'] 可以获取 queryString 对应数据</span>
+<span class="pl-c">    self.context.request.formData['name'] 可以获取 post 数据</span>
 <span class="pl-c">    self.context.data("name") 可以获取客户端传过来的 queryString 或 formData</span>
 <span class="pl-c">    */</span>
 
