@@ -7,17 +7,18 @@ Nokit 开发交流 QQ 群: 240603160
 [![npm version](https://badge.fury.io/js/nokit-runtime.svg)](http://badge.fury.io/js/nokit-runtime)  
 
 ##安装和更新
-nokit 依赖 nodejs，所以需先安装 nodejs，具体请参考 nodejs 网站
+nokit 依赖 nodejs 或 iojs，所以需先安装 nodejs 或 iojs，具体请参考 nodejs 或 iojs 网站
 > [https://nodejs.org/](https://nodejs.org/)
+> [https://iojs.org/](https://iojs.org/)
 
 ####安装 nokit
 ```javascript
-npm install -g nokit-runtime
+[sudo] npm install -g nokit-runtime
 ```
 
 ####更新 nokit
 ```javascript
-npm update -g nokit-runtime
+[sudo] npm update -g nokit-runtime
 ```
 
 ##命令行工具
@@ -31,13 +32,13 @@ nokit 或 nokit ?
 
 ####创建应用
 ```javascript
-nokit create <name> [folder] [mvc|nsp|restful]
+[sudo] nokit create <name> [folder] [mvc|nsp|restful]
 ```
 以上命令会生成一个最简单的应用所需要的目录结构和配置。
 
 ####运行应用
 ```javascript
-nokit start <root> [port] [-debug] [-cluster[:num]] [-watch[:.ext,...]]
+[sudo] nokit start <root> [port] [-debug] [-cluster[:num]] [-watch[:.ext,...]]
 ```
 -debug 选项可以开启 debug 模式，开启后可以使用 nodejs 内置调试工具调式，也可以使用 node-inspector 等工具进行调试。
 -cluster 选项可以开启 "单机集群模式"，使应用可以在核CPU上发挥更大的效能，也使应用更加健壮可靠，
@@ -47,17 +48,17 @@ nokit start <root> [port] [-debug] [-cluster[:num]] [-watch[:.ext,...]]
 
 ####停止应用
 ```javascript
-nokit stop [pid|all]
+[sudo] nokit stop [pid|all]
 ```
 
 ####重启应用
 ```javascript
-nokit restart [pid|all]
+[sudo] nokit restart [pid|all]
 ```
 
 ####查看运行中的应用
 ```javascript
-nokit list
+[sudo] nokit list
 ```
 
 ##代码引用
@@ -153,6 +154,12 @@ Index.prototype.init = function(context) {
     self.context //当前请上下文对象
     self.request //同 context.request，请求对象
     self.response //同 context.response 响应对象
+    self.context.request.queryData['name'] 可以获取 queryString 对应数据
+    self.context.request.formData['name'] 可以获取 post 数据
+    self.context.data("name") 可以获取客户端传过来的 queryString 或 formData
+    self.context.request.cookie 获取来自客户的 cookie
+    self.context.respone.cookie 向客户端发送 cookie
+    se轩.context.session 访问 session 数据
     */
     self.name = 'Nokit NSP';
 };
@@ -238,9 +245,12 @@ Home.prototype.index = function() {
     /*
     self.context 可以访问当前请求上下文对象
     self.context.routeData["name"] 可以获取路由数据
-    self.context.queryData['name'] 可以获取 queryString 对应数据
-    self.context.formData['name'] 可以获取 post 数据
+    self.context.request.queryData['name'] 可以获取 queryString 对应数据
+    self.context.request.formData['name'] 可以获取 post 数据
     self.context.data("name") 可以获取客户端传过来的 queryString 或 formData
+    self.context.request.cookie 获取来自客户的 cookie
+    self.context.respone.cookie 向客户端发送 cookie
+    se轩.context.session 访问 session 数据
     */
     
     //通过 self.render 方法呈现指定的视图，并进行模型绑定
@@ -318,8 +328,8 @@ User.prototype.post = function() {
     /*
     self.context 可以访问当前请求上下文对象
     self.context.routeData["name"] 可以获取路由数据
-    self.context.queryData['name'] 可以获取 queryString 对应数据
-    self.context.formData['name'] 可以获取 post 数据
+    self.context.request.queryData['name'] 可以获取 queryString 对应数据
+    self.context.request.formData['name'] 可以获取 post 数据
     self.context.data("name") 可以获取客户端传过来的 queryString 或 formData
     */
     
