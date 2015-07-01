@@ -9,7 +9,7 @@ var console = nokit.console;
 var spawn = child_process.spawn;
 var exec = child_process.exec;
 
-var engineName = path.parse(process.argv[0]).name || 'node';
+var engineName = path.basename(process.argv[0] || 'node').split('.')[0];
 var startCommandName = isWin ? path.normalize(__dirname + '/' + engineName + '.vbs ') : engineName;
 
 //cli进程延迟存活时间
