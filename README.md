@@ -27,7 +27,7 @@ nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录�
 
 ####查看版本
 ```javascript
-nokit 或 nokit ?
+[sudo] nokit [?]
 ```
 
 ####创建应用
