@@ -9,6 +9,7 @@ Nokit 开发交流 QQ 群: 240603160
 ##安装和更新
 nokit 依赖 nodejs 或 iojs，所以需先安装 nodejs 或 iojs，具体请参考 nodejs 或 iojs 网站
 > [https://nodejs.org/](https://nodejs.org/)
+
 > [https://iojs.org/](https://iojs.org/)
 
 ####安装 nokit
