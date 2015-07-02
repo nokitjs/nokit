@@ -4,6 +4,7 @@ var child_process = require('child_process');
 var nokit = require('../');
 var utils = nokit.utils;
 var execSync = child_process.execSync;
+var packageInfo = require('./packageinfo');
 
 var self = this;
 
@@ -21,9 +22,9 @@ self.win32 = {
             */
             var cmd = null;
             if (options.uid && options.pwd) {
-                cmd = ['"' + schtasks + '"', '/create', '/tn', 'nokit', '/tr', '"' + restartExecFile + '"', '/sc', 'onstart', '/ru', options.uid, '/rp', options.pwd];
+                cmd = ['"' + schtasks + '"', '/create', '/tn', packageInfo.name, '/tr', '"' + restartExecFile + '"', '/sc', 'onstart', '/ru', options.uid, '/rp', options.pwd];
             } else {
-                cmd = ['"' + schtasks + '"', '/create', '/tn', 'nokit', '/tr', '"' + restartExecFile + '"', '/sc', 'onlogon'];
+                cmd = ['"' + schtasks + '"', '/create', '/tn', packageInfo.name, '/tr', '"' + restartExecFile + '"', '/sc', 'onlogon'];
             }
             var result = execSync(cmd.join(' '), {
                 encoding: "utf8"
@@ -39,9 +40,9 @@ self.win32 = {
             var schtasks = path.normalize(__dirname + '/shim/win32/schtasks-admin.exe');
             var cmd = null;
             if (options.uid && options.pwd) {
-                cmd = ['"' + schtasks + '"', '/delete', '/tn', 'nokit', '/f', '/ru', options.uid, '/rp', options.pwd];
+                cmd = ['"' + schtasks + '"', '/delete', '/tn', packageInfo.name, '/f', '/ru', options.uid, '/rp', options.pwd];
             } else {
-                cmd = ['"' + schtasks + '"', '/delete', '/tn', 'nokit', '/f'];
+                cmd = ['"' + schtasks + '"', '/delete', '/tn', packageInfo.name, '/f'];
             }
             var result = execSync(cmd.join(' '), {
                 encoding: "utf8"
