@@ -1,4 +1,5 @@
 var path = require("path");
+var fs = require('fs');
 var nokit = require("../");
 var utils = nokit.utils;
 
@@ -11,7 +12,7 @@ function ProcessLog(logFile) {
 
 ProcessLog.prototype.readArray = function() {
     if (!this.cache) {
-        this.cache = utils.readJSONSync(this.logFile);
+        this.cache = fs.existsSync(this.logFile) ? utils.readJSONSync(this.logFile) : [];
     }
     return this.cache;
 };
@@ -73,5 +74,5 @@ ProcessLog.prototype.supply = function(pid, info) {
     this.add(log);
 };
 
-module.exports = new ProcessLog(path.normalize(__dirname + '/process.log'));
+module.exports = new ProcessLog(path.normalize(__dirname + '/data/process.log'));
 //end

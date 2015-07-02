@@ -59,6 +59,11 @@ nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录�
 [sudo] nokit list
 ```
 
+####开户自启动
+```javascript
+[sudo] nokit auostart [true|false]
+```
+
 ##代码引用
 除了使用命令行工具，也可以在代码中引用 nokit 的方式来运行 nokit 应用，
 在代码中引用 nokit，将不能利用 nokit 的进程管理功能，这时可以直接运行，或者使用 pm2 / forever 等工具进行管理。

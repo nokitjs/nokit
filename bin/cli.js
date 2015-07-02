@@ -7,6 +7,7 @@ var processLog = require('./processlog');
 var processMgr = require('./processmgr');
 var packageInfo = require('./packageinfo');
 var CommandLine = require('./commandline');
+var autostart = require('./autostart');
 var utils = nokit.utils;
 var console = nokit.console;
 
@@ -18,11 +19,12 @@ var cwd = process.cwd();
  **/
 function printVersionAndHelp(packageInfo) {
     console.log(packageInfo.name + " " + packageInfo.version + '\r\n', true);
-    console.log(" 1) nokit create  <name> [folder] [mvc|nsp|restful]", true);
-    console.log(" 2) nokit start   <root> [port] [-debug] [-cluster[:num]] [-watch[:.ext,...]]", true);
-    console.log(" 3) nokit stop    [pid|all]", true);
-    console.log(" 4) nokit restart [pid|all]", true);
-    console.log(" 5) nokit list    (no args)\r\n", true);
+    console.log(" 1) nokit create   <name> [folder] [mvc|nsp|restful]", true);
+    console.log(" 2) nokit start    <root> [port] [-debug] [-cluster[:num]] [-watch[:.ext,...]]", true);
+    console.log(" 3) nokit stop     [pid|all]", true);
+    console.log(" 4) nokit restart  [pid|all]", true);
+    console.log(" 5) nokit list     (no args)", true);
+    console.log(" 4) nokit autotart [true|false]\r\n", true);
 };
 
 var dm = domain.create();
@@ -62,13 +64,17 @@ dm.run(function() {
             //将作用于 node 
             if (isDebug) {
                 // node 的调式参数为 --debug，如果需要调试，此数数必须放到 startInfo 第一位（入口程序之前）
-                startInfo.push('-debug');
+                startInfo.push('--debug');
             }
             //添加入口程序
             var appFileName = path.normalize(__dirname + '/app.js');
             startInfo.push(appFileName);
             //添加命令传来的参数（应用目录、端口、控制参数）
             cml.args.forEach(function(item) {
+                if (cml.args.indexOf(item) == 0) {
+                    //必须要些就要转换为绝对路径，否则如果在其它目录 restart 将失败
+                    item = path.resolve(cwd, item);
+                }
                 startInfo.push(item);
             });
             cml.controls.forEach(function(item) {
@@ -105,6 +111,17 @@ dm.run(function() {
                 console.table(logArray);
             } else {
                 console.log('没有已启动的应用');
+            }
+            break;
+        case "autostart":
+            var state = (cml.args[0] || 'on').toLowerCase();
+            if (state != 'on' && state != 'off') {
+                console.log('不能识别的参数 ' + cml.args[0]);
+            } else {
+                console.log(autostart.set(state, {
+                    uid: cml.controls.getValue('-uid'),
+                    pwd: cml.controls.getValue('-pwd')
+                }));
             }
             break;
         default:
