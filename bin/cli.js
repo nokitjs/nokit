@@ -19,12 +19,12 @@ var cwd = process.cwd();
  **/
 function printVersionAndHelp(packageInfo) {
     console.log(packageInfo.name + " " + packageInfo.version + '\r\n', true);
-    console.log(" 1) nokit create   <name> [folder] [mvc|nsp|restful]", true);
-    console.log(" 2) nokit start    <root> [port] [-debug] [-cluster[:num]] [-watch[:.ext,...]]", true);
-    console.log(" 3) nokit stop     [pid|all]", true);
-    console.log(" 4) nokit restart  [pid|all]", true);
-    console.log(" 5) nokit list     (no args)", true);
-    console.log(" 4) nokit autotart [true|false]\r\n", true);
+    console.log(" 1) nokit create    <name> [folder] [mvc|nsp|restful]", true);
+    console.log(" 2) nokit start     <root> [port] [-debug] [-cluster[:num]] [-watch[:.ext,...]]", true);
+    console.log(" 3) nokit stop      [pid|all]", true);
+    console.log(" 4) nokit restart   [pid|all]", true);
+    console.log(" 5) nokit list      (no args)", true);
+    console.log(" 6) nokit autostart [on|off] [-uid:[domain\\]user [-pwd:password]]\r\n", true);
 };
 
 var dm = domain.create();
