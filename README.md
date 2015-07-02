@@ -59,7 +59,7 @@ nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录�
 [sudo] nokit list
 ```
 
-####开户自启动
+####开机自启动
 ```javascript
 [sudo] nokit autostart [on|off] [-uid:[domain\\]user [-pwd:password]] 
 ```
