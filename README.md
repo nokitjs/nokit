@@ -63,10 +63,11 @@ nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录�
 ```javascript
 [sudo] nokit autostart [on|off] [-uid:[domain\\]user [-pwd:password]] 
 ```
-autostart 命令目前支持 win32 和 linux 平台，此命令需要管理员权限，如果 ubuntu 需要使用 sodu ，在 windows 平台会弹出 "用户账户控制" 提示框。
--uid 和 -pwd 参数，仅在 win32 平台有效，其它平台将被忽略，在不指定 -uid 、-pwd 参数时，需有用户登录到 windows 时
-才会自动启动 Nokie App，当指定 -uid、-pwd 时，只要启动 windows 就会自动启动 Nokie App。
-无论是登录 windows 的账户或是通过 -uid 提定的账户，需要是安装 nodejs 和 npm 所用的的账户。
+autostart 命令目前支持 win32 和 linux 平台，此命令需要管理员权限，如 ubuntu 需要使用 sodu ，
+在 windows 平台会弹出 "用户账户控制" 提示框。
+-uid 和 -pwd 参数仅在 win32 平台有效，其它平台将被忽略，在不指定 -uid 、-pwd 参数时，需有用户登录到 windows 
+才会自动启动 Nokit App，当指定 -uid、-pwd 时，只要启动 windows 就会自动启动 Nokit App。
+无论是登录 windows 的账户或是通过 -uid 提定的账户，需要是安装 nodejs 和 npm 时所用的账户。
 
 ##代码引用
 除了使用命令行工具，也可以在代码中引用 nokit 的方式来运行 nokit 应用，
