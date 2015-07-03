@@ -61,7 +61,7 @@ nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录�
 
 ####开机自启动
 ```javascript
-[sudo] nokit autostart [on|off] [-uid:[domain\\]user [-pwd:password]] 
+[sudo] nokit autostart [on|off] [-uid:[domain\]user [-pwd:password]] 
 ```
 autostart 命令目前支持 win32 和 linux 平台，此命令需要管理员权限，如 ubuntu 需要使用 sodu ，
 在 windows 平台会弹出 "用户账户控制" 提示框。
