@@ -70,10 +70,13 @@ dm.run(function() {
             var appFileName = path.normalize(__dirname + '/app.js');
             startInfo.push(appFileName);
             //添加命令传来的参数（应用目录、端口、控制参数）
+            if (cml.args.length < 1) {
+                cml.args.push('./');
+            }
             cml.args.forEach(function(item) {
                 if (cml.args.indexOf(item) == 0) {
                     //必须要些就要转换为绝对路径，否则如果在其它目录 restart 将失败
-                    item = path.resolve(cwd, item);
+                    item = path.resolve(cwd, item || './');
                 }
                 startInfo.push(item);
             });

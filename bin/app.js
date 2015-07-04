@@ -112,9 +112,10 @@ if (cluster.isMaster) {
 
     //启动 server
     var server = new nokit.Server(options);
-    server.start();
+    server.start(function() {
+        //向父进程发送 server.configs
+        process.send(server.configs);
+    });
 
-    //向父进程发送 server.configs
-    process.send(server.configs);
 }
 /*end*/
