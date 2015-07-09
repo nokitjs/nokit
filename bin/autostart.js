@@ -4,7 +4,7 @@ var child_process = require('child_process');
 var nokit = require('../');
 var utils = nokit.utils;
 var execSync = child_process.execSync;
-var packageInfo = require('./packageinfo');
+var packageInfo = nokit.info;
 
 var self = this;
 
@@ -94,6 +94,6 @@ self.set = function(state, options) {
     if (platform) {
         return platform[state == 'on' ? 'enabled' : 'disabled'](options);
     } else {
-        return "不支持 " + process.platform;
+        return "不支持 " + process.platform + ' 平台';
     }
 };

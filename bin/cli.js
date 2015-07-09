@@ -5,10 +5,10 @@ var path = require("path");
 var domain = require("domain");
 var processLog = require('./processlog');
 var processMgr = require('./processmgr');
-var packageInfo = require('./packageinfo');
 var CommandLine = require('./commandline');
 var autostart = require('./autostart');
 var utils = nokit.utils;
+var packageInfo = nokit.info;
 var console = nokit.console;
 
 //工作目录
@@ -17,7 +17,7 @@ var cwd = process.cwd();
 /**
  * 输出帮助信息
  **/
-function printVersionAndHelp(packageInfo) {
+function printVersionAndHelp() {
     console.log(packageInfo.name + " " + packageInfo.version + '\r\n', true);
     console.log(" 1) nokit create    <name> [folder] [mvc|nsp|restful]", true);
     console.log(" 2) nokit start     <root> [port] [-debug] [-cluster[:num]] [-watch[:.ext,...]]", true);
@@ -31,7 +31,7 @@ var dm = domain.create();
 dm.on('error', function(err) {
     console.error(err);
 });
-
+dm.run=function(fn){fn();};
 dm.run(function() {
 
     var cml = new CommandLine({
@@ -40,10 +40,10 @@ dm.run(function() {
 
     switch (cml.command) {
         case "":
-            printVersionAndHelp(packageInfo);
+            printVersionAndHelp();
             break;
         case "?":
-            printVersionAndHelp(packageInfo);
+            printVersionAndHelp();
             break;
         case "create":
             console.log("正在创建...");

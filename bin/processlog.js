@@ -2,13 +2,13 @@ var path = require("path");
 var fs = require('fs');
 var nokit = require("../");
 var utils = nokit.utils;
-var packageInfo = require('./packageinfo');
+var env = nokit.env;
 
 /**
  * 进程信息操作
  **/
-function ProcessLog(dataFolder) {
-    this.logFile = path.normalize(dataFolder + '/process.log');
+function ProcessLog(dataPath) {
+    this.logFile = path.normalize(dataPath + '/process.log');
 };
 
 ProcessLog.prototype.readArray = function() {
@@ -75,10 +75,5 @@ ProcessLog.prototype.supply = function(pid, info) {
     this.add(log);
 };
 
-var dataFolder = path.normalize(process.env.HOME + '/.' + packageInfo.name);
-if (!fs.existsSync(dataFolder)) {
-    fs.mkdirSync(dataFolder);
-}
-
-module.exports = new ProcessLog(dataFolder);
+module.exports = new ProcessLog(env.dataPath);
 //end
