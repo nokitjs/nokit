@@ -19,8 +19,8 @@ var cwd = process.cwd();
  **/
 function printVersionAndHelp() {
     console.log(packageInfo.name + " " + packageInfo.version + '\r\n', true);
-    console.log(" 1) nokit create    <name> [folder] [mvc|nsp|restful]", true);
-    console.log(" 2) nokit start     <root> [port] [-debug] [-cluster[:num]] [-watch[:.ext,...]]", true);
+    console.log(" 1) nokit create    [name] [mvc|nsp|restful] [folder]", true);
+    console.log(" 2) nokit start     [port] [root] [public] [-debug] [-cluster[:num]] [-watch[:.ext,...]]", true);
     console.log(" 3) nokit stop      [pid|all]", true);
     console.log(" 4) nokit restart   [pid|all]", true);
     console.log(" 5) nokit list      (no args)", true);
@@ -31,7 +31,7 @@ var dm = domain.create();
 dm.on('error', function(err) {
     console.error(err);
 });
-dm.run=function(fn){fn();};
+
 dm.run(function() {
 
     var cml = new CommandLine({
@@ -47,13 +47,14 @@ dm.run(function() {
             break;
         case "create":
             console.log("正在创建...");
-            //处理目标路径
+            //处理参数
             var appName = cml.args[0] || 'nokit-app';
-            var dstPath = cml.args[1] || "./";
+            var appType = cml.args[1] || 'mvc';
+            var dstPath = cml.args[2] || "./";
+            //处理路径
             var dstFullPath = path.resolve(cwd, path.normalize(dstPath + '/' + appName));
-            //处理源路径
-            var appType = cml.args[2] || 'mvc';
             var srcFullPath = path.resolve(__dirname, path.normalize('../examples/' + appType));
+            //复制应用模板
             nokit.utils.copyDir(srcFullPath, dstFullPath);
             console.log('在 "' + dstFullPath + '" 创建完成');
             break;
@@ -67,19 +68,18 @@ dm.run(function() {
                 startInfo.push('--debug');
             }
             //添加入口程序
-            var appFileName = path.normalize(__dirname + '/app.js');
-            startInfo.push(appFileName);
-            //添加命令传来的参数（应用目录、端口、控制参数）
-            if (cml.args.length < 1) {
-                cml.args.push('./');
-            }
-            cml.args.forEach(function(item) {
-                if (cml.args.indexOf(item) == 0) {
-                    //必须要些就要转换为绝对路径，否则如果在其它目录 restart 将失败
-                    item = path.resolve(cwd, item || './');
-                }
-                startInfo.push(item);
-            });
+            var appFile = path.normalize(__dirname + '/app.js');
+            startInfo.push(appFile);
+            //添加监听端口
+            var port = cml.args[0] || 8000;
+            startInfo.push(port);
+            //添加应用根目录
+            var root = path.resolve(cwd, cml.args[1] || './');
+            startInfo.push(root);
+            //添加可公开访问目录
+            var _public = cml.args[2] || './public';
+            startInfo.push(_public);
+            //添加控制选项
             cml.controls.forEach(function(item) {
                 startInfo.push(item);
             });

@@ -32,13 +32,13 @@ nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录�
 
 ####创建应用
 ```javascript
-[sudo] nokit create <name> [folder] [mvc|nsp|restful]
+[sudo] nokit create [name] [mvc|nsp|restful] [folder] 
 ```
 以上命令会生成一个最简单的应用所需要的目录结构和配置。
 
 ####运行应用
 ```javascript
-[sudo] nokit start <root> [port] [-debug] [-cluster[:num]] [-watch[:.ext,...]]
+[sudo] nokit start [port] [root] [public] [-debug] [-cluster[:num]] [-watch[:.ext,...]]
 ```
 1. -debug 选项可以开启 debug 模式，开启后可以使用 nodejs 内置调试工具调式，也可以使用 node-inspector 等工具进行调试。
 2. -cluster 选项可以开启 "单机集群模式"，使应用有效的利用多核 CPU，也使应用更加健壮可靠，-cluster 选项可以指定进程数，如 -cluster:4 ，默认为 CPU 核数。

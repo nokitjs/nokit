@@ -17,10 +17,10 @@ var cml = new CommandLine();
 //注意 options 必须这样创建，不能用 var options = {...}; 的形式创建
 var options = {};
 if (cml.args[0]) {
-    options.root = path.resolve(cwd, cml.args[0]);
+    options.port = cml.args[0];
 }
 if (cml.args[1]) {
-    options.port = cml.args[1];
+    options.root = path.resolve(cwd, cml.args[1]);
 }
 if (cml.args[2]) {
     options.folders = options.folders || {};
