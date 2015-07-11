@@ -20,7 +20,7 @@ var cwd = process.cwd();
 function printVersionAndHelp() {
     console.log(packageInfo.name + " " + packageInfo.version + '\r\n', true);
     console.log(" 1) nokit create    [name] [mvc|nsp|restful] [folder]", true);
-    console.log(" 2) nokit start     [port] [root] [public] [-debug] [-cluster[:num]] [-watch[:.ext,...]]", true);
+    console.log(" 2) nokit start     [port] [root] [-debug] [-cluster[:num]] [-watch[:.ext,...]]", true);
     console.log(" 3) nokit stop      [pid|all]", true);
     console.log(" 4) nokit restart   [pid|all]", true);
     console.log(" 5) nokit list      (no args)", true);
