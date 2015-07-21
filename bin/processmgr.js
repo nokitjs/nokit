@@ -13,7 +13,6 @@ var engineName = path.basename(process.argv[0] || 'node').split('.')[0];
 var startCommandName = isWin ? path.normalize(__dirname + '/shim/win32/' + engineName + '.vbs ') : engineName;
 
 //cli进程延迟存活时间
-exports.exitTimeout = 500;
 exports.isWin = isWin;
 
 //基础进程方法开始
@@ -24,7 +23,6 @@ exports.kill = function(pid) {
 };
 
 exports.start = function(name, args) {
-    exports.exitTimeout += 2500;
     var child = null;
     if (isWin) {
         child = exec(name + args.join(' '), {

@@ -38,9 +38,9 @@ nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录�
 
 ####运行应用
 ```javascript
-[sudo] nokit start [port] [root] [-debug] [-cluster[:num]] [-watch[:.ext,...]]
+[sudo] nokit start [port] [root] [-cluster[:num]] [-watch[:.ext,...]] [node-opts]
 ```
-1. -debug 选项可以开启 debug 模式，开启后可以使用 nodejs 内置调试工具调式，也可以使用 node-inspector 等工具进行调试。
+1. --debug 为 nodejs 选项，可以开启 debug 模式，开启后可以使用 nodejs 内置调试工具调式，也可以使用 node-inspector 等工具进行调试。
 2. -cluster 选项可以开启 "单机集群模式"，使应用有效的利用多核 CPU，也使应用更加健壮可靠，-cluster 选项可以指定进程数，如 -cluster:4 ，默认为 CPU 核数。
 3. -watch 选项开启后，在应用文件发生改变时会自动完成进程重启，默认任何文件变更都将触发重启，也可以指定文件类型，如 -watch:.js,.html,.css
 

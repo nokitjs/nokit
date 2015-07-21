@@ -56,9 +56,10 @@ ProcessLog.prototype.toPrintArray = function() {
             WPID: log.wpid,
             HOST: log.host,
             PORT: log.port,
-            PATH: log.path,
-            DEBUG: log.debug,
-            CLUSTER: log.cluster
+            PATH: utils.short(log.path),
+            CLUSTER: log.cluster,
+            WATCH: log.watch,
+            DEBUG: log.debug
         };
     });
     return logArray;

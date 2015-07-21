@@ -3,6 +3,7 @@
 var nokit = require("../");
 var path = require("path");
 var domain = require("domain");
+var Message = require('./message');
 var processLog = require('./processlog');
 var processMgr = require('./processmgr');
 var CommandLine = require('./commandline');
@@ -20,7 +21,7 @@ var cwd = process.cwd();
 function printVersionAndHelp() {
     console.log(packageInfo.name + " " + packageInfo.version + '\r\n', true);
     console.log(" 1) nokit create    [name] [mvc|nsp|restful] [folder]", true);
-    console.log(" 2) nokit start     [port] [root] [-debug] [-cluster[:num]] [-watch[:.ext,...]]", true);
+    console.log(" 2) nokit start     [port] [root] [-cluster[:num]] [-watch[:.ext,...]] [node-opts]", true);
     console.log(" 3) nokit stop      [pid|all]", true);
     console.log(" 4) nokit restart   [pid|all]", true);
     console.log(" 5) nokit list      (no args)", true);
@@ -29,10 +30,14 @@ function printVersionAndHelp() {
 
 var dm = domain.create();
 dm.on('error', function(err) {
-    console.error(err);
+    console.error(err.message);
 });
 
+//dm.run = function(fn){fn();};
+
 dm.run(function() {
+
+    var message = new Message();
 
     var cml = new CommandLine({
         commandEnabled: true
@@ -59,14 +64,12 @@ dm.run(function() {
             console.log('在 "' + dstFullPath + '" 创建完成');
             break;
         case "start":
-            var isDebug = cml.controls.has('-debug');
-            var isCluster = cml.controls.has('-cluster');
+            message.waiting(1);
             var startInfo = [];
-            //将作用于 node 
-            if (isDebug) {
-                // node 的调式参数为 --debug，如果需要调试，此数数必须放到 startInfo 第一位（入口程序之前）
-                startInfo.push('--debug');
-            }
+            //添加 node 控制选项 
+            cml.nodeOptions.forEach(function(item) {
+                startInfo.push(item);
+            });
             //添加入口程序
             var appFile = path.normalize(__dirname + '/app.js');
             startInfo.push(appFile);
@@ -80,12 +83,12 @@ dm.run(function() {
             var _public = cml.args[2] || './public';
             startInfo.push(_public);
             //添加控制选项
-            cml.controls.forEach(function(item) {
+            cml.options.forEach(function(item) {
                 startInfo.push(item);
             });
             //请求启动
-            processMgr.startApp(startInfo);
-            console.log("已启动应用");
+            processMgr.startApp(startInfo, true);
+            console.log("正在启动应用");
             break;
         case "stop":
             var pid = cml.args[0];
@@ -98,12 +101,13 @@ dm.run(function() {
             }
             break;
         case "restart":
+            message.waiting(processLog.readArray().length);
             var pid = cml.args[0];
             if (!pid || pid == 'all') {
-                processMgr.restartAllApp();
-                console.log("已重启所有应用");
+                processMgr.restartAllApp(true);
+                console.log("正在重启应用");
             } else {
-                processMgr.restartApp(pid);
+                processMgr.restartApp(pid, true);
                 console.log("已重启指定的应用: " + pid);
             }
             break;
@@ -122,8 +126,8 @@ dm.run(function() {
                 console.log('不能识别的参数 ' + cml.args[0]);
             } else {
                 console.log(autostart.set(state, {
-                    uid: cml.controls.getValue('-uid'),
-                    pwd: cml.controls.getValue('-pwd')
+                    uid: cml.options.getValue('-uid'),
+                    pwd: cml.options.getValue('-pwd')
                 }));
             }
             break;
@@ -131,9 +135,4 @@ dm.run(function() {
             console.error("不能识别的命令 " + cml.command);
     }
 
-    if (processMgr.isWin) {
-        setTimeout(function() {
-            process.exit(0);
-        }, processMgr.exitTimeout);
-    }
 });

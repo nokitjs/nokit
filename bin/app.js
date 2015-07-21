@@ -2,6 +2,7 @@ var nokit = require("../");
 var console = nokit.console;
 var utils = nokit.utils;
 var path = require("path");
+var Message = require('./message');
 var domain = require("domain");
 var watch = require("watch");
 var processLog = require("./processlog");
@@ -30,17 +31,25 @@ if (cml.args[2]) {
 
 if (cluster.isMaster) {
 
-    var isCluster = cml.controls.has('-cluster');
-    var workerNumber = isCluster ? (cml.controls.getValue('-cluster') || cpuTotal) : 1;
+    var message = new Message();
+
+    var startInfo = cml.options.getValue('-start-info') || '';
+    var isDebug = cml.options.has('--debug') || cml.options.has('--debug-brk');
+    var isCluster = cml.options.has('-cluster');
+    var isWatch = cml.options.has('-watch');
+    //--
+
+    var workerNumber = isCluster ? (cml.options.getValue('-cluster') || cpuTotal) : 1;
     var workerReady = 0;
 
     //进程日志信息
     var logInfo = {
         pid: process.pid,
         path: options.root,
-        cluster: isCluster,
-        debug: cml.controls.has('-debug'),
-        startInfo: cml.controls.getValue('-start-info') || ''
+        cluster: isCluster ? workerNumber : false,
+        debug: isDebug ? (cml.options.getValue('--debug') || cml.options.getValue('--debug-brk') || "5858") : false,
+        watch: isWatch ? (cml.options.getValue('-watch') || "*") : false,
+        startInfo: startInfo
     };
 
     //创建工作进程 
@@ -48,19 +57,31 @@ if (cluster.isMaster) {
         var worker = cluster.fork();
         //接收工作进程启动成功的消息 
         //因为需要 configs 信息，所以需要用 "进程通信" 将 configs 传递过来
-        worker.on('message', function(configs) {
-            workerReady++;
-            //子进程全部 ready
-            if (workerReady >= workerNumber) {
-                logInfo.wpid = [];
-                var allWorkers = utils.copy(cluster.workers);
-                utils.each(allWorkers, function(id, _worker) {
-                    logInfo.wpid.push(_worker.process.pid);
+        worker.on('message', function(msgItem) {
+            if (msgItem && msgItem.state) {
+                workerReady++;
+                //子进程全部 ready
+                if (workerReady >= workerNumber) {
+                    var configs = msgItem.configs;
+                    logInfo.wpid = [];
+                    var allWorkers = utils.copy(cluster.workers);
+                    utils.each(allWorkers, function(id, _worker) {
+                        logInfo.wpid.push(_worker.process.pid);
+                    });
+                    logInfo.host = (configs.hosts || [])[0] || 'localhost';
+                    logInfo.port = configs.port;
+                    processLog.remove(logInfo.pid);
+                    processLog.add(logInfo);
+                    message.send([msgItem.message]);
+                }
+            } else if (msgItem) {
+                message.send([msgItem.message], function() {
+                    process.exit(0);
                 });
-                logInfo.host = (configs.hosts || [])[0] || 'localhost';
-                logInfo.port = configs.port;
-                processLog.remove(logInfo.pid);
-                processLog.add(logInfo);
+            } else {
+                message.send(null, function() {
+                    process.exit(0);
+                });
             }
         });
         return worker;
@@ -86,9 +107,9 @@ if (cluster.isMaster) {
     };
 
     //启用监控
-    var watchEnabled = cml.controls.has('-watch');
+    var watchEnabled = cml.options.has('-watch');
     if (watchEnabled) {
-        var watchTypes = cml.controls.getValue('-watch');
+        var watchTypes = cml.options.getValue('-watch');
         if (watchTypes) {
             watchTypes = watchTypes.split(',');
         }
@@ -110,11 +131,34 @@ if (cluster.isMaster) {
 
 } else {
 
-    //启动 server
-    var server = new nokit.Server(options);
-    server.start(function() {
-        //向父进程发送 server.configs
-        process.send(server.configs);
+    var dm = domain.create();
+    dm.on('error', function(err) {
+        process.send({
+            state: false,
+            message: err.message
+        });
+    });
+
+    dm.run(function() {
+
+        //启动 server
+        var server = new nokit.Server(options);
+        server.start(function(err, msg) {
+            if (err) {
+                //如果在启动时就存在异常
+                process.send({
+                    state: false,
+                    message: err
+                });
+            } else {
+                //向父进程发送 server.configs
+                process.send({
+                    state: true,
+                    configs: server.configs,
+                    message: msg || '启动成功'
+                });
+            }
+        });
     });
 
 }
