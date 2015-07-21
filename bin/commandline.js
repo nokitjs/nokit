@@ -18,19 +18,14 @@ CommandLine.prototype.parse = function() {
     srcArgs = srcArgs.splice(2);
     //分拆普通参数和控制参数
     self.options = [];
-    self.nodeOptions = [];
     self.args = [];
     //--
-    var optionsRegExp = new RegExp("^-");
-    var nodeOptionsRegExp = new RegExp("^--");
+    var regExp = new RegExp("^-");
     srcArgs.forEach(function(item) {
-        if (optionsRegExp.test(item)) {
-            self.options.push(item);
+        if (regExp.test(item)) {
+            self.options.push(item.replace(':', '='));
         } else {
             self.args.push(item);
-        }
-        if (nodeOptionsRegExp.test(item)) {
-            self.nodeOptions.push(item);
         }
     });
     //如果启用了子命令
@@ -45,22 +40,44 @@ CommandLine.prototype.initExtendMethods = function() {
     //控制参数处理
     self.options.has = function(name) {
         for (var i = 0; i < self.options.length; i++) {
-            console.log(i);
-            var item = self.options[i].replace('=', ':');
-            if (item == name || item.split(':')[0] == name) {
+            var item = self.options[i];
+            if (item == name || item.split('=')[0] == name) {
                 return true;
             }
         }
         return false;
     };
     self.options.getValue = function(name) {
-        if (!self.options.has(name)) return null;
         for (var i = 0; i < self.options.length; i++) {
-            var item = self.options[i].replace('=', ':');
-            if (item == name || item.split(':')[0] == name) {
-                return item.split(':')[1];
+            var item = self.options[i];
+            if (item == name || item.split('=')[0] == name) {
+                return item.split('=')[1];
             }
         }
         return null;
+    };
+    self.options.setValue = function(name, value) {
+        if (self.options.has(name)) {
+            var oldOptions = self.options;
+            self.options.splice(0, self.options.length);
+            for (var i = 0; i < oldOptions.length; i++) {
+                var item = oldOptions[i];
+                if (item != name && item.split('=')[0] != name) {
+                    self.options.push(item);
+                }
+            }
+        }
+        self.options.push(name + "=" + value);
+    };
+    self.options.getNodeOptions = function() {
+        var nodeOptions = [];
+        var regExp = new RegExp("^--");
+        for (var i = 0; i < self.options.length; i++) {
+            var item = self.options[i];
+            if (regExp.test(item)) {
+                nodeOptions.push(item);
+            };
+        }
+        return nodeOptions;
     };
 };

@@ -35,19 +35,20 @@ if (cluster.isMaster) {
 
     var startInfo = cml.options.getValue('-start-info') || '';
     var isDebug = cml.options.has('--debug') || cml.options.has('--debug-brk');
-    var isCluster = cml.options.has('-cluster');
+    var isCluster = cml.options.has('-cluster') && !isDebug;
     var isWatch = cml.options.has('-watch');
     //--
 
-    var workerNumber = isCluster ? (cml.options.getValue('-cluster') || cpuTotal) : 1;
+    var workerNumber = isCluster ? parseInt(cml.options.getValue('-cluster') || cpuTotal) : 1;
     var workerReady = 0;
+    var workerDebugPort = parseInt(cml.options.getValue('--debug') || cml.options.getValue('--debug-brk')) + 1;
 
     //进程日志信息
     var logInfo = {
         pid: process.pid,
         path: options.root,
         cluster: isCluster ? workerNumber : false,
-        debug: isDebug ? (cml.options.getValue('--debug') || cml.options.getValue('--debug-brk') || "5858") : false,
+        debug: isDebug ? workerDebugPort : false,
         watch: isWatch ? (cml.options.getValue('-watch') || "*") : false,
         startInfo: startInfo
     };
@@ -58,7 +59,8 @@ if (cluster.isMaster) {
         //接收工作进程启动成功的消息 
         //因为需要 configs 信息，所以需要用 "进程通信" 将 configs 传递过来
         worker.on('message', function(msgItem) {
-            if (msgItem && msgItem.state) {
+            msgItem = msgItem || {};
+            if (msgItem.state) {
                 workerReady++;
                 //子进程全部 ready
                 if (workerReady >= workerNumber) {
@@ -72,14 +74,18 @@ if (cluster.isMaster) {
                     logInfo.port = configs.port;
                     processLog.remove(logInfo.pid);
                     processLog.add(logInfo);
-                    message.send([msgItem.message]);
+                    //--
+                    msgItem.type = 'log';
+                    message.send([msgItem]);
                 }
-            } else if (msgItem) {
-                message.send([msgItem.message], function() {
-                    process.exit(0);
-                });
             } else {
-                message.send(null, function() {
+                msgItem.type = 'error';
+                message.send([msgItem], function() {
+                    /*
+                    启动时如果有一个工作进程不成功就全部结束,
+                    运行过程中，如果一个工作进程出现问题，不会导致全部结束
+                    因为，message.send 仅第一次调用有效。
+                    */
                     process.exit(0);
                 });
             }
@@ -133,29 +139,34 @@ if (cluster.isMaster) {
 
     var dm = domain.create();
     dm.on('error', function(err) {
+        //如果在启动时存在异常
         process.send({
             state: false,
-            message: err.message
+            text: err.message || err
         });
+        //结束工作进程自已
+        process.exit(0);
     });
 
     dm.run(function() {
 
         //启动 server
         var server = new nokit.Server(options);
-        server.start(function(err, msg) {
+        server.start(function(err, success) {
             if (err) {
-                //如果在启动时就存在异常
+                //如果在启动时存在异常
                 process.send({
                     state: false,
-                    message: err
+                    text: err.message || err
                 });
+                //结束工作进程自已
+                process.exit(0);
             } else {
                 //向父进程发送 server.configs
                 process.send({
                     state: true,
                     configs: server.configs,
-                    message: msg || '启动成功'
+                    text: success || '启动成功'
                 });
             }
         });

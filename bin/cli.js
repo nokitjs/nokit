@@ -33,7 +33,9 @@ dm.on('error', function(err) {
     console.error(err.message);
 });
 
-//dm.run = function(fn){fn();};
+dm.run = function(fn) {
+    fn();
+};
 
 dm.run(function() {
 
@@ -45,9 +47,8 @@ dm.run(function() {
 
     switch (cml.command) {
         case "":
-            printVersionAndHelp();
-            break;
         case "?":
+        case "help":
             printVersionAndHelp();
             break;
         case "create":
@@ -66,8 +67,18 @@ dm.run(function() {
         case "start":
             message.waiting(1);
             var startInfo = [];
+            //处理调式参数
+            if (cml.options.has('--debug')) {
+                var debugPort = parseInt(cml.options.getValue('--debug') || 5858) - 1;
+                cml.options.setValue('--debug', debugPort);
+            }
+            if (cml.options.has('--debug-brk')) {
+                var debugPort = parseInt(cml.options.getValue('--debug-brk') || 5858) - 1;
+                cml.options.setValue('--debug-brk', debugPort);
+            }
             //添加 node 控制选项 
-            cml.nodeOptions.forEach(function(item) {
+            var nodeOptions = cml.options.getNodeOptions();
+            nodeOptions.forEach(function(item) {
                 startInfo.push(item);
             });
             //添加入口程序
@@ -101,7 +112,12 @@ dm.run(function() {
             }
             break;
         case "restart":
-            message.waiting(processLog.readArray().length);
+            var processCount = processLog.readArray().length;
+            if (processCount < 1) {
+                console.log("没有已启动的应用");
+                return;
+            }
+            message.waiting(processCount);
             var pid = cml.args[0];
             if (!pid || pid == 'all') {
                 processMgr.restartAllApp(true);

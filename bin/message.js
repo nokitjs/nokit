@@ -1,6 +1,7 @@
 var net = require('net');
 var nokit = require("../");
 var console = nokit.console;
+var utils = nokit.utils;
 
 var HOST = "127.0.0.1";
 var PORT = 20002;
@@ -13,12 +14,12 @@ function Message() {
 /**
  * 发送进程消息
  */
-Message.prototype.send = function(msg, callback) {
+Message.prototype.send = function(msgList, callback) {
     var self = this;
     if (self.messageSended) return;
     var client = new net.Socket();
     client.connect(PORT, HOST, function() {
-        client.write(JSON.stringify(msg));
+        client.write(JSON.stringify(msgList));
         self.messageSended = true;
         if (callback) callback();
     });
@@ -31,19 +32,19 @@ Message.prototype.waiting = function(total) {
     var count = 0;
     net.createServer(function(socket) {
         socket.on('data', function(data) {
-            count++;
             if (data) {
                 var list = JSON.parse(data);
-                for (var i in list) {
-                    console.log(list[i]);
-                }
+                utils.each(list, function(i, item) {
+                    console[item.type || 'log'](item.text || item);
+                });
             }
+            count += 1;
             if (count >= total) {
                 process.exit(0);
             }
         });
     }).listen(PORT);
-}
+};
 
 module.exports = Message;
 //end
