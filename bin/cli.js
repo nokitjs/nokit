@@ -33,10 +33,6 @@ dm.on('error', function(err) {
     console.error(err.message);
 });
 
-dm.run = function(fn) {
-    fn();
-};
-
 dm.run(function() {
 
     var message = new Message();
