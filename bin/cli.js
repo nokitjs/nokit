@@ -61,6 +61,7 @@ dm.run(function() {
             console.log('在 "' + dstFullPath + '" 创建完成');
             break;
         case "start":
+            console.log("正在启动应用...");
             message.waiting(1);
             var startInfo = [];
             //处理调式参数
@@ -94,8 +95,7 @@ dm.run(function() {
                 startInfo.push(item);
             });
             //请求启动
-            processMgr.startApp(startInfo, true);
-            console.log("正在启动应用");
+            processMgr.startApp(startInfo);
             break;
         case "stop":
             var pid = cml.args[0];
@@ -113,14 +113,13 @@ dm.run(function() {
                 console.log("没有已启动的应用");
                 return;
             }
+            console.log("正在重启应用...");
             message.waiting(processCount);
             var pid = cml.args[0];
             if (!pid || pid == 'all') {
-                processMgr.restartAllApp(true);
-                console.log("正在重启应用");
+                processMgr.restartAllApp();
             } else {
-                processMgr.restartApp(pid, true);
-                console.log("已重启指定的应用: " + pid);
+                processMgr.restartApp(pid);
             }
             break;
         case "list":
