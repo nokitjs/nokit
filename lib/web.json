@@ -35,7 +35,8 @@
         "multipart/form-data": "./parsers/multipart",
         "application/x-www-form-urlencoded": "./parsers/urlencoded",
         "text/plain": "./parsers/plain",
-        "text/json": "./parsers/json"
+        "text/json": "./parsers/json",
+        "text/xml": "./parsers/xml"
     },
     "global": "./global.js",
     "filters": {},
@@ -50,11 +51,11 @@
     },
     "cache": {
         "client": {
-            "match": [".html$", ".htm$", ".css$", ".js$", ".icon$", ".ico$", ".less$", ".sass$", ".md$", ".png$", ".jpg$", ".jpeg$", ".gif$", ".bmp$", ".swf$"],
+            "match": [".html$", ".htm$", ".css$", ".js$", ".json$", ".txt$", ".icon$", ".ico$", ".less$", ".sass$", ".md$", ".png$", ".jpg$", ".jpeg$", ".gif$", ".bmp$", ".swf$"],
             "maxAge": 1800
         },
         "server": {
-            "match": [".html$", ".htm$", ".css$", ".js$", ".icon$", ".ico$", ".less$", ".sass$", ".md$"]
+            "match": []
         }
     },
     "denys": [".nsp.js$", "web.json$", "global.js$", "package.json$", ".tp$", ".tp.html$", ".tp.htm$", ".log$"],
@@ -63,6 +64,7 @@
         "timeout": 1800,
         "provider": "./core/session"
     },
+    "compress": [".html$", ".htm$", ".css$", ".js$", ".json$", ".txt$"],
     "displayDir": true,
     "log": {
         "provider": "./core/logger",

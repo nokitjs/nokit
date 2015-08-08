@@ -1,5 +1,5 @@
 {
-    "name": "nokit-nsp-handler",
+    "name": "nokit-handler-nsp",
     "version": "1.0.0",
     "description": "handler of nokit",
     "main": "./handler.js",

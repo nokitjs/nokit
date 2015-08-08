@@ -6,7 +6,7 @@ var domain = require("domain");
 var Message = require('./message');
 var processLog = require('./processlog');
 var processMgr = require('./processmgr');
-var CommandLine = require('./commandline');
+var CmdLine = require('cmdline');
 var autostart = require('./autostart');
 var utils = nokit.utils;
 var packageInfo = nokit.info;
@@ -30,14 +30,14 @@ function printVersionAndHelp() {
 
 var dm = domain.create();
 dm.on('error', function(err) {
-    console.error(err.message);
+    console.error(err.message + "\r\n" + err.stack);
 });
 
 dm.run(function() {
 
     var message = new Message();
 
-    var cml = new CommandLine({
+    var cml = new CmdLine({
         commandEnabled: true
     });
 

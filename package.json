@@ -1,43 +1,47 @@
 {
-    "name": "nokit-runtime",
-    "version": "1.9.1",
-    "description": "A Web development framework!",
-    "main": "./lib/index.js",
-    "bin": {
-        "nokit": "./bin/cli.js"
-    },
-    "scripts": {
-        "test": "echo \"There is no test\" && exit 1"
-    },
-    "keywords": [
-        "nokit",
-        "nokit-runtime",
-        "runtime",
-        "nsp",
-        "mvc",
-        "restful",
-        "webapi",
-        "web"
-    ],
-    "author": {
-        "name": "Houfeng",
-        "email": "admin@xhou.net"
-    },
-    "homepage": "http://nokit.org",
-    "bugs": {
-        "url": "https://github.com/Houfeng/nokit/issues",
-        "email": "admin@xhou.net"
-    },
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Houfeng/nokit.git"
-    },
-    "dependencies": {
-        "formidable": "1.0.17",
-        "cheerio": "0.19.0",
-        "console.table": "0.4.0",
-        "watch": "0.16.0",
-        "less": "2.5.1"
-    }
+  "name": "nokit-runtime",
+  "version": "1.9.2",
+  "description": "A Web development framework!",
+  "main": "./lib/index.js",
+  "bin": {
+    "nokit": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"There is no test\" && exit 1"
+  },
+  "keywords": [
+    "nokit",
+    "nokit-runtime",
+    "runtime",
+    "nsp",
+    "mvc",
+    "restful",
+    "webapi",
+    "web"
+  ],
+  "author": {
+    "name": "Houfeng",
+    "email": "admin@xhou.net"
+  },
+  "homepage": "http://nokit.org",
+  "bugs": {
+    "url": "https://github.com/Houfeng/nokit/issues",
+    "email": "admin@xhou.net"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Houfeng/nokit.git"
+  },
+  "dependencies": {
+    "cheerio": "0.19.0",
+    "cmdline": "0.0.4",
+    "console.table": "0.4.0",
+    "formidable": "1.0.17",
+    "less": "2.5.1",
+    "real-utils": "0.0.1",
+    "tpjs": "^3.6.9",
+    "watch": "0.16.0",
+    "xml2js": "^0.4.10"
+  }
 }

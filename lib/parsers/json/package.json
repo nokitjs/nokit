@@ -1,4 +1,4 @@
 {
-    "name":"json",
+    "name":"nokit-parser-json",
     "main":"./parser.js"
-}
+} 

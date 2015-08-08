@@ -1,5 +1,5 @@
 {
-    "name": "nokit-css-handler",
+    "name": "nokit-handler-css",
     "version": "1.0.0",
     "description": "handler of nokit",
     "main": "./handler.js",

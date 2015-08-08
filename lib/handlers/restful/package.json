@@ -1,5 +1,5 @@
 {
-    "name": "nokit-restful-handler",
+    "name": "nokit-handler-restful",
     "version": "1.0.0",
     "description": "handler of nokit",
     "main": "./handler.js",

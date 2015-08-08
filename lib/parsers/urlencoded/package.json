@@ -1,4 +1,4 @@
 {
-    "name":"urlencoded",
+    "name":"nokit-parser-urlencoded",
     "main":"./parser.js"
 }

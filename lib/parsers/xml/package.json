@@ -1,0 +1,4 @@
+{
+    "name":"nokit-parser-xml",
+    "main":"./parser.js"
+}

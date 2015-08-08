@@ -1,4 +1,4 @@
 {
-    "name":"multipart",
+    "name":"nokit-parser-multipart",
     "main":"./parser.js"
 }

@@ -1,4 +1,4 @@
 {
-    "name":"plain",
+    "name":"nokit-parser-plain",
     "main":"./parser.js"
 }

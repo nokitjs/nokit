@@ -1,5 +1,5 @@
 {
-    "name": "nokit-markdown-handler",
+    "name": "nokit-handler-markdown",
     "version": "1.0.0",
     "description": "handler of nokit",
     "main": "./handler.js",

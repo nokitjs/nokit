@@ -1,5 +1,5 @@
 {
-    "name": "nokit-forward-handler",
+    "name": "nokit-handler-forward",
     "version": "1.0.0",
     "description": "handler of nokit",
     "main": "./handler.js",

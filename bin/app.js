@@ -6,13 +6,13 @@ var Message = require('./message');
 var domain = require("domain");
 var watch = require("watch");
 var processLog = require("./processlog");
-var CommandLine = require("./commandline");
+var CmdLine = require("cmdline");
 var cluster = require("cluster");
 var cpuTotal = require("os").cpus().length;
 
 //处理参数信息开始
 var cwd = process.cwd();
-var cml = new CommandLine();
+var cml = new CmdLine();
 
 //创建 options
 //注意 options 必须这样创建，不能用 var options = {...}; 的形式创建
@@ -142,7 +142,7 @@ if (cluster.isMaster) {
         //如果在启动时存在异常
         process.send({
             state: false,
-            text: err.message || err
+            text: err.message + "\r\n" + err.stack
         });
         //结束工作进程自已
         process.exit(0);
