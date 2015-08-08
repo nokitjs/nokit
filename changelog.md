@@ -1,0 +1,6 @@
+### 1.9.2
+1. 将 tp、cmdline、utils 作为独立 npm 包引用
+2. 静态文件统一用流方式处理
+3. 增加 gzip、deflate 支持
+4. 默认不做任何服务器端文件缓存
+5. 增加 "text\xml" 的 parser
