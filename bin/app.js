@@ -157,7 +157,7 @@ if (cluster.isMaster) {
                 //如果在启动时存在异常
                 process.send({
                     state: false,
-                    text: err.message || err
+                    text: err.message + "\r\n" + err.stack
                 });
                 //结束工作进程自已
                 process.exit(0);
