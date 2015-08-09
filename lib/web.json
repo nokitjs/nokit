@@ -25,6 +25,8 @@
         "*": "./handlers/static",
         "^/__res__/": "./handlers/resource",
         "^/--res--/": "./handlers/resource",
+        "^/favicon.icon$": "./handlers/favicon",
+        "^/favicon.ico$": "./handlers/favicon",
         ".nsp": "./handlers/nsp",
         ".md": "./handlers/markdown",
         ".less": "./handlers/less",
