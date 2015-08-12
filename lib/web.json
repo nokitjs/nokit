@@ -24,11 +24,14 @@
     },
     "global": "./global.js",
     "filters": {},
-    "responsePages": {
-        "500": "./templates/500.html",
-        "404": "./templates/404.html",
-        "405": "./templates/405.html",
-        "dir": "./templates/dir.html"
+    "template": {
+        "pages": {
+            "500": "./templates/500.html",
+            "404": "./templates/404.html",
+            "405": "./templates/405.html",
+            "dir": "./templates/dir.html"
+        },
+        "compress": true 
     },
     "folders": {
         "public": "./public"

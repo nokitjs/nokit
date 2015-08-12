@@ -40,6 +40,12 @@ dm.run(function() {
      * 启动 server
      **/
     var server = new nokit.Server(options);
-    server.start();
+    server.start(function(err, msg) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(msg);
+        }
+    });
 
 });
