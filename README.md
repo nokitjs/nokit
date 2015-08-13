@@ -2,7 +2,7 @@
 
 ##简介
 最简单易用的 nodejs 开发框架，如果您曾经写过 asp / php 等代码，或者您曾经写过 JavaScript 客户端代码，
-那么您会非常易于上手，Nokit 不同于常见的 nodejs 框架，Nokit 提供了多种开发模式，包括 MVC / NSP / RESTful Service ，
+那么您会非常易于上手，Nokit 提供了多种开发模式，包括 MVC / NSP / RESTful Service ，
 开发人员也可以方便的扩展新模式。
 Nokit 开发交流 QQ 群: 240603160
 

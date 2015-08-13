@@ -23,9 +23,9 @@ if (cml.args[0]) {
 if (cml.args[1]) {
     options.root = path.resolve(cwd, cml.args[1]);
 }
-if (cml.args[2]) {
+if (cml.options.has('-public')) {
     options.folders = options.folders || {};
-    options.folders.public = cml.args[2];
+    options.folders.public = cml.options.getValue('-public');
 }
 //处理参数信息结束
 

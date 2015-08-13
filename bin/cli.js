@@ -87,9 +87,6 @@ dm.run(function() {
             //添加应用根目录
             var root = path.resolve(cwd, cml.args[1] || './');
             startInfo.push(root);
-            //添加可公开访问目录
-            var _public = cml.args[2] || './public';
-            startInfo.push(_public);
             //添加控制选项
             cml.options.forEach(function(item) {
                 startInfo.push(item);

@@ -22,21 +22,20 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-TileImage" content="/__res__/favicons/mstile-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <title>NOT FOUND (404)</title>
+    <title>DENY (403)</title>
     <link rel="stylesheet" href="/__res__/common.css">
 </head>
 
 <body>
-    <div class='header'>NOT FOUND (404)</div>
+    <div class='header'>DENY (403)</div>
     <div class='content'>
-        资源 "
-        <% $(this.request.url) %>" 没有找到
+        资源 "<% $(this.request.url) %>" 拒绝访问
     </div>
     <div class='footer'>
         Powered By
         <a href="<% $(this.server.packageInfo.homepage) %>" target="_blank">
             <% $(this.server.packageInfo.name) %>
-                <% $(this.server.packageInfo.version) %>
+            <% $(this.server.packageInfo.version) %>
         </a>
     </div>
 </body>

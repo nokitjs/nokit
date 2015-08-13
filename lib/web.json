@@ -28,10 +28,11 @@
         "pages": {
             "500": "./templates/500.html",
             "404": "./templates/404.html",
+            "403": "./templates/403.html",
             "405": "./templates/405.html",
             "dir": "./templates/dir.html"
         },
-        "compress": true 
+        "compress": true
     },
     "folders": {
         "public": "./public"
@@ -40,9 +41,6 @@
         "client": {
             "match": [".html$", ".htm$", ".css$", ".js$", ".json$", ".txt$", ".icon$", ".ico$", ".less$", ".sass$", ".md$", ".png$", ".jpg$", ".jpeg$", ".gif$", ".bmp$", ".swf$"],
             "maxAge": 1800
-        },
-        "server": {
-            "match": []
         }
     },
     "denys": [".nsp.js$", "web.json$", "global.js$", "package.json$", ".tp$", ".tp.html$", ".tp.htm$", ".log$"],
