@@ -40,7 +40,8 @@
     "cache": {
         "client": {
             "match": [".html$", ".htm$", ".css$", ".js$", ".json$", ".txt$", ".icon$", ".ico$", ".less$", ".sass$", ".md$", ".png$", ".jpg$", ".jpeg$", ".gif$", ".bmp$", ".swf$"],
-            "maxAge": 1800
+            "maxAge": 1800,
+            "modifiedSince": true
         }
     },
     "denys": [".nsp.js$", "web.json$", "global.js$", "package.json$", ".tp$", ".tp.html$", ".tp.htm$", ".log$"],
