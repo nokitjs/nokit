@@ -41,7 +41,7 @@
         "client": {
             "match": [".html$", ".htm$", ".css$", ".js$", ".json$", ".xml$", ".svg$", ".txt$", ".text$", ".csv$", ".icon$", ".ico$", ".less$", ".sass$", ".md$", ".png$", ".jpg$", ".jpeg$", ".gif$", ".bmp$", ".swf$", ".ttf$", ".woff$", ".eot"],
             "maxAge": 1800,
-            "modifiedSince": true
+            "lastModified": true
         }
     },
     "denys": [".nsp.js$", "web.json$", "global.js$", "package.json$", ".tp$", ".tp.html$", ".tp.htm$", ".log$"],
