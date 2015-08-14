@@ -1,0 +1,14 @@
+{
+    "name": "mvc-app",
+    "version": "1.0.0",
+    "description": "this is an example app",
+    "main": "./app.js",
+    "keywords": ["mvc"],
+    "author": {
+        "name": "author",
+        "email": "author@domain.com"
+    },
+    "homepage": "http://nokit.org",
+    "license": "MIT",
+    "dependencies": {}
+}
