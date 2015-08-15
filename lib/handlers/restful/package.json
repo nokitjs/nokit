@@ -6,6 +6,6 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Houfeng/nokit-restful-handler.git"
+        "url": "https://github.com/Houfeng/nokit-handler-restful.git"
     }
 }

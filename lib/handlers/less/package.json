@@ -6,6 +6,9 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Houfeng/nokit-less-handler.git"
+        "url": "https://github.com/Houfeng/nokit-handler-less.git"
+    },
+    "dependencies": {
+        "less": "2.5.1"
     }
 }
