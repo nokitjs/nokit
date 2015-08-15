@@ -22,14 +22,14 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-TileImage" content="/__res__/favicons/mstile-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <title>METHOD NOT ALLOWED (405)</title>
+    <title>NOT ALLOWED (405)</title>
     <link rel="stylesheet" href="/__res__/common.css">
 </head>
 
 <body>
-    <div class='header'>METHOD NOT ALLOWED (405)</div>
+    <div class='header'>NOT ALLOWED (405)</div>
     <div class='content'>
-        资源 "<% $(this.request.url) %>" 不能使用 "<% $(this.httpMethod) %>" 访问
+        资源 "<% $(this.request.url) %>" 不能使用 "<% $(this.request.method) %>" 访问
     </div>
     <div class='footer'>
         Powered By

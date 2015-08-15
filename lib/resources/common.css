@@ -3,9 +3,16 @@ body {
     height: 100%;
     padding: 0px;
     margin: 0px;
+    color: #333;
     font-size: 16px;
     font-family: "Helvetica", "Microsoft YaHei", "SimHei";
-    color: #333;
+}
+input,
+select,
+textarea,
+button {
+    font-size: 16px;
+    font-family: "Helvetica", "Microsoft YaHei", "SimHei";
 }
 .header {
     background-color: #303030;
