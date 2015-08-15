@@ -60,6 +60,8 @@
         "*": "application/octet-stream",
         ".html": "text/html",
         ".htm": "text/html",
+        ".shtm": "text/html",
+        ".shtml": "text/html",
         ".nsp": "text/html",
         ".md": "text/markdown",
         ".css": "text/css",
