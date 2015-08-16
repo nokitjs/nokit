@@ -1,3 +1,8 @@
+### 1.9.15
+1. 优化 mime 设置
+2. 增加 debug 模式
+3. 允许通过 options 指定 app 的 configFile
+
 ### 1.9.13
 1. 优化 cookie 模块
 

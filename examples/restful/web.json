@@ -1,4 +1,5 @@
 {
+    "mode": "debug",
     "handlers": {
         "^/api/": "$./handlers/restful"
     },

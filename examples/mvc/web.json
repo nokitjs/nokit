@@ -1,4 +1,5 @@
 {
+    "mode": "debug",
     "handlers": {
         "^/": "$./handlers/mvc"
     },
@@ -10,7 +11,7 @@
         "routes": [{
             "pattern": "/home",
             "target": "./home.js"
-        },{
+        }, {
             "pattern": "/",
             "target": "./home.js"
         }]
