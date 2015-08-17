@@ -12,7 +12,7 @@
  * npm install [-g] nokit-runtime
  **/
 
-var nokit = require("nokit-runtime");
+var nokit = require("../../");
 var console = nokit.console;
 
 var options = {};

@@ -18,14 +18,16 @@ var cwd = process.cwd();
 /**
  * 输出帮助信息
  **/
-function printVersionAndHelp() {
+function printInfo(versionOnly) {
     console.log(packageInfo.name + " " + packageInfo.version + '\r\n', true);
-    console.log(" 1) nokit create    [name] [mvc|nsp|restful] [folder]", true);
-    console.log(" 2) nokit start     [port] [root] [-config:<name>] [-cluster[:num]] [-watch[:.ext,...]] [node-opts]", true);
-    console.log(" 3) nokit stop      [pid|all]", true);
-    console.log(" 4) nokit restart   [pid|all]", true);
-    console.log(" 5) nokit list      (no args)", true);
-    console.log(" 6) nokit autostart [on|off] [-uid:[domain\\]user [-pwd:password]]\r\n", true);
+    if (!versionOnly) {
+        console.log(" 1) nokit create    [name] [mvc|nsp|restful] [folder]", true);
+        console.log(" 2) nokit start     [port] [root] [-config:<name>] [-cluster[:num]] [-watch[:.ext,...]] [node-opts]", true);
+        console.log(" 3) nokit stop      [pid|all]", true);
+        console.log(" 4) nokit restart   [pid|all]", true);
+        console.log(" 5) nokit list      (no args)", true);
+        console.log(" 6) nokit autostart [on|off] [-uid:[domain\\]user [-pwd:password]]\r\n", true);
+    }
 };
 
 var dm = domain.create();
@@ -43,9 +45,11 @@ dm.run(function() {
 
     switch (cml.command) {
         case "":
+            printInfo(cml.options.has('-v'));
+            break;
         case "?":
         case "help":
-            printVersionAndHelp();
+            printInfo();
             break;
         case "create":
             console.log("正在创建...");
