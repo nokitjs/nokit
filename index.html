@@ -32,10 +32,9 @@
 <h2>
 <a id="简介" class="anchor" href="#%E7%AE%80%E4%BB%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>简介</h2>
 
-<p>最简单易用的 nodejs 开发框架，如果您曾经写过 asp / php 等代码，或者您曾经写过 JavaScript 客户端代码，
-那么您会非常易于上手，Nokit 不同于常见的 nodejs 框架，Nokit 提供了多种开发模式，包括 MVC / NSP / RESTful Service ，
-开发人员也可以方便的扩展新模式。
-Nokit 开发交流 QQ 群: 240603160</p>
+<p>Nokit 是一个简单易用的基于 nodejs 的 Web 开发框架，如果您曾经写过 asp / php 等代码，或者您曾经写过 JavaScript 客户端代码，
+那么您会非常易于上手，Nokit 提供了多种开发模式，包括 MVC / NSP / RESTful Service ，
+开发人员也可以方便的扩展新模式。</p>
 
 <p><a href="http://badge.fury.io/js/nokit-runtime"><img src="https://badge.fury.io/js/nokit-runtime.svg" alt="npm version"></a>  </p>
 
@@ -82,7 +81,7 @@ Nokit 开发交流 QQ 群: 240603160</p>
 <h4>
 <a id="运行应用" class="anchor" href="#%E8%BF%90%E8%A1%8C%E5%BA%94%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>运行应用</h4>
 
-<div class="highlight highlight-javascript"><pre>[sudo] nokit start [port] [root] [<span class="pl-k">-</span>cluster[<span class="pl-k">:</span>num]] [<span class="pl-k">-</span>watch[<span class="pl-k">:</span>.ext,...]] [node<span class="pl-k">-</span>opts]</pre></div>
+<div class="highlight highlight-javascript"><pre>[sudo] nokit start [port] [root] [<span class="pl-k">-</span>config<span class="pl-k">:&lt;</span>name<span class="pl-k">&gt;</span>] [<span class="pl-k">-</span>cluster[<span class="pl-k">:</span>num]] [<span class="pl-k">-</span>watch[<span class="pl-k">:</span>.<span class="pl-c1">ext</span>,...]] [node<span class="pl-k">-</span>opts]</pre></div>
 
 <ol>
 <li>--debug 为 nodejs 选项，可以开启 debug 模式，开启后可以使用 nodejs 内置调试工具调式，也可以使用 node-inspector 等工具进行调试。</li>
@@ -141,17 +140,17 @@ NSP 支持 include 引用其它页面，也支持 master 母板页技术。</p>
 <p>一般目录结构</p>
 
 <div class="highlight highlight-javascript"><pre>根目录
-│ web.json
-│ app.js
+│ web.<span class="pl-c1">json</span>
+│ app.<span class="pl-c1">js</span>
 ├─layout
-│     date.nsp
-│     master.nsp
+│     date.<span class="pl-c1">nsp</span>
+│     master.<span class="pl-c1">nsp</span>
 ├─model
 └─<span class="pl-k">public</span>
-    │  index.nsp
-    │  index.nsp.js
+    │  index.<span class="pl-c1">nsp</span>
+    │  index.<span class="pl-c1">nsp</span>.<span class="pl-c1">js</span>
     └─style
-         common.css</pre></div>
+         common.<span class="pl-c1">css</span></pre></div>
 
 <p>NSP 页面 (*.nsp) 基本介绍</p>
 
@@ -225,16 +224,16 @@ NSP 支持 include 引用其它页面，也支持 master 母板页技术。</p>
     <span class="pl-k">var</span> self <span class="pl-k">=</span> <span class="pl-v">this</span>;
     <span class="pl-c">//由于 nokit 为异步处理，调用 self.render() 方法向浏览器呈现页面.</span>
     <span class="pl-c">//不要在 init 方法调用 self.render() </span>
-    self.render();
+    self.<span class="pl-c1">render</span>();
 };
 
 <span class="pl-c">//事件方法，可以绑定到页面中的 html 控件</span>
 <span class="pl-c1">Index</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">add</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(<span class="pl-smi">context</span>) {
     <span class="pl-k">var</span> self <span class="pl-k">=</span> <span class="pl-v">this</span>;
-    <span class="pl-k">var</span> val <span class="pl-k">=</span> <span class="pl-c1">parseInt</span>(self.numBox.val());
-    self.numBox.val(<span class="pl-k">++</span>val);
-    self.numBox.css(<span class="pl-s"><span class="pl-pds">"</span>border<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>solid 1px red<span class="pl-pds">"</span></span>);
-    self.render();
+    <span class="pl-k">var</span> val <span class="pl-k">=</span> <span class="pl-c1">parseInt</span>(self.<span class="pl-c1">numBox</span>.<span class="pl-c1">val</span>());
+    self.<span class="pl-c1">numBox</span>.<span class="pl-c1">val</span>(<span class="pl-k">++</span>val);
+    self.<span class="pl-c1">numBox</span>.<span class="pl-c1">css</span>(<span class="pl-s"><span class="pl-pds">"</span>border<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>solid 1px red<span class="pl-pds">"</span></span>);
+    self.<span class="pl-c1">render</span>();
 };</pre></div>
 
 <p>页面绑定</p>
@@ -251,8 +250,8 @@ NSP 支持 include 引用其它页面，也支持 master 母板页技术。</p>
 <div class="highlight highlight-javascript"><pre><span class="pl-c1">Index</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">add</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(<span class="pl-smi">context</span>) {
     <span class="pl-k">var</span> self <span class="pl-k">=</span> <span class="pl-v">this</span>;
     <span class="pl-c">//服务端提供类 jQuery 的元素操作 API (兼容部分常用 jQUery API)</span>
-    self.test.val(<span class="pl-s"><span class="pl-pds">'</span>你好<span class="pl-pds">'</span></span>); 
-    self.render();
+    self.<span class="pl-c1">test</span>.<span class="pl-c1">val</span>(<span class="pl-s"><span class="pl-pds">'</span>你好<span class="pl-pds">'</span></span>); 
+    self.<span class="pl-c1">render</span>();
 };</pre></div>
 
 <h2>
@@ -263,18 +262,18 @@ NSP 支持 include 引用其它页面，也支持 master 母板页技术。</p>
 <p>一般目录结构</p>
 
 <div class="highlight highlight-javascript"><pre>根目录
-│ web.json
-│ app.js
+│ web.<span class="pl-c1">json</span>
+│ app.<span class="pl-c1">js</span>
 ├─controllers
-│    home.js
+│    home.<span class="pl-c1">js</span>
 ├─models
 ├─<span class="pl-k">public</span>
 │  └─style
-│       common.css
+│       common.<span class="pl-c1">css</span>
 └─views
-     date.html
-     home.html
-     master.html</pre></div>
+     date.<span class="pl-c1">html</span>
+     home.<span class="pl-c1">html</span>
+     master.<span class="pl-c1">html</span></pre></div>
 
 <p>views 目录存放的是视图，视图和 NSP 的页面相似，支持 include 和 master，语法也完全相同，
 不同是在 mvc 的视图中 this 指向的是模型，视图具有单一的责职 ，就是呈现模型中的数据。
@@ -306,7 +305,7 @@ models 为模型目录，nokit 对模型没有统一的要求和控制，应用�
 <span class="pl-c">    */</span>
 
     <span class="pl-c">//通过 self.render 方法呈现指定的视图，并进行模型绑定</span>
-    self.render(<span class="pl-s"><span class="pl-pds">"</span>home.html<span class="pl-pds">"</span></span>, {
+    self.<span class="pl-c1">render</span>(<span class="pl-s"><span class="pl-pds">"</span>home.html<span class="pl-pds">"</span></span>, {
         <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Nokit MVC<span class="pl-pds">"</span></span>
     });
 };</pre></div>
@@ -356,14 +355,14 @@ models 为模型目录，nokit 对模型没有统一的要求和控制，应用�
 <p>一般目录结构</p>
 
 <div class="highlight highlight-javascript"><pre>根目录
-│ web.json
-│ app.js
+│ web.<span class="pl-c1">json</span>
+│ app.<span class="pl-c1">js</span>
 ├─<span class="pl-k">public</span>
-│  │  index.nsp
+│  │  index.<span class="pl-c1">nsp</span>
 │  └─style
-│       common.css
+│       common.<span class="pl-c1">css</span>
 └─restful
-      user.js</pre></div>
+      user.<span class="pl-c1">js</span></pre></div>
 
 <p>REST 的资源控制器示例</p>
 
@@ -382,21 +381,21 @@ models 为模型目录，nokit 对模型没有统一的要求和控制，应用�
 <span class="pl-c">    self.context.data("name") 可以获取客户端传过来的 queryString 或 formData</span>
 <span class="pl-c">    */</span>
 
-    <span class="pl-k">var</span> routeData <span class="pl-k">=</span> self.context.routeData;
-    self.out(<span class="pl-s"><span class="pl-pds">"</span>routeData:<span class="pl-pds">"</span></span> <span class="pl-k">+</span> routeData[<span class="pl-s"><span class="pl-pds">"</span>userId<span class="pl-pds">"</span></span>]);
+    <span class="pl-k">var</span> routeData <span class="pl-k">=</span> self.<span class="pl-c1">context</span>.<span class="pl-c1">routeData</span>;
+    self.<span class="pl-c1">out</span>(<span class="pl-s"><span class="pl-pds">"</span>routeData:<span class="pl-pds">"</span></span> <span class="pl-k">+</span> routeData[<span class="pl-s"><span class="pl-pds">"</span>userId<span class="pl-pds">"</span></span>]);
 };
 
 <span class="pl-c">//针对 User 的 get HttpMethod 处理方法</span>
 <span class="pl-c1">User</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">get</span> <span class="pl-k">=</span> <span class="pl-k">function</span>() {
     <span class="pl-k">var</span> self <span class="pl-k">=</span> <span class="pl-v">this</span>;
-    self.out(<span class="pl-s"><span class="pl-pds">"</span>routeData:<span class="pl-pds">"</span></span> <span class="pl-k">+</span> routeData[<span class="pl-s"><span class="pl-pds">"</span>userId<span class="pl-pds">"</span></span>]);
+    self.<span class="pl-c1">out</span>(<span class="pl-s"><span class="pl-pds">"</span>routeData:<span class="pl-pds">"</span></span> <span class="pl-k">+</span> routeData[<span class="pl-s"><span class="pl-pds">"</span>userId<span class="pl-pds">"</span></span>]);
 };
 
 <span class="pl-c">/*</span>
 <span class="pl-c">根据需求实现对应的 httpMethod 处理方法即可</span>
 <span class="pl-c">*/</span>
 
-<span class="pl-c1">module</span>.exports <span class="pl-k">=</span> User;</pre></div>
+<span class="pl-c1">module</span>.<span class="pl-c1">exports</span> <span class="pl-k">=</span> User;</pre></div>
 
 <p>REST 的 web.json 配置</p>
 
