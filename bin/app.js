@@ -23,9 +23,17 @@ if (cml.args[0]) {
 if (cml.args[1]) {
     options.root = path.resolve(cwd, cml.args[1]);
 }
-if (cml.options.has('-public')) {
+//是否自定义指定 public 文件夹
+var publicFolder = cml.options.getValue('-public');
+if (publicFolder) {
     options.folders = options.folders || {};
-    options.folders.public = cml.options.getValue('-public');
+    options.folders.public = publicFolder;
+}
+//是否使用自定义配置
+var configName = cml.options.getValue('-config');
+if (configName) {
+    options.folders = options.folders || {};
+    options.folders.configFile = './web.' + configName + '.json';
 }
 //处理参数信息结束
 
