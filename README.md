@@ -1,12 +1,17 @@
 ![Nokit](http://nokit.org/logo.png)
 
 ##简介
-最简单易用的 nodejs 开发框架，如果您曾经写过 asp / php 等代码，或者您曾经写过 JavaScript 客户端代码，
+Nokit 是一个简单易用的基于 nodejs 的 web 开发框架，如果您曾经写过 asp / php 等代码，或者您曾经写过 JavaScript 客户端代码，
 那么您会非常易于上手，Nokit 提供了多种开发模式，包括 MVC / NSP / RESTful Service ，
 开发人员也可以方便的扩展新模式。
-Nokit 开发交流 QQ 群: 240603160
 
 [![npm version](https://badge.fury.io/js/nokit-runtime.svg)](http://badge.fury.io/js/nokit-runtime)  
+
+##社区
+1. 文档 [wiki](https://github.com/Houfeng/nokit/wiki)
+2. 问题反馈 [issues](https://github.com/Houfeng/nokit/issues)
+3. 讨论组 [group (nokit@googlegroups.com)](https://groups.google.com/forum/#!forum/nokit)
+4. 即时交流 QQ群: 240603160 
 
 ##安装和更新
 nokit 依赖 nodejs 或 iojs，所以需先安装 nodejs 或 iojs，具体请参考 nodejs 或 iojs 网站
