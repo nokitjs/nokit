@@ -33,8 +33,7 @@
 <a id="简介" class="anchor" href="#%E7%AE%80%E4%BB%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>简介</h2>
 
 <p>Nokit 是一个简单易用的基于 nodejs 的 web 开发框架，如果您曾经写过 asp / php 等代码，或者您曾经写过 JavaScript 客户端代码，
-那么您会非常易于上手，Nokit 提供了多种开发模式，包括 MVC / NSP / RESTful Service ，
-开发人员也可以方便的扩展新模式。</p>
+那么您会非常易于上手，Nokit 提供了多种开发模式，包括 MVC / NSP / RESTful Service ，开发人员也可以方便的扩展新模式。</p>
 
 <p><a href="http://badge.fury.io/js/nokit-runtime"><img src="https://badge.fury.io/js/nokit-runtime.svg" alt="npm version"></a>  </p>
 
@@ -48,7 +47,7 @@
 </li>
 <li>讨论组 <a href="https://groups.google.com/forum/#!forum/nokit">group (nokit@googlegroups.com)</a>
 </li>
-<li>即时交流 QQ群: 240603160 </li>
+<li>QQ群: 240603160 </li>
 </ol>
 
 <h2>
@@ -97,9 +96,10 @@
 <div class="highlight highlight-javascript"><pre>[sudo] nokit start [port] [root] [<span class="pl-k">-</span>config<span class="pl-k">:&lt;</span>name<span class="pl-k">&gt;</span>] [<span class="pl-k">-</span>cluster[<span class="pl-k">:</span>num]] [<span class="pl-k">-</span>watch[<span class="pl-k">:</span>.<span class="pl-c1">ext</span>,...]] [node<span class="pl-k">-</span>opts]</pre></div>
 
 <ol>
-<li>--debug 为 nodejs 选项，可以开启 debug 模式，开启后可以使用 nodejs 内置调试工具调式，也可以使用 node-inspector 等工具进行调试。</li>
 <li>-cluster 选项可以开启 "单机集群模式"，使应用有效的利用多核 CPU，也使应用更加健壮可靠，-cluster 选项可以指定进程数，如 -cluster:4 ，默认为 CPU 核数。</li>
 <li>-watch 选项开启后，在应用文件发生改变时会自动完成进程重启，默认任何文件变更都将触发重启，也可以指定文件类型，如 -watch:.js,.html,.css</li>
+<li>-config 指定运行配置名称，将会根据 "配置名称" 加载 web.xxxx.json (xxxx 为指定的配置名称) 作为应用配置文件。</li>
+<li>--debug 为 nodejs 选项，可以开启 debug 模式，开启后可以使用 nodejs 内置调试工具调式，也可以使用 node-inspector 等工具进行调试。</li>
 </ol>
 
 <h4>
