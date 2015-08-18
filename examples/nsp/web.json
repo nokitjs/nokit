@@ -1,5 +1,5 @@
 {
-    "mode": "debug",
+    "debugMode": true,
     "defaults": ["index.nsp"],
     "filters": {
         "^/mgr": "./filter.js"

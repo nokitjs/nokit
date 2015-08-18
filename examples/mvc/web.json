@@ -1,5 +1,5 @@
 {
-    "mode": "debug",
+    "debugMode": true,
     "handlers": {
         "^/": "$./handlers/mvc"
     },
