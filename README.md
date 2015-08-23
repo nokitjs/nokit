@@ -2,7 +2,8 @@
 
 ##简介
 Nokit 是一个简单易用的基于 nodejs 的 web 开发框架，如果您曾经写过 asp / php 等代码，或者您曾经写过 JavaScript 客户端代码，
-那么您会非常易于上手，Nokit 提供了多种开发模式，包括 MVC / NSP / RESTful Service ，开发人员也可以方便的扩展新模式。
+那么您会非常易于上手，默认提供了 MVC / NSP / RESTful Service 等支持，并提供对应项目模。
+Nokit 核心相当简洁，大多数功能以扩展形式存在，开发人员也可以方便的为 nokit 添加新的扩展。
 
 [![npm version](https://badge.fury.io/js/nokit-runtime.svg)](http://badge.fury.io/js/nokit-runtime)  
 
@@ -42,6 +43,11 @@ nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录�
 ```
 以上命令会生成一个最简单的应用所需要的目录结构和配置。
 
+1. name 一般不建议省略（省略时为 nokit-app），name 将会作为应用的根目录名称
+2. type 默认为 mvc 也可以指定为 nsp 或 restful ，指定类型后将会创建对应的应用模板
+3. folder 为目标目录，省略时将默认为当前所在目录。
+ 
+
 ####运行应用
 ```javascript
 [sudo] nokit start [port] [root] [-config:<name>] [-cluster[:num]] [-watch[:.ext,...]] [node-opts]
@@ -57,16 +63,19 @@ nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录�
 ```javascript
 [sudo] nokit stop [pid|all]
 ```
+可以指定 pid (进程ID，可以用过 nokit list 查看)，停止指定的的应用，也可以省略停止所有应用
 
 ####重启应用
 ```javascript
 [sudo] nokit restart [pid|all]
 ```
+可以指定 pid (进程ID，可以用过 nokit list 查看)，重启指定的的应用，也可以省略重启所有应用
 
 ####查看运行中的应用
 ```javascript
 [sudo] nokit list
 ```
+查看所有已启动的应用
 
 ####开机自启动
 ```javascript
@@ -242,7 +251,7 @@ Nokit MVC 是一种设计简约、符合 MVC 模式 Web 应用开发模式。
      master.html
 ```
 views 目录存放的是视图，视图和 NSP 的页面相似，支持 include 和 master，语法也完全相同，
-不同是在 mvc 的视图中 this 指向的是模型，视图具有单一的责职 ，就是呈现模型中的数据。
+不同的是在 mvc 的视图中 this 指向的是模型，视图具有单一的责职 ，就是呈现模型中的数据。
 controllers 是控制器目录，单个文件为一个控制器，用来响应接受来自用户的请求，并传递给模型，
 然后，完成模型和视图的装配。
 models 为模型目录，nokit 对模型没有统一的要求和控制，应用的业务逻辑应在模型中完成。
@@ -254,7 +263,7 @@ var Home = module.exports = function() {};
 
 /*
 默认 action ，
-通常用户直接请求某一 url 会被路由到，指定 controller 的默认 action
+通常用户直接请求某一 url 会被路由到指定 controller 的默认 action
 */
 Home.prototype.index = function() {
     var self = this;
