@@ -33,7 +33,8 @@
 <a id="简介" class="anchor" href="#%E7%AE%80%E4%BB%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>简介</h2>
 
 <p>Nokit 是一个简单易用的基于 nodejs 的 web 开发框架，如果您曾经写过 asp / php 等代码，或者您曾经写过 JavaScript 客户端代码，
-那么您会非常易于上手，Nokit 提供了多种开发模式，包括 MVC / NSP / RESTful Service ，开发人员也可以方便的扩展新模式。</p>
+那么您会非常易于上手，默认提供了 MVC / NSP / RESTful Service 等支持，并提供对应项目模。
+Nokit 核心相当简洁，大多数功能以扩展形式存在，开发人员也可以方便的为 nokit 添加新的扩展。</p>
 
 <p><a href="http://badge.fury.io/js/nokit-runtime"><img src="https://badge.fury.io/js/nokit-runtime.svg" alt="npm version"></a>  </p>
 
@@ -90,15 +91,23 @@
 
 <p>以上命令会生成一个最简单的应用所需要的目录结构和配置。</p>
 
+<ol>
+<li>name 一般不建议省略（省略时为 nokit-app），name 将会作为应用的根目录名称</li>
+<li>type 默认为 mvc 也可以指定为 nsp 或 restful ，指定类型后将会创建对应的应用模板</li>
+<li>folder 为目标目录，省略时将默认为当前所在目录。</li>
+</ol>
+
 <h4>
 <a id="运行应用" class="anchor" href="#%E8%BF%90%E8%A1%8C%E5%BA%94%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>运行应用</h4>
 
 <div class="highlight highlight-javascript"><pre>[sudo] nokit start [port] [root] [<span class="pl-k">-</span>config<span class="pl-k">:&lt;</span>name<span class="pl-k">&gt;</span>] [<span class="pl-k">-</span>cluster[<span class="pl-k">:</span>num]] [<span class="pl-k">-</span>watch[<span class="pl-k">:</span>.<span class="pl-c1">ext</span>,...]] [node<span class="pl-k">-</span>opts]</pre></div>
 
 <ol>
+<li>-config 指定运行配置名称，将会根据 "配置名称" 加载 web.xxxx.json (xxxx 为指定的配置名称) 作为应用配置文件。</li>
 <li>-cluster 选项可以开启 "单机集群模式"，使应用有效的利用多核 CPU，也使应用更加健壮可靠，-cluster 选项可以指定进程数，如 -cluster:4 ，默认为 CPU 核数。</li>
 <li>-watch 选项开启后，在应用文件发生改变时会自动完成进程重启，默认任何文件变更都将触发重启，也可以指定文件类型，如 -watch:.js,.html,.css</li>
-<li>-config 指定运行配置名称，将会根据 "配置名称" 加载 web.xxxx.json (xxxx 为指定的配置名称) 作为应用配置文件。</li>
+<li>-public 一般用于为 html/js/css 等静态资源启动一个临时 WebServer，指定静态资源目录，静态资源目录为 root 的相对目录。</li>
+<li>-cache 一般用于为 html/js/css 等静态资源启动一个临时 WebServer，指定缓存配置，例如 -cache:0 不向浏览器发送缓存 header 信息。</li>
 <li>--debug 为 nodejs 选项，可以开启 debug 模式，开启后可以使用 nodejs 内置调试工具调式，也可以使用 node-inspector 等工具进行调试。</li>
 </ol>
 
@@ -107,15 +116,21 @@
 
 <div class="highlight highlight-javascript"><pre>[sudo] nokit stop [pid|all]</pre></div>
 
+<p>可以指定 pid (进程ID，可以用过 nokit list 查看)，停止指定的的应用，也可以省略停止所有应用</p>
+
 <h4>
 <a id="重启应用" class="anchor" href="#%E9%87%8D%E5%90%AF%E5%BA%94%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>重启应用</h4>
 
 <div class="highlight highlight-javascript"><pre>[sudo] nokit restart [pid|all]</pre></div>
 
+<p>可以指定 pid (进程ID，可以用过 nokit list 查看)，重启指定的的应用，也可以省略重启所有应用</p>
+
 <h4>
 <a id="查看运行中的应用" class="anchor" href="#%E6%9F%A5%E7%9C%8B%E8%BF%90%E8%A1%8C%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>查看运行中的应用</h4>
 
 <div class="highlight highlight-javascript"><pre>[sudo] nokit list</pre></div>
+
+<p>查看所有已启动的应用</p>
 
 <h4>
 <a id="开机自启动" class="anchor" href="#%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>开机自启动</h4>
@@ -289,7 +304,7 @@ NSP 支持 include 引用其它页面，也支持 master 母板页技术。</p>
      master.<span class="pl-c1">html</span></pre></div>
 
 <p>views 目录存放的是视图，视图和 NSP 的页面相似，支持 include 和 master，语法也完全相同，
-不同是在 mvc 的视图中 this 指向的是模型，视图具有单一的责职 ，就是呈现模型中的数据。
+不同的是在 mvc 的视图中 this 指向的是模型，视图具有单一的责职 ，就是呈现模型中的数据。
 controllers 是控制器目录，单个文件为一个控制器，用来响应接受来自用户的请求，并传递给模型，
 然后，完成模型和视图的装配。
 models 为模型目录，nokit 对模型没有统一的要求和控制，应用的业务逻辑应在模型中完成。</p>
@@ -301,7 +316,7 @@ models 为模型目录，nokit 对模型没有统一的要求和控制，应用�
 
 <span class="pl-c">/*</span>
 <span class="pl-c">默认 action ，</span>
-<span class="pl-c">通常用户直接请求某一 url 会被路由到，指定 controller 的默认 action</span>
+<span class="pl-c">通常用户直接请求某一 url 会被路由到指定 controller 的默认 action</span>
 <span class="pl-c">*/</span>
 <span class="pl-c1">Home</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">index</span> <span class="pl-k">=</span> <span class="pl-k">function</span>() {
     <span class="pl-k">var</span> self <span class="pl-k">=</span> <span class="pl-v">this</span>;
