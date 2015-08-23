@@ -35,6 +35,18 @@ if (configName) {
     options.folders = options.folders || {};
     options.folders.configFile = './web.' + configName + '.json';
 }
+//缓存参数 cache
+var cache = cml.options.getValue('-cache');
+if (!utils.isNull(cache) && cache != '') {
+    options.cache = options.cache || {};
+    var cacheParams = cache.split(';');
+    if (utils.isNumber(cacheParams[0])) {
+        options.cache.maxAge = parseInt(cacheParams[0]);
+    }
+    if (cacheParams[1]) {
+        options.cache.match = cacheParams[1].split(',');
+    }
+}
 //处理参数信息结束
 
 if (cluster.isMaster) {
