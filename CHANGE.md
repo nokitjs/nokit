@@ -1,3 +1,6 @@
+### 1.10.1
+1. 优化 static handler 缓存处理
+
 ### 1.10.0
 1. 修复 filter 在 onResponse、onRequestEnd 时的一个 Bug
 
