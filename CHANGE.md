@@ -1,3 +1,6 @@
+### 1.10.0
+1. 修复 filter 在 onResponse、onRequestEnd 时的一个 Bug
+
 ### 1.9.20
 1. 紧急修复一个拼写错误导到的 bug
 
