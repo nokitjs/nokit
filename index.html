@@ -1,35 +1,25 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta charset="UTF-8">
     <title>Nokit by Houfeng</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-dark.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Nokit</h1>
-        <p>A Web development framework!</p>
-        <p class="view"><a href="https://github.com/Houfeng/nokit">View the Project on GitHub <small>Houfeng/nokit</small></a></p>
-        <ul>
-          <li><a href="https://github.com/Houfeng/nokit/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/Houfeng/nokit/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/Houfeng/nokit">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <p><img src="http://nokit.org/logo.png" alt="Nokit"></p>
+    <section class="page-header">
+      <h1 class="project-name">Nokit</h1>
+      <h2 class="project-tagline">A Web development framework!</h2>
+      <a href="https://github.com/Houfeng/nokit" class="btn">View on GitHub</a>
+      <a href="https://github.com/Houfeng/nokit/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/Houfeng/nokit/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-<h2>
+    <section class="main-content">
+      <h2>
 <a id="简介" class="anchor" href="#%E7%AE%80%E4%BB%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>简介</h2>
 
 <p>Nokit 是一个简单易用的基于 nodejs 的 web 开发框架，如果您曾经写过 asp / php 等代码，或者您曾经写过 JavaScript 客户端代码，
@@ -230,7 +220,7 @@ NSP 支持 include 引用其它页面，也支持 master 母板页技术。</p>
 <span class="pl-k">var</span> Index <span class="pl-k">=</span> <span class="pl-c1">module</span>.<span class="pl-en">exports</span> <span class="pl-k">=</span> <span class="pl-k">function</span>() {};
 
 <span class="pl-c">//初始化方法，每次回发都将触发 init 方法</span>
-<span class="pl-c1">Index</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">init</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(<span class="pl-smi">context</span>) {
+<span class="pl-c1">Index</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">init</span> <span class="pl-k">=</span> <span class="pl-k">function</span>() {
     <span class="pl-k">var</span> self <span class="pl-k">=</span> <span class="pl-v">this</span>;
     <span class="pl-c">/*</span>
 <span class="pl-c">    self.server //当前 server 实例</span>
@@ -248,7 +238,7 @@ NSP 支持 include 引用其它页面，也支持 master 母板页技术。</p>
 };
 
 <span class="pl-c">//默认方法，首次打开页面，会触发 load 方法</span>
-<span class="pl-c1">Index</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">load</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(<span class="pl-smi">context</span>) {
+<span class="pl-c1">Index</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">load</span> <span class="pl-k">=</span> <span class="pl-k">function</span>() {
     <span class="pl-k">var</span> self <span class="pl-k">=</span> <span class="pl-v">this</span>;
     <span class="pl-c">//由于 nokit 为异步处理，调用 self.render() 方法向浏览器呈现页面.</span>
     <span class="pl-c">//不要在 init 方法调用 self.render() </span>
@@ -256,7 +246,7 @@ NSP 支持 include 引用其它页面，也支持 master 母板页技术。</p>
 };
 
 <span class="pl-c">//事件方法，可以绑定到页面中的 html 控件</span>
-<span class="pl-c1">Index</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">add</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(<span class="pl-smi">context</span>) {
+<span class="pl-c1">Index</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">add</span> <span class="pl-k">=</span> <span class="pl-k">function</span>() {
     <span class="pl-k">var</span> self <span class="pl-k">=</span> <span class="pl-v">this</span>;
     <span class="pl-k">var</span> val <span class="pl-k">=</span> <span class="pl-c1">parseInt</span>(self.<span class="pl-c1">numBox</span>.<span class="pl-c1">val</span>());
     self.<span class="pl-c1">numBox</span>.<span class="pl-c1">val</span>(<span class="pl-k">++</span>val);
@@ -275,7 +265,7 @@ NSP 支持 include 引用其它页面，也支持 master 母板页技术。</p>
 <div class="highlight highlight-html"><pre><span class="pl-c">&lt;!-- 此元素可以在服务端和客户端同时访问 --&gt;</span>
 &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>hello<span class="pl-pds">"</span></span> <span class="pl-e">nsp-id</span>=<span class="pl-s"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span> /&gt;</pre></div>
 
-<div class="highlight highlight-javascript"><pre><span class="pl-c1">Index</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">add</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(<span class="pl-smi">context</span>) {
+<div class="highlight highlight-javascript"><pre><span class="pl-c1">Index</span>.<span class="pl-c1">prototype</span>.<span class="pl-en">add</span> <span class="pl-k">=</span> <span class="pl-k">function</span>() {
     <span class="pl-k">var</span> self <span class="pl-k">=</span> <span class="pl-v">this</span>;
     <span class="pl-c">//服务端提供类 jQuery 的元素操作 API (兼容部分常用 jQUery API)</span>
     self.<span class="pl-c1">test</span>.<span class="pl-c1">val</span>(<span class="pl-s"><span class="pl-pds">'</span>你好<span class="pl-pds">'</span></span>); 
@@ -407,6 +397,7 @@ models 为模型目录，nokit 对模型没有统一的要求和控制，应用�
 <span class="pl-c">    self.context.request.queryData['name'] 可以获取 queryString 对应数据</span>
 <span class="pl-c">    self.context.request.formData['name'] 可以获取 post 数据</span>
 <span class="pl-c">    self.context.data("name") 可以获取客户端传过来的 queryString 或 formData</span>
+<span class="pl-c">    self.context.request.body 可以访问请求的主体对象</span>
 <span class="pl-c">    */</span>
 
     <span class="pl-k">var</span> routeData <span class="pl-k">=</span> self.<span class="pl-c1">context</span>.<span class="pl-c1">routeData</span>;
@@ -448,13 +439,15 @@ models 为模型目录，nokit 对模型没有统一的要求和控制，应用�
         }]
     }
 }</pre></div>
-      </section>
-    </div>
-    <footer>
-      <p>Project maintained by <a href="https://github.com/Houfeng">Houfeng</a></p>
-      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
-    </footer>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/Houfeng/nokit">Nokit</a> is maintained by <a href="https://github.com/Houfeng">Houfeng</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
   </body>
 </html>
