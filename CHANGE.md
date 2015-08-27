@@ -1,3 +1,10 @@
+### 1.10.6
+1. 更新 sytem.json 中的默认配置。
+2. 修正 .json 的 mime 类型，调整 parser 配置
+3. 修正 .xml 的 mime 类型，调整 parser 配置，修复解析 Bug
+2. 新增 nsh 处理器
+3. 优化 nsp 处理，绑定方法支持参数，优化 form 查找机制
+
 ### 1.10.5
 1. 优化 Session 模块加载。
 

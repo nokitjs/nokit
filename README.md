@@ -173,7 +173,7 @@ NSP 页面处理器 (*.nsp.js) 基本介绍
 var Index = module.exports = function() {};
 
 //初始化方法，每次回发都将触发 init 方法
-Index.prototype.init = function(context) {
+Index.prototype.init = function() {
     var self = this;
     /*
     self.server //当前 server 实例
@@ -191,7 +191,7 @@ Index.prototype.init = function(context) {
 };
 
 //默认方法，首次打开页面，会触发 load 方法
-Index.prototype.load = function(context) {
+Index.prototype.load = function() {
     var self = this;
     //由于 nokit 为异步处理，调用 self.render() 方法向浏览器呈现页面.
     //不要在 init 方法调用 self.render() 
@@ -199,7 +199,7 @@ Index.prototype.load = function(context) {
 };
 
 //事件方法，可以绑定到页面中的 html 控件
-Index.prototype.add = function(context) {
+Index.prototype.add = function() {
     var self = this;
     var val = parseInt(self.numBox.val());
     self.numBox.val(++val);
@@ -221,7 +221,7 @@ Index.prototype.add = function(context) {
 <input type="text" value="hello" nsp-id='test' />
 ```
 ```javascript
-Index.prototype.add = function(context) {
+Index.prototype.add = function() {
     var self = this;
     //服务端提供类 jQuery 的元素操作 API (兼容部分常用 jQUery API)
     self.test.val('你好'); 
@@ -357,6 +357,7 @@ User.prototype.post = function() {
     self.context.request.queryData['name'] 可以获取 queryString 对应数据
     self.context.request.formData['name'] 可以获取 post 数据
     self.context.data("name") 可以获取客户端传过来的 queryString 或 formData
+    self.context.request.body 可以访问请求的主体对象
     */
     
     var routeData = self.context.routeData;

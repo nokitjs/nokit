@@ -10,6 +10,7 @@
         "^/favicon.icon$": "./handlers/favicon",
         "^/favicon.ico$": "./handlers/favicon",
         ".nsp": "./handlers/nsp",
+        ".nsh": "./handlers/nsh",
         ".md": "./handlers/markdown",
         ".less": "./handlers/less",
         ".css": "./handlers/css"
@@ -20,7 +21,9 @@
         "application/x-www-form-urlencoded": "./parsers/urlencoded",
         "text/plain": "./parsers/plain",
         "text/json": "./parsers/json",
-        "text/xml": "./parsers/xml"
+        "text/xml": "./parsers/xml",
+        "application/json": "./parsers/json",
+        "application/xml": "./parsers/xml"
     },
     "global": "./global.js",
     "filters": {},
@@ -30,7 +33,7 @@
             "404": "./templates/404.html",
             "403": "./templates/403.html",
             "405": "./templates/405.html",
-            "dir": "./templates/dir.html"
+            "explore": "./templates/explore.html"
         },
         "compress": true
     },
@@ -42,7 +45,7 @@
         "maxAge": 1800,
         "lastModified": true
     },
-    "denys": [".nsp.js$", "web.json$", "global.js$", "package.json$", ".tp$", ".tp.html$", ".tp.htm$", ".log$"],
+    "denys": [".nsp.js$", ".nsp.html$", ".nsh.js$", "web.json$", "global.js$", "package.json$", ".tp$", ".tp.html$", ".tp.htm$", ".log$"],
     "session": {
         "state": true,
         "timeout": 1800,
@@ -68,7 +71,8 @@
         ".txt": "text/plain",
         ".text": "text/plain",
         ".js": "application/x-javascript",
-        ".json": "application/x-javascript",
+        ".json": "application/json",
+        ".xml": "application/xml",
         ".png": "image/png",
         ".jpg": "image/jpeg",
         ".jpeg": "image/jpeg",

@@ -19,6 +19,6 @@ Welcome to <%= this.name %>!
     <br/>
     <input nsp-id='numBox' type='text' value='1' />
     <br/>
-    <input nsp-id='addBtn' type='button' value='add' onclick="nsp.call('add')" />
+    <input nsp-id='addBtn' type='button' value='add' onclick="nsp('a').call('add','demo')" />
 </p>
 <% $.placeEnd() %>
