@@ -1,3 +1,6 @@
+### 1.10.7
+1. 重构 context.data 方法。
+
 ### 1.10.6
 1. 更新 sytem.json 中的默认配置。
 2. 修正 .json 的 mime 类型，调整 parser 配置
