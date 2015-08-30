@@ -4,7 +4,7 @@ var utils = nokit.utils;
 var path = require("path");
 var Message = require('./message');
 var domain = require("domain");
-var gaze = require('gaze');
+var chokidar = require('chokidar');
 var processLog = require("./processlog");
 var CmdLine = require("cmdline");
 var cluster = require("cluster");
@@ -149,15 +149,11 @@ if (cluster.isMaster) {
             killAllWorkers();
         };
         //启动文件监控
-        gaze(options.root + '/**/*', {
-            interval: 0
-        }, function(err, watcher) {
-            if (err) {
-                return console.error(err);
-            }
-            watcher.on('all', function(event, filepath) {
-                fileChanged(filepath);
-            });
+        chokidar.watch(options.root, {
+            ignoreInitial: true,
+            ignored: /[\/\\]\./
+        }).on('all', function(event, path) {
+            fileChanged(path);
         });
     }
 

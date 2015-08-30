@@ -1,7 +1,7 @@
 {
   "name": "nokit-runtime",
   "rawName": "nokit",
-  "version": "1.10.8",
+  "version": "1.10.9",
   "description": "A Web development framework!",
   "main": "./lib/index.js",
   "bin": {
@@ -36,10 +36,10 @@
   },
   "dependencies": {
     "cheerio": "0.19.0",
+    "chokidar": "^1.0.5",
     "cmdline": "0.0.5",
     "console.table": "0.4.0",
     "formidable": "1.0.17",
-    "gaze": "^0.5.1",
     "less": "2.5.1",
     "real-utils": "0.0.1",
     "tpjs": "^3.7.1",

@@ -7,7 +7,7 @@
  *     2)或者用于 "环境" 无法使用 nokit start 命令时 
  *
  * 确保添加了对 nokit 的依赖，或全局安装了 nokit 并设置了 NODE_PATH 环境变量
- *
+ *  
  * 安装命令:
  * npm install [-g] nokit-runtime
  **/

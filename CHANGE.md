@@ -1,3 +1,6 @@
+### 1.10.9
+1. 替换文件监听模块 gaze 为 chokidar
+
 ### 1.10.8
 1. 重构 Server 类，提供 start、stop 两个事件
 2. 替换文件监听模块 watch 为 gaze
