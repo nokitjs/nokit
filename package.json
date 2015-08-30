@@ -1,60 +1,60 @@
 {
-    "name": "nokit-runtime",
-    "rawName": "nokit",
-    "version": "1.10.7",
-    "description": "A Web development framework!",
-    "main": "./lib/index.js",
-    "bin": {
-        "nokit": "./bin/cli.js"
-    },
-    "scripts": {
-        "test": "echo \"There is no test\" && exit 1"
-    },
-    "keywords": [
-        "nokit",
-        "nokit-runtime",
-        "runtime",
-        "nsp",
-        "mvc",
-        "restful",
-        "webapi",
-        "web"
-    ],
-    "author": {
-        "name": "Houfeng",
-        "email": "admin@xhou.net"
-    },
-    "homepage": "http://nokit.org",
-    "bugs": {
-        "url": "https://github.com/Houfeng/nokit/issues",
-        "email": "admin@xhou.net"
-    },
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Houfeng/nokit.git"
-    },
-    "dependencies": {
-        "cheerio": "0.19.0",
-        "cmdline": "0.0.5",
-        "console.table": "0.4.0",
-        "formidable": "1.0.17",
-        "less": "2.5.1",
-        "real-utils": "0.0.1",
-        "tpjs": "^3.7.1",
-        "watch": "0.16.0",
-        "xml2js": "^0.4.10"
-    },
-    "devDependencies": {
-        "del": "^1.2.0",
-        "gulp": "^3.9.0",
-        "gulp-replace": "^0.5.4",
-        "gulp-autoprefixer": "^2.3.1",
-        "gulp-concat": "^2.6.0",
-        "gulp-header": "^1.2.2",
-        "gulp-htmlmin": "^1.1.3",
-        "gulp-minify-css": "^1.2.1",
-        "gulp-uglify": "^1.2.0",
-        "gulp-util": "^3.0.6"
-    }
+  "name": "nokit-runtime",
+  "rawName": "nokit",
+  "version": "1.10.8",
+  "description": "A Web development framework!",
+  "main": "./lib/index.js",
+  "bin": {
+    "nokit": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"There is no test\" && exit 1"
+  },
+  "keywords": [
+    "nokit",
+    "nokit-runtime",
+    "runtime",
+    "nsp",
+    "mvc",
+    "restful",
+    "webapi",
+    "web"
+  ],
+  "author": {
+    "name": "Houfeng",
+    "email": "admin@xhou.net"
+  },
+  "homepage": "http://nokit.org",
+  "bugs": {
+    "url": "https://github.com/Houfeng/nokit/issues",
+    "email": "admin@xhou.net"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Houfeng/nokit.git"
+  },
+  "dependencies": {
+    "cheerio": "0.19.0",
+    "cmdline": "0.0.5",
+    "console.table": "0.4.0",
+    "formidable": "1.0.17",
+    "gaze": "^0.5.1",
+    "less": "2.5.1",
+    "real-utils": "0.0.1",
+    "tpjs": "^3.7.1",
+    "xml2js": "^0.4.10"
+  },
+  "devDependencies": {
+    "del": "^1.2.0",
+    "gulp": "^3.9.0",
+    "gulp-replace": "^0.5.4",
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-header": "^1.2.2",
+    "gulp-htmlmin": "^1.1.3",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.6"
+  }
 }

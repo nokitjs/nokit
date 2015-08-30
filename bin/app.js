@@ -4,7 +4,7 @@ var utils = nokit.utils;
 var path = require("path");
 var Message = require('./message');
 var domain = require("domain");
-var watch = require("watch");
+var gaze = require('gaze');
 var processLog = require("./processlog");
 var CmdLine = require("cmdline");
 var cluster = require("cluster");
@@ -132,7 +132,7 @@ if (cluster.isMaster) {
         });
     };
 
-    //启用监控
+    //启用文件监控
     var watchEnabled = cml.options.has('-watch');
     if (watchEnabled) {
         var watchTypes = cml.options.getValue('-watch');
@@ -141,17 +141,23 @@ if (cluster.isMaster) {
         }
         var fileChanged = function(file) {
             var extname = path.extname(file).toLowerCase();
-            if (extname == '.log' || (watchTypes && watchTypes.length > 0 && !utils.contains(watchTypes, extname))) {
+            if (extname == '.log' || (watchTypes &&
+                watchTypes.length > 0 &&
+                !utils.contains(watchTypes, extname))) {
                 return;
             }
             killAllWorkers();
         };
-        watch.createMonitor(options.root, {
-            ignoreDotFiles: true
-        }, function(monitor) {
-            monitor.on("created", fileChanged);
-            monitor.on("changed", fileChanged);
-            monitor.on("removed", fileChanged);
+        //启动文件监控
+        gaze(options.root + '/**/*', {
+            interval: 0
+        }, function(err, watcher) {
+            if (err) {
+                return console.error(err);
+            }
+            watcher.on('all', function(event, filepath) {
+                fileChanged(filepath);
+            });
         });
     }
 
