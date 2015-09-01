@@ -1,3 +1,7 @@
+### 1.10.10
+1. 修复 context 处理 deflate 压缩时的问题
+2. Static Handler 浏览目录时进行了排序
+
 ### 1.10.9
 1. 替换文件监听模块 gaze 为 chokidar
 
