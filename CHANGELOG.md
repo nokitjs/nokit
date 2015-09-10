@@ -1,3 +1,9 @@
+### 1.10.11
+1. 重构 server 的 _transferRequest 方法(重命名+优化逻辑)
+2. 将 handler 的 transfer 重命名为 next
+2. 优化 context.transfer 方法
+3. 优化默认文档处理 (改为异步处理)
+
 ### 1.10.10
 1. 修复 context 处理 deflate 压缩时的问题
 2. Static Handler 浏览目录时进行了排序
