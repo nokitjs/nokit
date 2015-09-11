@@ -1,5 +1,8 @@
+### 1.10.13
+1. 修复在某些 windows 机器上，命令行工具因为 socket 消息过长导致的 bug
+
 ### 1.10.12
-1. 修复在某此 windows 机器上找到不 evn.HOME 的 Bug
+1. 修复在某些 windows 机器上找到不 evn.HOME 的 Bug
 
 ### 1.10.11
 1. 重构 server 的 _transferRequest 方法(重命名+优化逻辑)

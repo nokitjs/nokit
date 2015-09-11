@@ -16,9 +16,16 @@ function Message() {
  */
 Message.prototype.send = function(msgList, callback) {
     var self = this;
-    if (self.messageSended) return;
+    if (self.messageSended || !msgList) return;
     var client = new net.Socket();
     client.connect(PORT, HOST, function() {
+        //去掉其它信息只保留 type、text
+        msgList = msgList.map(function(item) {
+            return {
+                type: item.type,
+                text: item.text
+            };
+        });
         client.write(JSON.stringify(msgList));
         self.messageSended = true;
         if (callback) callback();
