@@ -1,5 +1,6 @@
 var nokit = require("../");
 var console = nokit.console;
+var env = nokit.env;
 var utils = nokit.utils;
 var path = require("path");
 var Message = require('./message');
@@ -168,7 +169,7 @@ if (cluster.isMaster) {
         //如果在启动时存在异常
         process.send({
             state: false,
-            text: err.message + "\r\n" + err.stack
+            text: err.message + env.EOL + err.stack
         });
         //结束工作进程自已
         process.exit(0);
@@ -183,7 +184,7 @@ if (cluster.isMaster) {
                 //如果在启动时存在异常
                 process.send({
                     state: false,
-                    text: err.message + "\r\n" + err.stack
+                    text: err.message + env.EOL + err.stack
                 });
                 //结束工作进程自已
                 process.exit(0);

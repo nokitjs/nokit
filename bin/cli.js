@@ -11,6 +11,7 @@ var autostart = require('./autostart');
 var utils = nokit.utils;
 var packageInfo = nokit.info;
 var console = nokit.console;
+var env = nokit.env;
 var debuger = require('../test/debuger');
 
 //工作目录
@@ -20,20 +21,20 @@ var cwd = process.cwd();
  * 输出帮助信息
  **/
 function printInfo(versionOnly) {
-    console.log(packageInfo.name + " " + packageInfo.version + '\r\n', true);
+    console.log(packageInfo.name + " " + packageInfo.version + env.EOL, true);
     if (!versionOnly) {
         console.log(" 1) nokit create    [name] [mvc|nsp|restful] [folder]", true);
         console.log(" 2) nokit start     [port] [root] [-config:<name>] [-cluster[:num]] [-watch[:.ext,...]] [node-opts]", true);
         console.log(" 3) nokit stop      [pid|all]", true);
         console.log(" 4) nokit restart   [pid|all]", true);
         console.log(" 5) nokit list      (no args)", true);
-        console.log(" 6) nokit autostart [on|off] [-uid:[domain\\]user [-pwd:password]]\r\n", true);
+        console.log(" 6) nokit autostart [on|off] [-uid:[domain\\]user [-pwd:password]]" + env.EOL, true);
     }
 };
 
 var dm = domain.create();
 dm.on('error', function(err) {
-    console.error(err.message + "\r\n" + err.stack);
+    console.error(err.message + env.EOL + err.stack);
 });
 
 dm.run(function() {
@@ -90,7 +91,7 @@ dm.run(function() {
             var port = cml.args[0] || 8000;
             startInfo.push(port);
             //添加应用根目录
-            var root = path.resolve(cwd, cml.args[1] || './');
+            var root = path.resolve(cwd, path.normalize(cml.args[1] || './'));
             startInfo.push(root);
             //添加控制选项
             cml.options.forEach(function(item) {
@@ -128,7 +129,7 @@ dm.run(function() {
         case "list":
             var logArray = processLog.toPrintArray();
             if (logArray && logArray.length > 0) {
-                console.log('已启动的应用:\r\n');
+                console.log('已启动的应用:' + env.EOL);
                 console.table(logArray);
             } else {
                 console.log('没有已启动的应用');

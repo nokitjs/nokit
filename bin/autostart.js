@@ -55,13 +55,13 @@ self.win32 = {
 };
 
 self.linux = {
-    cmd: '\nnokit restart &\n',
+    cmd: env.EOL + 'nokit restart &' + env.EOL,
     enabled: function(options) {
         options = options || {};
         try {
             this.disabled();
             var scriptPath = '/etc/rc.local';
-            var scriptLines = fs.readFileSync(scriptPath).toString().split('\n');
+            var scriptLines = fs.readFileSync(scriptPath).toString().split(env.EOL);
             var line = scriptLines.length;
             for (var i = 0; i < line; i++) {
                 if (utils.trim(scriptLines[i])[0] != '#') {
@@ -69,7 +69,7 @@ self.linux = {
                     break;
                 }
             }
-            fs.writeFileSync(scriptPath, scriptLines.join('\n'));
+            fs.writeFileSync(scriptPath, scriptLines.join(env.EOL));
             return "启用设置完成";
         } catch (ex) {
             return ex.message;
