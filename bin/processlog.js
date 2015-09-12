@@ -76,5 +76,5 @@ ProcessLog.prototype.supply = function(pid, info) {
     this.add(log);
 };
 
-module.exports = new ProcessLog(env.dataPath);
+module.exports = new ProcessLog(env.DATA_PATH);
 //end
