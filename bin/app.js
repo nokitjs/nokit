@@ -155,8 +155,7 @@ if (cluster.isMaster) {
         };
         //启动文件监控
         chokidar.watch(options.root, {
-            ignoreInitial: true,
-            ignored: /[\/\\]\./
+            ignoreInitial: true
         }).on('all', function(event, path) {
             fileChanged(path);
         });
