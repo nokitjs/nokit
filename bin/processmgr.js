@@ -11,7 +11,7 @@ var spawn = child_process.spawn;
 var exec = child_process.exec;
 
 var engineName = path.basename(process.argv[0] || 'node').split('.')[0];
-var startCommandName = isWin ? path.normalize(__dirname + '/shim/win32/' + engineName + '.vbs ') : engineName;
+var win32EngineName = path.normalize(__dirname + '/shim/win32/' + engineName + '.vbs ');
 
 //cli进程延迟存活时间
 exports.isWin = isWin;
@@ -23,26 +23,25 @@ exports.kill = function(pid) {
     } catch (ex) {}
 };
 
-exports.start = function(name, args) {
+exports.start = function(args) {
     var child = null;
-    debuger.log('start: ' + name + ' ' + args.join(' '));
     if (isWin) {
-        child = exec(name + args.join(' '), {
+        child = exec(win32EngineName + ' ' + args.join(' '), {
             //子进程将不随父进程结束而结束
             detached: true,
             stdio: ['ignore', 'ignore', 'ignore']
         });
     } else {
-        child = spawn(name, args, {
+        child = spawn(engineName, args, {
             //子进程将不随父进程结束而结束
             detached: true,
             stdio: ['ignore', 'ignore', 'ignore']
         });
     }
     if (child) {
-        child.unref(); //父进程将不等待子进程结束
+        //父进程将不等待子进程结束
+        child.unref();
     }
-    debuger.log('进入 processmgr.start');
     return child;
 };
 //基础进程方法结束
@@ -71,7 +70,7 @@ var dedcodeStartInfo = function(startInfo) {
 exports.startApp = function(startInfo) {
     //将启动信息加入到自身，用于重启
     startInfo.push('-start-info:' + endcodeStartInfo(startInfo));
-    this.start(startCommandName, startInfo);
+    this.start(startInfo);
 };
 
 exports.restartApp = function(pid) {

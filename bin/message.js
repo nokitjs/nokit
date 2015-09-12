@@ -3,8 +3,8 @@ var nokit = require("../");
 var console = nokit.console;
 var utils = nokit.utils;
 
-var HOST = "127.0.0.1";
-var PORT = 20002;
+var LOCAL_HOST = "127.0.0.1";
+var LOCAL_PORT = 20202;
 
 function Message() {
     var self = this;
@@ -18,7 +18,7 @@ Message.prototype.send = function(msgList, callback) {
     var self = this;
     if (self.messageSended || !msgList) return;
     var client = new net.Socket();
-    client.connect(PORT, HOST, function() {
+    client.connect(LOCAL_PORT, LOCAL_HOST, function() {
         //去掉其它信息只保留 type、text
         msgList = msgList.map(function(item) {
             return {
@@ -37,7 +37,7 @@ Message.prototype.send = function(msgList, callback) {
  */
 Message.prototype.waiting = function(total) {
     var count = 0;
-    net.createServer(function(socket) {
+    var server = net.createServer(function(socket) {
         socket.on('data', function(data) {
             if (data) {
                 var list = JSON.parse(data);
@@ -47,10 +47,16 @@ Message.prototype.waiting = function(total) {
             }
             count += 1;
             if (count >= total) {
+                /*
+                必须关闭连接停止监听，然后再退出 “工具进程”，
+                否则在 windows 上 “守护进程(master)” 和 “工作进程（worker）” 都将受影响退出
+                */
+                socket.destroy();
+                server.close();
                 process.exit(0);
             }
         });
-    }).listen(PORT);
+    }).listen(LOCAL_PORT);
 };
 
 module.exports = Message;

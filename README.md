@@ -1,42 +1,42 @@
 ![Nokit](http://nokit.org/logo.png)
 
-##简介
+## 简介
 Nokit 是一个简单易用的基于 Nodejs 的 Web 开发框架，默认提供了 MVC / NSP / RESTful 等支持，并提供对应项目模板。
 Nokit 核心非常简洁，大多数功能以扩展形式存在，开发人员也可以方便的为 Nokit 添加新的扩展。
 
 [![npm version](https://badge.fury.io/js/nokit-runtime.svg)](http://badge.fury.io/js/nokit-runtime)  
 
-##社区
+## 社区
 1. 文档 [wiki](https://github.com/Houfeng/nokit/wiki)
 2. 问题反馈 [issues](https://github.com/Houfeng/nokit/issues)
 3. 讨论组 [group (nokit@googlegroups.com)](https://groups.google.com/forum/#!forum/nokit)
 4. QQ群: 240603160 
 
-##安装和更新
+## 安装和更新
 nokit 依赖 nodejs 或 iojs，所以需先安装 nodejs 或 iojs，具体请参考 nodejs 或 iojs 网站
 >1. [https://nodejs.org/](https://nodejs.org/)
 >2. [https://iojs.org/](https://iojs.org/)
 
-####安装 nokit
+#### 安装 nokit
 ```javascript
 [sudo] npm install -g nokit-runtime
 ```
 
-####更新 nokit
+#### 更新 nokit
 ```javascript
 [sudo] npm update -g nokit-runtime
 ```
 
-##命令行工具
+## 命令行工具
 Nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录即可， nokit 提供了方便的命令行工具。
 命令行工具还提供进程管理相关功能，确保应用能够持续稳定的运行，并能在遇到故障时快速自动恢复。
 
-####查看版本
+#### 查看版本
 ```javascript
 [sudo] nokit [?]
 ```
 
-####创建应用
+#### 创建应用
 ```javascript
 [sudo] nokit create [name] [mvc|nsp|restful] [folder] 
 ```
@@ -47,7 +47,7 @@ Nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录�
 3. folder 为目标目录，省略时将默认为当前所在目录。
  
 
-####运行应用
+#### 运行应用
 ```javascript
 [sudo] nokit start [port] [root] [-config:<name>] [-cluster[:num]] [-watch[:.ext,...]] [node-opts]
 ```
@@ -58,25 +58,25 @@ Nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录�
 5. -cache 一般用于为 html/js/css 等静态资源启动一个临时 WebServer，指定缓存配置，例如 -cache:0 不向浏览器发送缓存 header 信息。
 6. --debug 为 nodejs 选项，可以开启 debug 模式，开启后可以使用 nodejs 内置调试工具调式，也可以使用 node-inspector 等工具进行调试。
 
-####停止应用
+#### 停止应用
 ```javascript
 [sudo] nokit stop [pid|all]
 ```
 可以指定 pid (进程ID，可以用过 nokit list 查看)，停止指定的的应用，也可以省略停止所有应用
 
-####重启应用
+#### 重启应用
 ```javascript
 [sudo] nokit restart [pid|all]
 ```
 可以指定 pid (进程ID，可以用过 nokit list 查看)，重启指定的的应用，也可以省略重启所有应用
 
-####查看运行中的应用
+#### 查看运行中的应用
 ```javascript
 [sudo] nokit list
 ```
 查看所有已启动的应用
 
-####开机自启动
+#### 开机自启动
 ```javascript
 [sudo] nokit autostart [on|off] [-uid:[domain\]user [-pwd:password]] 
 ```
@@ -86,7 +86,7 @@ autostart 命令目前支持 win32 和 linux 平台，此命令需要管理员�
 才会自动启动 Nokit App，当指定 -uid、-pwd 时，只要启动 windows 就会自动启动 Nokit App。
 无论是登录 windows 的账户或是通过 -uid 提定的账户，需要是安装 nodejs 和 npm 时所用的账户。
 
-##代码引用
+## 代码引用
 除了使用命令行工具，也可以在代码中引用 nokit 的方式来运行 nokit 应用，
 在代码中引用 nokit，将不能利用 nokit 的进程管理功能，这时可以直接运行，或者使用 pm2 / forever 等工具进行管理。
 ```javascript
@@ -101,7 +101,7 @@ server.start();
 无论任种方式，启动成功后，即可浏览器访问 "http://localhost:8000" (端口请换成具体应用的正确的端口)，
 如简单的示例 [http://www.xhou.net:8000](http://www.xhou.net:8000)
 
-##NSP
+## NSP
 NSP 全称为 Nokit Server Pages 是一种类似 asp / php 的 Web 应用开发模式，
 NSP 支持 include 引用其它页面，也支持 master 母板页技术。
 
@@ -229,7 +229,7 @@ Index.prototype.add = function() {
 ```
 
 
-##MVC
+## MVC
 Nokit MVC 是一种设计简约、符合 MVC 模式 Web 应用开发模式。
 
 一般目录结构
@@ -324,7 +324,7 @@ MVC 的 web.json 配置
 
 
 
-##RESTful
+## RESTful
 Nokit 用来开发 RESTful Service 是非常方便和简单的，通过简洁的 URL 路由配置，抽象出和资源对应的请求处理程序文件即可，
 可以在处理程序中，根据需求实现 get / post / put 等 HttpMethod 即可。
 
@@ -400,6 +400,3 @@ REST 的 web.json 配置
     }
 }
 ```
-
-
-
