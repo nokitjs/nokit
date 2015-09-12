@@ -31,13 +31,13 @@ if (cml.args[1]) {
 var publicFolder = cml.options.getValue('-public');
 if (publicFolder) {
     options.folders = options.folders || {};
-    options.folders.public = publicFolder;
+    options.folders.public = path.normalize(publicFolder);
 }
 //是否使用自定义配置
 var configName = cml.options.getValue('-config');
 if (configName) {
     options.folders = options.folders || {};
-    options.folders.configFile = './web.' + configName + '.json';
+    options.folders.configFile = path.normalize('./web.' + configName + '.json');
 }
 //缓存参数 cache
 var cache = cml.options.getValue('-cache');
