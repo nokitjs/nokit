@@ -2,6 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var child_process = require('child_process');
 var nokit = require('../');
+var env = nokit.env;
 var utils = nokit.utils;
 var execSync = child_process.execSync;
 var packageInfo = nokit.info;
