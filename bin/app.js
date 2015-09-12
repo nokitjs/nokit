@@ -4,11 +4,15 @@ var utils = nokit.utils;
 var path = require("path");
 var Message = require('./message');
 var domain = require("domain");
-var chokidar = require('chokidar');
+console.log('1');
+//var chokidar = require('chokidar');
 var processLog = require("./processlog");
 var CmdLine = require("cmdline");
 var cluster = require("cluster");
 var cpuTotal = require("os").cpus().length;
+var debuger = require('../test/debuger');
+
+debuger.log('进入 app.js');
 
 //处理参数信息开始
 var cwd = process.cwd();

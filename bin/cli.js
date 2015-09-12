@@ -11,6 +11,7 @@ var autostart = require('./autostart');
 var utils = nokit.utils;
 var packageInfo = nokit.info;
 var console = nokit.console;
+var debuger = require('../test/debuger');
 
 //工作目录
 var cwd = process.cwd();
@@ -95,6 +96,7 @@ dm.run(function() {
             cml.options.forEach(function(item) {
                 startInfo.push(item);
             });
+            debuger.log('即将启动...');
             //请求启动
             processMgr.startApp(startInfo);
             break;

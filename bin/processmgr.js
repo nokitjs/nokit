@@ -6,6 +6,7 @@ var processLog = require('./processlog');
 var utils = nokit.utils;
 var base64 = nokit.base64;
 var console = nokit.console;
+var debuger = require('../test/debuger');
 var spawn = child_process.spawn;
 var exec = child_process.exec;
 
@@ -24,6 +25,7 @@ exports.kill = function(pid) {
 
 exports.start = function(name, args) {
     var child = null;
+    debuger.log('start: ' + name + ' ' + args.join(' '));
     if (isWin) {
         child = exec(name + args.join(' '), {
             //子进程将不随父进程结束而结束
@@ -40,6 +42,7 @@ exports.start = function(name, args) {
     if (child) {
         child.unref(); //父进程将不等待子进程结束
     }
+    debuger.log('进入 processmgr.start');
     return child;
 };
 //基础进程方法结束
