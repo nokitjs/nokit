@@ -4,8 +4,7 @@ var utils = nokit.utils;
 var path = require("path");
 var Message = require('./message');
 var domain = require("domain");
-console.log('1');
-//var chokidar = require('chokidar');
+var chokidar = require('chokidar');
 var processLog = require("./processlog");
 var CmdLine = require("cmdline");
 var cluster = require("cluster");
@@ -143,6 +142,7 @@ if (cluster.isMaster) {
         if (watchTypes) {
             watchTypes = watchTypes.split(',');
         }
+        //文件改变处理函数
         var fileChanged = function(file) {
             var extname = path.extname(file).toLowerCase();
             if (extname == '.log' || (watchTypes &&
