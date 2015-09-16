@@ -1,3 +1,7 @@
+### 1.11.2
+1. 优化 context.setUrl 处理
+2. 强化 mvc 路由的 action 处理
+
 ### 1.11.1
 1. 强化 mvc 路由的 action 处理
 
