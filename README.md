@@ -20,16 +20,17 @@ nokit 依赖 nodejs 或 iojs，所以需先安装 nodejs 或 iojs，具体请参
 
 #### 安装 nokit
 ```javascript
-[sudo] npm install -g nokit-runtime
+[sudo] npm install nokit-runtime [-g]
 ```
 
 #### 更新 nokit
 ```javascript
-[sudo] npm update -g nokit-runtime
+[sudo] npm update nokit-runtime [-g]
 ```
 
 ## 命令行工具
-Nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录即可， nokit 提供了方便的命令行工具。
+使用 “命令行工具” 时必须全局安装 nokit-runtime (全局安装的同时也可以在 app 中本地安装 nokit-runtime)
+Nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录即可， Nokit 提供了方便的命令行工具。
 命令行工具还提供进程管理相关功能，确保应用能够持续稳定的运行，并能在遇到故障时快速自动恢复。
 
 #### 查看版本

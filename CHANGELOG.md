@@ -1,3 +1,8 @@
+### 1.11.3
+1. 优化 pagine 使其允许传入的 model 为 null
+2. mvc 模板增加 $.controller 
+3. nsp 模板增加 $.self ($.self 与 this 相等)
+
 ### 1.11.2
 1. 优化 context.setUrl 处理
 2. 强化 mvc 路由的 action 处理

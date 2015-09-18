@@ -1,8 +1,8 @@
 {
   "name": "nokit-runtime",
   "rawName": "nokit",
-  "version": "1.11.2",
-  "description": "A Web development framework!",
+  "version": "1.11.3",
+  "description": "A Web development framework",
   "main": "./lib/index.js",
   "bin": {
     "nokit": "./bin/cli.js"
@@ -17,6 +17,7 @@
     "nsp",
     "mvc",
     "restful",
+    "rest",
     "webapi",
     "web"
   ],
