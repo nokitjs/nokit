@@ -11,6 +11,8 @@
  * 安装命令:
  * npm install nokit-runtime [-g]
  **/
+ 
+/* global __dirname */
 
 var nokit = require("nokit-runtime");
 var console = nokit.console;
