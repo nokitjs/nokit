@@ -1,3 +1,6 @@
+### 1.11.4
+1. 优化 routeing 匹配，使 “查询字符串” 不再参与匹配
+
 ### 1.11.3
 1. 优化 pagine 使其允许传入的 model 为 null
 2. mvc 模板增加 $.controller 
