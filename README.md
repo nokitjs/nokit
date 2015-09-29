@@ -189,6 +189,8 @@ Index.prototype.init = function() {
     se轩.context.session 访问 session 数据
     */
     self.name = 'Nokit NSP';
+    //init（初始化）完成后，需要调用 ready 方法，通知初始化完成
+    self.ready();
 };
 
 //默认方法，首次打开页面，会触发 load 方法

@@ -13,7 +13,7 @@
         ".nsh": "./handlers/nsh",
         ".md": "./handlers/markdown",
         ".less": "./handlers/less",
-        ".css": "./handlers/css"
+        ".css": "./handlers/less"
     },
     "parsers": {
         "*": "./parsers/urlencoded",

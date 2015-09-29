@@ -1,3 +1,12 @@
+### 1.11.7
+1. MVC 增加 onMvcHandle 过滤器回调
+2. MVC 的 init 方法改为异步
+3. NSP 增加 onNspHandle 过滤器回调
+4. NSP 的 init 方法改为异步
+5. REST 增加 onRestHandle 过滤器回调
+6. REST 增加异步 init 方法
+7. 合并 css 和 less 处理器扩展
+
 ### 1.11.6
 1. 更新上游依赖
 
