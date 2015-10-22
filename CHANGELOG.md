@@ -1,3 +1,9 @@
+### 1.11.9
+1. 重构 session ，调整方法名
+2. 重构 Logger ，调整日志格式
+3. 重构 env.DATA_PATH 处理
+4. 更新依赖
+
 ### 1.11.7
 1. MVC 增加 onMvcHandle 过滤器回调
 2. MVC 的 init 方法改为异步
