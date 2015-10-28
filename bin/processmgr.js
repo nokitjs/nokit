@@ -1,3 +1,5 @@
+/* global __dirname */
+/* global process */
 var isWin = process.platform === 'win32';
 var child_process = require('child_process');
 var path = require("path");

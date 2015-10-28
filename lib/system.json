@@ -1,39 +1,41 @@
 {
     "hosts": [],
     "port": 8000,
-    "defaults": ["index.html", "index.nsp"],
+    "defaults": [
+        "index.html",
+        "index.nsp"
+    ],
     "headers": {},
     "handlers": {
-        "*": "./handlers/static",
-        "^/__res__/": "./handlers/resource",
-        "^/--res--/": "./handlers/resource",
-        "^/favicon.icon$": "./handlers/favicon",
-        "^/favicon.ico$": "./handlers/favicon",
-        ".nsp": "./handlers/nsp",
-        ".nsh": "./handlers/nsh",
-        ".md": "./handlers/markdown",
-        ".less": "./handlers/less",
-        ".css": "./handlers/less"
+        "*": "$./handlers/static",
+        "^/__res__/": "$./handlers/resource",
+        "^/--res--/": "$./handlers/resource",
+        "^/favicon.icon$": "$./handlers/favicon",
+        "^/favicon.ico$": "$./handlers/favicon",
+        ".nsp$": "$./handlers/nsp",
+        ".nsh$": "$./handlers/nsh"
     },
     "parsers": {
-        "*": "./parsers/urlencoded",
-        "multipart/form-data": "./parsers/multipart",
-        "application/x-www-form-urlencoded": "./parsers/urlencoded",
-        "text/plain": "./parsers/plain",
-        "text/json": "./parsers/json",
-        "text/xml": "./parsers/xml",
-        "application/json": "./parsers/json",
-        "application/xml": "./parsers/xml"
+        "*": "$./parsers/urlencoded",
+        "multipart/form-data": "$./parsers/multipart",
+        "application/x-www-form-urlencoded": "$./parsers/urlencoded",
+        "text/plain": "$./parsers/plain",
+        "text/json": "$./parsers/json",
+        "text/xml": "$./parsers/xml",
+        "application/json": "$./parsers/json",
+        "application/xml": "$./parsers/xml"
     },
-    "global": "./global.js",
-    "filters": {},
+    "global": "./global",
+    "filters": {
+       
+    },
     "template": {
         "pages": {
-            "500": "./templates/500.html",
-            "404": "./templates/404.html",
-            "403": "./templates/403.html",
-            "405": "./templates/405.html",
-            "explore": "./templates/explore.html"
+            "500": "$./templates/500.html",
+            "404": "$./templates/404.html",
+            "403": "$./templates/403.html",
+            "405": "$./templates/405.html",
+            "explore": "$./templates/explore.html"
         },
         "compress": true
     },
@@ -41,20 +43,68 @@
         "public": "./public"
     },
     "cache": {
-        "match": [".html$", ".htm$", ".css$", ".js$", ".json$", ".xml$", ".svg$", ".txt$", ".text$", ".csv$", ".icon$", ".ico$", ".less$", ".sass$", ".md$", ".png$", ".jpg$", ".jpeg$", ".gif$", ".bmp$", ".swf$", ".ttf$", ".woff$", ".eot"],
+        "match": [
+            ".html$",
+            ".htm$",
+            ".css$",
+            ".js$",
+            ".json$",
+            ".xml$",
+            ".svg$",
+            ".txt$",
+            ".text$",
+            ".csv$",
+            ".icon$",
+            ".ico$",
+            ".less$",
+            ".sass$",
+            ".md$",
+            ".png$",
+            ".jpg$",
+            ".jpeg$",
+            ".gif$",
+            ".bmp$",
+            ".swf$",
+            ".ttf$",
+            ".woff$",
+            ".eot"
+        ],
         "maxAge": 1800,
         "lastModified": true
     },
-    "denys": [".nsp.js$", ".nsp.html$", ".nsh.js$", "web.json$", "global.js$", "package.json$", ".tp$", ".tp.html$", ".tp.htm$", ".log$"],
+    "denys": [
+        ".nsp.js$",
+        ".nsp.html$",
+        ".nsh.js$",
+        "web.json$",
+        "global.js$",
+        "package.json$",
+        ".tp$",
+        ".tp.html$",
+        ".tp.htm$",
+        ".log$"
+    ],
     "session": {
+        "provider": "$./providers/session-process",
         "state": true,
-        "timeout": 1800,
-        "provider": "./core/session"
+        "timeout": 1800
     },
-    "compress": [".html$", ".htm$", ".css$", ".js$", ".json$", ".xml$", ".svg$", ".txt$", ".text$", ".md$", ".csv$"],
+    "compress": [
+        ".html$",
+        ".htm$",
+        ".css$",
+        ".js$",
+        ".json$",
+        ".xml$",
+        ".svg$",
+        ".txt$",
+        ".text$",
+        ".md$",
+        ".csv$"
+    ],
     "displayDir": true,
     "log": {
-        "provider": "./core/logger",
+        "provider": "$./providers/logger-file",
         "path": "./logs"
     },
     "mimeType": {

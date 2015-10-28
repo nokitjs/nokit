@@ -9,7 +9,7 @@ var processMgr = require('./processmgr');
 var CmdLine = require('cmdline');
 var autostart = require('./autostart');
 var utils = nokit.utils;
-var packageInfo = nokit.info;
+var pkg = nokit.pkg;
 var console = nokit.console;
 var env = nokit.env;
 var debuger = require('../test/debuger');
@@ -21,7 +21,7 @@ var cwd = process.cwd();
  * 输出帮助信息
  **/
 function printInfo(versionOnly) {
-    console.log(packageInfo.name + " " + packageInfo.version + env.EOL, true);
+    console.log(pkg.rawName + " " + pkg.version + env.EOL, true);
     if (!versionOnly) {
         console.log(" 1) nokit create    [name] [mvc|nsp|restful] [folder]", true);
         console.log(" 2) nokit start     [port] [root] [-config:<name>] [-cluster[:num]] [-watch[:.ext,...]] [node-opts]", true);
