@@ -26,7 +26,7 @@
     },
     "global": "./global",
     "filters": {
-        "^((?!\\.(js|json|xml|svg|txt|text|css|png|jpg|jpeg|gif|bmp|icon|ico|ttf|woff|eot|swf)$).)+$::session": "$./filters/session",
+        "^/::session": "$./filters/session",
         "^/::log": "$./filters/log"
     },
     "template": {
@@ -87,7 +87,8 @@
     "session": {
         "provider": "$./providers/session-process",
         "state": true,
-        "timeout": 1800
+        "timeout": 1800,
+        "match": "^((?!\\.(js|json|xml|svg|txt|text|css|png|jpg|jpeg|gif|bmp|icon|ico|ttf|woff|eot|swf)$).)+$"
     },
     "compress": {
         "html": ".html$",

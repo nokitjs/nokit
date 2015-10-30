@@ -13,6 +13,8 @@ Index.prototype.load = function () {
 
 Index.prototype.add = function (name) {
     var self = this;
+    self.context.session.test = (self.context.session.test || 0) + 1;
+    self.test = self.context.session.test;
     var val = parseInt(self.numBox.val());
     self.numBox.val(++val);
     self.numBox.css("border", "solid 1px red");

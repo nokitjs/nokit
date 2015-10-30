@@ -5,6 +5,7 @@ Welcome to <%= this.name %>!
 
 <h4>表单元素</h4>
 <p>
+    <div><%= this.test %></div>
     <textarea nsp-id='abc'></textarea>
     <br/>
     <select nsp-id='efg' multiple="multiple">
