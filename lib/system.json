@@ -8,8 +8,7 @@
     "headers": {},
     "handlers": {
         "*::static": "$./handlers/static",
-        "^/__res__/::res": "$./handlers/resource",
-        "^/--res--/::res": "$./handlers/resource",
+        "^/-rc-/::rc": "$./handlers/resource",
         "^/favicon.icon$::favicon": "$./handlers/favicon",
         "^/favicon.ico$::favicon": "$./handlers/favicon",
         ".nsp$::nsp": "$./handlers/nsp",
