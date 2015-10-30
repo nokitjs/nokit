@@ -26,7 +26,7 @@
     },
     "global": "./global",
     "filters": {
-        "^((?!\\.(js|css|png|jpg|gif)$).)+$::session": "$./filters/session",
+        "^((?!\\.(js|json|xml|svg|txt|text|css|png|jpg|jpeg|gif|bmp|icon|ico|ttf|woff|eot|swf)$).)+$::session": "$./filters/session",
         "^/::log": "$./filters/log"
     },
     "template": {
