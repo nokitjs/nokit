@@ -1,19 +1,19 @@
 {
-    "hosts": [],
+    "hosts": {},
     "port": 8000,
-    "defaults": [
-        "index.html",
-        "index.nsp"
-    ],
+    "defaults": {
+        "html": "index.html",
+        "nsp": "index.nsp"
+    },
     "headers": {},
     "handlers": {
-        "*": "$./handlers/static",
-        "^/__res__/": "$./handlers/resource",
-        "^/--res--/": "$./handlers/resource",
-        "^/favicon.icon$": "$./handlers/favicon",
-        "^/favicon.ico$": "$./handlers/favicon",
-        ".nsp$": "$./handlers/nsp",
-        ".nsh$": "$./handlers/nsh"
+        "*::static": "$./handlers/static",
+        "^/__res__/::res": "$./handlers/resource",
+        "^/--res--/::res": "$./handlers/resource",
+        "^/favicon.icon$::favicon": "$./handlers/favicon",
+        "^/favicon.ico$::favicon": "$./handlers/favicon",
+        ".nsp$::nsp": "$./handlers/nsp",
+        ".nsh$::nsh": "$./handlers/nsh"
     },
     "parsers": {
         "*": "$./parsers/urlencoded",
@@ -27,7 +27,8 @@
     },
     "global": "./global",
     "filters": {
-       
+        "^/::session": "",
+        "^/::log": ""
     },
     "template": {
         "pages": {
@@ -43,65 +44,65 @@
         "public": "./public"
     },
     "cache": {
-        "match": [
-            ".html$",
-            ".htm$",
-            ".css$",
-            ".js$",
-            ".json$",
-            ".xml$",
-            ".svg$",
-            ".txt$",
-            ".text$",
-            ".csv$",
-            ".icon$",
-            ".ico$",
-            ".less$",
-            ".sass$",
-            ".md$",
-            ".png$",
-            ".jpg$",
-            ".jpeg$",
-            ".gif$",
-            ".bmp$",
-            ".swf$",
-            ".ttf$",
-            ".woff$",
-            ".eot"
-        ],
+        "match": {
+            "html": ".html$",
+            "htm": ".htm$",
+            "css": ".css$",
+            "js": ".js$",
+            "json": ".json$",
+            "xml": ".xml$",
+            "svg": ".svg$",
+            "txt": ".txt$",
+            "text": ".text$",
+            "csv": ".csv$",
+            "iocn": ".icon$",
+            "ico": ".ico$",
+            "less": ".less$",
+            "sass": ".sass$",
+            "markdown": ".md$",
+            "png": ".png$",
+            "jpg": ".jpg$",
+            "jpeg": ".jpeg$",
+            "gif": ".gif$",
+            "bmp": ".bmp$",
+            "swf": ".swf$",
+            "ttf": ".ttf$",
+            "woff": ".woff$",
+            "eot": ".eot"
+        },
         "maxAge": 1800,
         "lastModified": true
     },
-    "denys": [
-        ".nsp.js$",
-        ".nsp.html$",
-        ".nsh.js$",
-        "web.json$",
-        "global.js$",
-        "package.json$",
-        ".tp$",
-        ".tp.html$",
-        ".tp.htm$",
-        ".log$"
-    ],
+    "denys": {
+        "nsp-js": ".nsp.js$",
+        "nsp-html": ".nsp.html$",
+        "nsh-js": ".nsh.js$",
+        "web-json": "web.json$",
+        "global-js": "global.js$",
+        "package-json": "package.json$",
+        "tp": ".tp$",
+        "tp-html": ".tp.html$",
+        "tp-htm": ".tp.htm$",
+        "log": ".log$"
+    },
     "session": {
         "provider": "$./providers/session-process",
         "state": true,
         "timeout": 1800
     },
-    "compress": [
-        ".html$",
-        ".htm$",
-        ".css$",
-        ".js$",
-        ".json$",
-        ".xml$",
-        ".svg$",
-        ".txt$",
-        ".text$",
-        ".md$",
-        ".csv$"
-    ],
+    "compress": {
+        "html": ".html$",
+        "htm": ".htm$",
+        "css": ".css$",
+        "js": ".js$",
+        "json": ".json$",
+        "xml": ".xml$",
+        "svg": ".svg$",
+        "txt": ".txt$",
+        "text": ".text$",
+        "markdown": ".md$",
+        "csv": ".csv$"
+    },
     "displayDir": true,
     "log": {
         "provider": "$./providers/logger-file",
