@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+/* global __dirname */
 /* global process */
 
 var nokit = require("../");
