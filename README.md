@@ -1,5 +1,3 @@
-![Nokit](http://nokit.org/logo.png)
-
 ## 简介
 Nokit 是一个简单易用的基于 Nodejs 的 Web 开发框架，默认提供了 MVC / NSP / RESTful 等支持，并提供对应项目模板。
 Nokit 核心非常简洁，大多数功能以扩展形式存在，开发人员也可以方便的为 Nokit 添加新的扩展。
