@@ -8,7 +8,7 @@ var IndexPresenter = module.exports = function () { };
  **/
 IndexPresenter.prototype.init = function () {
     var self = this;
-    self.name = 'Nokit NSP';
+    self.name = 'NSP';
     self.ready();
 };
 

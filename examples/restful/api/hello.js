@@ -10,7 +10,7 @@ HelloController.prototype.post = function () {
     var self = this;
     self.out({
         "status": "success",
-        "message": "Hello " + self.context.routeData["name"]
+        "message": "Hello " + self.context.routeData["name"] + "!"
     });
 };
 
@@ -21,6 +21,6 @@ HelloController.prototype.get = function () {
     var self = this;
     self.out({
         "status": "success",
-        "message": "Hello " + self.context.routeData["name"]
+        "message": "Hello " + self.context.routeData["name"] + "!"
     });
 };
