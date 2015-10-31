@@ -2,6 +2,7 @@
 1. 重构 Filter 和 Handler 格式及配置
 2. 增加并行 Filter 支持
 3. 改进 Session API
+4. 更新上游依赖
 
 ### 1.11.9
 1. 重构 session ，调整方法名
