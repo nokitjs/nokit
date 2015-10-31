@@ -1,6 +1,12 @@
-var Home = module.exports = function() {};
+/**
+ * 定义 HomeController
+ **/
+var HomeController = module.exports = function () { };
 
-Home.prototype.index = function() {
+/**
+ * indexAction
+ **/
+HomeController.prototype.index = function () {
     var self = this;
     self.render("home.html", {
         "name": "Nokit MVC"

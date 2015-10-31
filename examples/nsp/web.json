@@ -1,6 +1,6 @@
 {
     "debugMode": true,
     "filters": {
-        "^/mgr": "./filter.js"
+        "^/mgr": "./filters/mgr"
     }
 }

@@ -2,24 +2,4 @@
 
 <% $.placeBegin("content") %>
 Welcome to <%= this.name %>!
-
-<h4>表单元素</h4>
-<p>
-    <div><%= this.test %></div>
-    <textarea nsp-id='abc'></textarea>
-    <br/>
-    <select nsp-id='efg' multiple="multiple">
-        <option value='a'>a</option>
-        <option value='b'>b</option>
-        <option value='c'>c</option>
-    </select>
-    <br/>
-    <input nsp-id='cck' id='cck' type="checkbox" /><label for='cck'>复选框</label>
-    <br/>
-    <input nsp-id='rid' id='rid' type="radio" /><label for='rid'>半选框</label>
-    <br/>
-    <input nsp-id='numBox' type='text' value='1' />
-    <br/>
-    <input nsp-id='addBtn' type='button' value='add' onclick="nsp('a').call('add','demo')" />
-</p>
 <% $.placeEnd() %>
