@@ -1,3 +1,4 @@
+/* global process */
 /* global __dirname */
 var fs = require('fs');
 var path = require('path');
@@ -10,6 +11,9 @@ var pkg = nokit.pkg;
 
 var self = this;
 
+/**
+ * windows 平台
+ **/
 self.win32 = {
     enabled: function (options) {
         options = options || {};
@@ -56,6 +60,9 @@ self.win32 = {
     }
 };
 
+/**
+ * linux 平台
+ **/
 self.linux = {
     cmd: env.EOL + 'nokit restart &' + env.EOL,
     enabled: function (options) {
@@ -91,6 +98,9 @@ self.linux = {
     }
 };
 
+/**
+ * 设置启用状态
+ **/
 self.set = function (state, options) {
     var platform = self[process.platform];
     if (platform) {

@@ -17,6 +17,9 @@
 var nokit = require("nokit-runtime");
 var console = nokit.console;
 
+/**
+ * 定义 server 选项
+ **/
 var options = {};
  
 /**
