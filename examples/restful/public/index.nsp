@@ -13,7 +13,7 @@
     <div class='content'>
         <strong> RESTFul Demo </strong>
         <p>
-            <a href='/api/user/nokit'>user</a>
+            <a href='/api/hello/nokit'>Hello</a>
         </p>
     </div>
     <div class='footer'>

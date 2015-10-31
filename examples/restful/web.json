@@ -4,11 +4,11 @@
         "^/api/": "$./handlers/restful"
     },
     "restful": {
-        "path": "./restful",
+        "path": "./api",
         "routes": [
             {
-                "pattern": "/api/user/{userId}",
-                "target": "./user.js"
+                "pattern": "/api/hello/{name}",
+                "target": "./hello"
             }
         ]
     }

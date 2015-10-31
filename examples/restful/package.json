@@ -3,7 +3,9 @@
     "version": "1.0.0",
     "description": "this is an example app",
     "main": "./app.js",
-    "keywords": ["restful"],
+    "keywords": [
+        "restful"
+    ],
     "author": {
         "name": "author",
         "email": "author@domain.com"
