@@ -1,5 +1,5 @@
 <% $.master("../layout/master.nsp") %> 
 
 <% $.placeBegin("content") %>
-Welcome to <%= this.name %>!
+Hello <%= this.name %>!
 <% $.placeEnd() %>
