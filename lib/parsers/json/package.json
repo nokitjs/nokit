@@ -6,7 +6,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Houfeng/nokit-parser-json.git"
+        "url": "https://github.com/nokitjs/nokit-parser-json.git"
     },
     "dependencies": {}
 }

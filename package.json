@@ -27,13 +27,13 @@
   },
   "homepage": "http://nokit.org",
   "bugs": {
-    "url": "https://github.com/Houfeng/nokit/issues",
+    "url": "https://github.com/nokitjs/nokit/issues",
     "email": "admin@xhou.net"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Houfeng/nokit.git"
+    "url": "https://github.com/nokitjs/nokit.git"
   },
   "dependencies": {
     "cheerio": "^0.19.0",

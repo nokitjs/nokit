@@ -6,6 +6,6 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Houfeng/nokit-handler-mvc.git"
+        "url": "https://github.com/nokitjs/nokit-handler-mvc.git"
     }
 }

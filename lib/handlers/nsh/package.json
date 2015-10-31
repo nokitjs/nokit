@@ -6,7 +6,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Houfeng/nokit-handler-nsh.git"
+        "url": "https://github.com/nokitjs/nokit-handler-nsh.git"
     },
     "dependencies": {}
 }
