@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+/* global process */
+
 var nokit = require("../");
 var path = require("path");
 var domain = require("domain");
@@ -33,11 +35,11 @@ function printInfo(versionOnly) {
 };
 
 var dm = domain.create();
-dm.on('error', function(err) {
+dm.on('error', function (err) {
     console.error(err.message + env.EOL + err.stack);
 });
 
-dm.run(function() {
+dm.run(function () {
 
     var message = new Message();
 
@@ -81,7 +83,7 @@ dm.run(function() {
             }
             //添加 node 控制选项 
             var nodeOptions = cml.options.getNodeOptions();
-            nodeOptions.forEach(function(item) {
+            nodeOptions.forEach(function (item) {
                 startInfo.push(item);
             });
             //添加入口程序
@@ -94,7 +96,7 @@ dm.run(function() {
             var root = path.resolve(cwd, path.normalize(cml.args[1] || './'));
             startInfo.push(root);
             //添加控制选项
-            cml.options.forEach(function(item) {
+            cml.options.forEach(function (item) {
                 startInfo.push(item);
             });
             debuger.log('即将启动...');

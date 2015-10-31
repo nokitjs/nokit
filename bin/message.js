@@ -1,3 +1,4 @@
+/* global process */
 var net = require('net');
 var nokit = require("../");
 var console = nokit.console;
@@ -14,13 +15,13 @@ function Message() {
 /**
  * 发送进程消息
  */
-Message.prototype.send = function(msgList, callback) {
+Message.prototype.send = function (msgList, callback) {
     var self = this;
     if (self.messageSended || !msgList) return;
     var client = new net.Socket();
-    client.connect(LOCAL_PORT, LOCAL_HOST, function() {
+    client.connect(LOCAL_PORT, LOCAL_HOST, function () {
         //去掉其它信息只保留 type、text
-        msgList = msgList.map(function(item) {
+        msgList = msgList.map(function (item) {
             return {
                 type: item.type,
                 text: item.text
@@ -35,13 +36,13 @@ Message.prototype.send = function(msgList, callback) {
 /**
  * 等待进程消息
  */
-Message.prototype.waiting = function(total) {
+Message.prototype.waiting = function (total) {
     var count = 0;
-    var server = net.createServer(function(socket) {
-        socket.on('data', function(data) {
+    var server = net.createServer(function (socket) {
+        socket.on('data', function (data) {
             if (data) {
                 var list = JSON.parse(data);
-                utils.each(list, function(i, item) {
+                utils.each(list, function (i, item) {
                     console[item.type || 'log'](item.text || item);
                 });
             }

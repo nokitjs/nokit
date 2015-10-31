@@ -5,9 +5,11 @@
     },
     "restful": {
         "path": "./restful",
-        "routes": [{
-            "pattern": "/api/user/{userId}",
-            "target": "./user.js"
-        }]
+        "routes": [
+            {
+                "pattern": "/api/user/{userId}",
+                "target": "./user.js"
+            }
+        ]
     }
 }

@@ -1,3 +1,4 @@
+/* global process */
 var nokit = require("../");
 var console = nokit.console;
 var env = nokit.env;
@@ -78,11 +79,11 @@ if (cluster.isMaster) {
     };
 
     //创建工作进程 
-    var createWorker = function() {
+    var createWorker = function () {
         var worker = cluster.fork();
         //接收工作进程启动成功的消息 
         //因为需要 configs 信息，所以需要用 "进程通信" 将 configs 传递过来
-        worker.on('message', function(msgItem) {
+        worker.on('message', function (msgItem) {
             msgItem = msgItem || {};
             if (msgItem.state) {
                 workerReady++;
@@ -91,7 +92,7 @@ if (cluster.isMaster) {
                     var configs = msgItem.configs;
                     logInfo.wpid = [];
                     var allWorkers = utils.copy(cluster.workers);
-                    utils.each(allWorkers, function(id, _worker) {
+                    utils.each(allWorkers, function (id, _worker) {
                         logInfo.wpid.push(_worker.process.pid);
                     });
                     logInfo.host = (configs.hosts || [])[0] || 'localhost';
@@ -104,7 +105,7 @@ if (cluster.isMaster) {
                 }
             } else {
                 msgItem.type = 'error';
-                message.send([msgItem], function() {
+                message.send([msgItem], function () {
                     /*
                     启动时如果有一个工作进程不成功就全部结束,
                     运行过程中，如果一个工作进程出现问题，不会导致全部结束
@@ -123,15 +124,15 @@ if (cluster.isMaster) {
     }
 
     //发现一个 worker 结束，就启动一个新的 worker
-    cluster.on('exit', function(worker) {
+    cluster.on('exit', function (worker) {
         workerReady--;
         createWorker();
     });
 
     //结束(重启)所有工作进程
-    var killAllWorkers = function() {
+    var killAllWorkers = function () {
         var allWorkers = utils.copy(cluster.workers);
-        utils.each(allWorkers, function(id, _worker) {
+        utils.each(allWorkers, function (id, _worker) {
             _worker.kill();
         });
     };
@@ -144,7 +145,7 @@ if (cluster.isMaster) {
             watchTypes = watchTypes.split(',');
         }
         //文件改变处理函数
-        var fileChanged = function(file) {
+        var fileChanged = function (file) {
             var extname = path.extname(file).toLowerCase();
             if (extname == '.log' || (watchTypes &&
                 watchTypes.length > 0 &&
@@ -156,7 +157,7 @@ if (cluster.isMaster) {
         //启动文件监控
         chokidar.watch(options.root, {
             ignoreInitial: true
-        }).on('all', function(event, path) {
+        }).on('all', function (event, path) {
             fileChanged(path);
         });
     }
@@ -164,7 +165,7 @@ if (cluster.isMaster) {
 } else {
 
     var dm = domain.create();
-    dm.on('error', function(err) {
+    dm.on('error', function (err) {
         //如果在启动时存在异常
         process.send({
             state: false,
@@ -174,11 +175,11 @@ if (cluster.isMaster) {
         process.exit(0);
     });
 
-    dm.run(function() {
+    dm.run(function () {
 
         //启动 server
         var server = new nokit.Server(options);
-        server.start(function(err, success) {
+        server.start(function (err, success) {
             if (err) {
                 //如果在启动时存在异常
                 process.send({

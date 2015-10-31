@@ -11,7 +11,7 @@ var pkg = nokit.pkg;
 var self = this;
 
 self.win32 = {
-    enabled: function(options) {
+    enabled: function (options) {
         options = options || {};
         try {
             this.disabled();
@@ -36,7 +36,7 @@ self.win32 = {
             return ex.message;
         }
     },
-    disabled: function(options) {
+    disabled: function (options) {
         options = options || {};
         try {
             var schtasks = path.normalize(__dirname + '/shim/win32/schtasks-admin.exe');
@@ -58,7 +58,7 @@ self.win32 = {
 
 self.linux = {
     cmd: env.EOL + 'nokit restart &' + env.EOL,
-    enabled: function(options) {
+    enabled: function (options) {
         options = options || {};
         try {
             this.disabled();
@@ -77,7 +77,7 @@ self.linux = {
             return ex.message;
         }
     },
-    disabled: function(options) {
+    disabled: function (options) {
         options = options || {};
         try {
             var scriptPath = '/etc/rc.local';
@@ -91,7 +91,7 @@ self.linux = {
     }
 };
 
-self.set = function(state, options) {
+self.set = function (state, options) {
     var platform = self[process.platform];
     if (platform) {
         return platform[state == 'on' ? 'enabled' : 'disabled'](options);

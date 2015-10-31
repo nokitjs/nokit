@@ -19,13 +19,13 @@ var win32EngineName = path.normalize(__dirname + '/shim/win32/' + engineName + '
 exports.isWin = isWin;
 
 //基础进程方法开始
-exports.kill = function(pid) {
+exports.kill = function (pid) {
     try {
         process.kill(pid);
-    } catch (ex) {}
+    } catch (ex) { }
 };
 
-exports.start = function(args) {
+exports.start = function (args) {
     var child = null;
     if (isWin) {
         child = exec(win32EngineName + ' ' + args.join(' '), {
@@ -48,12 +48,12 @@ exports.start = function(args) {
 };
 //基础进程方法结束
 
-exports.killApp = function(pid) {
+exports.killApp = function (pid) {
     this.kill(pid);
     processLog.remove(pid);
 };
 
-exports.killAllApp = function() {
+exports.killAllApp = function () {
     var logArray = processLog.readArray();
     for (var i in logArray) {
         var log = logArray[i];
@@ -62,27 +62,27 @@ exports.killAllApp = function() {
     processLog.clear();
 };
 
-var endcodeStartInfo = function(startInfo) {
+var endcodeStartInfo = function (startInfo) {
     return base64.encode(JSON.stringify(startInfo || []));
 };
-var dedcodeStartInfo = function(startInfo) {
+var dedcodeStartInfo = function (startInfo) {
     return JSON.parse(base64.decode(startInfo));
 };
 
-exports.startApp = function(startInfo) {
+exports.startApp = function (startInfo) {
     //将启动信息加入到自身，用于重启
     startInfo.push('-start-info:' + endcodeStartInfo(startInfo));
     this.start(startInfo);
 };
 
-exports.restartApp = function(pid) {
+exports.restartApp = function (pid) {
     var log = processLog.get(pid);
     if (!log) return;
     this.killApp(log.pid);
     this.startApp(dedcodeStartInfo(log.startInfo));
 };
 
-exports.restartAllApp = function() {
+exports.restartAllApp = function () {
     var logArray = processLog.readArray();
     this.killAllApp();
     for (var i in logArray) {

@@ -11,46 +11,46 @@ function ProcessLog(dataPath) {
     this.logFile = path.normalize(dataPath + '/process.log');
 };
 
-ProcessLog.prototype.readArray = function() {
+ProcessLog.prototype.readArray = function () {
     if (!this.cache) {
         this.cache = fs.existsSync(this.logFile) ? utils.readJSONSync(this.logFile) : [];
     }
     return this.cache;
 };
 
-ProcessLog.prototype.saveArray = function(logArray) {
+ProcessLog.prototype.saveArray = function (logArray) {
     utils.writeJSONSync(this.logFile, logArray);
     this.cache = null;
 };
 
-ProcessLog.prototype.get = function(pid) {
+ProcessLog.prototype.get = function (pid) {
     var logArray = this.readArray();
-    return (logArray.filter(function(item) {
+    return (logArray.filter(function (item) {
         return item.pid == pid
     }) || [])[0];
 };
 
-ProcessLog.prototype.add = function(log) {
+ProcessLog.prototype.add = function (log) {
     var logArray = this.readArray();
     logArray.push(log);
     this.saveArray(logArray);
 };
 
-ProcessLog.prototype.remove = function(pid) {
+ProcessLog.prototype.remove = function (pid) {
     var logArray = this.readArray();
-    logArray = logArray.filter(function(item) {
+    logArray = logArray.filter(function (item) {
         return item.pid != pid;
     });
     this.saveArray(logArray);
 };
 
-ProcessLog.prototype.clear = function() {
+ProcessLog.prototype.clear = function () {
     this.saveArray([]);
 };
 
-ProcessLog.prototype.toPrintArray = function() {
+ProcessLog.prototype.toPrintArray = function () {
     var logArray = this.readArray();
-    logArray = logArray.map(function(log) {
+    logArray = logArray.map(function (log) {
         return {
             PID: log.pid,
             WPID: log.wpid,
@@ -65,7 +65,7 @@ ProcessLog.prototype.toPrintArray = function() {
     return logArray;
 };
 
-ProcessLog.prototype.supply = function(pid, info) {
+ProcessLog.prototype.supply = function (pid, info) {
     var log = this.get(pid);
     if (!log || log.supplyed) return;
     log.host = (info.hosts || [])[0] || 'localhost';
