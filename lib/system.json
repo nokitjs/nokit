@@ -25,10 +25,7 @@
         "application/xml": "$./parsers/xml"
     },
     "global": "./global",
-    "filters": {
-        "^/::session": "$./filters/session",
-        "^/::log": "$./filters/log"
-    },
+    "filters": {},
     "template": {
         "pages": {
             "500": "$./templates/500.html",
@@ -85,10 +82,9 @@
         "log": ".log$"
     },
     "session": {
+        "enabled": true,
         "provider": "$./providers/session-process",
-        "state": true,
-        "timeout": 1800,
-        "match": "^((?!\\.(js|json|xml|svg|txt|text|css|png|jpg|jpeg|gif|bmp|icon|ico|ttf|woff|eot|swf)$).)+$"
+        "timeout": 1800
     },
     "compress": {
         "html": ".html$",
@@ -105,7 +101,8 @@
     },
     "displayDir": true,
     "log": {
-        "provider": "$./providers/logger-file",
+        "enabled": true,
+        "provider": "$./providers/log-writer-file",
         "path": "./logs"
     },
     "mimeType": {
