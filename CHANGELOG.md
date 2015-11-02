@@ -1,3 +1,6 @@
+### 1.12.6
+1. 重构 logger 和 seession 模块
+
 ### 1.12.1
 1. 重构 Filter 和 Handler 格式及配置
 2. 增加并行 Filter 支持
