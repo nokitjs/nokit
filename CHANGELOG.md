@@ -1,5 +1,6 @@
 ### 1.12.6
 1. 重构 logger 和 seession 模块
+2. 更新依赖
 
 ### 1.12.1
 1. 重构 Filter 和 Handler 格式及配置
