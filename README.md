@@ -13,8 +13,7 @@ Nokit 核心非常简洁，大多数功能以扩展形式存在，开发人员�
 ## 安装和更新
 nokit 依赖 nodejs 或 iojs，所以需先安装 nodejs 或 iojs，具体请参考 nodejs 或 iojs 网站
 >1. [https://nodejs.org/](https://nodejs.org/)
->2. [https://iojs.org/](https://iojs.org/)
-
+>2. [https://iojs.org/](https://iojs.org/)  
 
 #### 安装 nokit
 ```javascript
@@ -99,7 +98,7 @@ server.start();
 ```
 
 无论任种方式，启动成功后，即可浏览器访问 "http://localhost:8000" (端口请换成具体应用的正确的端口)，
-如简单的示例 [http://www.xhou.net:8000](http://www.xhou.net:8000)
+如简单的示例 [http://jser.cc](http://jser.cc)
 
 ## NSP
 NSP 全称为 Nokit Server Pages 是一种类似 asp / php 的 Web 应用开发模式，
@@ -228,8 +227,7 @@ Index.prototype.add = function() {
     self.test.val('你好'); 
     self.render();
 };
-```
-
+```    
 
 ## MVC
 Nokit MVC 是一种设计简约、符合 MVC 模式 Web 应用开发模式。
