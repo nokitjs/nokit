@@ -9,12 +9,12 @@
  * 确保添加了对 nokit 的依赖，或全局安装了 nokit 并设置了 NODE_PATH 环境变量
  *  
  * 安装命令:
- * npm install nokit-runtime [-g]
+ * npm install nokitjs [-g]
  **/
  
 /* global __dirname */
 
-var nokit = require("../../");
+var nokit = require("nokitjs");
 var console = nokit.console;
 
 /**

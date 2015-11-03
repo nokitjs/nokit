@@ -2,31 +2,28 @@
 Nokit 是一个简单易用的基于 Nodejs 的 Web 开发框架，默认提供了 MVC / NSP / RESTful 等支持，并提供对应项目模板。
 Nokit 核心非常简洁，大多数功能以扩展形式存在，开发人员也可以方便的为 Nokit 添加新的扩展。
 
-[![npm version](https://badge.fury.io/js/nokit-runtime.svg)](http://badge.fury.io/js/nokit-runtime)  
+[![npm version](https://badge.fury.io/js/nokitjs.svg)](http://badge.fury.io/js/nokitjs)  
 
 ## 社区
-1. 文档 [wiki](https://github.com/Houfeng/nokit/wiki)
-2. 问题反馈 [issues](https://github.com/Houfeng/nokit/issues)
+1. 文档 [wiki](https://github.com/nokitjs/nokit/wiki)
+2. 问题反馈 [issues](https://github.com/nokitjs/nokit/issues)
 3. 讨论组 [group (nokit@googlegroups.com)](https://groups.google.com/forum/#!forum/nokit)
 4. QQ群: 240603160 
 
 ## 安装和更新
-nokit 依赖 nodejs 或 iojs，所以需先安装 nodejs 或 iojs，具体请参考 nodejs 或 iojs 网站
->1. [https://nodejs.org/](https://nodejs.org/)
->2. [https://iojs.org/](https://iojs.org/)  
 
 #### 安装 nokit
 ```javascript
-[sudo] npm install nokit-runtime [-g]
+[sudo] npm install nokitjs [-g]
 ```
 
 #### 更新 nokit
 ```javascript
-[sudo] npm update nokit-runtime [-g]
+[sudo] npm update nokitjs [-g]
 ```
 
 ## 命令行工具
-使用 “命令行工具” 时必须全局安装 nokit-runtime (全局安装的同时也可以在 app 中本地安装 nokit-runtime)
+使用 “命令行工具” 时必须全局安装 nokitjs (全局安装的同时也可以在 app 中本地安装 nokitjs)
 Nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录即可， Nokit 提供了方便的命令行工具。
 命令行工具还提供进程管理相关功能，确保应用能够持续稳定的运行，并能在遇到故障时快速自动恢复。
 
@@ -89,7 +86,7 @@ autostart 命令目前支持 win32 和 linux 平台，此命令需要管理员�
 除了使用命令行工具，也可以在代码中引用 nokit 的方式来运行 nokit 应用，
 在代码中引用 nokit，将不能利用 nokit 的进程管理功能，这时可以直接运行，或者使用 pm2 / forever 等工具进行管理。
 ```javascript
-var nokit = require("nokit-runtime");
+var nokit = require("nokitjs");
 var server = new nokit.Server({
     root : "应用根目录",
     port : 8000

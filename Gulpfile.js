@@ -10,7 +10,7 @@ var del = require('del');
 var pkg = require("./package.json");
 
 var banner = ['/**',
-    ' * <%= rawName %>.js - <%= description %>',
+    ' * <%= rawName %> - <%= description %>',
     ' * @version v<%= version %>',
     ' * @link <%= homepage %>',
     ' * @license <%= license %>',
