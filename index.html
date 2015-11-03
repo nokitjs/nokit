@@ -25,7 +25,7 @@
 <p>Nokit 是一个简单易用的基于 Nodejs 的 Web 开发框架，默认提供了 MVC / NSP / RESTful 等支持，并提供对应项目模板。
 Nokit 核心非常简洁，大多数功能以扩展形式存在，开发人员也可以方便的为 Nokit 添加新的扩展。</p>
 
-<p><a href="http://badge.fury.io/js/nokit-runtime"><img src="https://badge.fury.io/js/nokit-runtime.svg" alt="npm version"></a>  </p>
+<p><a href="http://badge.fury.io/js/nokitjs"><img src="https://badge.fury.io/js/nokitjs.svg" alt="npm version"></a>  </p>
 
 <h2>
 <a id="社区" class="anchor" href="#%E7%A4%BE%E5%8C%BA" aria-hidden="true"><span class="octicon octicon-link"></span></a>社区</h2>
@@ -43,29 +43,20 @@ Nokit 核心非常简洁，大多数功能以扩展形式存在，开发人员�
 <h2>
 <a id="安装和更新" class="anchor" href="#%E5%AE%89%E8%A3%85%E5%92%8C%E6%9B%B4%E6%96%B0" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装和更新</h2>
 
-<p>nokit 依赖 nodejs 或 iojs，所以需先安装 nodejs 或 iojs，具体请参考 nodejs 或 iojs 网站</p>
-
-<blockquote>
-<ol>
-<li><a href="https://nodejs.org/">https://nodejs.org/</a></li>
-<li><a href="https://iojs.org/">https://iojs.org/</a></li>
-</ol>
-</blockquote>
-
 <h4>
 <a id="安装-nokit" class="anchor" href="#%E5%AE%89%E8%A3%85-nokit" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装 nokit</h4>
 
-<div class="highlight highlight-source-js"><pre>[sudo] npm install nokit<span class="pl-k">-</span>runtime [<span class="pl-k">-</span>g]</pre></div>
+<div class="highlight highlight-source-js"><pre>[sudo] npm install nokitjs [<span class="pl-k">-</span>g]</pre></div>
 
 <h4>
 <a id="更新-nokit" class="anchor" href="#%E6%9B%B4%E6%96%B0-nokit" aria-hidden="true"><span class="octicon octicon-link"></span></a>更新 nokit</h4>
 
-<div class="highlight highlight-source-js"><pre>[sudo] npm update nokit<span class="pl-k">-</span>runtime [<span class="pl-k">-</span>g]</pre></div>
+<div class="highlight highlight-source-js"><pre>[sudo] npm update nokitjs [<span class="pl-k">-</span>g]</pre></div>
 
 <h2>
 <a id="命令行工具" class="anchor" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7" aria-hidden="true"><span class="octicon octicon-link"></span></a>命令行工具</h2>
 
-<p>使用 “命令行工具” 时必须全局安装 nokit-runtime (全局安装的同时也可以在 app 中本地安装 nokit-runtime)
+<p>使用 “命令行工具” 时必须全局安装 nokitjs (全局安装的同时也可以在 app 中本地安装 nokitjs)
 Nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录即可， Nokit 提供了方便的命令行工具。
 命令行工具还提供进程管理相关功能，确保应用能够持续稳定的运行，并能在遇到故障时快速自动恢复。</p>
 
@@ -139,7 +130,7 @@ Nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录�
 <p>除了使用命令行工具，也可以在代码中引用 nokit 的方式来运行 nokit 应用，
 在代码中引用 nokit，将不能利用 nokit 的进程管理功能，这时可以直接运行，或者使用 pm2 / forever 等工具进行管理。</p>
 
-<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> nokit <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">"</span>nokit-runtime<span class="pl-pds">"</span></span>);
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> nokit <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">"</span>nokitjs<span class="pl-pds">"</span></span>);
 <span class="pl-k">var</span> server <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">nokit.Server</span>({
     root <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>应用根目录<span class="pl-pds">"</span></span>,
     port <span class="pl-k">:</span> <span class="pl-c1">8000</span>
@@ -147,7 +138,7 @@ Nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录�
 server.<span class="pl-c1">start</span>();</pre></div>
 
 <p>无论任种方式，启动成功后，即可浏览器访问 "http://localhost:8000" (端口请换成具体应用的正确的端口)，
-如简单的示例 <a href="http://www.xhou.net:8000">http://www.xhou.net:8000</a></p>
+如简单的示例 <a href="http://jser.cc">http://jser.cc</a></p>
 
 <h2>
 <a id="nsp" class="anchor" href="#nsp" aria-hidden="true"><span class="octicon octicon-link"></span></a>NSP</h2>
@@ -235,6 +226,8 @@ NSP 支持 include 引用其它页面，也支持 master 母板页技术。</p>
 <span class="pl-c">    se轩.context.session 访问 session 数据</span>
 <span class="pl-c">    */</span>
     self.<span class="pl-c1">name</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>Nokit NSP<span class="pl-pds">'</span></span>;
+    <span class="pl-c">//init（初始化）完成后，需要调用 ready 方法，通知初始化完成</span>
+    self.ready();
 };
 
 <span class="pl-c">//默认方法，首次打开页面，会触发 load 方法</span>
