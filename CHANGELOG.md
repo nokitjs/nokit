@@ -1,3 +1,8 @@
+### 1.12.9
+1. 重构 logger 和 "异常处理"
+2. ready 函数(存在于 nsp/mvc/rest) 增加防重复调用
+3. context 相关输入函数增加防重复调用
+
 ### 1.12.6
 1. 重构 logger 和 seession 模块
 2. 更新依赖
