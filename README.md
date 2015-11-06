@@ -45,9 +45,9 @@ Nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录�
 
 #### 运行应用
 ```javascript
-[sudo] nokit start [port] [root] [-config:<name>] [-cluster[:num]] [-watch[:.ext,...]] [node-opts]
+[sudo] nokit start [port] [root] [-env:<name>] [-cluster[:num]] [-watch[:.ext,...]] [node-opts]
 ```
-1. -config 指定运行配置名称，将会根据 "配置名称" 加载 web.xxxx.json (xxxx 为指定的配置名称) 作为应用配置文件。
+1. -env 指定运行配置名称，将会根据 "配置名称" 加载 web.xxxx.json (xxxx 为指定的配置名称) 作为应用配置文件。
 2. -cluster 选项可以开启 "单机集群模式"，使应用有效的利用多核 CPU，也使应用更加健壮可靠，-cluster 选项可以指定进程数，如 -cluster:4 ，默认为 CPU 核数。
 3. -watch 选项开启后，在应用文件发生改变时会自动完成进程重启，默认任何文件变更都将触发重启，也可以指定文件类型，如 -watch:.js,.html,.css
 4. -public 一般用于为 html/js/css 等静态资源启动一个临时 WebServer，指定静态资源目录，静态资源目录为 root 的相对目录。
