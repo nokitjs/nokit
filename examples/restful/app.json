@@ -1,5 +1,5 @@
 {
-    "debugMode": true,
+    "showErrorDetail": true,
     "handlers": {
         "^/api/": "$./handlers/restful"
     },

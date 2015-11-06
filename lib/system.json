@@ -5,6 +5,7 @@
         "html": "index.html",
         "nsp": "index.nsp"
     },
+    "showErrorDetail": true,
     "headers": {},
     "handlers": {
         "*::static": "$./handlers/static",
@@ -73,7 +74,7 @@
         "nsp-js": ".nsp.js$",
         "nsp-html": ".nsp.html$",
         "nsh-js": ".nsh.js$",
-        "web-json": "web.json$",
+        "app-json": "app.json$",
         "global-js": "global.js$",
         "package-json": "package.json$",
         "tp": ".tp$",

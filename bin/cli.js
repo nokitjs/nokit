@@ -15,7 +15,7 @@ var utils = nokit.utils;
 var pkg = nokit.pkg;
 var console = nokit.console;
 var env = nokit.env;
-var debuger = require('../test/debuger');
+//var debuger = require('../test/debuger');
 
 //工作目录
 var cwd = process.cwd();
@@ -27,13 +27,13 @@ function printInfo(versionOnly) {
     console.log(pkg.rawName + " " + pkg.version + env.EOL, true);
     if (!versionOnly) {
         console.log(" 1) nokit create    [name] [mvc|nsp|restful] [folder]", true);
-        console.log(" 2) nokit start     [port] [root] [-config:<name>] [-cluster[:num]] [-watch[:.ext,...]] [node-opts]", true);
+        console.log(" 2) nokit start     [port] [root] [-env:<name>] [-cluster[:num]] [-watch[:.ext,...]] [node-opts]", true);
         console.log(" 3) nokit stop      [pid|all]", true);
         console.log(" 4) nokit restart   [pid|all]", true);
         console.log(" 5) nokit list      (no args)", true);
         console.log(" 6) nokit autostart [on|off] [-uid:[domain\\]user [-pwd:password]]" + env.EOL, true);
     }
-};
+}
 
 var dm = domain.create();
 dm.on('error', function (err) {
@@ -74,12 +74,13 @@ dm.run(function () {
             message.waiting(1);
             var startInfo = [];
             //处理调式参数
+            var debugPort = null;
             if (cml.options.has('--debug')) {
-                var debugPort = parseInt(cml.options.getValue('--debug') || 5858) - 1;
+                debugPort = parseInt(cml.options.getValue('--debug') || 5858) - 1;
                 cml.options.setValue('--debug', debugPort);
             }
             if (cml.options.has('--debug-brk')) {
-                var debugPort = parseInt(cml.options.getValue('--debug-brk') || 5858) - 1;
+                debugPort = parseInt(cml.options.getValue('--debug-brk') || 5858) - 1;
                 cml.options.setValue('--debug-brk', debugPort);
             }
             //添加 node 控制选项 
@@ -100,7 +101,7 @@ dm.run(function () {
             cml.options.forEach(function (item) {
                 startInfo.push(item);
             });
-            debuger.log('即将启动...');
+            //debuger.log('即将启动...');
             //请求启动
             processMgr.startApp(startInfo);
             break;

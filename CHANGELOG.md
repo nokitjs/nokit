@@ -1,3 +1,8 @@
+### 1.13.1
+1. 增加根据 NODE_ENV 加载配置文件的功能
+2. 应用配置文件更名为 app.json
+3. debugMode 变更为 showErrorDetail
+
 ### 1.13.0
 1. 更新运行配置存储路径
 

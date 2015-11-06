@@ -9,7 +9,7 @@ var env = nokit.env;
  **/
 function ProcessLog(dataPath) {
     this.logFile = path.normalize(dataPath + '/process.log');
-};
+}
 
 ProcessLog.prototype.readArray = function () {
     if (!this.cache) {
