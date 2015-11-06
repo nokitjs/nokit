@@ -104,7 +104,7 @@ NSP 支持 include 引用其它页面，也支持 master 母板页技术。
 一般目录结构
 ```javascript
 根目录
-│ web.json
+│ app.json
 │ app.js
 ├─layout
 │     date.nsp
@@ -233,7 +233,7 @@ Nokit MVC 是一种设计简约、符合 MVC 模式 Web 应用开发模式。
 
 ```javascript
 根目录
-│ web.json
+│ app.json
 │ app.js
 ├─controllers
 │    home.js
@@ -282,7 +282,7 @@ Home.prototype.index = function() {
 };
 ```
 
-MVC 的 web.json 配置
+MVC 的 app.json 配置
 ```javascript
 {
     /*
@@ -328,7 +328,7 @@ Nokit 用来开发 RESTful Service 是非常方便和简单的，通过简洁的
 一般目录结构
 ```javascript
 根目录
-│ web.json
+│ app.json
 │ app.js
 ├─public
 │  │  index.nsp
@@ -373,7 +373,7 @@ User.prototype.get = function() {
 module.exports = User;
 ```
 
-REST 的 web.json 配置
+REST 的 app.json 配置
 ```javascript
 {
     /*
