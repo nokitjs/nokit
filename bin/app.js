@@ -132,6 +132,12 @@ if (cluster.isMaster) {
         createWorker();
     });
 
+    //发现一个 worker disconnect，就启动一个新的 worker
+    // cluster.on('disconnect', function (worker) {
+    //     workerReady--;
+    //     createWorker();
+    // });
+
     //结束(重启)所有工作进程
     var killAllWorkers = function () {
         var allWorkers = utils.copy(cluster.workers);
