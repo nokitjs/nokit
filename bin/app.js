@@ -127,16 +127,16 @@ if (cluster.isMaster) {
     }
 
     //发现一个 worker 结束，就启动一个新的 worker
-    cluster.on('exit', function (worker) {
-        workerReady--;
-        createWorker();
-    });
-
-    //发现一个 worker disconnect，就启动一个新的 worker
-    // cluster.on('disconnect', function (worker) {
+    // cluster.on('exit', function (worker) {
     //     workerReady--;
     //     createWorker();
     // });
+
+    //发现一个 worker disconnect，就启动一个新的 worker
+    cluster.on('disconnect', function (worker) {
+        workerReady--;
+        createWorker();
+    });
 
     //结束(重启)所有工作进程
     var killAllWorkers = function () {
