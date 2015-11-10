@@ -38,7 +38,9 @@
         "compress": true
     },
     "folders": {
-        "public": "./public"
+        "public": {
+            "*": "./public"
+        }
     },
     "cache": {
         "match": {
