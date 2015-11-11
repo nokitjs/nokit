@@ -22,20 +22,20 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-TileImage" content="/-rc-/favicons/mstile-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <title>DENY (403)</title>
+    <title><%= this.server.STATUS_CODES["403"] %> (403)</title>
     <link rel="stylesheet" href="/-rc-/common.css">
 </head>
 
 <body>
-    <div class='header'>DENY (403)</div>
+    <div class='header'><%= this.server.STATUS_CODES["403"] %> (403)</div>
     <div class='content'>
-        资源 "<% $(this.request.url) %>" 拒绝访问
+        资源 "<%= this.request.url %>" 拒绝访问
     </div>
     <div class='footer'>
         Powered By
         <a href="<% $(this.server.pkg.homepage) %>" target="_blank">
-            <% $(this.server.pkg.rawName) %>
-            <% $(this.server.pkg.version) %>
+            <%= this.server.pkg.rawName %>
+            <%= this.server.pkg.version %>
         </a>
     </div>
 </body>

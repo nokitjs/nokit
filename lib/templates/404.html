@@ -22,12 +22,12 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-TileImage" content="/-rc-/favicons/mstile-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <title>NOT FOUND (404)</title>
+    <title><%= this.server.STATUS_CODES["404"] %> (404)</title>
     <link rel="stylesheet" href="/-rc-/common.css">
 </head>
 
 <body>
-    <div class='header'>NOT FOUND (404)</div>
+    <div class='header'><%= this.server.STATUS_CODES["404"] %> (404)</div>
     <div class='content'>
         资源 "<% $(this.request.url) %>" 没有找到
     </div>
@@ -35,7 +35,7 @@
         Powered By
         <a href="<% $(this.server.pkg.homepage) %>" target="_blank">
             <% $(this.server.pkg.rawName) %>
-                <% $(this.server.pkg.version) %>
+            <% $(this.server.pkg.version) %>
         </a>
     </div>
 </body>

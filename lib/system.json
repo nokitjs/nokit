@@ -72,7 +72,7 @@
         "maxAge": 1800,
         "lastModified": true
     },
-    "denys": {
+    "forbiddens": {
         "nsp-js": ".nsp.js$",
         "nsp-html": ".nsp.html$",
         "nsh-js": ".nsh.js$",
