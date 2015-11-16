@@ -30,7 +30,7 @@
     <div class='header'><%= this.server.STATUS_CODES["500"] %> (500)</div>
     <div class='content'>
         在请求 "<% $(this.request.url) %>" 时发生了异常
-        <pre class='quote'><% $(this.showErrorDetail?this.lastError.stack:this.lastError.message) %></pre>
+        <pre class='quote'><% $(this.showErrorDetail?this.lastError.message+'\r\n'+this.lastError.stack:this.lastError.message) %></pre>
     </div>
     <div class='footer'>
         Powered By

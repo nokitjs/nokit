@@ -17,6 +17,5 @@ IndexPresenter.prototype.init = function () {
  **/
 IndexPresenter.prototype.load = function () {
     var self = this;
-    //self.context.error('hello error');
     self.render();
 };
