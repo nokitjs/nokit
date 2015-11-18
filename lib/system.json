@@ -108,6 +108,9 @@
         "provider": "$./providers/log-writer-file",
         "path": "./logs"
     },
+    "https": {
+        "enabled": false
+    },
     "mimeType": {
         "*": "application/octet-stream",
         ".html": "text/html",

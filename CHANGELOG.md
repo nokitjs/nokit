@@ -1,3 +1,7 @@
+### 1.14.1
+1. 完善对 https 支持
+2. 开启 https 时，增加 http to https 跳转支持
+
 ### 1.14.0
 1. 添加 https 支持
 
