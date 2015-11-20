@@ -1,0 +1,1 @@
+This is an empty directory for some special circumstances, such as "http-to-https"
