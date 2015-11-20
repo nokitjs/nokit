@@ -23,7 +23,7 @@ var cml = new CmdLine();
 //注意 options 必须这样创建，不能用 var options = {...}; 的形式创建
 var options = {};
 
-if (cml.args[0]) {
+if (cml.args[0] && cml.args[0] != "" && cml.args[0] != "0" && cml.args[0] != 0) {
     options.port = cml.args[0];
 }
 if (cml.args[1]) {
