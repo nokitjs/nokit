@@ -92,7 +92,7 @@ dm.run(function () {
             var appFile = path.normalize(__dirname + '/app.js');
             startInfo.push(appFile);
             //添加监听端口
-            var port = cml.args[0] || 8000;
+            var port = cml.args[0];
             startInfo.push(port);
             //添加应用根目录
             var root = path.resolve(cwd, path.normalize(cml.args[1] || './'));
