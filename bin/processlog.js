@@ -57,7 +57,7 @@ ProcessLog.prototype.toPrintArray = function () {
             HOST: log.host,
             PORT: log.port,
             PATH: utils.short(log.path),
-            ENV: log.env,
+            ENV: log.env || "default",
             WATCH: log.watch,
             DEBUG: log.debug
         };
