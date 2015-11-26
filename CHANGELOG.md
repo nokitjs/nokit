@@ -1,3 +1,6 @@
+### 1.14.7
+1. 增加 301 重定向方法 context.permanentRedirect（<1.4.7 也可用 context.status 方法处理）
+
 ### 1.14.6
 1. 优化提示信息
 2. 修正 start 命令省略端口时配置优先级问题
