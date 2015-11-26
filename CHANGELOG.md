@@ -1,5 +1,7 @@
 ### 1.14.7
-1. 增加 301 重定向方法 context.permanentRedirect（<1.4.7 也可用 context.status 方法处理）
+1. 增加 301 重定向方法 context.permanentRedirect（低于 1.4.7 也可用 context.status 方法处理）
+2. 优化异常处理
+3. 更新进程列表信息，移除 cluster 列（可通过 wpid 列表判断）；增加 env 列
 
 ### 1.14.6
 1. 优化提示信息

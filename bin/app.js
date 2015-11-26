@@ -75,7 +75,7 @@ if (cluster.isMaster) {
     var logInfo = {
         pid: process.pid,
         path: options.root,
-        cluster: isCluster ? workerNumber : false,
+        env: options.env,
         debug: isDebug ? workerDebugPort : false,
         watch: isWatch ? (cml.options.getValue('-watch') || "*") : false,
         startInfo: startInfo
@@ -204,6 +204,11 @@ if (cluster.isMaster) {
                     configs: server.configs,
                     text: success || '启动成功'
                 });
+                /**
+                 * 启动成功后，移除 error listener
+                 * 确保所有未处理异常由 nokit core 处理
+                 **/
+                dm.removeAllListeners("error");
             }
         });
     });
