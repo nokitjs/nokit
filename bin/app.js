@@ -34,7 +34,9 @@ if (cml.args[1]) {
 var publicFolder = cml.options.getValue('-public');
 if (publicFolder) {
     options.folders = options.folders || {};
-    options.folders.public = path.normalize(publicFolder);
+    options.folders.public = {
+        "^/": path.normalize(publicFolder)
+    };
 }
 
 //是否使用自定义配置
