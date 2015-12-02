@@ -1,3 +1,7 @@
+### 1.14.8
+1. 优化 Session 处理
+2. 优化日志处理
+
 ### 1.14.7
 1. 增加 301 重定向方法 context.permanentRedirect（低于 1.4.7 也可用 context.status 方法处理）
 2. 优化异常处理
