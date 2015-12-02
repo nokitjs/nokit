@@ -14,7 +14,7 @@
  
 /* global __dirname */
 
-var nokit = require("nokitjs");
+var nokit = require("../../");
 var console = nokit.console;
 
 /**
