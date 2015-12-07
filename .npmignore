@@ -5,3 +5,5 @@ designs
 Gulpfile.js
 .travis.yml
 .vscode
+_*
+*.src.*
