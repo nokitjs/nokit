@@ -21,7 +21,7 @@ var banner = ['/**',
 ].join('\r\n');
 
 //清理
-gulp.task('clear', function(cb) {
+gulp.task('clear', function (cb) {
     del(['./lib/resources/nsp-client.js',
         './lib/resources/common.css',
         './lib/resources/explore.css'
@@ -29,7 +29,7 @@ gulp.task('clear', function(cb) {
 });
 
 //构建
-gulp.task('build', ["clear"], function() {
+gulp.task('build', ["clear"], function () {
     //nsp-client.js
     gulp.src("./lib/resources/nsp-client.src.js")
         .pipe(uglify())
@@ -48,6 +48,21 @@ gulp.task('build', ["clear"], function() {
         .pipe(header(banner, pkg))
         .pipe(rename("explore.css"))
         .pipe(gulp.dest("./lib/resources/"));
+    //mvc package.json
+    gulp.src("./examples/mvc/_package.json")
+        .pipe(rename("package.json"))
+        .pipe(replace("{version}", pkg.version))
+        .pipe(gulp.dest("./examples/mvc/"));
+    //nsp package.json
+    gulp.src("./examples/nsp/_package.json")
+        .pipe(rename("package.json"))
+        .pipe(replace("{version}", pkg.version))
+        .pipe(gulp.dest("./examples/nsp/"));
+    //restful package.json
+    gulp.src("./examples/restful/_package.json")
+        .pipe(rename("package.json"))
+        .pipe(replace("{version}", pkg.version))
+        .pipe(gulp.dest("./examples/restful/"));
 });
 
 //默认任务
