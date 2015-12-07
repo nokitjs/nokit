@@ -8,15 +8,9 @@
             "controller": "./controllers",
             "view": "./views"
         },
-        "routes": [
-            {
-                "pattern": "/home",
-                "target": "./home.js"
-            },
-            {
-                "pattern": "/",
-                "target": "./home.js"
-            }
-        ]
+        "routes": {
+            "/home": "./home",
+            "/": "./home"
+        }
     }
 }
