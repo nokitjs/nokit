@@ -1,3 +1,7 @@
+### 1.15.4
+1. app.json 重命名为 config.js，app.xxx.json 重命名为 config.xxx.json
+2. 配置文件支持 .js 文件，比如 config.js、config.xxx.js
+
 ### 1.15.3
 1. 更新应用示例模板的 package.json (声明对 nokitjs 的依赖)
 2. 优化 "路由配置"，除了 Array 方式，新增支持 map 方式
