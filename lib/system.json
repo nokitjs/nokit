@@ -25,13 +25,9 @@
         "application/json": "$./parsers/json",
         "application/xml": "$./parsers/xml"
     },
-    "view-engines": {
-        "*": "$./view-engines/tp",
-        ".html": "$./view-engines/tp",
-        ".htm": "$./view-engines/tp",
-        ".nsp": "$./view-engines/tp"
-    },
+    "viewEngine": "$./core/view-engine",
     "router": "$./core/router",
+    "locales": "./locales",
     "global": "./global",
     "filters": {},
     "template": {

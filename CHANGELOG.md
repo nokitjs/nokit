@@ -3,6 +3,8 @@
 2. 重构视图引擎模块
 3. 增加 context.json 方法
 4. 增加 context.jsonp 方法
+5. 增加 $.route (在模板中使用)
+6. 增加本地化支持
 
 ### 1.15.4
 1. app.json 重命名为 config.js，app.xxx.json 重命名为 config.xxx.json
@@ -98,7 +100,7 @@
 1. 优化 routeing 匹配，使 “查询字符串” 不再参与匹配
 
 ### 1.11.3
-1. 优化 pagine 使其允许传入的 model 为 null
+1. 优化 ViewEngine 使其允许传入的 model 为 null
 2. mvc 模板增加 $.controller 
 3. nsp 模板增加 $.self ($.self 与 this 相等)
 
