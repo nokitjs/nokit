@@ -14,7 +14,7 @@
  
 /* global __dirname */
 
-var nokit = require("../../");
+var nokit = require("nokitjs");
 var console = nokit.console;
 
 /**
@@ -39,7 +39,7 @@ options.port = 8000;
 var server = new nokit.Server(options);
 server.start(function (err, msg) {
     if (err) {
-        console.log(err);
+        console.error(err);
     } else {
         console.log(msg);
     }

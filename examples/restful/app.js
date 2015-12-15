@@ -39,7 +39,7 @@ options.port = 8000;
 var server = new nokit.Server(options);
 server.start(function (err, msg) {
     if (err) {
-        console.log(err);
+        console.error(err);
     } else {
         console.log(msg);
     }
