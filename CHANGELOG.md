@@ -1,3 +1,9 @@
+### 1.15.5
+1. 重构路由模块
+2. 重构视图引擎模块
+3. 增加 context.json 方法
+4. 增加 context.jsonp 方法
+
 ### 1.15.4
 1. app.json 重命名为 config.js，app.xxx.json 重命名为 config.xxx.json
 2. 配置文件支持 .js 文件，比如 config.js、config.xxx.js

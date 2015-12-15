@@ -29,7 +29,7 @@ options.root = __dirname;
 
 /**
  * 可以这里指定应用绑定的端口
- * 当不在此指定时，将使用 app.json 中配置，app.json 也没有配置时使用默认端口
+ * 当不在此指定时，将使用 config.json 中配置，config.json 也没有配置时使用默认端口
  **/
 options.port = 8000;
 

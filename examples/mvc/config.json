@@ -4,10 +4,6 @@
         "^/": "$./handlers/mvc"
     },
     "mvc": {
-        "paths": {
-            "controller": "./controllers",
-            "view": "./views"
-        },
         "routes": {
             "/home": "./home",
             "/": "./home"

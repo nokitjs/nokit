@@ -4,7 +4,6 @@
         "^/api/": "$./handlers/restful"
     },
     "restful": {
-        "path": "./api",
         "routes": {
             "/api/hello/{name}": "./hello"
         }

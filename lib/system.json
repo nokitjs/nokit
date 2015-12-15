@@ -25,6 +25,13 @@
         "application/json": "$./parsers/json",
         "application/xml": "$./parsers/xml"
     },
+    "view-engines": {
+        "*": "$./view-engines/tp",
+        ".html": "$./view-engines/tp",
+        ".htm": "$./view-engines/tp",
+        ".nsp": "$./view-engines/tp"
+    },
+    "router": "$./core/router",
     "global": "./global",
     "filters": {},
     "template": {
@@ -111,6 +118,16 @@
     "https": {
         "enabled": false
     },
+    "mvc": {
+        "paths": {
+            "controller": "./controllers",
+            "view": "./views"
+        }
+    },
+    "restful": {
+        "path": "./api"
+    },
+    "jsonpParam": "callback",
     "mimeType": {
         "*": "application/octet-stream",
         ".html": "text/html",

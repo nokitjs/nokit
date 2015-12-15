@@ -8,7 +8,7 @@ var HomeController = module.exports = function () { };
  **/
 HomeController.prototype.index = function () {
     var self = this;
-    self.render("home.html", {
+    self.render("home", {
         "name": "MVC"
     });
 };
