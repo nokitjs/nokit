@@ -29,7 +29,7 @@
     "router": "$./core/router",
     "locale": {
         "path": "./locales",
-        "default": "",
+        "default": "en",
         "fixed": ""
     },
     "global": "./global",
