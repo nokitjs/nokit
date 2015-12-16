@@ -27,7 +27,11 @@
     },
     "viewEngine": "$./core/view-engine",
     "router": "$./core/router",
-    "locales": "./locales",
+    "locale": {
+        "path": "./locales",
+        "default": "",
+        "fixed": ""
+    },
     "global": "./global",
     "filters": {},
     "template": {

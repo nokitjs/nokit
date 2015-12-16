@@ -1,10 +1,10 @@
 {
-  "name": "nsp-app",
+  "name": "mvc-app",
   "version": "1.0.0",
   "description": "this is an example app",
   "main": "./app.js",
   "keywords": [
-    "nsp"
+    "mvc"
   ],
   "author": {
     "name": "author",
@@ -13,6 +13,6 @@
   "homepage": "http://nokit.org",
   "license": "MIT",
   "dependencies": {
-    "nokitjs": "^1.15.6"
+    "nokitjs": "^{version}"
   }
 }

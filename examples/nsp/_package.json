@@ -13,6 +13,6 @@
   "homepage": "http://nokit.org",
   "license": "MIT",
   "dependencies": {
-    "nokitjs": "^1.15.6"
+    "nokitjs": "^{version}"
   }
 }
