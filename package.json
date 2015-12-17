@@ -1,7 +1,7 @@
 {
   "name": "nokitjs",
   "rawName": "Nokit",
-  "version": "1.15.7",
+  "version": "1.15.8",
   "description": "A Web development framework",
   "main": "./lib/index.js",
   "bin": {
@@ -12,8 +12,7 @@
   },
   "keywords": [
     "nokit",
-    "nokit-runtime",
-    "runtime",
+    "nokitjs",
     "nsp",
     "mvc",
     "restful",
