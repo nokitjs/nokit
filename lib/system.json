@@ -82,13 +82,8 @@
     "forbiddens": {
         "nsp-js": ".nsp.js$",
         "nsp-html": ".nsp.html$",
+        "nsp-htm": ".nsp.htm$",
         "nsh-js": ".nsh.js$",
-        "app-json": "app.json$",
-        "global-js": "global.js$",
-        "package-json": "package.json$",
-        "tp": ".tp$",
-        "tp-html": ".tp.html$",
-        "tp-htm": ".tp.htm$",
         "log": ".log$"
     },
     "session": {

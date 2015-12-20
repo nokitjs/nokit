@@ -7,7 +7,6 @@ Nokit 核心非常简洁，大多数功能以扩展形式存在，开发人员�
 ## 社区
 1. 文档 [wiki](https://github.com/nokitjs/nokit/wiki)
 2. 问题反馈 [issues](https://github.com/nokitjs/nokit/issues)
-3. 讨论组 [group (nokit@googlegroups.com)](https://groups.google.com/forum/#!forum/nokit)
 4. QQ群: 240603160 
 
 ## 安装和更新
@@ -51,8 +50,7 @@ Nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录�
 2. -cluster 选项可以开启 "单机集群模式"，使应用有效的利用多核 CPU，也使应用更加健壮可靠，-cluster 选项可以指定进程数，如 -cluster:4 ，默认为 CPU 核数。
 3. -watch 选项开启后，在应用文件发生改变时会自动完成进程重启，默认任何文件变更都将触发重启，也可以指定文件类型，如 -watch:.js,.html,.css
 4. -public 一般用于为 html/js/css 等静态资源启动一个临时 WebServer，指定静态资源目录，静态资源目录为 root 的相对目录。
-5. -cache 一般用于为 html/js/css 等静态资源启动一个临时 WebServer，指定缓存配置，例如 -cache:0 不向浏览器发送缓存 header 信息。
-6. --debug 为 nodejs 选项，可以开启 debug 模式，开启后可以使用 nodejs 内置调试工具调式，也可以使用 node-inspector 等工具进行调试。
+5. --debug 为 nodejs 选项，可以开启 debug 模式，开启后可以使用 nodejs 内置调试工具调式，也可以使用 node-inspector 等工具进行调试。
 
 #### 停止应用
 ```javascript
@@ -165,10 +163,10 @@ NSP 页面 (*.nsp) 基本介绍
 NSP 页面处理器 (*.nsp.js) 基本介绍
 ```javascript
 //定义页面处理器类型
-var Index = module.exports = function() {};
+var IndexPresenter = module.exports = function() {};
 
 //初始化方法，每次回发都将触发 init 方法
-Index.prototype.init = function() {
+IndexPresenter.prototype.init = function() {
     var self = this;
     /*
     self.server //当前 server 实例
@@ -188,7 +186,7 @@ Index.prototype.init = function() {
 };
 
 //默认方法，首次打开页面，会触发 load 方法
-Index.prototype.load = function() {
+IndexPresenter.prototype.load = function() {
     var self = this;
     //由于 nokit 为异步处理，调用 self.render() 方法向浏览器呈现页面.
     //不要在 init 方法调用 self.render() 
@@ -196,7 +194,7 @@ Index.prototype.load = function() {
 };
 
 //事件方法，可以绑定到页面中的 html 控件
-Index.prototype.add = function() {
+IndexPresenter.prototype.add = function() {
     var self = this;
     var val = parseInt(self.numBox.val());
     self.numBox.val(++val);
@@ -218,7 +216,7 @@ Index.prototype.add = function() {
 <input type="text" value="hello" nsp-id='test' />
 ```
 ```javascript
-Index.prototype.add = function() {
+IndexPresenter.prototype.add = function() {
     var self = this;
     //服务端提供类 jQuery 的元素操作 API (兼容部分常用 jQUery API)
     self.test.val('你好'); 
@@ -227,7 +225,7 @@ Index.prototype.add = function() {
 ```    
 
 ## MVC
-Nokit MVC 是一种设计简约、符合 MVC 模式 Web 应用开发模式。
+Nokit MVC 是一种设计简约、稳定、高效的 Web 应用开发模式。
 
 一般目录结构
 
@@ -255,13 +253,13 @@ models 为模型目录，nokit 对模型没有统一的要求和控制，应用�
 MVC 的控制器示例
 ```javascript
 //定义控制器类型
-var Home = module.exports = function() {};
+var HomeController = module.exports = function() {};
 
 /*
 默认 action ，
 通常用户直接请求某一 url 会被路由到指定 controller 的默认 action
 */
-Home.prototype.index = function() {
+HomeController.prototype.index = function() {
     var self = this;
     
     /*
@@ -308,13 +306,10 @@ MVC 的 app.json 配置
         pattern 格式示例 "/user/{userId}" 其中 userId 是占位符变量，
         可以在 controller 中通过 context.routeData['userId'] 获取。
         */
-        "routes": [{
-            "pattern": "/home",
-            "target": "./home.js"
-        },{
-            "pattern": "/",
-            "target": "./home.js"
-        }]
+        "routes": {
+            "/home": "./home"
+            "/": "./home"
+        }
     }
 }
 ```
@@ -341,10 +336,10 @@ Nokit 用来开发 RESTful Service 是非常方便和简单的，通过简洁的
 REST 的资源控制器示例
 ```javascript
 //定义资源控制器类型，通常一个资源类型视为一个控制器
-function User() {};
+function UserController() {};
 
 //针对 User 的 post HttpMethod 处理方法
-User.prototype.post = function() {
+UserController.prototype.post = function() {
     var self = this;
         
     /*
@@ -361,7 +356,7 @@ User.prototype.post = function() {
 };
 
 //针对 User 的 get HttpMethod 处理方法
-User.prototype.get = function() {
+UserController.prototype.get = function() {
     var self = this;
     self.out("routeData:" + routeData["userId"]);
 };
@@ -370,7 +365,7 @@ User.prototype.get = function() {
 根据需求实现对应的 httpMethod 处理方法即可
 */
 
-module.exports = User;
+module.exports = UserController;
 ```
 
 REST 的 app.json 配置
@@ -390,10 +385,9 @@ REST 的 app.json 配置
         pattern 格式示例 "/user/{userId}" 其中 userId 是占位符变量，
         REST 的路由配置没有 action 配置项。
         */
-        "routes": [{
-            "pattern": "/api/user/{userId}",
-            "target": "./user.js"
-        }]
+        "routes": {
+            "/api/user/{userId}": "./user"
+        }
     }
 }
 ```

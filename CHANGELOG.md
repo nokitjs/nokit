@@ -1,3 +1,8 @@
+### 1.16.1
+1. 更新系统配置 (system.json)
+2. MVC 的 controller 增加 response、request、server、session 属性
+3. NSP 的 presenter 增加 server、session 属性
+
 ### 1.16.0
 1. 改进路由处理
 2. 改进配置合并
