@@ -1,3 +1,9 @@
+### 1.16.2
+1. 新增路由直接指向 view 
+2. 重构路由配置格式
+3. 更新 examples/xxx/app.js
+4. 视图模板语法 placeHolder、palceBegin、placeEnd 增加别名
+
 ### 1.16.1
 1. 更新系统配置 (system.json)
 2. MVC 的 controller 增加 response、request、server、session 属性
