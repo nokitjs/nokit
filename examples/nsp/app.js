@@ -15,22 +15,17 @@
 /* global __dirname */
 
 var nokit = require("nokitjs");
-var console = nokit.console;
 
 /**
- * 定义 server 选项
+ * 创建 server 实例
  **/
-var options = {};
- 
-/**
- * 设定应程序的根目录
- */
-options.root = __dirname; 
+var server = new nokit.Server({
+    "root": __dirname
+});
 
 /**
  * 启动 server
  **/
-var server = new nokit.Server(options);
 server.start(function (err, msg) {
     if (err) {
         console.error(err);
