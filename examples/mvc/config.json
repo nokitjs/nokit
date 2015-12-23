@@ -6,7 +6,10 @@
     "mvc": {
         "routes": {
             "/home": "./home",
-            "/": "./home"
+            "/": "./home",
+            "get /date": {
+                "view": "./date"
+            }
         }
     }
 }
