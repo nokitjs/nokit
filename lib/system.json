@@ -25,7 +25,10 @@
         "application/json": "$./parsers/json",
         "application/xml": "$./parsers/xml"
     },
-    "viewEngine": "$./core/view-engine",
+    "viewEngine": {
+        "provider": "$./core/view-engine",
+        "extname": ".html"
+    },
     "router": "$./core/router",
     "locale": {
         "path": "./locales",
