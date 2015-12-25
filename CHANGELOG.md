@@ -1,8 +1,9 @@
-### 1.16.3
+### 1.16.4
 1. 新增路由直接指向 view 
 2. 重构路由配置格式，改进路由查找
 3. 更新 examples/xxx/app.js
 4. 视图模板语法 placeHolder、palceBegin、placeEnd 增加别名
+5. 改进 server.start、server.stop 方法
 
 ### 1.16.1
 1. 更新系统配置 (system.json)
