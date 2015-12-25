@@ -14,7 +14,7 @@
  
 /* global __dirname */
 
-var nokit = require("nokitjs");
+var nokit = require("../../");
 
 /**
  * 创建 server 实例
