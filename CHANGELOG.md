@@ -1,3 +1,6 @@
+### 1.16.5
+1. 修复 filter 事件有可能发生无法 end 请求的问题
+
 ### 1.16.4
 1. 新增路由直接指向 view 
 2. 重构路由配置格式，改进路由查找
@@ -199,7 +202,7 @@
 1. 优化 static handler 缓存处理
 
 ### 1.10.0
-1. 修复 filter 在 onResponse、onRequestEnd 时的一个 Bug
+1. 修复 filter 在 onResponse、onRequest 时的一个 Bug
 
 ### 1.9.20
 1. 紧急修复一个拼写错误导到的 bug
