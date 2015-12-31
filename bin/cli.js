@@ -5,6 +5,7 @@
 
 var nokit = require("../");
 var path = require("path");
+var fs = require("fs");
 var domain = require("domain");
 var Message = require('./message');
 var processLog = require('./processlog');
@@ -65,9 +66,14 @@ dm.run(function () {
             //处理路径
             var dstFullPath = path.resolve(cwd, path.normalize(dstPath + '/' + appName));
             var srcFullPath = path.resolve(__dirname, path.normalize('../examples/' + appType));
-            //复制应用模板
-            nokit.utils.copyDir(srcFullPath, dstFullPath);
-            console.log('在 "' + dstFullPath + '" 创建完成');
+            //检查目标路径是否已存在
+            if (fs.existsSync(dstFullPath)) {
+                console.log('目录 "' + dstFullPath + '" 已经存在');
+            } else {
+                //复制应用模板
+                nokit.utils.copyDir(srcFullPath, dstFullPath);
+                console.log('在 "' + dstFullPath + '" 创建完成');
+            }
             break;
         case "start":
             console.log("正在启动应用...");
