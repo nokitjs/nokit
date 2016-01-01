@@ -1,5 +1,4 @@
 {
-    "showErrorDetail": true,
     "handlers": {
         "^/": "$./handlers/mvc"
     },
