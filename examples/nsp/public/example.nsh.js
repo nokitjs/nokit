@@ -9,5 +9,5 @@ var ExampleHandler = module.exports = function () { };
 ExampleHandler.prototype.handle = function () {
     var self = this;
     self.context.response.setHeader('Content-Type', 'text/html');
-    self.context.content("Hello NSH!");
+    self.context.send("Hello NSH!");
 };

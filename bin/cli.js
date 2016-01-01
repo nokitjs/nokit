@@ -25,7 +25,7 @@ var cwd = process.cwd();
  * 输出帮助信息
  **/
 function printInfo(versionOnly) {
-    console.log(pkg.rawName + " " + pkg.version + env.EOL, true);
+    console.log(pkg.displayName + " " + pkg.version + env.EOL, true);
     if (!versionOnly) {
         console.log(" 1) nokit create    [name] [mvc|nsp|restful] [folder]", true);
         console.log(" 2) nokit start     [port] [root] [-env:<name>] [-cluster[:num]] [-watch[:.ext,...]] [node-opts]", true);
@@ -68,7 +68,7 @@ dm.run(function () {
             var srcFullPath = path.resolve(__dirname, path.normalize('../examples/' + appType));
             //检查目标路径是否已存在
             if (fs.existsSync(dstFullPath)) {
-                console.log('目录 "' + dstFullPath + '" 已经存在');
+                console.error('创建失败，目录 "' + dstFullPath + '" 已经存在');
             } else {
                 //复制应用模板
                 nokit.utils.copyDir(srcFullPath, dstFullPath);

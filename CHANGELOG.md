@@ -1,6 +1,8 @@
-### 1.16.6
+### 1.16.7
 1. 修复 filter 事件有可能发生无法 end 请求的问题
 2. create 命令，增加已存在目录检查
+3. 重构 context 对象，1) content 方法改为 send/write 方法; 2)data 改为 params 
+4. context 对象增加 file、text 方法
 
 ### 1.16.4
 1. 新增路由直接指向 view 
