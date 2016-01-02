@@ -1,7 +1,7 @@
 {
     "name": "nokitjs",
     "displayName": "Nokit",
-    "version": "1.16.7",
+    "version": "1.16.8",
     "description": "A Web development framework",
     "main": "./lib/index.js",
     "bin": {
