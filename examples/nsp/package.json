@@ -1,18 +1,18 @@
 {
-  "name": "nsp-app",
-  "version": "1.0.0",
-  "description": "this is an example app",
-  "main": "./app.js",
-  "keywords": [
-    "nsp"
-  ],
-  "author": {
-    "name": "author",
-    "email": "author@domain.com"
-  },
-  "homepage": "http://nokit.org",
-  "license": "MIT",
-  "dependencies": {
-    "nokitjs": "^1.16.8"
-  }
+    "name": "nsp-app",
+    "version": "1.0.0",
+    "description": "this is an example app",
+    "main": "./app.js",
+    "keywords": [
+        "nsp"
+    ],
+    "author": {
+        "name": "author",
+        "email": "author@domain.com"
+    },
+    "homepage": "http://nokit.org",
+    "license": "MIT",
+    "dependencies": {
+        "nokitjs": "^1.16.8"
+    }
 }
