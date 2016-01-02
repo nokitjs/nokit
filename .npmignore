@@ -7,3 +7,4 @@ Gulpfile.js
 .vscode
 _*
 *.src.*
+*.d.ts
