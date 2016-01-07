@@ -150,6 +150,10 @@
         "compress": true,
         "cache": true
     },
+    "resource": {
+        "compress": true,
+        "cache": true
+    },
     "mvc": {
         "paths": {
             "controller": "./controllers",
