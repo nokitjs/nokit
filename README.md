@@ -1,5 +1,5 @@
 ## 简介
-Nokit 是一个简单易用的基于 Nodejs 的 Web 开发框架，默认提供了 MVC / NSP / rest 等支持，并提供对应项目模板。
+Nokit 是一个简单易用的基于 Nodejs 的 Web 开发框架，默认提供了 MVC / NSP / REST 等支持，并提供对应项目模板。
 Nokit 核心非常简洁，大多数功能以扩展形式存在，开发人员也可以方便的为 Nokit 添加新的扩展。
 
 [![npm version](https://badge.fury.io/js/nokitjs.svg)](http://badge.fury.io/js/nokitjs)  
@@ -316,9 +316,9 @@ MVC 的 config.json 配置
 
 
 
-## rest
-Nokit 用来开发 rest Service 是非常方便和简单的，通过简洁的 URL 路由配置，抽象出和资源对应的请求处理程序文件即可，
-可以在处理程序中，根据需求实现 get / post / put 等 HttpMethod 即可。
+## REST
+Nokit 用来开发 RESTful Service 是非常方便和简单的，通过简洁的 URL 路由配置，抽象出和资源对应的请求处理程序文件即可，
+可以在处理程序中，根据需求实现 get / post / put 等 HttpMethod 即可。同时，也可以用 Nokit MVC 来开发 RESTful Service。
 
 一般目录结构
 ```javascript
@@ -329,7 +329,7 @@ Nokit 用来开发 rest Service 是非常方便和简单的，通过简洁的 UR
 │  │  index.nsp
 │  └─style
 │       common.css
-└─rest
+└─api
       user.js
 ```
 
