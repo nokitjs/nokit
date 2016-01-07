@@ -1,5 +1,5 @@
 ## 简介
-Nokit 是一个简单易用的基于 Nodejs 的 Web 开发框架，默认提供了 MVC / NSP / RESTful 等支持，并提供对应项目模板。
+Nokit 是一个简单易用的基于 Nodejs 的 Web 开发框架，默认提供了 MVC / NSP / rest 等支持，并提供对应项目模板。
 Nokit 核心非常简洁，大多数功能以扩展形式存在，开发人员也可以方便的为 Nokit 添加新的扩展。
 
 [![npm version](https://badge.fury.io/js/nokitjs.svg)](http://badge.fury.io/js/nokitjs)  
@@ -33,12 +33,12 @@ Nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录�
 
 #### 创建应用
 ```javascript
-[sudo] nokit create [name] [mvc|nsp|restful] [folder] 
+[sudo] nokit create [name] [mvc|nsp|rest] [folder] 
 ```
 以上命令会生成一个最简单的应用所需要的目录结构和配置。
 
 1. name 一般不建议省略（省略时为 nokit-app），name 将会作为应用的根目录名称
-2. type 默认为 mvc 也可以指定为 nsp 或 restful ，指定类型后将会创建对应的应用模板
+2. type 默认为 mvc 也可以指定为 nsp 或 rest ，指定类型后将会创建对应的应用模板
 3. folder 为目标目录，省略时将默认为当前所在目录。
  
 
@@ -316,8 +316,8 @@ MVC 的 config.json 配置
 
 
 
-## RESTful
-Nokit 用来开发 RESTful Service 是非常方便和简单的，通过简洁的 URL 路由配置，抽象出和资源对应的请求处理程序文件即可，
+## rest
+Nokit 用来开发 rest Service 是非常方便和简单的，通过简洁的 URL 路由配置，抽象出和资源对应的请求处理程序文件即可，
 可以在处理程序中，根据需求实现 get / post / put 等 HttpMethod 即可。
 
 一般目录结构
@@ -329,7 +329,7 @@ Nokit 用来开发 RESTful Service 是非常方便和简单的，通过简洁的
 │  │  index.nsp
 │  └─style
 │       common.css
-└─restful
+└─rest
       user.js
 ```
 
@@ -376,10 +376,10 @@ REST 的 config.json 配置
     如示例，/api/... 开头的请求，交由 REST Handler 处理
     */
     "handlers": {
-        "^/api/": "$./handlers/restful"
+        "^/api/": "$./handlers/rest"
     },
-    "restful": {
-        "path": "./restful", //指定资源控制器的存放目录
+    "rest": {
+        "path": "./rest", //指定资源控制器的存放目录
         /*
         每一个路由至少需要指定 pattern(URL匹配模式) 和 target(目标contrller)
         pattern 格式示例 "/user/{userId}" 其中 userId 是占位符变量，

@@ -11,7 +11,7 @@
 <body>
     <div class='header'>Hello Nokit</div>
     <div class='content'>
-        <strong> RESTFul Demo </strong>
+        <strong> REST Demo </strong>
         <p>
             <a href='/api/hello/REST'>Hello</a>
         </p>

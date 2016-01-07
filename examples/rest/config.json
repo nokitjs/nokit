@@ -1,9 +1,9 @@
 {
     "showErrorDetail": true,
     "handlers": {
-        "^/api/": "$./handlers/restful"
+        "^/api/": "$./handlers/rest"
     },
-    "restful": {
+    "rest": {
         "routes": {
             "/api/hello/{name}": "./hello"
         }

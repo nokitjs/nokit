@@ -1,7 +1,7 @@
 {
     "name": "nokitjs",
     "displayName": "Nokit",
-    "version": "1.17.0",
+    "version": "1.17.1",
     "description": "A Web development framework",
     "main": "./lib/index.js",
     "bin": {
@@ -15,7 +15,6 @@
         "nokitjs",
         "nsp",
         "mvc",
-        "restful",
         "rest",
         "webapi",
         "web"

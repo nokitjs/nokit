@@ -27,7 +27,7 @@ var cwd = process.cwd();
 function printInfo(versionOnly) {
     console.log(pkg.displayName + " " + pkg.version + env.EOL, true);
     if (!versionOnly) {
-        console.log(" 1) nokit create    [name] [mvc|nsp|restful] [folder]", true);
+        console.log(" 1) nokit create    [name] [mvc|nsp|rest] [folder]", true);
         console.log(" 2) nokit start     [port] [root] [-env:<name>] [-cluster[:num]] [-watch[:.ext,...]] [node-opts]", true);
         console.log(" 3) nokit stop      [pid|all]", true);
         console.log(" 4) nokit restart   [pid|all]", true);
