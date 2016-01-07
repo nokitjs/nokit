@@ -95,17 +95,20 @@
         "timeout": 1800
     },
     "compress": {
-        "html": ".html$",
-        "htm": ".htm$",
-        "css": ".css$",
-        "js": ".js$",
-        "json": ".json$",
-        "xml": ".xml$",
-        "svg": ".svg$",
-        "txt": ".txt$",
-        "text": ".text$",
-        "markdown": ".md$",
-        "csv": ".csv$"
+        "enabled": true,
+        "match": {
+            "html": ".html$",
+            "htm": ".htm$",
+            "css": ".css$",
+            "js": ".js$",
+            "json": ".json$",
+            "xml": ".xml$",
+            "svg": ".svg$",
+            "txt": ".txt$",
+            "text": ".text$",
+            "markdown": ".md$",
+            "csv": ".csv$"
+        }
     },
     "displayDir": true,
     "log": {
