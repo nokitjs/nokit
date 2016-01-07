@@ -22,7 +22,7 @@
       <h2>
 <a id="简介" class="anchor" href="#%E7%AE%80%E4%BB%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>简介</h2>
 
-<p>Nokit 是一个简单易用的基于 Nodejs 的 Web 开发框架，默认提供了 MVC / NSP / RESTful 等支持，并提供对应项目模板。
+<p>Nokit 是一个简单易用的基于 Nodejs 的 Web 开发框架，默认提供了 MVC / NSP / rest 等支持，并提供对应项目模板。
 Nokit 核心非常简洁，大多数功能以扩展形式存在，开发人员也可以方便的为 Nokit 添加新的扩展。</p>
 
 <p><a href="http://badge.fury.io/js/nokitjs"><img src="https://badge.fury.io/js/nokitjs.svg" alt="npm version"></a>  </p>
@@ -66,13 +66,13 @@ Nokit 应用只需在磁盘建立应用目录，并新建相关文件和目录�
 <h4>
 <a id="创建应用" class="anchor" href="#%E5%88%9B%E5%BB%BA%E5%BA%94%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>创建应用</h4>
 
-<div class="highlight highlight-source-js"><pre>[sudo] nokit create [name] [mvc<span class="pl-k">|</span>nsp<span class="pl-k">|</span>restful] [folder] </pre></div>
+<div class="highlight highlight-source-js"><pre>[sudo] nokit create [name] [mvc<span class="pl-k">|</span>nsp<span class="pl-k">|</span>rest] [folder] </pre></div>
 
 <p>以上命令会生成一个最简单的应用所需要的目录结构和配置。</p>
 
 <ol>
 <li>name 一般不建议省略（省略时为 nokit-app），name 将会作为应用的根目录名称</li>
-<li>type 默认为 mvc 也可以指定为 nsp 或 restful ，指定类型后将会创建对应的应用模板</li>
+<li>type 默认为 mvc 也可以指定为 nsp 或 rest ，指定类型后将会创建对应的应用模板</li>
 <li>folder 为目标目录，省略时将默认为当前所在目录。</li>
 </ol>
 
@@ -352,9 +352,9 @@ models 为模型目录，nokit 对模型没有统一的要求和控制，应用�
 }</pre></div>
 
 <h2>
-<a id="restful" class="anchor" href="#restful" aria-hidden="true"><span class="octicon octicon-link"></span></a>RESTful</h2>
+<a id="rest" class="anchor" href="#rest" aria-hidden="true"><span class="octicon octicon-link"></span></a>rest</h2>
 
-<p>Nokit 用来开发 RESTful Service 是非常方便和简单的，通过简洁的 URL 路由配置，抽象出和资源对应的请求处理程序文件即可，
+<p>Nokit 用来开发 rest Service 是非常方便和简单的，通过简洁的 URL 路由配置，抽象出和资源对应的请求处理程序文件即可，
 可以在处理程序中，根据需求实现 get / post / put 等 HttpMethod 即可。</p>
 
 <p>一般目录结构</p>
@@ -366,7 +366,7 @@ models 为模型目录，nokit 对模型没有统一的要求和控制，应用�
 │  │  <span class="pl-smi">index</span>.<span class="pl-smi">nsp</span>
 │  └─style
 │       <span class="pl-smi">common</span>.<span class="pl-smi">css</span>
-└─restful
+└─rest
       <span class="pl-smi">user</span>.<span class="pl-smi">js</span></pre></div>
 
 <p>REST 的资源控制器示例</p>
@@ -411,10 +411,10 @@ models 为模型目录，nokit 对模型没有统一的要求和控制，应用�
 <span class="pl-c">    如示例，/api/... 开头的请求，交由 REST Handler 处理</span>
 <span class="pl-c">    */</span>
     <span class="pl-s"><span class="pl-pds">"</span>handlers<span class="pl-pds">"</span></span><span class="pl-k">:</span> {
-        <span class="pl-s"><span class="pl-pds">"</span>^/api/<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>$./handlers/restful<span class="pl-pds">"</span></span>
+        <span class="pl-s"><span class="pl-pds">"</span>^/api/<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>$./handlers/rest<span class="pl-pds">"</span></span>
     },
-    <span class="pl-s"><span class="pl-pds">"</span>restful<span class="pl-pds">"</span></span><span class="pl-k">:</span> {
-        <span class="pl-s"><span class="pl-pds">"</span>path<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>./restful<span class="pl-pds">"</span></span>, <span class="pl-c">//指定资源控制器的存放目录</span>
+    <span class="pl-s"><span class="pl-pds">"</span>rest<span class="pl-pds">"</span></span><span class="pl-k">:</span> {
+        <span class="pl-s"><span class="pl-pds">"</span>path<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>./rest<span class="pl-pds">"</span></span>, <span class="pl-c">//指定资源控制器的存放目录</span>
         <span class="pl-c">/*</span>
 <span class="pl-c">        每一个路由至少需要指定 pattern(URL匹配模式) 和 target(目标contrller)</span>
 <span class="pl-c">        pattern 格式示例 "/user/{userId}" 其中 userId 是占位符变量，</span>
