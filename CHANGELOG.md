@@ -1,3 +1,6 @@
+### 1.17.0
+1. cookie.add 调整为 cookie.set
+
 ### 1.16.9
 1. 修复 filter 事件有可能发生无法 end 请求的问题
 2. create 命令，增加已存在目录检查
