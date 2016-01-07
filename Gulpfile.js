@@ -58,11 +58,11 @@ gulp.task('build', ["clear"], function () {
         .pipe(rename("package.json"))
         .pipe(replace("{version}", pkg.version))
         .pipe(gulp.dest("./examples/nsp/"));
-    //restful package.json
-    gulp.src("./examples/restful/_package.json")
+    //rest package.json
+    gulp.src("./examples/rest/_package.json")
         .pipe(rename("package.json"))
         .pipe(replace("{version}", pkg.version))
-        .pipe(gulp.dest("./examples/restful/"));
+        .pipe(gulp.dest("./examples/rest/"));
 });
 
 //默认任务

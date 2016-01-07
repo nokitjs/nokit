@@ -1,10 +1,10 @@
 {
-    "name": "restful-app",
+    "name": "rest-app",
     "version": "1.0.0",
     "description": "this is an example app",
     "main": "./app.js",
     "keywords": [
-        "restful"
+        "rest"
     ],
     "author": {
         "name": "author",

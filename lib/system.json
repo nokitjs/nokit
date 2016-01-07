@@ -53,6 +53,9 @@
         }
     },
     "cache": {
+        "enabled": true,
+        "maxAge": 1800,
+        "lastModified": true,
         "match": {
             "html": ".html$",
             "htm": ".htm$",
@@ -79,8 +82,19 @@
             "woff": ".woff$",
             "eot": ".eot"
         },
-        "maxAge": 1800,
-        "lastModified": true
+        "type": {
+            "html": "text/html",
+            "css": "text/css",
+            "js-text": "text/javascript",
+            "js-appliction": "appliction/x-javascript",
+            "markdown": "text/markdown",
+            "less": "text/less",
+            "sass": "text/sass",
+            "text": "text/plain",
+            "json": "application/json",
+            "xml": "application/xml",
+            "svg": "image/svg+xml"
+        }
     },
     "forbiddens": {
         "nsp-js": ".nsp.js$",
@@ -108,6 +122,19 @@
             "text": ".text$",
             "markdown": ".md$",
             "csv": ".csv$"
+        },
+        "type": {
+            "html": "text/html",
+            "css": "text/css",
+            "js-text": "text/javascript",
+            "js-appliction": "appliction/x-javascript",
+            "markdown": "text/markdown",
+            "less": "text/less",
+            "sass": "text/sass",
+            "text": "text/plain",
+            "json": "application/json",
+            "xml": "application/xml",
+            "svg": "image/svg+xml"
         }
     },
     "displayDir": true,
@@ -119,14 +146,34 @@
     "https": {
         "enabled": false
     },
+    "static": {
+        "compress": true,
+        "cache": true
+    },
+    "resource": {
+        "compress": true,
+        "cache": true
+    },
     "mvc": {
         "paths": {
             "controller": "./controllers",
             "view": "./views"
-        }
+        },
+        "compress": false,
+        "cache": false
     },
-    "restful": {
-        "path": "./api"
+    "rest": {
+        "path": "./api",
+        "compress": false,
+        "cache": false
+    },
+    "nsp": {
+        "compress": false,
+        "cache": false
+    },
+    "nsh": {
+        "compress": false,
+        "cache": false
     },
     "jsonpParam": "callback",
     "mimeType": {
