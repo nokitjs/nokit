@@ -6,7 +6,7 @@ Nokit 核心非常简洁，大多数功能以扩展形式存在，开发人员�
 [![Build Status](https://travis-ci.org/nokitjs/nokit.svg?branch=master)](https://travis-ci.org/nokitjs/nokit) 
 
 ## 社区
-1. 文档 [wiki](https://github.com/nokitjs/nokit/wiki)
+1. wiki文档 [wiki](https://github.com/nokitjs/nokit/wiki)
 2. 问题反馈 [issues](https://github.com/nokitjs/nokit/issues)
 4. QQ群: 240603160 
 
