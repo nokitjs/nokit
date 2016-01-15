@@ -6,7 +6,7 @@ var request = require('supertest');
 
 app.server.start(function () {
 
-    describe('静态文件处理', function () {
+    describe('MVC', function () {
         it('GET /', function (done) {
             request(app.server.httpServer)
                 .get("/")
