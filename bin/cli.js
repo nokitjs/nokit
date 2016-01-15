@@ -16,7 +16,7 @@ var utils = nokit.utils;
 var pkg = nokit.pkg;
 var console = nokit.console;
 var env = nokit.env;
-//var debuger = require('../test/debuger');
+//var debugger = require('../test/debugger');
 
 //工作目录
 var cwd = process.cwd();
@@ -108,7 +108,7 @@ dm.run(function () {
             cml.options.forEach(function (item) {
                 startInfo.push(item);
             });
-            //debuger.log('即将启动...');
+            //debugger.log('即将启动...');
             //请求启动
             processMgr.startApp(startInfo);
             break;
