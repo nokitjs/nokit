@@ -1,14 +1,14 @@
 /**
  * 定义 HelloController
  **/
-var HelloController = module.exports = function User() { };
+var HelloController = module.exports = function () { };
 
 /**
  * post 处理方法
  **/
 HelloController.prototype.post = function () {
     var self = this;
-    self.out({
+    self.send({
         "status": "success",
         "message": "Hello " + self.context.routeData["name"] + "!"
     });
@@ -19,7 +19,18 @@ HelloController.prototype.post = function () {
  **/
 HelloController.prototype.get = function () {
     var self = this;
-    self.out({
+    self.send({
+        "status": "success",
+        "message": "Hello " + self.context.routeData["name"] + "!"
+    });
+};
+
+/**
+ * put 处理方法
+ **/
+HelloController.prototype.put = function () {
+    var self = this;
+    self.send({
         "status": "success",
         "message": "Hello " + self.context.routeData["name"] + "!"
     });

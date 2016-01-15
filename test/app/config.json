@@ -1,6 +1,7 @@
 {
     "handlers": {
-        "^/": "$./handlers/mvc"
+        "^/": "$./handlers/mvc",
+        "^/api/": "$./handlers/rest"
     },
     "mvc": {
         "routes": {
@@ -9,6 +10,11 @@
             "get /date": {
                 "view": "./date"
             }
+        }
+    },
+    "rest": {
+        "routes": {
+            "/api/item": "./item"
         }
     }
 }
