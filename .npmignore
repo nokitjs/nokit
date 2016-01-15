@@ -8,3 +8,4 @@ Gulpfile.js
 _*
 *.src.*
 *.d.ts
+coverage
