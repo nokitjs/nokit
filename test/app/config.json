@@ -1,0 +1,20 @@
+{
+    "handlers": {
+        "^/": "$./handlers/mvc",
+        "^/api/": "$./handlers/rest"
+    },
+    "mvc": {
+        "routes": {
+            "/home": "./home",
+            "/": "./home",
+            "get /date": {
+                "view": "./date"
+            }
+        }
+    },
+    "rest": {
+        "routes": {
+            "/api/item": "./item"
+        }
+    }
+}
