@@ -8,7 +8,7 @@ var processLog = require('./processlog');
 var utils = nokit.utils;
 var base64 = nokit.base64;
 var console = nokit.console;
-var debuger = require('../test/debuger');
+//var _debugger = require('../tool/debugger');
 var spawn = child_process.spawn;
 var exec = child_process.exec;
 

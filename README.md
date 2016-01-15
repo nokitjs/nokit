@@ -3,6 +3,7 @@ Nokit 是一个简单易用的基于 Nodejs 的 Web 开发框架，默认提供�
 Nokit 核心非常简洁，大多数功能以扩展形式存在，开发人员也可以方便的为 Nokit 添加新的扩展。
 
 [![npm version](https://badge.fury.io/js/nokitjs.svg)](http://badge.fury.io/js/nokitjs)  
+[![Build Status](https://travis-ci.org/nokitjs/nokit.svg?branch=master)](https://travis-ci.org/nokitjs/nokit) 
 
 ## 社区
 1. 文档 [wiki](https://github.com/nokitjs/nokit/wiki)
