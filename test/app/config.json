@@ -3,12 +3,19 @@
         "^/": "$./handlers/mvc",
         "^/api/": "$./handlers/rest"
     },
+    "filters": {
+        "^/filter-test": "./filters/test"
+    },
     "mvc": {
         "routes": {
             "/home": "./home",
             "/": "./home",
-            "get /date": {
-                "view": "./date"
+            "get /say/{name}": "./home say",
+            "/no-controller-view": {
+                "view": "test"
+            },
+            "/filter-test": {
+                "view": "test"
             }
         }
     },
