@@ -12,3 +12,8 @@ HomeController.prototype.index = function () {
         "name": "MVC"
     });
 };
+
+HomeController.prototype.say = function () {
+    var self = this;
+    self.context.send(self.context.params("name"));
+};
