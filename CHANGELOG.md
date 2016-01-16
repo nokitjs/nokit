@@ -1,4 +1,4 @@
-### 1.17.5
+### 1.17.6
 1. 修复 DATA_PATH 没有权限时的异常
 2. 添加单元测试及部分 test case
 3. 修复 contxt.text 为数字时的 Bug
