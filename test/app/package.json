@@ -2,7 +2,7 @@
     "name": "mvc-app",
     "version": "1.0.0",
     "description": "this is an example app",
-    "main": "./app.js",
+    "main": "./index.js",
     "keywords": [
         "mvc"
     ],

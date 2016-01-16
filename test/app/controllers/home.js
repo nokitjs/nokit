@@ -17,3 +17,14 @@ HomeController.prototype.say = function () {
     var self = this;
     self.context.send(self.context.params("name"));
 };
+
+HomeController.prototype.readAndWriteSession = function () {
+    var self = this;
+    var srcVal = parseInt(self.context.params("val"));
+    self.context.session.set("s", srcVal, function () {
+        self.context.session.get("s", function (val) {
+            var dstVal = val + val;
+            self.context.send(dstVal);
+        });
+    });
+};
