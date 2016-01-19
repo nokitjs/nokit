@@ -19,6 +19,13 @@
             "/locale": "./home localeAction",
             "/json": "./home json",
             "/jsonp": "./home jsonp",
+            "/redirect": "./home redirect",
+            "/transfer": "./home transfer",
+            "/noChange": "./home noChange",
+            "/notAllowed": "./home notAllowed",
+            "/forbidden": "./home forbidden",
+            "/notFound": "./home notFound",
+            "/permanentRedirect": "./home permanentRedirect",
             "/filter-test": {
                 "view": "test"
             }
