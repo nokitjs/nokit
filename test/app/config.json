@@ -16,6 +16,8 @@
             },
             "/status/{code}": "./home status",
             "/locale": "./home localeAction",
+            "/json": "./home json",
+            "/jsonp": "./home jsonp",
             "/filter-test": {
                 "view": "test"
             }

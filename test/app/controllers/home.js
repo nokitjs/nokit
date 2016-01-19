@@ -39,3 +39,13 @@ HomeController.prototype.localeAction = function () {
     var self = this;
     self.render('locale');
 };
+
+HomeController.prototype.json = function () {
+    var self = this;
+    self.context.json('json');
+};
+
+HomeController.prototype.jsonp = function () {
+    var self = this;
+    self.context.jsonp('jsonp');
+};
