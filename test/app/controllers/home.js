@@ -35,6 +35,12 @@ HomeController.prototype.status = function () {
     self.context.status(statusCode);
 };
 
+HomeController.prototype.statusWithContent = function () {
+    var self = this;
+    var statusCode = self.context.routeData["code"];
+    self.context.statusWithContent(statusCode);
+};
+
 HomeController.prototype.localeAction = function () {
     var self = this;
     self.render('locale');

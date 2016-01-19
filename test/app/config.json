@@ -15,6 +15,7 @@
                 "view": "test"
             },
             "/status/{code}": "./home status",
+            "/statusWithContent/{code}": "./home statusWithContent",
             "/locale": "./home localeAction",
             "/json": "./home json",
             "/jsonp": "./home jsonp",

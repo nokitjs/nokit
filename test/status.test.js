@@ -16,4 +16,16 @@ describe('status code', function () {
             .get("/status/404")
             .expect(404, done);
     });
+
+    it('GET /statusWithContent/{code}', function (done) {
+        request(app.server.httpServer)
+            .get("/statusWithContent/200")
+            .expect(200, done);
+    });
+
+    it('GET /statusWithContent/{code}', function (done) {
+        request(app.server.httpServer)
+            .get("/statusWithContent/404")
+            .expect(404, done);
+    });
 });
