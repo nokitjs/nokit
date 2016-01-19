@@ -55,3 +55,38 @@ HomeController.prototype.jsonp = function () {
     var self = this;
     self.context.jsonp('jsonp');
 };
+
+HomeController.prototype.redirect = function () {
+    var self = this;
+    self.context.redirect('/');
+};
+
+HomeController.prototype.permanentRedirect = function () {
+    var self = this;
+    self.context.permanentRedirect('/');
+};
+
+HomeController.prototype.notFound = function () {
+    var self = this;
+    self.context.notFound();
+};
+
+HomeController.prototype.forbidden = function () {
+    var self = this;
+    self.context.forbidden();
+};
+
+HomeController.prototype.notAllowed = function () {
+    var self = this;
+    self.context.notAllowed();
+};
+
+HomeController.prototype.transfer = function () {
+    var self = this;
+    self.context.transfer('/json');
+};
+
+HomeController.prototype.noChange = function () {
+    var self = this;
+    self.context.noChange();
+};
