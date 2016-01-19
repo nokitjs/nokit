@@ -28,3 +28,14 @@ HomeController.prototype.readAndWriteSession = function () {
         });
     });
 };
+
+HomeController.prototype.status = function () {
+    var self = this;
+    var statusCode = self.context.routeData["code"];
+    self.context.status(statusCode);
+};
+
+HomeController.prototype.localeAction = function () {
+    var self = this;
+    self.render('locale');
+};

@@ -4,16 +4,16 @@ var assert = require("assert");
 var app = require("./app");
 var request = require('supertest');
 
-describe('静态文件处理', function () {
-    it('GET /', function (done) {
+describe('status code', function () {
+    it('GET /status/{code}', function (done) {
         request(app.server.httpServer)
-            .get("/")
+            .get("/status/200")
             .expect(200, done);
     });
 
-    it('POST /', function (done) {
+    it('GET /status/{code}', function (done) {
         request(app.server.httpServer)
-            .post("/")
-            .expect(200, done);
+            .get("/status/404")
+            .expect(404, done);
     });
 });
