@@ -35,5 +35,8 @@
         "routes": {
             "/api/item": "./item"
         }
+    },
+    "plugins": {
+        "test": "./plugins/test"
     }
 }
