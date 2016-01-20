@@ -176,6 +176,7 @@
         "cache": false
     },
     "jsonpParam": "callback",
+    "plugins": {},
     "mimeType": {
         "*": "application/octet-stream",
         ".html": "text/html",
