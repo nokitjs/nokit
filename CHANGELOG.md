@@ -1,7 +1,8 @@
-### 1.17.9
+### 1.18.0
 1. 允许作为 express 中间件使用
 2. 添加 test case
 3. 增加针对 Server 实例的扩展插件机制
+4. filter 、handler 支持设置 verbs
 
 ### 1.17.6
 1. 修复 DATA_PATH 没有权限时的异常
