@@ -8,8 +8,8 @@
         "nokit": "./bin/cli.js"
     },
     "scripts": {
-        "test": "mocha",
-        "cover": "istanbul cover _mocha"
+        "test": "istanbul cover _mocha",
+        "test-no-cover": "mocha"
     },
     "keywords": [
         "nokit",
