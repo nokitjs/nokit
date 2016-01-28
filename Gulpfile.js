@@ -1,6 +1,6 @@
 var gulp = require("gulp");
 var uglify = require("gulp-uglify");
-var cssMinify = require("gulp-minify-css");
+var cssnano = require('gulp-cssnano');
 var htmlMin = require("gulp-htmlmin");
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
@@ -38,13 +38,13 @@ gulp.task('build', ["clear"], function () {
         .pipe(gulp.dest("./lib/resources/"));
     //common.css
     gulp.src("./lib/resources/common.src.css")
-        .pipe(cssMinify())
+        .pipe(cssnano())
         .pipe(header(banner, pkg))
         .pipe(rename("common.css"))
         .pipe(gulp.dest("./lib/resources/"));
     //explore.css
     gulp.src("./lib/resources/explore.src.css")
-        .pipe(cssMinify())
+        .pipe(cssnano())
         .pipe(header(banner, pkg))
         .pipe(rename("explore.css"))
         .pipe(gulp.dest("./lib/resources/"));
