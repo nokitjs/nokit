@@ -1,9 +1,11 @@
 {
-    "name": "mvc-app",
+    "name": "nokit-app",
     "version": "1.0.0",
     "description": "this is an example app",
     "main": "./app.js",
     "keywords": [
+        "nokitjs",
+        "nokit",
         "mvc"
     ],
     "author": {
@@ -13,6 +15,6 @@
     "homepage": "http://nokit.org",
     "license": "MIT",
     "dependencies": {
-        "nokitjs": "^1.18.2"
+        "nokitjs": "^1.18.3"
     }
 }
