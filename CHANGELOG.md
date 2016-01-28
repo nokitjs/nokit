@@ -4,6 +4,7 @@
 3. 增加针对 Server 实例的扩展插件机制
 4. filter 、handler 支持设置 verbs
 5. 修复 res.end 不为空时的一个 Bug
+6. 更改 nokit 运行信息存储目录
 
 ### 1.17.6
 1. 修复 DATA_PATH 没有权限时的异常
