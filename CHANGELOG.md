@@ -2,6 +2,8 @@
 1. 优化请求上下文件 (context)
 2. context.send 支持 json 数据
 3. 改进 server, 增加进程退出日志
+4. 修复一个 http2https 导致的日志记录 bug
+5. 简化日志逻辑
 
 ### 1.18.4
 1. 允许作为 express 中间件使用
