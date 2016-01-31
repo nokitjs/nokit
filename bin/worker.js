@@ -19,9 +19,9 @@ self.sendMsg = function (msg) {
         return;
     }
     if (msg.state) {
-        self.server.logger.log("#" + process.pid + " : " + msg.text, true);
+        self.server.logger.log("#" + process.pid + " , " + msg.text, true);
     } else {
-        self.server.logger.error("#" + process.pid + " : " + msg.text, true);
+        self.server.logger.error("#" + process.pid + " , " + msg.text, true);
     };
 };
 
