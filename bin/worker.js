@@ -15,8 +15,13 @@ self.sendMsg = function (msg) {
     msg = msg || {};
     process.send(msg);
     //记录日志
-    if (self.server && self.server.logger) {
-        self.server.logger.error(msg.text);
+    if (!self.server || !self.server.logger) {
+        return;
+    }
+    if (msg.state) {
+        self.server.logger.log("#" + process.pid + " : " + msg.text, true);
+    } else {
+        self.server.logger.error("#" + process.pid + " : " + msg.text, true);
     };
 };
 
@@ -24,7 +29,7 @@ self.sendMsg = function (msg) {
  * 发送错误
  **/
 self.sendError = function (err) {
-    process.send({
+    self.sendMsg({
         state: false,
         text: err.message + env.EOL + err.stack
     });

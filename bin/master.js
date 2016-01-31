@@ -12,6 +12,8 @@ var cpuTotal = require("os").cpus().length;
 var exitCode = nokit.exitCode;
 var self = exports;
 
+var EXIT_DELAY = 1000;
+
 self.init = function (options, cml) {
 
     var message = new Message();
@@ -23,6 +25,7 @@ self.init = function (options, cml) {
     //--
 
     var workerNumber = isCluster ? parseInt(cml.options.getValue('-cluster') || cpuTotal) : 1;
+    if (workerNumber < 1) workerNumber = 1;
     var workerReady = 0;
     var workerDebugPort = parseInt(cml.options.getValue('--debug') || cml.options.getValue('--debug-brk')) + 1;
 
@@ -69,7 +72,9 @@ self.init = function (options, cml) {
                     运行过程中，如果一个工作进程出现问题，不会导致全部结束
                     因为，message.send 仅第一次调用有效。
                     */
-                    process.exit(exitCode.MASTER_START_ERR);
+                    setTimeout(function () {
+                        process.exit(exitCode.MASTER_START_ERR);
+                    }, EXIT_DELAY);
                 });
             }
         });
