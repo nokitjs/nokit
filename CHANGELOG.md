@@ -1,4 +1,4 @@
-### 1.18.7
+### 1.18.8
 1. 优化请求上下文件 (context)
 2. context.send 支持 json 数据
 3. 改进 server, 增加进程退出日志
