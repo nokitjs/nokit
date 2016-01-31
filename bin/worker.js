@@ -6,11 +6,18 @@ var domain = require("domain");
 var cluster = require("cluster");
 var self = exports;
 
+var EXIT_DELAY = 1000;
+
 /**
  * 发送一个消息
  **/
 self.sendMsg = function (msg) {
+    msg = msg || {};
     process.send(msg);
+    //记录日志
+    if (self.server && self.server.logger) {
+        self.server.logger.error(msg.text);
+    };
 };
 
 /**
@@ -30,7 +37,9 @@ self.errorHandler = function (err) {
     //如果在启动时存在异常
     self.sendError(err);
     //结束工作进程自已
-    process.exit(exitCode.WORKER_START_ERR);
+    setTimeout(function () {
+        process.exit(exitCode.WORKER_START_ERR);
+    }, EXIT_DELAY);
 };
 
 /**
@@ -44,17 +53,17 @@ self.init = function (options, cml) {
         if (err) {
             self.errorHandler(err);
         } else {
-            //向父进程发送 server.configs
-            process.send({
-                state: true,
-                configs: self.server.configs,
-                text: success || '启动成功'
-            });
             /**
              * 启动成功后，移除 error listener
              * 确保所有未处理异常由 nokit core 处理
              **/
             process.removeListener("uncaughtException", self.errorHandler);
+            //向父进程发送 server.configs
+            self.sendMsg({
+                state: true,
+                configs: self.server.configs,
+                text: success || '启动成功'
+            });
         }
     });
 };
