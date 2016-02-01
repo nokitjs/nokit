@@ -3,9 +3,11 @@ var net = require('net');
 var nokit = require("../");
 var console = nokit.console;
 var utils = nokit.utils;
+var exitCode = nokit.exitCode;
 
 var LOCAL_HOST = "127.0.0.1";
 var LOCAL_PORT = 20202;
+var EXIT_DELAY = 1000;
 
 function Message() {
     var self = this;
@@ -49,12 +51,15 @@ Message.prototype.waiting = function (total) {
             count += 1;
             if (count >= total) {
                 /*
-                必须关闭连接停止监听，然后再退出 “工具进程”，
+                必须关闭连接停止监听，然后再退出 “CLI进程”，
                 否则在 windows 上 “守护进程(master)” 和 “工作进程（worker）” 都将受影响退出
                 */
                 socket.destroy();
                 server.close();
-                process.exit(0);
+                //结束 “CLI进程” 自已
+                setTimeout(function () {
+                    process.exit(exitCode.NORMAL);
+                }, EXIT_DELAY);
             }
         });
     }).listen(LOCAL_PORT);

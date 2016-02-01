@@ -1,15 +1,15 @@
 {
     "name": "nokitjs",
     "displayName": "Nokit",
-    "version": "1.18.4",
+    "version": "1.18.9",
     "description": "A Web development framework",
     "main": "./lib/index.js",
     "bin": {
         "nokit": "./bin/cli.js"
     },
     "scripts": {
-        "test": "istanbul cover _mocha",
-        "test-no-cover": "mocha"
+        "test": "mocha",
+        "cover": "istanbul cover _mocha"
     },
     "keywords": [
         "nokit",
