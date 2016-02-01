@@ -1,4 +1,4 @@
-### 1.18.8
+### 1.18.9
 1. 优化请求上下文件 (context)
 2. context.send 支持 json 数据
 3. 改进 server, 增加进程退出日志
@@ -6,6 +6,7 @@
 5. 简化日志逻辑
 6. 优化进程遇到异常时的退出处理
 7. 修复一个 Content-Encoding 的 Bug
+8. 处理一个 decodeURI 引起的异常
 
 ### 1.18.4
 1. 允许作为 express 中间件使用
