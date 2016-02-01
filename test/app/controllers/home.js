@@ -90,3 +90,8 @@ HomeController.prototype.noChange = function () {
     var self = this;
     self.context.noChange();
 };
+
+HomeController.prototype.emitError = function () {
+    var self = this;
+    self.__no_func();
+};
