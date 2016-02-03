@@ -1,3 +1,7 @@
+### 1.19.1
+1. 改进 console 对对象及异常的打印效果
+2. 修复一个直接用 node 启动时发生异常 console 不显示信息的 Bug
+
 ### 1.19.0
 1. 优化请求上下文件 (context)
 2. context.send 支持 json 数据
