@@ -22,32 +22,32 @@ var banner = ['/**',
 
 //清理
 gulp.task('clear', function (cb) {
-    del(['./lib/resources/nsp-client.js',
-        './lib/resources/common.css',
-        './lib/resources/explore.css'
+    del(['./lib/resources/javascripts/nsp-client.js',
+        './lib/resources/stylesheets/common.css',
+        './lib/resources/stylesheets/explore.css'
     ], cb);
 });
 
 //构建
 gulp.task('build', ["clear"], function () {
     //nsp-client.js
-    gulp.src("./lib/resources/nsp-client.src.js")
+    gulp.src("./lib/resources/javascripts/nsp-client.src.js")
         .pipe(uglify())
         .pipe(header(banner, pkg))
         .pipe(rename("nsp-client.js"))
-        .pipe(gulp.dest("./lib/resources/"));
+        .pipe(gulp.dest("./lib/resources/javascripts/"));
     //common.css
-    gulp.src("./lib/resources/common.src.css")
+    gulp.src("./lib/resources/stylesheets/common.src.css")
         .pipe(cssnano())
         .pipe(header(banner, pkg))
         .pipe(rename("common.css"))
-        .pipe(gulp.dest("./lib/resources/"));
+        .pipe(gulp.dest("./lib/resources/stylesheets/"));
     //explore.css
-    gulp.src("./lib/resources/explore.src.css")
+    gulp.src("./lib/resources/stylesheets/explore.src.css")
         .pipe(cssnano())
         .pipe(header(banner, pkg))
         .pipe(rename("explore.css"))
-        .pipe(gulp.dest("./lib/resources/"));
+        .pipe(gulp.dest("./lib/resources/stylesheets/"));
     //mvc package.json
     gulp.src("./examples/mvc/_package.json")
         .pipe(rename("package.json"))

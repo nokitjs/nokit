@@ -5,9 +5,9 @@ var app = require("./app");
 var request = require('supertest');
 
 describe('Resources', function () {
-    it('GET /-rc-/common.css', function (done) {
+    it('GET /-rc-/stylesheets/common.css', function (done) {
         request(app.server.httpServer)
-            .get("/-rc-/common.css")
+            .get("/-rc-/stylesheets/common.css")
             .expect(200, done);
     });
-});
+}); 

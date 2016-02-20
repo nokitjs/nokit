@@ -23,13 +23,13 @@
     <meta name="msapplication-TileImage" content="/-rc-/favicons/mstile-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <title><%= this.server.STATUS_CODES["500"] %> (500)</title>
-    <link rel="stylesheet" href="/-rc-/common.css">
+    <link rel="stylesheet" href="/-rc-/stylesheets/common.css">
 </head>
 
 <body>
     <div class='header'><%= this.server.STATUS_CODES["500"] %> (500)</div>
     <div class='content'>
-        在请求 "<% $(this.request.url) %>" 时发生了异常
+        "<% $(this.request.url) %>" error
         <pre class='quote'><% $(this.showErrorDetail?this.lastError.message+'\r\n'+this.lastError.stack:this.lastError.message) %></pre>
     </div>
     <div class='footer'>

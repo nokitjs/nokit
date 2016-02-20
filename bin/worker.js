@@ -18,10 +18,11 @@ self.sendMsg = function (msg) {
     if (!self.server || !self.server.logger) {
         return;
     }
+    var msgText = msg.text + " #" + process.pid;
     if (msg.state) {
-        self.server.logger.log("#" + process.pid + " , " + msg.text, true);
+        self.server.logger.log(msgText, true);
     } else {
-        self.server.logger.error("#" + process.pid + " , " + msg.text, true);
+        self.server.logger.error(msgText, true);
     };
 };
 
@@ -67,7 +68,7 @@ self.init = function (options, cml) {
             self.sendMsg({
                 state: true,
                 configs: self.server.configs,
-                text: success || '启动成功'
+                text: success || 'Application has been started'
             });
         }
     });
