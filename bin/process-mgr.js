@@ -4,7 +4,7 @@ var isWin = process.platform === 'win32';
 var child_process = require('child_process');
 var path = require("path");
 var nokit = require("../");
-var processLog = require('./processlog');
+var processLog = require('./process-log');
 var utils = nokit.utils;
 var base64 = nokit.base64;
 var console = nokit.console;

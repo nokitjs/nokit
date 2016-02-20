@@ -3,10 +3,10 @@ var console = nokit.console;
 var env = nokit.env;
 var utils = nokit.utils;
 var path = require("path");
-var Message = require('./message');
+var Notifier = require('./notifier');
 var domain = require("domain");
 var chokidar = require('chokidar');
-var processLog = require("./processlog");
+var processLog = require("./process-log");
 var cluster = require("cluster");
 var cpuTotal = require("os").cpus().length;
 var exitCode = nokit.exitCode;
@@ -16,7 +16,7 @@ var EXIT_DELAY = 1000;
 
 self.init = function (options, cml) {
 
-    var message = new Message();
+    var notifier = new Notifier();
 
     var startInfo = cml.options.getValue('-start-info') || '';
     var isDebug = cml.options.has('--debug') || cml.options.has('--debug-brk');
@@ -62,11 +62,11 @@ self.init = function (options, cml) {
                     processLog.add(logInfo);
                     //--
                     msgItem.type = 'log';
-                    message.send([msgItem]);
+                    notifier.ready([msgItem]);
                 }
             } else {
                 msgItem.type = 'error';
-                message.send([msgItem], function () {
+                notifier.ready([msgItem], function () {
                     /*
                     启动时如果有一个工作进程不成功就全部结束,
                     运行过程中，如果一个工作进程出现问题，不会导致全部结束

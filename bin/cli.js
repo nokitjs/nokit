@@ -7,16 +7,16 @@ var nokit = require("../");
 var path = require("path");
 var fs = require("fs");
 var domain = require("domain");
-var Message = require('./message');
-var processLog = require('./processlog');
-var processMgr = require('./processmgr');
+var Notifier = require('./notifier');
+var processLog = require('./process-log');
+var processMgr = require('./process-mgr');
 var CmdLine = require('cmdline');
-var autostart = require('./autostart');
+var autoStarter = require('./auto-starter');
 var utils = nokit.utils;
 var pkg = nokit.pkg;
 var console = nokit.console;
 var env = nokit.env;
-//var debugger = require('../test/debugger');
+//var _debugger = require('../tool/debugger');
 
 //工作目录
 var cwd = process.cwd();
@@ -43,7 +43,7 @@ dm.on('error', function (err) {
 
 dm.run(function () {
 
-    var message = new Message();
+    var notifier = new Notifier();
 
     var cml = new CmdLine({
         commandEnabled: true
@@ -58,7 +58,7 @@ dm.run(function () {
             printInfo();
             break;
         case "create":
-            console.log("正在创建...");
+            console.log("Creating...");
             //处理参数
             var appName = cml.args[0] || 'nokit-app';
             var appType = cml.args[1] || 'mvc';
@@ -68,18 +68,21 @@ dm.run(function () {
             var srcFullPath = path.resolve(__dirname, path.normalize('../examples/' + appType));
             //检查目标路径是否已存在
             if (fs.existsSync(dstFullPath)) {
-                console.error('创建失败，目录 "' + dstFullPath + '" 已经存在');
+                console.error('Create failure, directory "' + dstFullPath + '" already exists');
             } else {
                 //复制应用模板
                 nokit.utils.copyDir(srcFullPath, dstFullPath);
-                console.log('在 "' + dstFullPath + '" 创建完成');
+                console.log('In the "' + dstFullPath + '" has been created');
             }
             break;
         case "start":
-            console.log("正在启动应用...");
-            message.waiting(1);
+            console.log("Starting...");
+            notifier.waiting(1);
             var startInfo = [];
             //处理调式参数
+            //因为 master 使用 --debug 指定的端口，而 worker 的 debug port 则会每个 +1
+            //所以这里，把 --debug 的端口 -1 作为 master 的 port 
+            //这样第一个 worker 的端口就是 --debug 指定的端口了，后续 worker 会每个 +1
             var debugPort = null;
             if (cml.options.has('--debug')) {
                 debugPort = parseInt(cml.options.getValue('--debug') || 5858) - 1;
@@ -100,7 +103,6 @@ dm.run(function () {
             //添加监听端口
             var port = cml.args[0] || 0;
             startInfo.push(port);
-            //console.log("startInfo: " + startInfo);
             //添加应用根目录
             var root = path.resolve(cwd, path.normalize(cml.args[1] || './'));
             startInfo.push(root);
@@ -108,7 +110,7 @@ dm.run(function () {
             cml.options.forEach(function (item) {
                 startInfo.push(item);
             });
-            //debugger.log('即将启动...');
+            //console.log("startInfo: " + startInfo);
             //请求启动
             processMgr.startApp(startInfo);
             break;
@@ -116,20 +118,20 @@ dm.run(function () {
             var pid = cml.args[0];
             if (!pid || pid == 'all') {
                 processMgr.killAllApp();
-                console.log("已退出所有应用");
+                console.log("All application has stopped");
             } else {
                 processMgr.killApp(pid);
-                console.log("已退出指定的应用: " + pid);
+                console.log("Stopped specified application: " + pid);
             }
             break;
         case "restart":
             var processCount = processLog.readArray().length;
             if (processCount < 1) {
-                console.log("没有已启动的应用");
+                console.log("No application has been started");
                 return;
             }
-            console.log("正在重启应用...");
-            message.waiting(processCount);
+            console.log("Restarting...");
+            notifier.waiting(processCount);
             var pid = cml.args[0];
             if (!pid || pid == 'all') {
                 processMgr.restartAllApp();
@@ -140,25 +142,25 @@ dm.run(function () {
         case "list":
             var logArray = processLog.toPrintArray();
             if (logArray && logArray.length > 0) {
-                console.log('已启动的应用:' + env.EOL);
+                console.log('Launched applications:' + env.EOL);
                 console.table(logArray);
             } else {
-                console.log('没有已启动的应用');
+                console.log('No application has been started');
             }
             break;
         case "autostart":
             var state = (cml.args[0] || 'on').toLowerCase();
             if (state != 'on' && state != 'off') {
-                console.log('不能识别的参数 ' + cml.args[0]);
+                console.log('Unrecognizable parameters "' + cml.args[0] + '"');
             } else {
-                console.log(autostart.set(state, {
+                console.log(autoStarter.set(state, {
                     uid: cml.options.getValue('-uid'),
                     pwd: cml.options.getValue('-pwd')
                 }));
             }
             break;
         default:
-            console.error("不能识别的命令 " + cml.command);
+            console.error('Unrecognizable command "' + cml.command + '"');
     }
 
 });

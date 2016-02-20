@@ -23,13 +23,13 @@
     <meta name="msapplication-TileImage" content="/-rc-/favicons/mstile-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <title><%= this.server.STATUS_CODES["403"] %> (403)</title>
-    <link rel="stylesheet" href="/-rc-/common.css">
+    <link rel="stylesheet" href="/-rc-/stylesheets/common.css">
 </head>
 
 <body>
     <div class='header'><%= this.server.STATUS_CODES["403"] %> (403)</div>
     <div class='content'>
-        资源 "<%= this.request.url %>" 拒绝访问
+        "<%= this.request.url %>" access denied
     </div>
     <div class='footer'>
         Powered By

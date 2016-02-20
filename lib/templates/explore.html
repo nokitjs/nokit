@@ -23,20 +23,20 @@
     <meta name="msapplication-TileImage" content="/-rc-/favicons/mstile-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <title>EXPLORER</title>
-    <link rel="stylesheet" href="/-rc-/common.css">
-    <link rel="stylesheet" href="/-rc-/explore.css">
+    <link rel="stylesheet" href="/-rc-/stylesheets/common.css">
+    <link rel="stylesheet" href="/-rc-/stylesheets/explore.css">
 </head>
 
 <body>
     <div class='header'>EXPLORER</div>
     <div class='content'>
         <div class='path'>
-            <span class='prefix'>[位置]</span> <% $(this.request.url) %>
+            <i class='icon icon-path'></i> <% $(this.request.url) %>
         </div>
         <ul class="list">
         <% $.each(this.items,function(i,item){ %>
             <li>
-                <span class='prefix'>[<% $(item.type=='folder'?'目录':'文件') %>]</span>  
+                <i class='icon icon-<% $(item.type=='folder'?'folder':'file') %>'></i>  
                 <a href="./<% $(item.name) %><% $(item.type=='folder'?'/':'') %>">
                     <% $(item.name) %>
                 </a>

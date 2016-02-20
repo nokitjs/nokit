@@ -23,13 +23,13 @@
     <meta name="msapplication-TileImage" content="/-rc-/favicons/mstile-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <title><%= this.server.STATUS_CODES["405"] %> (405)</title>
-    <link rel="stylesheet" href="/-rc-/common.css">
+    <link rel="stylesheet" href="/-rc-/stylesheets/common.css">
 </head>
 
 <body>
     <div class='header'><%= this.server.STATUS_CODES["405"] %> (405)</div>
     <div class='content'>
-        资源 "<% $(this.request.url) %>" 不能使用 "<% $(this.request.method) %>" 访问
+        "<% $(this.request.url) %>" Not allowed "<% $(this.request.method) %>"
     </div>
     <div class='footer'>
         Powered By

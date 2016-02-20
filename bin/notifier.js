@@ -9,17 +9,17 @@ var LOCAL_HOST = "127.0.0.1";
 var LOCAL_PORT = 20202;
 var EXIT_DELAY = 1000;
 
-function Message() {
+function Notifier() {
     var self = this;
-    self.messageSended = false;
+    self.readied = false;
 };
 
 /**
- * 发送进程消息
+ * 发送 app ready 消息
  */
-Message.prototype.send = function (msgList, callback) {
+Notifier.prototype.ready = function (msgList, callback) {
     var self = this;
-    if (self.messageSended || !msgList) return;
+    if (self.readied || !msgList) return;
     var client = new net.Socket();
     client.connect(LOCAL_PORT, LOCAL_HOST, function () {
         //去掉其它信息只保留 type、text
@@ -30,16 +30,16 @@ Message.prototype.send = function (msgList, callback) {
             };
         });
         client.write(JSON.stringify(msgList));
-        self.messageSended = true;
+        self.readied = true;
         if (callback) callback();
     });
 };
 
 /**
- * 等待进程消息
+ * 等待 app ready 消息
  */
-Message.prototype.waiting = function (total) {
-    var count = 0;
+Notifier.prototype.waiting = function (total) {
+    var readiedCount = 0;
     var server = net.createServer(function (socket) {
         socket.on('data', function (data) {
             if (data) {
@@ -48,8 +48,8 @@ Message.prototype.waiting = function (total) {
                     console[item.type || 'log'](item.text || item);
                 });
             }
-            count += 1;
-            if (count >= total) {
+            readiedCount += 1;
+            if (readiedCount >= total) {
                 /*
                 必须关闭连接停止监听，然后再退出 “CLI进程”，
                 否则在 windows 上 “守护进程(master)” 和 “工作进程（worker）” 都将受影响退出
@@ -65,5 +65,5 @@ Message.prototype.waiting = function (total) {
     }).listen(LOCAL_PORT);
 };
 
-module.exports = Message;
+module.exports = Notifier;
 //end
