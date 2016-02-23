@@ -30,14 +30,14 @@ var publicFolder = cml.options.getValue('-public');
 if (publicFolder) {
     options.folders = options.folders || {};
     options.folders.public = {
-        "^/": path.normalize(publicFolder)
+        "*": path.normalize(publicFolder)
     };
 }
 
 //是否使用自定义配置
 var envName = cml.options.getValue('-env');
-if (envName) {
-    options.env = envName;
+if (envName || process.env.NODE_ENV) {
+    options.env = envName || process.env.NODE_ENV;
 }
 
 //缓存参数 cache
