@@ -34,7 +34,13 @@ if (publicFolder) {
     };
 }
 
-//是否使用自定义配置
+//是否指定配置文件名称
+var configName = cml.options.getValue('-config');
+if (configName) {
+    options.config = configName;
+}
+
+//是否使用环境配置
 var envName = cml.options.getValue('-env');
 if (envName || process.env.NODE_ENV) {
     options.env = envName || process.env.NODE_ENV;
