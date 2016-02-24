@@ -30,7 +30,7 @@ var publicFolder = cml.options.getValue('-public');
 if (publicFolder) {
     options.folders = options.folders || {};
     options.folders.public = {
-        "*": path.normalize(publicFolder)
+        "*": publicFolder
     };
 }
 
