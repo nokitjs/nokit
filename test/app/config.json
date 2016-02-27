@@ -3,6 +3,12 @@
         "^/": "$./handlers/mvc",
         "^/api/": "$./handlers/rest"
     },
+    "folders": {
+        "public": {
+            "^/public-test1": "./public/test",
+            "^/public-test2": "./public/test /public-test2"
+        }
+    },
     "filters": {
         "^/filter-test": "./filters/test"
     },
