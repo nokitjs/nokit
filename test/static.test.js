@@ -16,4 +16,22 @@ describe('静态文件处理', function () {
             .post("/")
             .expect(200, done);
     });
+
+    it('GET /style', function (done) {
+        request(app.server.httpServer)
+            .get("/style")
+            .expect(302, done);
+    });
+
+    it('GET /style/', function (done) {
+        request(app.server.httpServer)
+            .get("/style/")
+            .expect(200, done);
+    });
+
+    it('GET /pages/', function (done) {
+        request(app.server.httpServer)
+            .get("/pages/")
+            .expect(200, done);
+    });
 });

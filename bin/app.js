@@ -48,15 +48,30 @@ if (envName || process.env.NODE_ENV) {
 
 //缓存参数 cache
 var cache = cml.options.getValue('-cache');
-if (!utils.isNull(cache) && cache !== '') {
+if (!utils.isNull(cache)) {
     options.cache = options.cache || {};
-    var cacheParams = cache.split(';');
-    if (utils.isNumber(cacheParams[0])) {
-        options.cache.maxAge = parseInt(cacheParams[0]);
-    }
-    if (cacheParams[1]) {
-        options.cache.match = cacheParams[1].split(',');
-    }
+    options.cache.enabled = Boolean(cache);
+}
+
+//压缩参数 compress
+var compress = cml.options.getValue('-compress');
+if (!utils.isNull(compress)) {
+    options.compress = options.compress || {};
+    options.compress.enabled = Boolean(compress);
+}
+
+//session 参数 
+var session = cml.options.getValue('-session');
+if (!utils.isNull(session)) {
+    options.session = options.session || {};
+    options.session.enabled = Boolean(session);
+}
+
+//log 参数 
+var log = cml.options.getValue('-log');
+if (!utils.isNull(log)) {
+    options.log = options.log || {};
+    options.log.enabled = Boolean(log);
 }
 //处理参数信息结束
 
