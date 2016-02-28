@@ -15,7 +15,7 @@ TestFilter.prototype.onError = function (context, done) {
  * 在请求到达时
  **/
 TestFilter.prototype.onRequest = function (context, done) {
-    context.__t = "1";
+    context.__t1 = "1";
     done();
 };
 
@@ -23,7 +23,7 @@ TestFilter.prototype.onRequest = function (context, done) {
  * 在收到请求数据时
  **/
 TestFilter.prototype.onReceived = function (context, done) {
-    context.__t += "2";
+    context.__t1 += "2";
     done();
 };
 
@@ -31,8 +31,8 @@ TestFilter.prototype.onReceived = function (context, done) {
  * 在发送响应时
  **/
 TestFilter.prototype.onResponse = function (context, done) {
-    context.__t += "3";
-    context.send(context.__t);
+    context.__t1 += "3";
+    context.send(context.__t1);
 };
 
 /**

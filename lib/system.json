@@ -168,10 +168,12 @@
         "cache": false
     },
     "nsp": {
+        "path": "./nsp",
         "compress": false,
         "cache": false
     },
     "nsh": {
+        "path": "./nsh",
         "compress": false,
         "cache": false
     },

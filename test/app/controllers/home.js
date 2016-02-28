@@ -95,3 +95,12 @@ HomeController.prototype.emitError = function () {
     var self = this;
     self.__no_func();
 };
+
+HomeController.prototype.cookie = function () {
+    var self = this;
+    var cookieValue = self.context.request.cookie.get("test");
+    self.context.response.cookie.set("test", "test");
+    self.context.response.cookie.remove("test");
+    self.context.response.cookie.set("test", "test");
+    self.context.send(cookieValue, "text/html");
+};
