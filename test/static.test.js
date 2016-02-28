@@ -34,4 +34,17 @@ describe('静态文件处理', function () {
             .get("/pages/")
             .expect(200, done);
     });
+
+    it('GET /public-test1/test.txt', function (done) {
+        request(app.server.httpServer)
+            .get("/public-test1/test.txt")
+            .expect(200, "test1", done);
+    });
+
+    it('GET /public-test2/test.txt', function (done) {
+        request(app.server.httpServer)
+            .get("/public-test2/test.txt")
+            .expect(200, "test2", done);
+    });
+
 });
