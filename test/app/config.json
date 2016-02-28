@@ -10,7 +10,8 @@
         }
     },
     "filters": {
-        "^/filter-test": "./filters/test"
+        "^/filter-test::test-1": "./filters/test-1",
+        "^/filter-test::test-2": "./filters/test-2"
     },
     "mvc": {
         "routes": {
@@ -40,6 +41,18 @@
     "rest": {
         "routes": {
             "/api/item": "./item"
+        }
+    },
+    "nsp": {
+        "path": "./public",
+        "routes": {
+            "/test-1.nsp": "./example-1.nsp"
+        }
+    },
+    "nsh": {
+        "path": "./public",
+        "routes": {
+            "/test.nsh": "./example.nsh"
         }
     },
     "plugins": {
