@@ -137,7 +137,9 @@
             "svg": "image/svg+xml"
         }
     },
-    "displayDir": true,
+    "browseFolder": {
+        "^/": true
+    },
     "log": {
         "enabled": true,
         "provider": "$./providers/log-writer-file",
