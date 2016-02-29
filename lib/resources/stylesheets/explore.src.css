@@ -7,6 +7,12 @@
     margin: 0px;
     padding: 10px;
 }
+.path a{
+    text-decoration: none;
+}
+.path a:hover{
+    text-decoration: underline;
+}
 .list li {
     padding: 3px 0px;
 }

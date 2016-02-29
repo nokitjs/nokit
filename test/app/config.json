@@ -57,5 +57,8 @@
     },
     "plugins": {
         "test": "./plugins/test"
+    },
+    "browseFolder": {
+        "^/test/public-test1": false
     }
 }
