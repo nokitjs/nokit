@@ -4,7 +4,7 @@ var assert = require("assert");
 var app = require("./app");
 var request = require('supertest');
 
-describe('Error', function () {
+describe('cookie', function () {
     it('GET /cookie', function (done) {
         request(app.server.httpServer)
             .get("/cookie")
