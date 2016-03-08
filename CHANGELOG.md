@@ -1,3 +1,11 @@
+### 1.21.0
+1. 重构 Context
+2. 重构 Response
+3. 重构 Request
+4. 重构 Cookie
+5. 重构 Session
+6. 重构 Logger
+
 ### 1.20.2
 1. 改进 "host" 配置
 2. 改进 "forbiddens" 配置

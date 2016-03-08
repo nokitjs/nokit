@@ -31,13 +31,13 @@ HomeController.prototype.readAndWriteSession = function () {
 
 HomeController.prototype.status = function () {
     var self = this;
-    var statusCode = self.context.routeData["code"];
+    var statusCode = self.context.params["code"];
     self.context.status(statusCode);
 };
 
 HomeController.prototype.statusWithContent = function () {
     var self = this;
-    var statusCode = self.context.routeData["code"];
+    var statusCode = self.context.params["code"];
     self.context.statusWithContent(statusCode);
 };
 
