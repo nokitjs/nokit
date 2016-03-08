@@ -15,12 +15,12 @@ HomeController.prototype.index = function () {
 
 HomeController.prototype.say = function () {
     var self = this;
-    self.context.send(self.context.params("name"));
+    self.context.send(self.context.param("name"));
 };
 
 HomeController.prototype.readAndWriteSession = function () {
     var self = this;
-    var srcVal = parseInt(self.context.params("val"));
+    var srcVal = parseInt(self.context.param("val"));
     self.context.session.set("s", srcVal, function () {
         self.context.session.get("s", function (val) {
             var dstVal = val + val;
@@ -98,9 +98,9 @@ HomeController.prototype.emitError = function () {
 
 HomeController.prototype.cookie = function () {
     var self = this;
-    var cookieValue = self.context.request.cookie.get("test");
-    self.context.response.cookie.set("test", "test");
-    self.context.response.cookie.remove("test");
-    self.context.response.cookie.set("test", "test");
+    var cookieValue = self.context.cookie.get("test");
+    self.context.cookie.set("test", "test");
+    self.context.cookie.remove("test");
+    self.context.cookie.set("test", "test");
     self.context.send(cookieValue, "text/html");
 };
