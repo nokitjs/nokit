@@ -349,14 +349,14 @@ UserController.prototype.post = function() {
     self.context.param("name") 可以获取客户端传过来的 query 或 form
     */
     
-    var routeData = self.context.params;
-    self.out("routeData:" + routeData["userId"]);
+    var routeParams = self.context.params;
+    self.out("routeParams:" + routeParams["userId"]);
 };
 
 //针对 User 的 get HttpMethod 处理方法
 UserController.prototype.get = function() {
     var self = this;
-    self.out("routeData:" + routeData["userId"]);
+    self.out("routeParams:" + routeParams["userId"]);
 };
 
 /*

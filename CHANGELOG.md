@@ -1,3 +1,7 @@
+### 1.21.0-alpha.2
+1. 重构 Context
+2. 重构 Router
+
 ### 1.21.0-alpha.1
 1. 重构 Context
 2. 重构 Response
