@@ -1,6 +1,7 @@
-### 1.21.0-alpha.2
+### 1.21.0-alpha.3
 1. 重构 Context
 2. 重构 Router
+3. 移除无用的 dispose 函数
 
 ### 1.21.0-alpha.1
 1. 重构 Context
