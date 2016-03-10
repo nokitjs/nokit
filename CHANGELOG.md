@@ -6,7 +6,8 @@
 5. 重构 Cookie
 6. 重构 Session
 7. 重构 Logger
-8. 移除无用的 dispose 函数
+8. 新增 context.buffer
+9. 新增 context.data/context.param
 
 ### 1.20.2
 1. 改进 "host" 配置
