@@ -121,7 +121,7 @@ NSP 页面 (*.nsp) 基本介绍
 <!-- 输出内容 -->
 <p> <%= "输出内容" %> </p>
 <!-- this 指向页面处理器，无处理器页面指向默认处理器对象 -->
-<p> <%= this.context.request.formData("name") %> </p>
+<p> <%= this.context.form("name") %> </p>
 
 <!-- 循环 -->
 <ul> 
@@ -174,11 +174,10 @@ IndexPresenter.prototype.init = function() {
     self.context //当前请上下文对象
     self.request //同 context.request，请求对象
     self.response //同 context.response 响应对象
-    self.context.request.queryData['name'] 可以获取 queryString 对应数据
-    self.context.request.formData['name'] 可以获取 post 数据
-    self.context.data("name") 可以获取客户端传过来的 queryString 或 formData
-    self.context.request.cookie 获取来自客户的 cookie
-    self.context.respone.cookie 向客户端发送 cookie
+    self.context.query['name'] 可以获取 query 对应数据
+    self.context.form['name'] 可以获取 post 数据
+    self.context.param("name") 可以获取客户端传过来的 query 或 form
+    self.context.cookie 访问 cookie
     se轩.context.session 访问 session 数据
     */
     self.name = 'Nokit NSP';
@@ -265,12 +264,11 @@ HomeController.prototype.index = function() {
     
     /*
     self.context 可以访问当前请求上下文对象
-    self.context.routeData["name"] 可以获取路由数据
-    self.context.request.queryData['name'] 可以获取 queryString 对应数据
-    self.context.request.formData['name'] 可以获取 post 数据
-    self.context.data("name") 可以获取客户端传过来的 queryString 或 formData
-    self.context.request.cookie 获取来自客户的 cookie
-    self.context.respone.cookie 向客户端发送 cookie
+    self.context.params["name"] 可以获取路由数据
+    self.context.query['name'] 可以获取 queryString 对应数据
+    self.context.form['name'] 可以获取 post 数据
+    self.context.param("name") 可以获取客户端传过来的 query 或 form
+    self.context.cookie 访问 cookie
     se轩.context.session 访问 session 数据
     */
     
@@ -305,7 +303,7 @@ MVC 的 config.json 配置
         每一个路由至少需要指定 pattern(URL匹配模式) 和 target(目标contrller)
         还可以通过配置 action 项指定对应的 action (controller方法)。
         pattern 格式示例 "/user/{userId}" 其中 userId 是占位符变量，
-        可以在 controller 中通过 context.routeData['userId'] 获取。
+        可以在 controller 中通过 context.params['userId'] 获取。
         */
         "routes": {
             "/home": "./home"
@@ -345,21 +343,20 @@ UserController.prototype.post = function() {
         
     /*
     self.context 可以访问当前请求上下文对象
-    self.context.routeData["name"] 可以获取路由数据
-    self.context.request.queryData['name'] 可以获取 queryString 对应数据
-    self.context.request.formData['name'] 可以获取 post 数据
-    self.context.data("name") 可以获取客户端传过来的 queryString 或 formData
-    self.context.request.body 可以访问请求的主体对象
+    self.context.params["name"] 可以获取路由数据
+    self.context.query['name'] 可以获取 query 对应数据
+    self.context.form['name'] 可以获取 post 数据
+    self.context.param("name") 可以获取客户端传过来的 query 或 form
     */
     
-    var routeData = self.context.routeData;
-    self.out("routeData:" + routeData["userId"]);
+    var routeParams = self.context.params;
+    self.out("routeParams:" + routeParams["userId"]);
 };
 
 //针对 User 的 get HttpMethod 处理方法
 UserController.prototype.get = function() {
     var self = this;
-    self.out("routeData:" + routeData["userId"]);
+    self.out("routeParams:" + routeParams["userId"]);
 };
 
 /*

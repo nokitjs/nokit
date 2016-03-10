@@ -1,3 +1,13 @@
+### 1.21.0-alpha
+1. 重构 Router
+2. 重构 Context
+3. 重构 Response
+4. 重构 Request
+5. 重构 Cookie
+6. 重构 Session
+7. 重构 Logger
+8. 移除无用的 dispose 函数
+
 ### 1.20.2
 1. 改进 "host" 配置
 2. 改进 "forbiddens" 配置

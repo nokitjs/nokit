@@ -10,7 +10,7 @@ HelloController.prototype.post = function () {
     var self = this;
     self.send({
         "status": "success",
-        "message": "Hello " + self.context.routeData["name"] + "!"
+        "message": "Hello " + self.context.params["name"] + "!"
     });
 };
 
@@ -21,7 +21,7 @@ HelloController.prototype.get = function () {
     var self = this;
     self.send({
         "status": "success",
-        "message": "Hello " + self.context.routeData["name"] + "!"
+        "message": "Hello " + self.context.params["name"] + "!"
     });
 };
 
@@ -32,6 +32,6 @@ HelloController.prototype.put = function () {
     var self = this;
     self.send({
         "status": "success",
-        "message": "Hello " + self.context.routeData["name"] + "!"
+        "message": "Hello " + self.context.params["name"] + "!"
     });
 };
