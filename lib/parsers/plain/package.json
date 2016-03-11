@@ -1,12 +1,12 @@
 {
-    "name": "nokit-parser-plain",
-    "version": "1.0.0",
-    "description": "parser of nokit",
-    "main": "./parser.js",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/nokitjs/nokit-parser-plain.git"
-    },
-    "dependencies": {}
+  "name": "nokit-parser-plain",
+  "version": "1.0.0",
+  "description": "parser of nokit",
+  "main": "./parser.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nokitjs/nokit-parser-plain.git"
+  },
+  "dependencies": {}
 }

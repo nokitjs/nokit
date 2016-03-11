@@ -1,14 +1,14 @@
 {
-    "handlers": {
-        "^/": "$./handlers/mvc"
-    },
-    "mvc": {
-        "routes": {
-            "/home": "./home",
-            "/": "./home",
-            "get /date": {
-                "view": "./date"
-            }
-        }
+  "handlers": {
+    "^/": "$./handlers/mvc"
+  },
+  "mvc": {
+    "routes": {
+      "/home": "./home",
+      "/": "./home",
+      "get /date": {
+        "view": "./date"
+      }
     }
+  }
 }

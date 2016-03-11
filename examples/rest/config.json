@@ -1,11 +1,11 @@
 {
-    "showErrorDetail": true,
-    "handlers": {
-        "^/api/": "$./handlers/rest"
-    },
-    "rest": {
-        "routes": {
-            "/api/hello/{name}": "./hello"
-        }
+  "showErrorDetail": true,
+  "handlers": {
+    "^/api/": "$./handlers/rest"
+  },
+  "rest": {
+    "routes": {
+      "/api/hello/{name}": "./hello"
     }
+  }
 }

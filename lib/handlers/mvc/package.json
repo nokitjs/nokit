@@ -1,11 +1,11 @@
 {
-    "name": "nokit-handler-mvc",
-    "version": "1.0.0",
-    "description": "handler of nokit",
-    "main": "./handler.js",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/nokitjs/nokit-handler-mvc.git"
-    }
+  "name": "nokit-handler-mvc",
+  "version": "1.0.0",
+  "description": "handler of nokit",
+  "main": "./handler.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nokitjs/nokit-handler-mvc.git"
+  }
 }

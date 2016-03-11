@@ -1,20 +1,20 @@
 {
-    "name": "nokit-app",
-    "version": "1.0.0",
-    "description": "this is an example app",
-    "main": "./app.js",
-    "keywords": [
-        "nokitjs",
-        "nokit",
-        "nsp"
-    ],
-    "author": {
-        "name": "author",
-        "email": "author@domain.com"
-    },
-    "homepage": "http://nokit.org",
-    "license": "MIT",
-    "dependencies": {
-        "nokitjs": "^{version}"
-    }
+  "name": "nokit-app",
+  "version": "1.0.0",
+  "description": "this is an example app",
+  "main": "./app.js",
+  "keywords": [
+    "nokitjs",
+    "nokit",
+    "nsp"
+  ],
+  "author": {
+    "name": "author",
+    "email": "author@domain.com"
+  },
+  "homepage": "http://nokit.org",
+  "license": "MIT",
+  "dependencies": {
+    "nokitjs": "^{version}"
+  }
 }

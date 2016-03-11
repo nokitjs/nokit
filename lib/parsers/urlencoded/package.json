@@ -1,12 +1,12 @@
 {
-    "name": "nokit-parser-urlencoded",
-    "version": "1.0.0",
-    "description": "parser of nokit",
-    "main": "./parser.js",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/nokitjs/nokit-parser-urlencoded.git"
-    },
-    "dependencies": {}
+  "name": "nokit-parser-urlencoded",
+  "version": "1.0.0",
+  "description": "parser of nokit",
+  "main": "./parser.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nokitjs/nokit-parser-urlencoded.git"
+  },
+  "dependencies": {}
 }

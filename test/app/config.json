@@ -1,64 +1,64 @@
 {
-    "handlers": {
-        "^/": "$./handlers/mvc",
-        "^/api/": "$./handlers/rest"
-    },
-    "folders": {
-        "public": {
-            "^/public-test1": "./public/test",
-            "^/public-test2": "./public/test /public-test2"
-        }
-    },
-    "filters": {
-        "^/filter-test::test-1": "./filters/test-1",
-        "^/filter-test::test-2": "./filters/test-2"
-    },
-    "mvc": {
-        "routes": {
-            "/home": "./home",
-            "/": "./home",
-            "get /say/{name}": "./home say",
-            "/no-controller-view": {
-                "view": "test"
-            },
-            "/status/{code}": "./home status",
-            "/statusWithContent/{code}": "./home statusWithContent",
-            "/locale": "./home localeAction",
-            "/json": "./home json",
-            "/jsonp": "./home jsonp",
-            "/redirect": "./home redirect",
-            "/transfer": "./home transfer",
-            "/noChange": "./home noChange",
-            "/notAllowed": "./home notAllowed",
-            "/forbidden": "./home forbidden",
-            "/notFound": "./home notFound",
-            "/permanentRedirect": "./home permanentRedirect",
-            "/filter-test": {
-                "view": "test"
-            }
-        }
-    },
-    "rest": {
-        "routes": {
-            "/api/item": "./item"
-        }
-    },
-    "nsp": {
-        "path": "./public",
-        "routes": {
-            "/test-1.nsp": "./example-1.nsp"
-        }
-    },
-    "nsh": {
-        "path": "./public",
-        "routes": {
-            "/test.nsh": "./example.nsh"
-        }
-    },
-    "plugins": {
-        "test": "./plugins/test"
-    },
-    "browseFolder": {
-        "^/test/public-test1": false
+  "handlers": {
+    "^/": "$./handlers/mvc",
+    "^/api/": "$./handlers/rest"
+  },
+  "folders": {
+    "public": {
+      "^/public-test1": "./public/test",
+      "^/public-test2": "./public/test /public-test2"
     }
+  },
+  "filters": {
+    "^/filter-test::test-1": "./filters/test-1",
+    "^/filter-test::test-2": "./filters/test-2"
+  },
+  "mvc": {
+    "routes": {
+      "/home": "./home",
+      "/": "./home",
+      "get /say/{name}": "./home say",
+      "/no-controller-view": {
+        "view": "test"
+      },
+      "/status/{code}": "./home status",
+      "/statusWithContent/{code}": "./home statusWithContent",
+      "/locale": "./home localeAction",
+      "/json": "./home json",
+      "/jsonp": "./home jsonp",
+      "/redirect": "./home redirect",
+      "/transfer": "./home transfer",
+      "/noChange": "./home noChange",
+      "/notAllowed": "./home notAllowed",
+      "/forbidden": "./home forbidden",
+      "/notFound": "./home notFound",
+      "/permanentRedirect": "./home permanentRedirect",
+      "/filter-test": {
+        "view": "test"
+      }
+    }
+  },
+  "rest": {
+    "routes": {
+      "/api/item": "./item"
+    }
+  },
+  "nsp": {
+    "path": "./public",
+    "routes": {
+      "/test-1.nsp": "./example-1.nsp"
+    }
+  },
+  "nsh": {
+    "path": "./public",
+    "routes": {
+      "/test.nsh": "./example.nsh"
+    }
+  },
+  "plugins": {
+    "test": "./plugins/test"
+  },
+  "browseFolder": {
+    "^/test/public-test1": false
+  }
 }
