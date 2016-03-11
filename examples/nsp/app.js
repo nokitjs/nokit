@@ -11,7 +11,7 @@
  * 安装命令:
  * npm install nokitjs [-g]
  **/
- 
+
 /* global __dirname */
 
 var nokit = require("nokitjs");
@@ -20,16 +20,16 @@ var nokit = require("nokitjs");
  * 创建 server 实例
  **/
 var server = new nokit.Server({
-    "root": __dirname
+  "root": __dirname
 });
 
 /**
  * 启动 server
  **/
-server.start(function (err, msg) {
-    if (err) {
-        console.error(err);
-    } else {
-        console.log(msg);
-    }
+server.start(function(err, msg) {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log(msg);
+  }
 });

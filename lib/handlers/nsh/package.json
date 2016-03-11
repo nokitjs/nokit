@@ -1,12 +1,12 @@
 {
-    "name": "nokit-handler-nsh",
-    "version": "1.0.0",
-    "description": "handler of nokit",
-    "main": "./handler.js",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/nokitjs/nokit-handler-nsh.git"
-    },
-    "dependencies": {}
+  "name": "nokit-handler-nsh",
+  "version": "1.0.0",
+  "description": "handler of nokit",
+  "main": "./handler.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nokitjs/nokit-handler-nsh.git"
+  },
+  "dependencies": {}
 }

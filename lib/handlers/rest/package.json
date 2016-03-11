@@ -1,11 +1,11 @@
 {
-    "name": "nokit-handler-rest",
-    "version": "1.0.0",
-    "description": "handler of nokit",
-    "main": "./handler.js",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Houfeng/nokit-handler-rest.git"
-    }
+  "name": "nokit-handler-rest",
+  "version": "1.0.0",
+  "description": "handler of nokit",
+  "main": "./handler.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Houfeng/nokit-handler-rest.git"
+  }
 }
