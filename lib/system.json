@@ -10,12 +10,12 @@
   "showErrorDetail": true,
   "headers": {},
   "handlers": {
-    "*::static": "$./handlers/static",
-    "^/-rc-/::rc": "$./handlers/resource",
-    "^/favicon.icon$::favicon": "$./handlers/favicon",
-    "^/favicon.ico$::favicon": "$./handlers/favicon",
-    ".nsp$::nsp": "$./handlers/nsp",
-    ".nsh$::nsh": "$./handlers/nsh"
+    "*:static": "$./handlers/static",
+    "^/-rc-/:rc": "$./handlers/resource",
+    "^/favicon.icon$:favicon": "$./handlers/favicon",
+    "^/favicon.ico$:favicon": "$./handlers/favicon",
+    ".nsp$:nsp": "$./handlers/nsp",
+    ".nsh$:nsh": "$./handlers/nsh"
   },
   "parsers": {
     "*": "$./parsers/urlencoded",

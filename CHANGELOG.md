@@ -1,3 +1,8 @@
+### 1.21.1
+1. 新增路由参数验证表达式功能
+2. 改进路由处理($.route.actionUrl 方法)
+3. 更新 filter 、handler 别名格式
+
 ### 1.21.0
 1. 重构 Router
 2. 重构 Context

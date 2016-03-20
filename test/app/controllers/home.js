@@ -109,3 +109,8 @@ HomeController.prototype.buffer = function() {
   var self = this;
   self.context.buffer(new Buffer("test"), "text/html");
 };
+
+HomeController.prototype.testRoute = function() {
+  var self = this;
+  self.context.send(self.context.params['num'], "text/html");
+};
