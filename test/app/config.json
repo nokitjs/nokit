@@ -10,8 +10,8 @@
     }
   },
   "filters": {
-    "^/filter-test::test-1": "./filters/test-1",
-    "^/filter-test::test-2": "./filters/test-2"
+    "^/filter-test:test-1": "./filters/test-1",
+    "^/filter-test:test-2": "./filters/test-2"
   },
   "mvc": {
     "routes": {
@@ -22,6 +22,7 @@
         "view": "test"
       },
       "/status/{code}": "./home status",
+      "/route/{num:[0-9]+?}": "./home testRoute",
       "/statusWithContent/{code}": "./home statusWithContent",
       "/locale": "./home localeAction",
       "/json": "./home json",
