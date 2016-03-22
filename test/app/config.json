@@ -6,7 +6,7 @@
   "folders": {
     "public": {
       "^/public-test1": "./public/test",
-      "^/public-test2": "./public/test /public-test2"
+      "^/public-test2/(.*)": "./public/test"
     }
   },
   "filters": {

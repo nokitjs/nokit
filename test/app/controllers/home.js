@@ -21,10 +21,12 @@ HomeController.prototype.say = function() {
 HomeController.prototype.readAndWriteSession = function() {
   var self = this;
   var srcVal = parseInt(self.context.param("val"));
-  self.context.session.set("s", srcVal, function() {
-    self.context.session.get("s", function(val) {
-      var dstVal = val + val;
-      self.context.send(dstVal);
+  self.context.session.remove("s", function() {
+    self.context.session.set("s", srcVal, function() {
+      self.context.session.get("s", function(val) {
+        var dstVal = val + val;
+        self.context.send(dstVal);
+      });
     });
   });
 };
@@ -113,4 +115,19 @@ HomeController.prototype.buffer = function() {
 HomeController.prototype.testRoute = function() {
   var self = this;
   self.context.send(self.context.params['num'], "text/html");
+};
+
+var asyncFunc = function(n) {
+  return function(callback) {
+    setTimeout(function() {
+      callback(null, n * n);
+    }, 0);
+  };
+};
+
+HomeController.prototype.generatorAsync = function* () {
+  var self = this;
+  var n = self.context.param("n");
+  var x = yield asyncFunc(10);
+  self.context.send(x, "text/html");
 };
