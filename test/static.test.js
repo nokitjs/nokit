@@ -32,7 +32,7 @@ describe('静态文件处理', function() {
   it('GET /pages/', function(done) {
     request(app.server.httpServer)
       .get("/pages/")
-      .expect(200, done);
+      .expect(200, 'default-file', done);
   });
 
   it('GET /public-test1/test.txt', function(done) {
