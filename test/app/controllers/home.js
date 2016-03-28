@@ -3,6 +3,11 @@
  **/
 var HomeController = module.exports = function() { };
 
+HomeController.prototype.init = function() {
+  var self = this;
+  self.ready();
+};
+
 /**
  * indexAction
  **/
@@ -15,7 +20,7 @@ HomeController.prototype.index = function() {
 
 HomeController.prototype.say = function() {
   var self = this;
-  self.context.send(self.context.param("name"));
+  self.context.send(self.context.param("name"), 'text/html');
 };
 
 HomeController.prototype.readAndWriteSession = function() {

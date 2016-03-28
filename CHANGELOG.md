@@ -1,3 +1,8 @@
+### 1.22.5
+1. 增加 context.promise 方法
+2. 增加 context.thunk 方法
+3. 改进使用 generator 时的错误处理
+
 ### 1.22.4
 1. 重写 Task 模块
 2. 增加 nokit.define 方法
