@@ -1,9 +1,9 @@
 /**
  * Nokit - A Web development framework
- * @version v1.22.5
+ * @version v1.22.6
  * @link http://nokit.org
  * @license MIT
  * @author Houfeng
  * @email admin@xhou.net
  */
-body,html{height:100%;padding:0;margin:0;color:#333}body,button,html,input,select,textarea{font-size:16px;font-family:Helvetica,Microsoft YaHei,SimHei}.header{background-color:#303030;padding:10px 15px;color:#f3f3f3;font-size:18px;font-weight:700}.content{padding:25px 15px}.content a{color:#333}.quote{margin:0;padding:10px;font-family:initial;color:#666;line-height:135%;font-size:14px;word-break:break-all;word-wrap:break-word;background-color:#ffe;border:1px dotted #eee;margin-top:10px}.footer{padding:10px 15px;background-color:#fafafa;border-top:1px solid #ddd;font-size:14px}.footer,.footer a{color:#888}
+body,html{height:100%;padding:0;margin:0;color:#333}body,button,html,input,select,textarea{font-size:16px;font-family:Helvetica,Microsoft YaHei,SimHei}.header{background-color:#303030;padding:10px 15px;color:#f3f3f3;font-size:18px;font-weight:700}.content{padding:25px 15px}.content a{color:#333}.quote{margin:0;padding:10px;font-family:initial;color:#666;line-height:135%;font-size:14px;word-break:break-all;word-wrap:break-word;background-color:#ffe;border:1px dotted #eee;margin-top:10px;overflow-x:auto}.footer{padding:10px 15px;background-color:#fafafa;border-top:1px solid #ddd;font-size:14px}.footer,.footer a{color:#888}

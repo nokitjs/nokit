@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=yes" />
     <title>Hello Nokit</title>
-    <link rel="stylesheet" href="/style/common.css">
+    <link rel="stylesheet" href="/css/common.css">
 </head>
 
 <body>

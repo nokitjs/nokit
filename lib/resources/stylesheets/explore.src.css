@@ -1,37 +1,45 @@
 .path {
-    padding-bottom: 5px;
-    border-bottom: solid 1px #eaeaea;
+  padding-bottom: 5px;
+  border-bottom: solid 1px #eaeaea;
 }
+
 .list {
-    list-style-type: none;
-    margin: 0px;
-    padding: 10px;
+  list-style-type: none;
+  margin: 0px;
+  padding: 10px;
 }
-.path a{
-    text-decoration: none;
+
+.path a {
+  text-decoration: none;
 }
-.path a:hover{
-    text-decoration: underline;
+
+.path a:hover {
+  text-decoration: underline;
 }
+
 .list li {
-    padding: 3px 0px;
+  padding: 3px 0px;
 }
-i.icon{
-    color: #666;
-    width: 16px;
-    height: 16px;
-    display: inline-block;
-    vertical-align: top;
-    background-size: 16px 16px;
-    background-repeat: no-repeat;
-    background-position: center center;
+
+i.icon {
+  color: #666;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: top;
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
-i.icon-path{
-    background-image: url('../images/path.png');
+
+i.icon-path {
+  background-image: url('../images/path.png');
 }
-i.icon-folder{
-    background-image: url('../images/folder.png');
+
+i.icon-folder {
+  background-image: url('../images/folder.png');
 }
-i.icon-file{
-    background-image: url('../images/file.png');
+
+i.icon-file {
+  background-image: url('../images/file.png');
 }
