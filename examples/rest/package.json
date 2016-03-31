@@ -15,6 +15,6 @@
   "homepage": "http://nokit.org",
   "license": "MIT",
   "dependencies": {
-    "nokitjs": "^1.22.6"
+    "nokitjs": "^1.22.7"
   }
 }
