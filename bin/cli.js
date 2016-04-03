@@ -116,7 +116,11 @@ dm.run(function() {
       break;
     case "stop":
       var pid = cml.args[0];
-      if (!pid || pid == 'all') {
+      var isAll = !pid || pid == 'all';
+      if (!isAll && !processLog.get(pid)) {
+        return console.warn('Can\'t find specified application: ' + pid);
+      }
+      if (isAll) {
         processMgr.killAllApp();
         console.log("All application has stopped");
       } else {
@@ -131,9 +135,13 @@ dm.run(function() {
         return;
       }
       console.log("Restarting...");
-      notifier.waiting(processCount);
       var pid = cml.args[0];
-      if (!pid || pid == 'all') {
+      var isAll = !pid || pid == 'all';
+      if (!isAll && !processLog.get(pid)) {
+        return console.warn('Can\'t find specified application: ' + pid);
+      }
+      notifier.waiting(isAll ? processCount : 1);
+      if (isAll) {
         processMgr.restartAllApp();
       } else {
         processMgr.restartApp(pid);

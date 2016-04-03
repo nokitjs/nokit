@@ -1,3 +1,7 @@
+### 1.22.8
+1. 修复浏览器中的旧 cookie 会被重写设置的 Bug
+2. 修复 CLI 重启一单个应用时的 CLI 进程不退出问题 
+
 ### 1.22.6
 1. 增加 context.promise 方法
 2. 增加 context.thunk 方法
