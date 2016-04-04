@@ -1,7 +1,8 @@
-### 1.22.9
+### 1.23.0
 1. 修复浏览器中的旧 cookie 会被重写设置的 Bug
 2. 修复 CLI 重启一单个应用时的 CLI 进程不退出问题 
 3. 修复 controller.init 为 generator 时异常处理 Bug
+4. 修复「路由参数限定」表达式检查 Bug
 
 ### 1.22.6
 1. 增加 context.promise 方法
