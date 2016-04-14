@@ -29,17 +29,17 @@ header {
 
 .brand, .subtitle {
   text-align: center;
-  color: #ddd;
 }
 
 .brand {
   font-size: 7rem;
   margin: 2rem 0;
+  color: #bbb;
 }
 
 .subtitle {
   font-size: 1.2rem;
-  color: #aaa;
+  color: #999;
 }
 
 .content {
@@ -56,7 +56,7 @@ header {
   padding: 1.3rem;
   font-size: 1.5rem;
   background-color: #333;
-  color: #ddd;
+  color: #ccc;
   border-radius: 5px;
 }
 
