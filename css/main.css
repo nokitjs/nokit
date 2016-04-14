@@ -12,6 +12,10 @@ html, body {
   background-color: #eee;
 }
 
+.hidden {
+  display: none;
+}
+
 @media (max-width: 600px) {
   html, body {
     font-size: 12px;
