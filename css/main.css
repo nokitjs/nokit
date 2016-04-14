@@ -43,7 +43,7 @@ header {
 }
 
 .install, .menu {
-  margin: auto auto;
+  margin: 2.5rem auto;
   width: 19rem;
   text-align: center;
 }
@@ -53,13 +53,13 @@ header {
   font-size: 1.5rem;
   background-color: #333;
   color: #ddd;
-  border-radius: 0;
+  border-radius: 5px;
 }
 
 .menu {
   padding: 0;
   font-size: 1rem;
-  margin: 1.5rem auto;
+  margin-top: -1rem;
 }
 
 .menu li {
