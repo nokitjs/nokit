@@ -1,6 +1,5 @@
 * {
-  -webkit-font-smoothing: antialiased;
-  font-family: "STHeitiTC-Light", "STHeiti", "Helvetica Neue", "Microsoft Yahei";
+  font-family: "Helvetica", "Helvetica Neue", "Microsoft Yahei";
   box-sizing: border-box;
 }
 
@@ -32,7 +31,7 @@ header {
 }
 
 .brand {
-  font-size: 7rem;
+  font-size: 6rem;
   margin: 2rem 0;
   color: #bbb;
 }
@@ -69,7 +68,7 @@ header {
 .menu li {
   list-style-type: none;
   margin: 0;
-  padding: 5px;
+  padding: 5px 4px;
   font-size: 1rem;
   display: inline-block;
 }
