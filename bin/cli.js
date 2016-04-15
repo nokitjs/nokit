@@ -30,11 +30,8 @@ function printInfo(versionOnly) {
     console.log(env.EOL + "Usage:", true);
     console.log("  nokit <command> [params] [options]" + env.EOL, true);
     console.log("Commands:", true);
-    console.log("  create     [name]", true);
-    console.log("             [mvc|nsp|rest]", true);
-    console.log("             [folder]", true);
-    console.log("  start      [port]      ", true);
-    console.log("             [root]", true);
+    console.log("  create     [name] [mvc|nsp|rest] [folder]", true);
+    console.log("  start      [port] [root]", true);
     console.log("             [-name:<name>]", true);
     console.log("             [-env:<name>]", true);
     console.log("             [-cluster[:num]]", true);
