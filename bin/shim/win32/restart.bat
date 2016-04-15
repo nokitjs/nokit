@@ -1,2 +1,0 @@
-nokit restart
-pause

@@ -28,20 +28,21 @@ function printInfo(versionOnly) {
   console.log(pkg.displayName + " " + pkg.version + env.EOL, true);
   if (!versionOnly) {
     console.log(" 1) nokit create    [name] [mvc|nsp|rest] [folder]", true);
-    console.log(" 2) nokit start     [port] [root] [-env:<name>] [-cluster[:num]] [-watch[:.ext,...]] [node-opts]", true);
-    console.log(" 3) nokit stop      [pid|all]", true);
-    console.log(" 4) nokit restart   [pid|all]", true);
+    console.log(" 2) nokit start     [port] [root] [-name:<name>] [-env:<name>] [-cluster[:num]] [-watch[:.ext,...]] [node-opts]", true);
+    console.log(" 3) nokit stop      [name|pid|all]", true);
+    console.log(" 4) nokit restart   [name|pid|all]", true);
     console.log(" 5) nokit list      (no args)", true);
-    console.log(" 6) nokit autostart [on|off] [-uid:[domain\\]user [-pwd:password]]" + env.EOL, true);
+    console.log(" 6) nokit delete    [name|pid|all]", true);
+    console.log(" 7) nokit autostart [on|off] [-uid:[domain\\]user [-pwd:password]]" + env.EOL, true);
   }
 }
 
 var dm = domain.create();
-dm.on('error', function(err) {
+dm.on('error', function (err) {
   console.error(err.message + env.EOL + err.stack);
 });
 
-dm.run(function() {
+dm.run(function () {
 
   var notifier = new Notifier();
 
@@ -57,6 +58,7 @@ dm.run(function() {
     case "help":
       printInfo();
       break;
+    case "new":
     case "create":
       console.log("Creating...");
       //处理参数
@@ -77,7 +79,6 @@ dm.run(function() {
       break;
     case "start":
       console.log("Starting...");
-      notifier.waiting(1);
       var startInfo = [];
       //处理调式参数
       //因为 master 使用 --debug 指定的端口，而 worker 的 debug port 则会每个 +1
@@ -94,7 +95,7 @@ dm.run(function() {
       }
       //添加 node 控制选项 
       var nodeOptions = cml.options.getNodeOptions();
-      nodeOptions.forEach(function(item) {
+      nodeOptions.forEach(function (item) {
         startInfo.push(item);
       });
       //添加入口程序
@@ -107,25 +108,33 @@ dm.run(function() {
       var root = path.resolve(cwd, path.normalize(cml.args[1] || './'));
       startInfo.push(root);
       //添加控制选项
-      cml.options.forEach(function(item) {
+      cml.options.forEach(function (item) {
         startInfo.push(item);
       });
       //console.log("startInfo: " + startInfo);
+      //检查重名
+      if (cml.options.has('-name')) {
+        var appName = cml.options.getValue('-name');
+        if (processLog.get(appName)) {
+          return console.warn("Application name already exists: " + appName);
+        }
+      }
       //请求启动
-      processMgr.startApp(startInfo);
+      notifier.waiting(1);
+      processMgr.startAppByInfo(startInfo);
       break;
     case "stop":
-      var pid = cml.args[0];
-      var isAll = !pid || pid == 'all';
-      if (!isAll && !processLog.get(pid)) {
-        return console.warn('Can\'t find specified application: ' + pid);
+      var nameOrPid = cml.args[0];
+      var isAll = !nameOrPid || nameOrPid == 'all';
+      if (!isAll && !processLog.get(nameOrPid)) {
+        return console.warn('Can\'t find specified application: ' + nameOrPid);
       }
       if (isAll) {
         processMgr.killAllApp();
         console.log("All application has stopped");
       } else {
-        processMgr.killApp(pid);
-        console.log("Stopped specified application: " + pid);
+        processMgr.killApp(nameOrPid);
+        console.log("Stopped specified application: " + nameOrPid);
       }
       break;
     case "restart":
@@ -135,18 +144,34 @@ dm.run(function() {
         return;
       }
       console.log("Restarting...");
-      var pid = cml.args[0];
-      var isAll = !pid || pid == 'all';
-      if (!isAll && !processLog.get(pid)) {
-        return console.warn('Can\'t find specified application: ' + pid);
+      var nameOrPid = cml.args[0];
+      var isAll = !nameOrPid || nameOrPid == 'all';
+      if (!isAll && !processLog.get(nameOrPid)) {
+        return console.warn('Can\'t find specified application: ' + nameOrPid);
       }
       notifier.waiting(isAll ? processCount : 1);
       if (isAll) {
         processMgr.restartAllApp();
       } else {
-        processMgr.restartApp(pid);
+        processMgr.restartApp(nameOrPid);
       }
       break;
+    case "remove":
+    case "delete":
+      var nameOrPid = cml.args[0];
+      var isAll = !nameOrPid || nameOrPid == 'all';
+      if (!isAll && !processLog.get(nameOrPid)) {
+        return console.warn('Can\'t find specified application: ' + nameOrPid);
+      }
+      if (isAll) {
+        processMgr.deleteAllApp();
+        console.log("All application has deleted");
+      } else {
+        processMgr.deleteApp(nameOrPid);
+        console.log("Deleted specified application: " + nameOrPid);
+      }
+      break;
+    case "ls":
     case "list":
       var logArray = processLog.toPrintArray();
       if (logArray && logArray.length > 0) {
@@ -166,6 +191,22 @@ dm.run(function() {
           pwd: cml.options.getValue('-pwd')
         }));
       }
+      break;
+    case "bootstrap":
+      var appArray = processLog.readArray()
+        .filter(function (app) {
+          return app.status;
+        });
+      if (appArray.length < 1) {
+        console.log("No application has been started");
+        return;
+      }
+      console.log("Starting...");
+      notifier.waiting(appArray.length);
+      processMgr.killAllApp();
+      appArray.forEach(function (app) {
+        processMgr.startApp(app);
+      })
       break;
     default:
       console.error('Unrecognizable command "' + cml.command + '"');

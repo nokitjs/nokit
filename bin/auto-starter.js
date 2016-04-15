@@ -12,59 +12,10 @@ var pkg = nokit.pkg;
 var self = this;
 
 /**
- * windows 平台
- **/
-self.win32 = {
-    enabled: function (options) {
-        options = options || {};
-        try {
-            this.disabled();
-            var restartExecFile = path.normalize(__dirname + '/shim/win32/restart.exe');
-            var schtasks = path.normalize(__dirname + '/shim/win32/schtasks-admin.exe');
-            /*
-            如果需要启动并不登录就能启动 nokit app，需要指定 uid 和 pwd
-            所以当 options 包含 uid 和 pwd 时，就创建启动就触发的 '计划任务'
-            否则，创建 ‘用户登录’ 触发的 '计划任务'
-            */
-            var cmd = null;
-            if (options.uid && options.pwd) {
-                cmd = ['"' + schtasks + '"', '/create', '/tn', pkg.displayName, '/tr', '"' + restartExecFile + '"', '/sc', 'onstart', '/ru', options.uid, '/rp', options.pwd];
-            } else {
-                cmd = ['"' + schtasks + '"', '/create', '/tn', pkg.displayName, '/tr', '"' + restartExecFile + '"', '/sc', 'onlogon'];
-            }
-            var result = execSync(cmd.join(' '), {
-                encoding: "utf8"
-            });
-            return "启用设置完成";
-        } catch (ex) {
-            return ex.message;
-        }
-    },
-    disabled: function (options) {
-        options = options || {};
-        try {
-            var schtasks = path.normalize(__dirname + '/shim/win32/schtasks-admin.exe');
-            var cmd = null;
-            if (options.uid && options.pwd) {
-                cmd = ['"' + schtasks + '"', '/delete', '/tn', pkg.displayName, '/f', '/ru', options.uid, '/rp', options.pwd];
-            } else {
-                cmd = ['"' + schtasks + '"', '/delete', '/tn', pkg.displayName, '/f'];
-            }
-            var result = execSync(cmd.join(' '), {
-                encoding: "utf8"
-            });
-            return "禁止设置完成";
-        } catch (ex) {
-            return ex.message;
-        }
-    }
-};
-
-/**
  * linux 平台
  **/
 self.linux = {
-    cmd: env.EOL + 'nokit restart &' + env.EOL,
+    cmd: env.EOL + 'nokit bootstrap &' + env.EOL,
     enabled: function (options) {
         options = options || {};
         try {
