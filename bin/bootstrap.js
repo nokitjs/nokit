@@ -30,7 +30,7 @@ self.linux = {
                 }
             }
             fs.writeFileSync(scriptPath, scriptLines.join(env.EOL));
-            return "启用设置完成";
+            return "Bootstrap enabled";
         } catch (ex) {
             return ex.message;
         }
@@ -42,7 +42,7 @@ self.linux = {
             var script = fs.readFileSync(scriptPath).toString();
             script = utils.replace(script, this.cmd, '');
             fs.writeFileSync(scriptPath, script);
-            return "禁止设置完成";
+            return "Bootstrap disabled";
         } catch (ex) {
             return ex.message;
         }
@@ -52,11 +52,11 @@ self.linux = {
 /**
  * 设置启用状态
  **/
-self.set = function (state, options) {
+self.set = function (status, options) {
     var platform = self[process.platform];
     if (platform) {
-        return platform[state == 'on' ? 'enabled' : 'disabled'](options);
+        return platform[status ? 'enabled' : 'disabled'](options);
     } else {
-        return "不支持 " + process.platform + ' 平台';
+        return 'No support: ' + process.platform;
     }
 };

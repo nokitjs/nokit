@@ -11,7 +11,7 @@ var Notifier = require('./notifier');
 var processLog = require('./process-log');
 var processMgr = require('./process-mgr');
 var CmdLine = require('cmdline');
-var autoStarter = require('./auto-starter');
+var bootstrap = require('./bootstrap');
 var utils = nokit.utils;
 var pkg = nokit.pkg;
 var console = nokit.console;
@@ -25,15 +25,26 @@ var cwd = process.cwd();
  * 输出帮助信息
  **/
 function printInfo(versionOnly) {
-  console.log(pkg.displayName + " " + pkg.version + env.EOL, true);
+  console.log(pkg.displayName + " " + pkg.version, true);
   if (!versionOnly) {
-    console.log(" 1) nokit create    [name] [mvc|nsp|rest] [folder]", true);
-    console.log(" 2) nokit start     [port] [root] [-name:<name>] [-env:<name>] [-cluster[:num]] [-watch[:.ext,...]] [node-opts]", true);
-    console.log(" 3) nokit stop      [name|pid|all]", true);
-    console.log(" 4) nokit restart   [name|pid|all]", true);
-    console.log(" 5) nokit list      (no args)", true);
-    console.log(" 6) nokit delete    [name|pid|all]", true);
-    console.log(" 7) nokit autostart [on|off] [-uid:[domain\\]user [-pwd:password]]" + env.EOL, true);
+    console.log(env.EOL + "Usage:", true);
+    console.log("  nokit <command> [params] [options]" + env.EOL, true);
+    console.log("Commands:", true);
+    console.log("  create     [name]", true);
+    console.log("             [mvc|nsp|rest]", true);
+    console.log("             [folder]", true);
+    console.log("  start      [port]      ", true);
+    console.log("             [root]", true);
+    console.log("             [-name:<name>]", true);
+    console.log("             [-env:<name>]", true);
+    console.log("             [-cluster[:num]]", true);
+    console.log("             [-watch[:.ext,...]]", true);
+    console.log("             [node-opts]", true);
+    console.log("  stop       [name|pid|all]", true);
+    console.log("  restart    [name|pid|all]", true);
+    console.log("  list       (no params)", true);
+    console.log("  delete     [name|pid|all]", true);
+    console.log("  bootstrap  [true|false]" + env.EOL, true);
   }
 }
 
@@ -181,18 +192,12 @@ dm.run(function () {
         console.log('No application has been started');
       }
       break;
-    case "autostart":
-      var state = (cml.args[0] || 'on').toLowerCase();
-      if (state != 'on' && state != 'off') {
-        console.log('Unrecognizable parameters "' + cml.args[0] + '"');
-      } else {
-        console.log(autoStarter.set(state, {
-          uid: cml.options.getValue('-uid'),
-          pwd: cml.options.getValue('-pwd')
-        }));
-      }
-      break;
     case "bootstrap":
+      if (cml.args[0]) {
+        var status = Boolean(cml.args[0]);
+        console.log(bootstrap.set(status));
+        return;
+      }
       var appArray = processLog.readArray()
         .filter(function (app) {
           return app.status;
