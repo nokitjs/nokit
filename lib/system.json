@@ -147,12 +147,12 @@
     "cache": false
   },
   "nsp": {
-    "path": "./nsp",
+    "path": "./",
     "compress": false,
     "cache": false
   },
   "nsh": {
-    "path": "./nsh",
+    "path": "./",
     "compress": false,
     "cache": false
   },
