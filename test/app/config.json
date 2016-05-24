@@ -23,7 +23,7 @@
       },
       "/status/{code}": "./home status",
       "/route/{num:[0-9]+?}": "./home testRoute",
-      "/statusWithContent/{code}": "./home statusWithContent",
+      "/statusTemplate/{code}": "./home statusTemplate",
       "/locale": "./home localeAction",
       "/json": "./home json",
       "/jsonp": "./home jsonp",

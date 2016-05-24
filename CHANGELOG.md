@@ -1,3 +1,11 @@
+### 1.24.0
+1. 优化 headers 处理
+2. 重构 context.status 方法
+3. 重命名 context.statusWithContext 为 context.statusTemplate
+4. 重构 context.stream 方法
+5. 增加 context.header 和 context.headers 方法
+6. 增加 context.request.getHeader 方法
+
 ### 1.23.3
 1. 改进 CLI
 2. 改进 NSP/NSH
