@@ -1,7 +1,7 @@
 {
   "name": "nokitjs",
   "displayName": "Nokit",
-  "version": "1.24.1",
+  "version": "1.24.3",
   "description": "A Web development framework",
   "main": "./lib/index.js",
   "bin": {
@@ -39,7 +39,7 @@
     "bufstream": "0.0.2",
     "cheerio": "^0.19.0",
     "chokidar": "^1.5.2",
-    "cify": "0.0.6",
+    "cify": "^1.0.0",
     "cmdline": "^0.0.5",
     "co": "^4.6.0",
     "console.table": "^0.4.0",
