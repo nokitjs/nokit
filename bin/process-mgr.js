@@ -127,7 +127,7 @@ self.startApp = function (log) {
 self.restartApp = function (nameOrPid) {
   var log = processLog.get(nameOrPid);
   if (!log) return;
-  this.killApp(nameOrPid);
+  this.deleteApp(nameOrPid);
   this.startApp(log);
 };
 
@@ -136,7 +136,7 @@ self.restartApp = function (nameOrPid) {
  **/
 self.restartAllApp = function () {
   var logArray = processLog.readArray();
-  this.killAllApp();
+  this.deleteAllApp();
   for (var i in logArray) {
     var log = logArray[i];
     this.startApp(log);
