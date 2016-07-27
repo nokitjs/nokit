@@ -1,16 +1,16 @@
 /* global process */
-var net = require('net');
-var nokit = require("../");
-var console = nokit.console;
-var utils = nokit.utils;
-var exitCode = nokit.exitCode;
+const net = require('net');
+const nokit = require("../");
+const console = nokit.console;
+const utils = nokit.utils;
+const exitCode = nokit.exitCode;
 
-var LOCAL_HOST = "127.0.0.1";
-var LOCAL_PORT = 20202;
-var EXIT_DELAY = 1000;
+const LOCAL_HOST = "127.0.0.1";
+const LOCAL_PORT = 20202;
+const EXIT_DELAY = 1000;
 
 function Notifier() {
-  var self = this;
+  const self = this;
   self.readied = false;
 };
 
@@ -18,9 +18,9 @@ function Notifier() {
  * 发送 app ready 消息
  */
 Notifier.prototype.ready = function(msgList, callback) {
-  var self = this;
+  const self = this;
   if (self.readied || !msgList) return;
-  var client = new net.Socket();
+  const client = new net.Socket();
   client.connect(LOCAL_PORT, LOCAL_HOST, function() {
     //去掉其它信息只保留 type、text
     msgList = msgList.map(function(item) {
@@ -40,7 +40,7 @@ Notifier.prototype.ready = function(msgList, callback) {
  */
 Notifier.prototype.waiting = function(total) {
   var readiedCount = 0;
-  var server = net.createServer(function(socket) {
+  const server = net.createServer(function(socket) {
     socket.on('data', function(data) {
       if (data) {
         var list = JSON.parse(data);

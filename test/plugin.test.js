@@ -1,7 +1,7 @@
 /* global it */
 /* global describe */
-var assert = require("assert");
-var app = require("./app");
+const assert = require("assert");
+const app = require("./app");
 
 describe('Server plugin', function() {
   it('use plugin', function(done) {

@@ -3,15 +3,13 @@
     "^/": "$./handlers/mvc",
     "^/api/": "$./handlers/rest"
   },
-  "folders": {
-    "public": {
-      "^/public-test1": "./public/test",
-      "^/public-test2/(.*)": "./public/test"
-    }
+  "public": {
+    "^/public-test1": "./public/test",
+    "^/public-test2/(.*)": "./public/test"
   },
   "filters": {
-    "^/filter-test:test-1": "./filters/test-1",
-    "^/filter-test:test-2": "./filters/test-2"
+    "^/filter-test@test-1": "./filters/test-1",
+    "^/filter-test@test-2": "./filters/test-2"
   },
   "mvc": {
     "routes": {

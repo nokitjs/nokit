@@ -1,28 +1,28 @@
-var nokit = require("../");
-var console = nokit.console;
-var env = nokit.env;
-var utils = nokit.utils;
-var path = require("path");
-var Notifier = require('./notifier');
-var domain = require("domain");
-var chokidar = require('chokidar');
-var processLog = require("./process-log");
-var cluster = require("cluster");
-var cpuTotal = require("os").cpus().length;
-var exitCode = nokit.exitCode;
-var self = exports;
+const nokit = require("../");
+const console = nokit.console;
+const env = nokit.env;
+const utils = nokit.utils;
+const path = require("path");
+const Notifier = require('./notifier');
+const domain = require("domain");
+const chokidar = require('chokidar');
+const processLog = require("./process-log");
+const cluster = require("cluster");
+const cpuTotal = require("os").cpus().length;
+const exitCode = nokit.exitCode;
+const self = exports;
 
-var EXIT_DELAY = 1000;
+const EXIT_DELAY = 1000;
 
 self.init = function (options, cml) {
 
-  var notifier = new Notifier();
+  const notifier = new Notifier();
 
-  var startInfo = cml.options.getValue('-start-info') || '';
-  var isDebug = cml.options.has('--debug') || cml.options.has('--debug-brk');
-  var isCluster = cml.options.has('-cluster') && !isDebug;
-  var isWatch = cml.options.has('-watch');
-  var appName = cml.options.getValue('-name');
+  const startInfo = cml.options.getValue('-start-info') || '';
+  const isDebug = cml.options.has('--debug') || cml.options.has('--debug-brk');
+  const isCluster = cml.options.has('-cluster') && !isDebug;
+  const isWatch = cml.options.has('-watch');
+  const appName = cml.options.getValue('-name');
   //--
 
   var workerNumber = isCluster ? parseInt(cml.options.getValue('-cluster') || cpuTotal) : 1;

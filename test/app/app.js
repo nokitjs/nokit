@@ -1,4 +1,4 @@
-var app = require("./");
+const app = require("./");
 app.server.start(function(err, info) {
   if (err) {
     return console.error(err);

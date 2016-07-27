@@ -1,8 +1,8 @@
 /* global it */
 /* global describe */
-var assert = require("assert");
-var app = require("./app");
-var request = require('supertest');
+const assert = require("assert");
+const app = require("./app");
+const request = require('supertest');
 
 describe('cookie', function() {
   it('GET /cookie', function(done) {

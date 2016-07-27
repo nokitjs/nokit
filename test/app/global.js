@@ -1,7 +1,7 @@
 /**
  * 全局应用程序类
  **/
-var Global = function() { };
+const Global = function() { };
 
 /**
  * 在 server 启动时

@@ -1,8 +1,8 @@
 /* global it */
 /* global describe */
-var assert = require("assert");
-var app = require("./app");
-var request = require('supertest');
+const assert = require("assert");
+const app = require("./app");
+const request = require('supertest');
 
 describe('Error', function() {
   it('GET /emitError', function(done) {

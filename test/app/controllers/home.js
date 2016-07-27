@@ -1,10 +1,10 @@
 /**
  * 定义 HomeController
  **/
-var HomeController = module.exports = function () { };
+const HomeController = module.exports = function () { };
 
 HomeController.prototype.init = function () {
-  var self = this;
+  const self = this;
   self.ready();
 };
 
@@ -12,19 +12,19 @@ HomeController.prototype.init = function () {
  * indexAction
  **/
 HomeController.prototype.index = function () {
-  var self = this;
+  const self = this;
   self.render("home", {
     "name": "MVC"
   });
 };
 
 HomeController.prototype.say = function () {
-  var self = this;
+  const self = this;
   self.context.send(self.context.param("name"), 'text/html');
 };
 
 HomeController.prototype.readAndWriteSession = function () {
-  var self = this;
+  const self = this;
   var srcVal = parseInt(self.context.param("val"));
   self.context.session.remove("s", function () {
     self.context.session.set("s", srcVal, function () {
@@ -37,75 +37,75 @@ HomeController.prototype.readAndWriteSession = function () {
 };
 
 HomeController.prototype.status = function () {
-  var self = this;
+  const self = this;
   var statusCode = self.context.params["code"];
   self.context.status(statusCode);
   self.context.send();
 };
 
 HomeController.prototype.statusTemplate = function () {
-  var self = this;
+  const self = this;
   var statusCode = self.context.params["code"];
   self.context.statusTemplate(statusCode);
 };
 
 HomeController.prototype.localeAction = function () {
-  var self = this;
+  const self = this;
   self.render('locale');
 };
 
 HomeController.prototype.json = function () {
-  var self = this;
+  const self = this;
   self.context.json('json');
 };
 
 HomeController.prototype.jsonp = function () {
-  var self = this;
+  const self = this;
   self.context.jsonp('jsonp');
 };
 
 HomeController.prototype.redirect = function () {
-  var self = this;
+  const self = this;
   self.context.redirect('/');
 };
 
 HomeController.prototype.permanentRedirect = function () {
-  var self = this;
+  const self = this;
   self.context.permanentRedirect('/');
 };
 
 HomeController.prototype.notFound = function () {
-  var self = this;
+  const self = this;
   self.context.notFound();
 };
 
 HomeController.prototype.forbidden = function () {
-  var self = this;
+  const self = this;
   self.context.forbidden();
 };
 
 HomeController.prototype.notAllowed = function () {
-  var self = this;
+  const self = this;
   self.context.notAllowed();
 };
 
 HomeController.prototype.transfer = function () {
-  var self = this;
+  const self = this;
   self.context.transfer('/json');
 };
 
 HomeController.prototype.noChange = function () {
-  var self = this;
+  const self = this;
   self.context.noChange();
 };
 
 HomeController.prototype.emitError = function () {
-  var self = this;
+  const self = this;
   self.__no_func();
 };
 
 HomeController.prototype.cookie = function () {
-  var self = this;
+  const self = this;
   var cookieValue = self.context.cookie.get("test");
   self.context.cookie.set("test", "test");
   self.context.cookie.remove("test");
@@ -114,12 +114,12 @@ HomeController.prototype.cookie = function () {
 };
 
 HomeController.prototype.buffer = function () {
-  var self = this;
+  const self = this;
   self.context.buffer(new Buffer("test"), "text/html");
 };
 
 HomeController.prototype.testRoute = function () {
-  var self = this;
+  const self = this;
   self.context.send(self.context.params['num'], "text/html");
 };
 
@@ -132,7 +132,7 @@ var asyncFunc = function (n) {
 };
 
 HomeController.prototype.generatorAsync = function* () {
-  var self = this;
+  const self = this;
   var n = self.context.param("n");
   var x = yield asyncFunc(10);
   self.context.send(x, "text/html");

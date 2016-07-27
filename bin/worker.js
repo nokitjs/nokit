@@ -1,12 +1,12 @@
-var nokit = require("../");
-var env = nokit.env;
-var utils = nokit.utils;
-var exitCode = nokit.exitCode;
-var domain = require("domain");
-var cluster = require("cluster");
-var self = exports;
+const nokit = require("../");
+const env = nokit.env;
+const utils = nokit.utils;
+const exitCode = nokit.exitCode;
+const domain = require("domain");
+const cluster = require("cluster");
+const self = exports;
 
-var EXIT_DELAY = 1000;
+const EXIT_DELAY = 1000;
 
 /**
  * 发送一个消息

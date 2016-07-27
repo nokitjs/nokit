@@ -1,9 +1,9 @@
 /* global nokit */
 /* global it */
 /* global describe */
-var assert = require("assert");
-var app = require("./app");
-var base64 = nokit.base64;
+const assert = require("assert");
+const app = require("./app");
+const base64 = nokit.base64;
 
 describe('define', function() {
 

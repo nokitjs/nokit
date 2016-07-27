@@ -3,23 +3,23 @@
 /* global __dirname */
 /* global process */
 
-var nokit = require("../");
-var path = require("path");
-var fs = require("fs");
-var domain = require("domain");
-var Notifier = require('./notifier');
-var processLog = require('./process-log');
-var processMgr = require('./process-mgr');
-var CmdLine = require('cmdline');
-var bootstrap = require('./bootstrap');
-var utils = nokit.utils;
-var pkg = nokit.pkg;
-var console = nokit.console;
-var env = nokit.env;
+const nokit = require("../");
+const path = require("path");
+const fs = require("fs");
+const domain = require("domain");
+const Notifier = require('./notifier');
+const processLog = require('./process-log');
+const processMgr = require('./process-mgr');
+const CmdLine = require('cmdline');
+const bootstrap = require('./bootstrap');
+const utils = nokit.utils;
+const pkg = nokit.pkg;
+const console = nokit.console;
+const env = nokit.env;
 //var _debugger = require('../tool/debugger');
 
 //工作目录
-var cwd = process.cwd();
+const cwd = process.cwd();
 
 /**
  * 输出帮助信息
@@ -45,16 +45,16 @@ function printInfo(versionOnly) {
   }
 }
 
-var dm = domain.create();
+const dm = domain.create();
 dm.on('error', function (err) {
   console.error(err.message + env.EOL + err.stack);
 });
 
 dm.run(function () {
 
-  var notifier = new Notifier();
+  const notifier = new Notifier();
 
-  var cml = new CmdLine({
+  const cml = new CmdLine({
     commandEnabled: true
   });
 

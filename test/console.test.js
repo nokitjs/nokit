@@ -1,9 +1,9 @@
 /* global nokit */
 /* global it */
 /* global describe */
-var assert = require("assert");
-var app = require("./app");
-var console = nokit.console;
+const assert = require("assert");
+const app = require("./app");
+const console = nokit.console;
 
 describe('console', function() {
 

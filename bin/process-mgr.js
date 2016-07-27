@@ -1,21 +1,21 @@
 /* global __dirname */
 /* global process */
-var isWin = process.platform === 'win32';
-var child_process = require('child_process');
-var path = require("path");
-var nokit = require("../");
-var processLog = require('./process-log');
-var utils = nokit.utils;
-var base64 = nokit.base64;
-var console = nokit.console;
+const isWin = process.platform === 'win32';
+const child_process = require('child_process');
+const path = require("path");
+const nokit = require("../");
+const processLog = require('./process-log');
+const utils = nokit.utils;
+const base64 = nokit.base64;
+const console = nokit.console;
 //var _debugger = require('../tool/debugger');
-var spawn = child_process.spawn;
-var exec = child_process.exec;
+const spawn = child_process.spawn;
+const exec = child_process.exec;
 
-var engineName = path.basename(process.argv[0] || 'node').split('.')[0];
-var win32EngineName = path.normalize(__dirname + '/shim/win32/' + engineName + '.vbs ');
+const engineName = path.basename(process.argv[0] || 'node').split('.')[0];
+const win32EngineName = path.normalize(__dirname + '/shim/win32/' + engineName + '.vbs ');
 
-var self = exports;
+const self = exports;
 
 //cli进程延迟存活时间
 self.isWin = isWin;

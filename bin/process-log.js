@@ -1,8 +1,8 @@
-var path = require("path");
-var fs = require('fs');
-var nokit = require("../");
-var utils = nokit.utils;
-var env = nokit.env;
+const path = require("path");
+const fs = require('fs');
+const nokit = require("../");
+const utils = nokit.utils;
+const env = nokit.env;
 
 /**
  * 进程信息操作

@@ -1,38 +1,35 @@
 /**
  * 定义 HelloController
  **/
-var HelloController = nokit.define({
+const HelloController = nokit.define({
 
   /**
    * post 处理方法
    **/
-  post: function() {
-    var self = this;
-    self.send({
+  post: function () {
+    this.send({
       "status": "success",
-      "message": "Hello " + self.context.params["name"] + "!"
+      "message": "Hello " + this.context.params["name"] + "!"
     });
   },
 
   /**
    * get 处理方法
    **/
-  get: function() {
-    var self = this;
-    self.send({
+  get: function () {
+    this.send({
       "status": "success",
-      "message": "Hello " + self.context.params["name"] + "!"
+      "message": "Hello " + this.context.params["name"] + "!"
     });
   },
 
   /**
    * put 处理方法
    **/
-  put: function() {
-    var self = this;
-    self.send({
+  put: function () {
+    this.send({
       "status": "success",
-      "message": "Hello " + self.context.params["name"] + "!"
+      "message": "Hello " + this.context.params["name"] + "!"
     });
   }
 

@@ -1,8 +1,8 @@
 /* global __dirname */
-var fs = require('fs');
-var path = require('path');
-var os = require('os');
-var self = exports;
+const fs = require('fs');
+const path = require('path');
+const os = require('os');
+const self = exports;
 
 self.enabled = false;
 
