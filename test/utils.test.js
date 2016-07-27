@@ -5,6 +5,7 @@ const assert = require("assert");
 const app = require("./app");
 const utils = nokit.utils;
 const fs = require("fs");
+const exec = require('child_process').execSync;
 
 describe('utils', function () {
 
@@ -33,8 +34,9 @@ describe('utils', function () {
     assert.notEqual(utils.copyDir, null);
     var dirPath = __dirname + '/app/test-dir';
     utils.copyDir(dirPath, dirPath + '-new');
-    var exists = fs.existsSync('/etc/passwd');
+    var exists = fs.existsSync(dirPath + '-new');
     assert.equal(exists, true);
+    exec('rm -rf ' + dirPath + '-new');
   });
 
 });
