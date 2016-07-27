@@ -1,15 +1,14 @@
 /**
  * 定义 ExampleHandler
  **/
-var ExampleHandler = nokit.define({
+const ExampleHandler = nokit.define({
 
   /**
    * 请求处理方法
    **/
-  handle: function() {
-    var self = this;
-    self.context.response.setHeader('Content-Type', 'text/html');
-    self.context.send("Hello NSH!");
+  handle: function () {
+    this.context.response.setHeader('Content-Type', 'text/html');
+    this.context.send("Hello NSH!");
   }
 
 });

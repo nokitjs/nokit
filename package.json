@@ -42,10 +42,12 @@
     "cify": "^1.0.0",
     "cmdline": "^0.0.5",
     "co": "^4.6.0",
+    "confman": "^0.1.1",
     "console.table": "^0.4.0",
     "formidable": "^1.0.17",
     "nb64": "0.0.1",
     "real-utils": "^0.0.1",
+    "smache": "^1.0.1",
     "thunkify": "^2.1.2",
     "tpjs": "^3.7.2",
     "xml2js": "^0.4.16"

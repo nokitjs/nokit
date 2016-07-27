@@ -1,7 +1,7 @@
 /**
  * 全局应用程序类
  **/
-var TestFilter = function () { };
+const TestFilter = function () { };
 
 
 /**

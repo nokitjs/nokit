@@ -1,15 +1,15 @@
-var gulp = require("gulp");
-var uglify = require("gulp-uglify");
-var cssnano = require('gulp-cssnano');
-var htmlMin = require("gulp-htmlmin");
-var concat = require('gulp-concat');
-var rename = require('gulp-rename');
-var header = require('gulp-header');
-var replace = require('gulp-replace');
-var del = require('del');
-var pkg = require("./package.json");
+const gulp = require("gulp");
+const uglify = require("gulp-uglify");
+const cssnano = require('gulp-cssnano');
+const htmlMin = require("gulp-htmlmin");
+const concat = require('gulp-concat');
+const rename = require('gulp-rename');
+const header = require('gulp-header');
+const replace = require('gulp-replace');
+const del = require('del');
+const pkg = require("./package.json");
 
-var banner = ['/**',
+const banner = ['/**',
   ' * <%= displayName %> - <%= description %>',
   ' * @version v<%= version %>',
   ' * @link <%= homepage %>',

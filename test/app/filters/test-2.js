@@ -1,8 +1,8 @@
 /**
  * 全局应用程序类
  **/
-var TestFilter = function () {
-    var self = this;
+const TestFilter = function () {
+    const self = this;
     self.parallel = true;
 };
 

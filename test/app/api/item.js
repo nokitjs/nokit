@@ -1,13 +1,13 @@
 /**
  * ItemController
  **/
-var ItemController = function() { };
+const ItemController = function() { };
 
 /**
  * 初始化方法，每次请求都会先执行 init 方法
  **/
 ItemController.prototype.init = function() {
-  var self = this;
+  const self = this;
   self.ready();
 }
 
@@ -15,7 +15,7 @@ ItemController.prototype.init = function() {
  * Create (POST)
  **/
 ItemController.prototype.post = function() {
-  var self = this;
+  const self = this;
   self.send({
     "name": "POST"
   });
@@ -25,7 +25,7 @@ ItemController.prototype.post = function() {
  * Read (GET)
  **/
 ItemController.prototype.get = function() {
-  var self = this;
+  const self = this;
   self.send({
     "name": "GET"
   });
@@ -35,7 +35,7 @@ ItemController.prototype.get = function() {
  * Update (PUT)
  **/
 ItemController.prototype.put = function() {
-  var self = this;
+  const self = this;
   self.send({
     "name": "PUT"
   });
@@ -45,7 +45,7 @@ ItemController.prototype.put = function() {
  * Delete (DELETE)
  **/
 ItemController.prototype.delete = function() {
-  var self = this;
+  const self = this;
   self.send({
     "name": "DELETE"
   });

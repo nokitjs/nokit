@@ -1,7 +1,7 @@
 /* global __dirname */
 
-var nokit = require("../../");
-var self = module.exports;
+const nokit = require("../../");
+const self = module.exports;
 
 /**
  * 创建 server 实例

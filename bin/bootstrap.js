@@ -1,15 +1,15 @@
 /* global process */
 /* global __dirname */
-var fs = require('fs');
-var path = require('path');
-var child_process = require('child_process');
-var nokit = require('../');
-var env = nokit.env;
-var utils = nokit.utils;
-var execSync = child_process.execSync;
-var pkg = nokit.pkg;
+const fs = require('fs');
+const path = require('path');
+const child_process = require('child_process');
+const nokit = require('../');
+const env = nokit.env;
+const utils = nokit.utils;
+const execSync = child_process.execSync;
+const pkg = nokit.pkg;
 
-var self = this;
+const self = this;
 
 /**
  * linux 平台
