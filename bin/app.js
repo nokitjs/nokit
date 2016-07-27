@@ -28,10 +28,8 @@ if (cml.args[1]) {
 //是否自定义指定 public 文件夹
 const publicFolder = cml.options.getValue('-public');
 if (publicFolder) {
-  options.folders = options.folders || {};
-  options.folders.public = {
-    "*": publicFolder
-  };
+  options.public = options.public || {};
+  options.public["*"] = publicFolder;
 }
 
 //是否指定配置文件名称
