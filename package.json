@@ -1,7 +1,7 @@
 {
   "name": "nokitjs",
   "displayName": "Nokit",
-  "version": "1.25.2",
+  "version": "1.25.3",
   "description": "A Web development framework",
   "main": "./lib/index.js",
   "bin": {
@@ -42,7 +42,7 @@
     "cify": "^1.0.0",
     "cmdline": "^0.0.5",
     "co": "^4.6.0",
-    "confman": "^0.1.2",
+    "confman": "^0.2.1",
     "console.table": "^0.4.0",
     "formidable": "^1.0.17",
     "nb64": "0.0.1",
