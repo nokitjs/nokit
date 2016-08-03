@@ -92,33 +92,17 @@ self.deleteAllApp = function () {
 };
 
 /**
- * 编码启动信息
- **/
-var endcodeStartInfo = function (startInfo) {
-  return base64.encode(JSON.stringify(startInfo || []));
-};
-
-/**
- * 解码启动信息
- **/
-var dedcodeStartInfo = function (startInfo) {
-  return JSON.parse(base64.decode(startInfo));
-};
-
-/**
  * 启动一个 app
  **/
-self.startAppByInfo = function (startInfo) {
-  //将启动信息加入到自身，用于重启
-  startInfo.push('-start-info:' + endcodeStartInfo(startInfo));
-  this.start(startInfo);
-};
-
-/**
- * 启动一个 app
- **/
-self.startApp = function (log) {
-  self.startAppByInfo(dedcodeStartInfo(log.startInfo));
+self.startApp = function (params) {
+  var args = [
+    params.nodeOptions,
+    params.main,
+    base64.encode(JSON.stringify(params))
+  ].filter(function (item) {
+    return !utils.isNull(item);
+  });
+  self.start(args);
 };
 
 /**
@@ -128,7 +112,7 @@ self.restartApp = function (nameOrPid) {
   var log = processLog.get(nameOrPid);
   if (!log) return;
   this.deleteApp(nameOrPid);
-  this.startApp(log);
+  this.startApp(log.params);
 };
 
 /**
@@ -139,6 +123,6 @@ self.restartAllApp = function () {
   this.deleteAllApp();
   for (var i in logArray) {
     var log = logArray[i];
-    this.startApp(log);
+    this.startApp(log.params);
   }
 };
