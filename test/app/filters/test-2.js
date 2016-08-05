@@ -2,7 +2,7 @@
  * 全局应用程序类
  **/
 const TestFilter = function () {
-    const self = this;
+    var self = this;
     self.parallel = true;
 };
 

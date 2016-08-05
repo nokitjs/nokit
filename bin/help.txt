@@ -1,0 +1,30 @@
+Usage:
+  nokit <command> [params] [options]
+
+Commands:
+  create  [name] [dir]  Create a new app
+  start   [root]        Start a app
+  stop    [name]        Stop one or all 
+  restart [name]        Restart one or all
+  list                  Display all apps
+  delete  [name]        Delete one or all
+  restore               Restore apps
+  boot    [on/off]      Set auto boot
+
+Options:
+  -v, --version         Display version info
+  -h, --help            Display help info
+  -t, --type            For create, set app type
+  -n, --name            For start, set app name
+  -p, --port            For start, set server port
+  -c, --cluster         For start, set worker number
+  -w, --watch           For start, enable file watcher
+  -e, --env             For start, set environment variable
+      --config          For start, set config filename
+      --public          For start, set static folder
+      --node            For start, set node options
+
+Examples:
+  nokit create demo ./
+  nokit start demo -p 8000
+  

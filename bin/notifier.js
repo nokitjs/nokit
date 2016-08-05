@@ -10,7 +10,7 @@ const LOCAL_PORT = 20202;
 const EXIT_DELAY = 1000;
 
 function Notifier() {
-  const self = this;
+  var self = this;
   self.readied = false;
 };
 
@@ -18,7 +18,7 @@ function Notifier() {
  * 发送 app ready 消息
  */
 Notifier.prototype.ready = function(msgList, callback) {
-  const self = this;
+  var self = this;
   if (self.readied || !msgList) return;
   const client = new net.Socket();
   client.connect(LOCAL_PORT, LOCAL_HOST, function() {

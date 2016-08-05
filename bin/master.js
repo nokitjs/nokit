@@ -14,31 +14,22 @@ const self = exports;
 
 const EXIT_DELAY = 1000;
 
-self.init = function (options, cml) {
+self.init = function (params) {
 
   const notifier = new Notifier();
 
-  const startInfo = cml.options.getValue('-start-info') || '';
-  const isDebug = cml.options.has('--debug') || cml.options.has('--debug-brk');
-  const isCluster = cml.options.has('-cluster') && !isDebug;
-  const isWatch = cml.options.has('-watch');
-  const appName = cml.options.getValue('-name');
-  //--
-
-  var workerNumber = isCluster ? parseInt(cml.options.getValue('-cluster') || cpuTotal) : 1;
-  if (workerNumber < 1) workerNumber = 1;
+  var workerNumber = utils.isNull(params.cluster) ? 1 : params.cluster;
+  workerNumber = workerNumber > 0 ? workerNumber : cpuTotal;
   var workerReady = 0;
-  var workerDebugPort = parseInt(cml.options.getValue('--debug') || cml.options.getValue('--debug-brk')) + 1;
 
   //进程日志信息
   var logInfo = {
     pid: process.pid,
-    name: appName || process.pid,
-    path: options.root,
-    env: options.env,
-    debug: isDebug ? workerDebugPort : false,
-    watch: isWatch ? (cml.options.getValue('-watch') || "*") : false,
-    startInfo: startInfo,
+    name: params.name || process.pid,
+    path: params.root,
+    env: params.env,
+    watch: params.watch,
+    params: params,
     status: false
   };
 
@@ -89,12 +80,6 @@ self.init = function (options, cml) {
     createWorker();
   }
 
-  //发现一个 worker 结束，就启动一个新的 worker
-  // cluster.on('exit', function (worker) {
-  //     workerReady--;
-  //     createWorker();
-  // });
-
   //发现一个 worker disconnect，就启动一个新的 worker
   cluster.on('disconnect', function (worker) {
     workerReady--;
@@ -110,27 +95,15 @@ self.init = function (options, cml) {
   };
 
   //启用文件监控
-  var watchEnabled = cml.options.has('-watch');
-  if (watchEnabled) {
-    var watchTypes = cml.options.getValue('-watch');
-    if (watchTypes) {
-      watchTypes = watchTypes.split(',');
-    }
-    //文件改变处理函数
-    var fileChanged = function (file) {
-      var extname = path.extname(file).toLowerCase();
-      if (extname == '.log' || (watchTypes &&
-        watchTypes.length > 0 &&
-        !utils.contains(watchTypes, extname))) {
-        return;
-      }
-      killAllWorkers();
-    };
+  if (params.watch) {
     //启动文件监控
-    chokidar.watch(options.root, {
+    chokidar.watch(params.root, {
       ignoreInitial: true
     }).on('all', function (event, path) {
-      fileChanged(path);
+      var extname = path.extname(file).toLowerCase();
+      if (extname == '.log') return;
+      killAllWorkers();
     });
   }
+
 };
