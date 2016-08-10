@@ -60,7 +60,6 @@ ProcessLog.prototype.toPrintArray = function () {
       NAME: log.name,
       MASTER: log.pid,
       WORKER: log.wpid,
-      HOST: log.host,
       PORT: log.port,
       PATH: utils.short(log.path),
       ENV: log.env || "normal",

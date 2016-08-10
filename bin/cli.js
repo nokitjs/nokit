@@ -32,56 +32,54 @@ dm.run(function () {
     .help(path.normalize('@' + __dirname + '/help.txt'))
 
     /**
-     * 定义选项
-     **/
-    .option(['-t', '--type'], { type: 'string', command: 'create' })
-    .option(['-n', '--name'], { type: 'string', command: 'start' })
-    .option(['-p', '--port'], { type: 'number', command: 'start' })
-    .option(['-c', '--cluster'], { type: 'number', command: 'start' })
-    .option(['-w', '--watch'], { type: 'switch', command: 'start' })
-    .option(['-e', '--env'], { type: 'string', command: 'start' })
-    .option(['--config'], { type: 'string', command: 'start' })
-    .option(['--public'], { type: 'string', command: 'start' })
-    .option(['--node'], { type: 'string*', command: 'start' })
-
-    /**
      * 创建一个应用
      **/
-    .command(['new', 'create'], function ($0, $1, type) {
+    .root.command(['new', 'create'])
+    .option(['-t', '--type'], 'string')
+    .action(function ($1, $2, type) {
       console.log("Creating...");
       //处理参数
-      var appName = $0 || 'nokit-app';
-      var dstPath = $1 || "./";
+      var appName = $1 || 'nokit-app';
+      var dstPath = $2 || "./";
       var appType = type || 'mvc';
       //处理路径
       var dstFullPath = path.resolve(process.cwd(), path.normalize(dstPath + '/' + appName));
       var srcFullPath = path.resolve(__dirname, path.normalize('../examples/' + appType));
       //检查目标路径是否已存在
       if (fs.existsSync(dstFullPath)) {
-        console.error('Create failure, directory "' + dstFullPath + '" already exists');
+        console.error('Create failed, folder "' + dstFullPath + '" already exists');
       } else {
         //复制应用模板
         nokit.utils.copyDir(srcFullPath, dstFullPath);
         console.log('In the "' + dstFullPath + '" has been created');
       }
       return false;
-    })
+    }, false)
 
     /**
      * 启动一个应用
      **/
-    .command(['start'], function () {
+    .root.command(['start'])
+    .option(['-n', '--name'], 'string')
+    .option(['-p', '--port'], 'number')
+    .option(['-c', '--cluster'], 'number')
+    .option(['-w', '--watch'], 'switch')
+    .option(['-e', '--env'], 'string')
+    .option(['--config'], 'string')
+    .option(['--public'], 'string')
+    .option(['--node'], 'string*')
+    .action(function () {
       console.log("Starting...");
       //定义 params
       var params = {};
       //添加入口程序
       params.main = path.normalize(__dirname + '/app.js');
       //添加应用根目录
-      params.root = path.resolve(process.cwd(), path.normalize(cmdline.argv[0] || './'));
+      params.root = path.resolve(process.cwd(), path.normalize(this.argv[0] || './'));
       //添加监听端口
-      params.port = cmdline.get('port');
+      params.port = this.get('port');
       //添加控制选项
-      utils.each(cmdline.options, function (name, value) {
+      utils.each(this.options, function (name, value) {
         params[name] = value;
       });
       //检查重名
@@ -92,74 +90,75 @@ dm.run(function () {
       notifier.waiting(1);
       processMgr.startApp(params);
       return false;
-    })
+    }, false)
 
     /**
      * 停止一个应用
      **/
-    .command('stop', function () {
-      var nameOrPid = cmdline.argv[0];
-      var isAll = !nameOrPid;
-      if (!isAll && !processLog.get(nameOrPid)) {
+    .root.command('stop')
+    .action(function () {
+      var nameOrPid = this.argv[0];
+      if (nameOrPid && !processLog.get(nameOrPid)) {
         return console.warn('Can\'t find specified application: ' + nameOrPid);
       }
-      if (isAll) {
-        processMgr.killAllApp();
-        console.log("All application has stopped");
-      } else {
+      if (nameOrPid) {
         processMgr.killApp(nameOrPid);
         console.log("Stopped specified application: " + nameOrPid);
+      } else {
+        processMgr.killAllApp();
+        console.log("All application has stopped");
       }
       return false;
-    })
+    }, false)
 
     /**
      * 重启启用
      **/
-    .command(['restart'], function () {
+    .root.command(['restart'])
+    .action(function () {
       var processCount = processLog.readArray().length;
       if (processCount < 1) {
         console.log("No application has been started");
         return;
       }
       console.log("Restarting...");
-      var nameOrPid = cmdline.args[0];
-      var isAll = !nameOrPid;
-      if (!isAll && !processLog.get(nameOrPid)) {
+      var nameOrPid = this.argv[0];
+      if (nameOrPid && !processLog.get(nameOrPid)) {
         return console.warn('Can\'t find specified application: ' + nameOrPid);
       }
-      notifier.waiting(isAll ? processCount : 1);
-      if (isAll) {
-        processMgr.restartAllApp();
-      } else {
+      notifier.waiting(nameOrPid ? 1 : processCount);
+      if (nameOrPid) {
         processMgr.restartApp(nameOrPid);
+      } else {
+        processMgr.restartAllApp();
       }
       return false;
-    })
+    }, false)
 
     /**
      * 停止并删除应用 
      **/
-    .command(['remove', 'delete'], function () {
-      var nameOrPid = cmdline.argv[0];
-      var isAll = !nameOrPid;
-      if (!isAll && !processLog.get(nameOrPid)) {
+    .root.command(['remove', 'delete'])
+    .action(function () {
+      var nameOrPid = this.argv[0];
+      if (nameOrPid && !processLog.get(nameOrPid)) {
         return console.warn('Can\'t find specified application: ' + nameOrPid);
       }
-      if (isAll) {
-        processMgr.deleteAllApp();
-        console.log("All application has deleted");
-      } else {
+      if (nameOrPid) {
         processMgr.deleteApp(nameOrPid);
         console.log("Deleted specified application: " + nameOrPid);
+      } else {
+        processMgr.deleteAllApp();
+        console.log("All application has deleted");
       }
       return false;
-    })
+    }, false)
 
     /**
      * 显示所有应用
      **/
-    .command(['list', 'ls'], function () {
+    .root.command(['list', 'ls'])
+    .action(function () {
       var logArray = processLog.toPrintArray();
       if (logArray && logArray.length > 0) {
         console.log('Launched applications:' + env.EOL);
@@ -168,21 +167,23 @@ dm.run(function () {
         console.log('No application has been started');
       }
       return false;
-    })
+    }, false)
 
     /**
      * 添加自启动
      **/
-    .command(['boot'], function () {
-      var status = Boolean(cmdline.args[0] == 'on');
+    .root.command(['boot'])
+    .action(function () {
+      var status = Boolean(this.argv[0] == 'on');
       console.log(bootstrap.set(status));
       return false;
-    })
+    }, false)
 
     /**
      * 恢复意外终止的应用
      **/
-    .command(['restore'], function () {
+    .root.command(['restore'])
+    .action(function () {
       var appArray = processLog.readArray()
         .filter(function (app) {
           return app.status;
@@ -191,15 +192,22 @@ dm.run(function () {
         console.log("No application has been started");
         return;
       }
-      console.log("Starting...");
-      notifier.waiting(appArray.length);
-      processMgr.killAllApp();
-      appArray.forEach(function (log) {
-        processMgr.startApp(log.params);
-      });
-    })
+      console.log("Restoreing...");
+      var nameOrPid = this.argv[0];
+      if (nameOrPid && !processLog.get(nameOrPid)) {
+        return console.warn('Can\'t find specified application: ' + nameOrPid);
+      }
+      notifier.waiting(nameOrPid ? 1 : appArray.length);
+      if (nameOrPid) {
+        processMgr.restartApp(nameOrPid);
+      } else {
+        appArray.forEach(function (log) {
+          processMgr.restartApp(log.name);
+        });
+      }
+    }, false)
 
     //就续开始执行
-    .ready();
+    .root.ready();
 
 });

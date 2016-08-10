@@ -21,7 +21,7 @@ const banner = ['/**',
 ].join('\r\n');
 
 //清理
-gulp.task('clear', function(cb) {
+gulp.task('clear', function (cb) {
   del(['./lib/resources/javascripts/nsp-client.js',
     './lib/resources/stylesheets/common.css',
     './lib/resources/stylesheets/explore.css'
@@ -29,7 +29,7 @@ gulp.task('clear', function(cb) {
 });
 
 //构建
-gulp.task('build', ["clear"], function() {
+gulp.task('build', ["clear"], function () {
   //nsp-client.js
   gulp.src("./lib/resources/javascripts/nsp-client.src.js")
     .pipe(uglify())

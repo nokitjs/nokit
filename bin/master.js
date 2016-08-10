@@ -50,7 +50,6 @@ self.init = function (params) {
           utils.each(allWorkers, function (id, _worker) {
             logInfo.wpid.push(_worker.process.pid);
           });
-          logInfo.host = (configs.hosts || [])[0] || 'localhost';
           logInfo.port = configs.port;
           logInfo.status = true;
           processLog.save(logInfo);
