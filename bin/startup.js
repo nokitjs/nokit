@@ -1,5 +1,3 @@
-/* global process */
-/* global __dirname */
 const fs = require('fs');
 const path = require('path');
 const child_process = require('child_process');
@@ -15,7 +13,7 @@ const self = this;
  * linux 平台
  **/
 self.linux = {
-  cmd: env.EOL + 'nokit bootstrap &' + env.EOL,
+  cmd: env.EOL + 'nokit recovery &' + env.EOL,
   enabled: function (options) {
     options = options || {};
     try {
@@ -30,7 +28,7 @@ self.linux = {
         }
       }
       fs.writeFileSync(scriptPath, scriptLines.join(env.EOL));
-      return "Bootstrap enabled";
+      return "Startup enabled";
     } catch (ex) {
       return ex.message;
     }
@@ -42,7 +40,7 @@ self.linux = {
       var script = fs.readFileSync(scriptPath).toString();
       script = utils.replace(script, this.cmd, '');
       fs.writeFileSync(scriptPath, script);
-      return "Bootstrap disabled";
+      return "Startup disabled";
     } catch (ex) {
       return ex.message;
     }

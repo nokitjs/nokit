@@ -8,8 +8,7 @@ Commands:
   restart [name]        Restart one or all
   list                  Display all apps
   delete  [name]        Delete one or all
-  restore               Restore apps
-  boot    [on/off]      Set auto boot
+  startup [on/off]      Set auto boot
 
 Options:
   -v, --version         Display version info

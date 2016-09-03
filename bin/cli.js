@@ -8,7 +8,7 @@ const Notifier = require('./notifier');
 const processLog = require('./process-log');
 const processMgr = require('./process-mgr');
 const cmdline = require('cmdline');
-const bootstrap = require('./bootstrap');
+const startup = require('./startup');
 const utils = nokit.utils;
 const pkg = nokit.pkg;
 const console = nokit.console;
@@ -172,17 +172,17 @@ dm.run(function () {
     /**
      * 添加自启动
      **/
-    .root.command(['boot'])
+    .root.command(['startup'])
     .action(function () {
       var status = Boolean(this.argv[0] == 'on');
-      console.log(bootstrap.set(status));
+      console.log(startup.set(status));
       return false;
     }, false)
 
     /**
      * 恢复意外终止的应用
      **/
-    .root.command(['restore'])
+    .root.command(['recovery'])
     .action(function () {
       var appArray = processLog.readArray()
         .filter(function (app) {
@@ -192,7 +192,7 @@ dm.run(function () {
         console.log("No application has been started");
         return;
       }
-      console.log("Restoreing...");
+      console.log("Recovery...");
       var nameOrPid = this.argv[0];
       if (nameOrPid && !processLog.get(nameOrPid)) {
         return console.warn('Can\'t find specified application: ' + nameOrPid);
