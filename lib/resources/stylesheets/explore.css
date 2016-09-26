@@ -1,6 +1,6 @@
 /**
  * Nokit - A Web development framework
- * @version v1.25.8
+ * @version v1.25.9
  * @link http://nokit.org
  * @license MIT
  * @author Houfeng
