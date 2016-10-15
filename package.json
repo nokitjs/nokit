@@ -1,7 +1,7 @@
 {
   "name": "nokitjs",
   "displayName": "Nokit",
-  "version": "1.25.9",
+  "version": "1.26.0",
   "description": "A Web development framework",
   "main": "./lib/index.js",
   "bin": {
@@ -47,6 +47,7 @@
     "formidable": "^1.0.17",
     "nb64": "0.0.1",
     "ntils": "^1.0.2",
+    "oneport": "^1.0.1",
     "smache": "^1.0.1",
     "thunkify": "^2.1.2",
     "tpjs": "^3.8.1",
