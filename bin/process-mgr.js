@@ -1,5 +1,3 @@
-/* global __dirname */
-/* global process */
 const isWin = process.platform === 'win32';
 const child_process = require('child_process');
 const path = require("path");
@@ -26,7 +24,7 @@ self.isWin = isWin;
 self.kill = function (pid) {
   try {
     process.kill(pid);
-  } catch (ex) { }
+  } catch (err) { }
 };
 
 /**
