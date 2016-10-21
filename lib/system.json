@@ -101,7 +101,7 @@
       "text/html": true,
       "text/css": true,
       "text/javascript": true,
-      "appliction/x-javascript": true,
+      "application/x-javascript": true,
       "text/markdown": true,
       "text/less": true,
       "text/sass": true,
