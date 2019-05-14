@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "outDir": "./lib/",
+    "sourceMap": false,
+    "declaration": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "esnext",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "maxNodeModuleJsDepth": 4,
+    "lib": [
+      "esnext"
+    ]
+  },
+  "include": [
+    "./src/**/*.ts",
+    "./example/**/*.ts"
+  ]
+}

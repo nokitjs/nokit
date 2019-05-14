@@ -9,3 +9,4 @@ _*
 *.src.*
 *.d.ts
 coverage
+src/
