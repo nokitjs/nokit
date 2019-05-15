@@ -34,11 +34,13 @@
     "url": "https://github.com/nokitjs/nokit.git"
   },
   "dependencies": {
+    "@types/koa-compose": "^3.2.3",
     "confman": "^0.2.10",
     "console3": "^1.0.6",
     "express": "^4.16.4",
     "globby": "^9.2.0",
     "koa": "^2.7.0",
+    "koa-compose": "^4.1.0",
     "ntils": "^4.0.8",
     "oneport": "^1.0.2",
     "reflect-metadata": "^0.1.13"
