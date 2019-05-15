@@ -6,7 +6,7 @@ const { getByPath } = require('ntils');
 /**
  * IoC 容器 
  */
-export class IoCContainer {
+export class Container {
 
   /**
    * 所有已注册的可注入类型
@@ -60,6 +60,21 @@ export class IoCContainer {
   }
 
   /**
+   * 在实例上应用注入 
+   * @param instance 
+   */
+  public applyInjection(instance: any) {
+    const propInjectInfos = getPropInjectInfos(instance);
+    propInjectInfos.forEach((info: IInjectInfo) => {
+      delete instance[info.member];
+      return info.options && info.options.type === InjectTypes.Value ?
+        this.injectValues(instance, info) :
+        this.injectTypes(instance, info);
+    });
+    return instance;
+  }
+
+  /**
    * 通过类型名称创建一个实例
    * @param name 已注册的类型名称
    */
@@ -68,13 +83,7 @@ export class IoCContainer {
     const Type = this.types[name];
     if (!Type) return null;
     const instance = new Type();
-    const propInjectInfos = getPropInjectInfos(instance);
-    propInjectInfos.forEach((info: IInjectInfo) => {
-      delete instance[info.member];
-      return info.options && info.options.type === InjectTypes.Value ?
-        this.injectValues(instance, info) :
-        this.injectTypes(instance, info);
-    });
+    this.applyInjection(instance);
     return instance as T;
   }
 

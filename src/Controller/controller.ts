@@ -1,4 +1,4 @@
-import { CTL_INFO } from "./constants";
+import { CTL_INFO } from './constants';
 
 export interface IControllerInfo {
   pattern: string;
@@ -10,10 +10,10 @@ export interface IControllerInfo {
  */
 export function controller(pattern: string) {
   return (target: any) => {
-    Reflect.metadata(CTL_INFO, { pattern });
+    Reflect.metadata(CTL_INFO, { pattern })(target);
   }
 }
 
-export function getControllerInfo(type: any) {
-  return Reflect.getMetadata(CTL_INFO, type) as IControllerInfo;
+export function getControllerInfo(target: any) {
+  return Reflect.getMetadata(CTL_INFO, target) as IControllerInfo;
 }

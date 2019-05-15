@@ -1,7 +1,7 @@
 import { CTL_MAPPING } from "./constants";
 
 export interface IMappingInfo {
-  verb: string;
+  verb: string | string[];
   pattern: string;
   method: string;
 }
@@ -15,7 +15,7 @@ export function mapping(verb: string, pattern: string) {
   return (target: any, method: string) => {
     const mappings = getAllMappingInfos(target);
     mappings.push({ verb, pattern, method });
-    Reflect.metadata(CTL_MAPPING, mappings)(target);
+    Reflect.metadata(CTL_MAPPING, mappings)(target.constructor);
   };
 }
 

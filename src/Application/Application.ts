@@ -8,7 +8,7 @@ import { EventEmitter } from 'events';
 import { IApplication } from './IApplication';
 import { IApplicationOptions } from './IApplicationOptions';
 import { ILoader } from '../Loader';
-import { IoCContainer } from '../IoC';
+import { Container } from '../IoC';
 import { ServiceLoader } from '../Service';
 
 /**
@@ -24,7 +24,7 @@ export class Application extends EventEmitter implements IApplication {
   /**
    * IoC 容器实例
    */
-  public container = new IoCContainer();
+  public container = new Container();
 
   public router = new Router();
 

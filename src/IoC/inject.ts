@@ -40,9 +40,9 @@ export function inject(provider: string, options: IInjectOptions = {}) {
 
 /**
  * 获取属性注入信息
- * @param type 类型
+ * @param target 类型
  */
-export function getPropInjectInfos(type: any) {
-  const list = Reflect.getMetadata(IOC_PROP_INJECT, type) || [];
+export function getPropInjectInfos(target: any) {
+  const list = Reflect.getMetadata(IOC_PROP_INJECT, target) || [];
   return list as IInjectInfo[];
 }

@@ -1,4 +1,4 @@
 export * from "./constants";
 export * from "./provider";
 export * from "./inject";
-export * from "./IoCContainer";
+export * from "./Container";

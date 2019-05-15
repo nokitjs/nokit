@@ -10,7 +10,4 @@ export class Test1Service {
 
 @provider("test2")
 export class Test2Service {
-  name = "test2";
-  @inject('test1')
-  test1: Test1Service;
 }
