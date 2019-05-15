@@ -7,6 +7,8 @@ import { IApplication } from './IApplication';
 import { IApplicationOptions } from './IApplicationOptions';
 import { ILoader } from '../Loader';
 import { ServiceLoader } from '../Service';
+import { ConfLoader } from '../Conf/ConfLoader';
+import { IoCContainer } from '../IoC';
 
 /**
  * 全局应用程序类，每一个应用都会由一个 Application 实例开始
@@ -17,6 +19,11 @@ export class Application extends EventEmitter implements IApplication {
    * 对应的 koa 实例
    */
   public server = new Koa();
+
+  /**
+   * IoC 容器实例
+   */
+  public container = new IoCContainer();
 
   /**
    * 全局应用构造函数
@@ -30,8 +37,9 @@ export class Application extends EventEmitter implements IApplication {
   /**
    * 获取所有可用 Loaders
    */
-  protected getLoaders(): ILoader<any>[] {
+  protected getBuiltInLoaders(): ILoader<any>[] {
     return [
+      new ConfLoader('./config'),
       new ServiceLoader('./src/**/*.service.{ts,js}'),
       new ControllerLoader('./src/**/*.controller.{ts,js}'),
     ];
@@ -41,9 +49,10 @@ export class Application extends EventEmitter implements IApplication {
    * 启动当前应用实例
    */
   public async run() {
-    const { port = await acquire() } = this.options;
-    const loaders = await this.getLoaders();
-    await Promise.all(loaders.map(loader => loader.load(this)));
+    const { port = await acquire(), loaders = [] } = this.options;
+    const builtInloaders = await this.getBuiltInLoaders();
+    for (let loader of builtInloaders) await loader.load(this);
+    for (let loader of loaders) await loader.load(this);
     this.server.listen(port);
     console.info("Application running:", `http://localhost:${port}`);
   }

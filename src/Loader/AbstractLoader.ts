@@ -4,7 +4,7 @@ import { IApplication } from "../Application/IApplication";
 import { resolve } from "path";
 
 /**
- * 资源加载器基类
+ * 资源加载器抽象基类
  */
 export abstract class AbstractLoader<T> implements ILoader<T> {
 
@@ -17,7 +17,7 @@ export abstract class AbstractLoader<T> implements ILoader<T> {
   /**
    * 已加载的资源或类型列表
    */
-  public list: T[] = [];
+  public content: T[] = [];
 
   /**
    * 执行加载
@@ -28,7 +28,7 @@ export abstract class AbstractLoader<T> implements ILoader<T> {
     const files = await globby(this.pattern, { cwd: root });
     files.forEach(file => {
       const types = require(resolve(root, file));
-      Object.keys(types).forEach(name => this.list.push(types[name]));
+      Object.keys(types).forEach(name => this.content.push(types[name]));
     });
   }
 

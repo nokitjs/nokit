@@ -1,9 +1,15 @@
 import { IOC_PROVIDER } from "./constants";
 
+/**
+ * provider 选项
+ */
 export interface IProviderOptions {
   singleton?: boolean;
 }
 
+/**
+ * provider 信息
+ */
 export interface IProviderInfo {
   name: string;
   options: IProviderOptions;
