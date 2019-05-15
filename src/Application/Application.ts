@@ -30,7 +30,7 @@ export class Application extends EventEmitter implements IApplication {
    * 获取所有可用 Loaders
    */
   protected getLoaders(): ILoader[] {
-    return [new ControllerLoader('./**/*.controller.{ts,js}')];
+    return [new ControllerLoader('./src/**/*.controller.{ts,js}')];
   }
 
   /**

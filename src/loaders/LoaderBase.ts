@@ -1,5 +1,7 @@
 import * as globby from "globby";
-import { ILoader, LoadPattern } from "./ILoader";
+import { ILoader } from "./ILoader";
+import { IApplication } from "../Application";
+import { FilePattern } from "./FilePattern";
 
 /**
  * 资源加载器基类
@@ -10,14 +12,15 @@ export class LoaderBase<T> implements ILoader {
    * 通过 pattern 声明一个加载器实例
    * @param root 根路径
    */
-  constructor(protected pattern: LoadPattern) { }
+  constructor(protected pattern: FilePattern) { }
 
   /**
-   * 加载指定的模块
-   * @param pattern 匹配模式（glob 语法）
+   * 执行加载
+   * @param app 全局应用程序实例
    */
-  public async load<T>(app: any) {
-    const files = await globby(this.pattern, { cwd: app.root });
+  public async load<T>(app: IApplication) {
+    const { root } = app.options;
+    const files = await globby(this.pattern, { cwd: root });
     const list: T[] = [];
     files.forEach(file => {
       const types = require(file);

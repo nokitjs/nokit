@@ -1,9 +1,9 @@
-import { LoadPattern } from "./ILoader";
-import { IoCLoader } from "./IOCLoader";
+import { IoCLoader } from "./IoCLoader";
+import { IApplication } from "../Application";
 
 export class ControllerLoader<T> extends IoCLoader<T> {
-  public async load<T>(pattern: LoadPattern) {
-    const list = await super.load<T>(pattern);
+  public async load<T>(app: IApplication) {
+    const list = await super.load<T>(app);
     return list;
   }
 }
