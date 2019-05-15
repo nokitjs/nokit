@@ -6,8 +6,9 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "build": "rm -rf ./lib && tsc",
-    "start": "ts-node ./example/index.ts"
+    "clean": "rm -rf ./lib",
+    "build": "npm run clean && tsc",
+    "start": "ts-node ./src/.example/index.ts"
   },
   "keywords": [
     "nokit",

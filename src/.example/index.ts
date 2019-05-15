@@ -1,4 +1,4 @@
-import { Application } from "../src";
+import { Application } from "../";
 
 const app = new Application();
 app.run();

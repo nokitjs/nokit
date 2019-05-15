@@ -1,3 +1,3 @@
-import { LoaderBase } from "./LoaderBase";
+import { AbstractLoader } from "../Loader/LoaderBase";
 
-export class IoCLoader<T> extends LoaderBase<T> { }
+export class IoCLoader<T> extends AbstractLoader<T> { }

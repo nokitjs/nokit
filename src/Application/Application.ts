@@ -5,7 +5,7 @@ import { ControllerLoader } from '../loaders/ControllerLoader';
 import { EventEmitter } from 'events';
 import { IApplication } from './IApplication';
 import { IApplicationOptions } from './IApplicationOptions';
-import { ILoader } from '../loaders/ILoader';
+import { ILoader } from '../Loader';
 
 /**
  * 全局应用程序类，每一个应用都会由一个 Application 实例开始

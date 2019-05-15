@@ -1,18 +1,17 @@
 import * as globby from "globby";
 import { ILoader } from "./ILoader";
 import { IApplication } from "../Application";
-import { FilePattern } from "./FilePattern";
 
 /**
  * 资源加载器基类
  */
-export class LoaderBase<T> implements ILoader {
+export abstract class AbstractLoader<T> implements ILoader {
 
   /**
    * 通过 pattern 声明一个加载器实例
    * @param root 根路径
    */
-  constructor(protected pattern: FilePattern) { }
+  constructor(protected pattern: string | string[]) { }
 
   /**
    * 执行加载

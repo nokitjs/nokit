@@ -1,4 +1,5 @@
 import 'reflect-metadata'
 export * from "./Application";
-export * from "./annotations";
+export * from "./Loader";
+export * from "./Controller";
 export * from "./loaders";
