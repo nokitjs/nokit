@@ -1,11 +1,12 @@
 import * as console from '../common/console';
 import * as Koa from 'koa';
 import { acquire } from '../common/oneport';
-import { ControllerLoader } from '../loaders/ControllerLoader';
+import { ControllerLoader } from '../Controller';
 import { EventEmitter } from 'events';
 import { IApplication } from './IApplication';
 import { IApplicationOptions } from './IApplicationOptions';
 import { ILoader } from '../Loader';
+import { ServiceLoader } from '../Service';
 
 /**
  * 全局应用程序类，每一个应用都会由一个 Application 实例开始
@@ -29,8 +30,11 @@ export class Application extends EventEmitter implements IApplication {
   /**
    * 获取所有可用 Loaders
    */
-  protected getLoaders(): ILoader[] {
-    return [new ControllerLoader('./src/**/*.controller.{ts,js}')];
+  protected getLoaders(): ILoader<any>[] {
+    return [
+      new ServiceLoader('./src/**/*.service.{ts,js}'),
+      new ControllerLoader('./src/**/*.controller.{ts,js}'),
+    ];
   }
 
   /**
