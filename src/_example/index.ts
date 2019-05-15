@@ -1,19 +1,13 @@
 import { Application } from "../";
 import { Test2Service } from "./test.service";
-import { IApplication } from "../Application";
 
 (async () => {
 
   console.time('start');
   const app = new Application({
-    loaders: [
-      {
-        async load(app: IApplication) {
-        }
-      }
-    ]
+    loaders: []
   });
-  
+
   await app.run();
   console.timeEnd('start');
 

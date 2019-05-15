@@ -1,12 +1,19 @@
-import { mapping } from "./mapping";
+import { CTL_INFO } from "./constants";
+
+export interface IControllerInfo {
+  pattern: string;
+}
 
 /**
  * 声明一个 Controller 类
- * @param path 请求路径
+ * @param pattern 请求路径
  */
-export function controller(path: string) {
+export function controller(pattern: string) {
   return (target: any) => {
-    Reflect.metadata('controller', true);
-    return mapping('*', path)(target);
+    Reflect.metadata(CTL_INFO, { pattern });
   }
+}
+
+export function getControllerInfo(type: any) {
+  return Reflect.getMetadata(CTL_INFO, type) as IControllerInfo;
 }

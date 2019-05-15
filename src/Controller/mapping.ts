@@ -1,65 +1,71 @@
-const metadataKey = 'request-mapping';
+import { CTL_MAPPING } from "./constants";
+
+export interface IMappingInfo {
+  verb: string;
+  pattern: string;
+  method: string;
+}
 
 /**
  * 路由映射，声明允许的请求方法有路径
- * @param method Http Method
- * @param path 请求路径
+ * @param verb Http Method
+ * @param pattern 请求路径
  */
-export function mapping(method: string, path: string) {
-  return (target: any, name?: string | symbol) => {
-    const mappings = Reflect.getMetadata(metadataKey, target, name) || [];
-    mappings.push({ method, path });
-    Reflect.metadata(metadataKey, mappings)(target, name);
+export function mapping(verb: string, pattern: string) {
+  return (target: any, method: string) => {
+    const mappings = getAllMappingInfos(target);
+    mappings.push({ verb, pattern, method });
+    Reflect.metadata(CTL_MAPPING, mappings)(target);
   };
 }
 
 /**
  * 获取所有路由映射 
  * @param target 类或原型 
- * @param name 成员名称
  */
-export function getAllMappings(target: any, name: string | symbol) {
-  return Reflect.getMetadata(metadataKey, target, name);
+export function getAllMappingInfos(target: any) {
+  const list = Reflect.getMetadata(CTL_MAPPING, target) || [];
+  return list as IMappingInfo[];
 }
 
 /**
  * 映射 GET 请求
- * @param path 请求路径
+ * @param pattern 请求路径
  */
-export const get = (path: string) => mapping('GET', path);
+export const get = (pattern: string) => mapping('GET', pattern);
 
 /**
  * 映射 POST 请求
- * @param path 请求路径
+ * @param pattern 请求路径
  */
-export const post = (path: string) => mapping('POST', path);
+export const post = (pattern: string) => mapping('POST', pattern);
 
 /**
  * 映射 PUT 请求
- * @param path 请求路径
+ * @param pattern 请求路径
  */
-export const put = (path: string) => mapping('PUT', path);
+export const put = (pattern: string) => mapping('PUT', pattern);
 
 /**
  * 映射 DELETE 请求
- * @param path 请求路径
+ * @param pattern 请求路径
  */
-export const del = (path: string) => mapping('DELETE', path);
+export const del = (pattern: string) => mapping('DELETE', pattern);
 
 /**
  * 映射 OPTIONS 请求
- * @param path 请求路径
+ * @param pattern 请求路径
  */
-export const options = (path: string) => mapping('OPTIONS', path);
+export const options = (pattern: string) => mapping('OPTIONS', pattern);
 
 /**
  * 映射 PATCH 请求
- * @param path 请求路径
+ * @param pattern 请求路径
  */
-export const patch = (path: string) => mapping('PATCH', path);
+export const patch = (pattern: string) => mapping('PATCH', pattern);
 
 /**
  * 映射 HEAD 请求
- * @param path 请求路径
+ * @param pattern 请求路径
  */
-export const head = (path: string) => mapping('HEAD', path);
+export const head = (pattern: string) => mapping('HEAD', pattern);

@@ -1,14 +1,15 @@
 import * as console from '../common/console';
 import * as Koa from 'koa';
+import * as Router from 'koa-router';
 import { acquire } from '../common/oneport';
+import { ConfLoader } from '../Conf/ConfLoader';
 import { ControllerLoader } from '../Controller';
 import { EventEmitter } from 'events';
 import { IApplication } from './IApplication';
 import { IApplicationOptions } from './IApplicationOptions';
 import { ILoader } from '../Loader';
-import { ServiceLoader } from '../Service';
-import { ConfLoader } from '../Conf/ConfLoader';
 import { IoCContainer } from '../IoC';
+import { ServiceLoader } from '../Service';
 
 /**
  * 全局应用程序类，每一个应用都会由一个 Application 实例开始
@@ -24,6 +25,8 @@ export class Application extends EventEmitter implements IApplication {
    * IoC 容器实例
    */
   public container = new IoCContainer();
+
+  public router = new Router();
 
   /**
    * 全局应用构造函数
@@ -53,6 +56,8 @@ export class Application extends EventEmitter implements IApplication {
     const builtInloaders = await this.getBuiltInLoaders();
     for (let loader of builtInloaders) await loader.load(this);
     for (let loader of loaders) await loader.load(this);
+    this.server.use(this.router.routes());
+    this.server.use(this.router.allowedMethods());
     this.server.listen(port);
     console.info("Application running:", `http://localhost:${port}`);
   }

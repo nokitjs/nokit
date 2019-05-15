@@ -1,6 +1,6 @@
-import 'reflect-metadata'
+import { CTL_FROM_CONTEXT } from './constants';
 
 export function fromContext(path: string) {
   return (target: any, name: string) =>
-    Reflect.metadata('from-context', path)(target, name);
+    Reflect.metadata(CTL_FROM_CONTEXT, path)(target, name);
 }
