@@ -10,5 +10,5 @@ export class Test1Service {
 
 @provider("test2")
 export class Test2Service {
-  name = "I am Test2"
+  name = "I am Test2";
 }
