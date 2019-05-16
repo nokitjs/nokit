@@ -7,7 +7,7 @@ const confman = require("confman");
 /**
  * 配置加载器
  */
-export class ConfLoader<T> extends AbstractLoader<T> {
+export class ConfigLoader<T> extends AbstractLoader<T> {
   public async load(app: IApplication) {
     const { root } = app.options;
     const configFile = resolve(root, this.pattern as string);

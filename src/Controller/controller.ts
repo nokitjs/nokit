@@ -1,5 +1,8 @@
 import { CTL_INFO } from './constants';
 
+/**
+ * 控制器信息
+ */
 export interface IControllerInfo {
   pattern: string;
 }
@@ -14,6 +17,10 @@ export function controller(pattern: string) {
   }
 }
 
+/**
+ * 获取控制器信息
+ * @param target 对应的 controller 类
+ */
 export function getControllerInfo(target: any) {
   return Reflect.getMetadata(CTL_INFO, target) as IControllerInfo;
 }

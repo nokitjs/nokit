@@ -5,6 +5,9 @@ import { IApplication } from '../Application/IApplication';
 import { IoCLoader } from '../Loader';
 import { normalize } from "path";
 
+/**
+ * Controller 加载器
+ */
 export class ControllerLoader<T> extends IoCLoader<T> {
 
   public async load(app: IApplication) {

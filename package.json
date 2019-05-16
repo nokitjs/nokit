@@ -8,7 +8,7 @@
   "scripts": {
     "clean": "rm -rf ./lib",
     "build": "npm run clean && tsc",
-    "start": "ts-node ./src/_example/index.ts"
+    "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' ./src/_example/src/index.ts"
   },
   "keywords": [
     "nokit",
@@ -52,6 +52,7 @@
     "@types/koa-compose": "^3.2.3",
     "@types/koa-router": "^7.0.40",
     "@types/node": "^12.0.1",
+    "nodemon": "^1.19.0",
     "ts-node": "^8.1.0",
     "typescript": "^3.4.5"
   }

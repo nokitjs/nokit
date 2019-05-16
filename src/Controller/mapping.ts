@@ -1,5 +1,8 @@
 import { CTL_MAPPING } from "./constants";
 
+/**
+ * 路由映射信息
+ */
 export interface IMappingInfo {
   verb: string | string[];
   pattern: string;

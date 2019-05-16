@@ -2,7 +2,7 @@ import * as console from '../common/console';
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
 import { acquire } from '../common/oneport';
-import { ConfLoader } from '../Conf/ConfLoader';
+import { ConfigLoader } from '../Config/ConfigLoader';
 import { ControllerLoader } from '../Controller';
 import { EventEmitter } from 'events';
 import { IApplication } from './IApplication';
@@ -26,6 +26,9 @@ export class Application extends EventEmitter implements IApplication {
    */
   public container = new Container();
 
+  /**
+   * 应用路由
+   */
   public router = new Router();
 
   /**
@@ -42,7 +45,7 @@ export class Application extends EventEmitter implements IApplication {
    */
   protected getBuiltInLoaders(): ILoader<any>[] {
     return [
-      new ConfLoader('./config'),
+      new ConfigLoader('./config'),
       new ServiceLoader('./src/**/*.service.{ts,js}'),
       new ControllerLoader('./src/**/*.controller.{ts,js}'),
     ];
