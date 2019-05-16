@@ -1,8 +1,8 @@
-import * as nunjucks from 'nunjucks';
-import * as globby from "globby";
-import { readFile } from "fs";
+import * as globby from 'globby';
 import { AbstractLoader } from '../Loader';
+import { compile, Environment, FileSystemLoader } from 'nunjucks';
 import { IApplication } from '../Application/IApplication';
+import { readFile } from 'fs';
 import { resolve } from 'path';
 
 /**
@@ -35,9 +35,11 @@ export class ViewLoader<T> extends AbstractLoader<T> {
     const viewRoot = resolve(root, this.path as string);
     const files = await globby('./**/*.nj', { cwd: viewRoot });
     const $views: any = {};
+    const env = new Environment(new FileSystemLoader(viewRoot));
     await Promise.all(files.map(async (file) => {
       const text = await readTemplate(resolve(viewRoot, file));
-      const template = nunjucks.compile(text);
+      //@types/nunjucks 3.1.1 没有第三个 path 参数的类型定义
+      const template = compile(text, env, file as any);
       $views[trimTplName(file)] = (data: any) => template.render(data);
     }));
     app.container.appendValues({ $views });
