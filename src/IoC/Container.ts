@@ -41,7 +41,12 @@ export class Container {
     Object.assign(this.values, values);
   }
 
-  protected injectTypes(instance: any, info: IInjectInfo) {
+  /**
+   * 应用类型注入
+   * @param instance 实例
+   * @param info 注入信息
+   */
+  protected applyTypeInjection(instance: any, info: IInjectInfo) {
     let refInstance: any;
     Object.defineProperty(instance, info.member, {
       enumerable: true,
@@ -52,7 +57,12 @@ export class Container {
     });
   }
 
-  protected injectValues(instance: any, info: IInjectInfo) {
+  /**
+   * 应用常量值注入
+   * @param instance 实例
+   * @param info 注入信息
+   */
+  protected applyValueInjection(instance: any, info: IInjectInfo) {
     Object.defineProperty(instance, info.member, {
       enumerable: true,
       get: () => getByPath(this.values, info.name)
@@ -68,8 +78,8 @@ export class Container {
     propInjectInfos.forEach((info: IInjectInfo) => {
       delete instance[info.member];
       return info.options && info.options.type === InjectTypes.Value ?
-        this.injectValues(instance, info) :
-        this.injectTypes(instance, info);
+        this.applyValueInjection(instance, info) :
+        this.applyTypeInjection(instance, info);
     });
     return instance;
   }

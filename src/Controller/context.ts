@@ -35,7 +35,7 @@ export const res = () => ctx('response');
  * 路由参数
  * @param name 路由参数名
  */
-export const params = (name?: string) =>
+export const param = (name?: string) =>
   name ? ctx(`params.${name}`) : ctx('params');
 
 /**

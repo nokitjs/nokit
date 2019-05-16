@@ -1,5 +1,5 @@
 import { controller, get, inject, config } from "../../";
-import { query, params } from "../../Controller";
+import { query, param } from "../../Controller";
 
 @controller('/')
 export class Test {
@@ -13,7 +13,7 @@ export class Test {
   @get('/say/:name')
   say(
     @query('message') msg: string,
-    @params("name") name: string
+    @param("name") name: string
   ) {
     return { name, msg };
   }
