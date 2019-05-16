@@ -2,7 +2,7 @@ import { controller, get, inject, config } from "../../";
 import { query, param } from "../../Controller";
 
 @controller('/')
-export class Test {
+export class TestController {
 
   @inject('test1')
   service: any;
