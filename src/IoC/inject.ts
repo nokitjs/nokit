@@ -19,18 +19,18 @@ export interface IInjectOptions {
  * 注入信息
  */
 export interface IInjectInfo {
-  provider: string;
+  name: string;
   member: string | symbol;
   options: IInjectOptions;
 }
 
 /**
  * 声明一个类成员，通过名称在容器中查找类型并实例化后注入
- * @param provider 名称
+ * @param name 名称
  */
-export function inject(provider: string, options: IInjectOptions = {}) {
+export function inject(name: string, options: IInjectOptions = {}) {
   return (target: any, member: string | symbol) => {
-    const injectInfo: IInjectInfo = { provider, member, options };
+    const injectInfo: IInjectInfo = { name, member, options };
     const injectList: IInjectInfo[] = Reflect
       .getMetadata(IOC_PROP_INJECT, target) || [];
     injectList.push(injectInfo);

@@ -46,7 +46,7 @@ export class Container {
     Object.defineProperty(instance, info.member, {
       enumerable: true,
       get: () => {
-        if (!refInstance) refInstance = this.createInstance(info.provider);
+        if (!refInstance) refInstance = this.createInstance(info.name);
         return refInstance;
       }
     });
@@ -55,7 +55,7 @@ export class Container {
   protected injectValues(instance: any, info: IInjectInfo) {
     Object.defineProperty(instance, info.member, {
       enumerable: true,
-      get: () => getByPath(this.values, info.provider)
+      get: () => getByPath(this.values, info.name)
     });
   }
 

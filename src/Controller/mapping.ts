@@ -5,19 +5,19 @@ import { CTL_MAPPING } from "./constants";
  */
 export interface IMappingInfo {
   verb: string | string[];
-  pattern: string;
+  path: string;
   method: string;
 }
 
 /**
  * 路由映射，声明允许的请求方法有路径
  * @param verb Http Method
- * @param pattern 请求路径
+ * @param path 请求路径
  */
-export function mapping(verb: string, pattern: string) {
+export function mapping(verb: string, path: string) {
   return (target: any, method: string) => {
     const mappings = getAllMappingInfos(target);
-    mappings.push({ verb, pattern, method });
+    mappings.push({ verb, path, method });
     Reflect.metadata(CTL_MAPPING, mappings)(target.constructor);
   };
 }
@@ -33,42 +33,42 @@ export function getAllMappingInfos(target: any) {
 
 /**
  * 映射 GET 请求
- * @param pattern 请求路径
+ * @param path 请求路径
  */
-export const get = (pattern: string) => mapping('GET', pattern);
+export const get = (path: string) => mapping('GET', path);
 
 /**
  * 映射 POST 请求
- * @param pattern 请求路径
+ * @param path 请求路径
  */
-export const post = (pattern: string) => mapping('POST', pattern);
+export const post = (path: string) => mapping('POST', path);
 
 /**
  * 映射 PUT 请求
- * @param pattern 请求路径
+ * @param path 请求路径
  */
-export const put = (pattern: string) => mapping('PUT', pattern);
+export const put = (path: string) => mapping('PUT', path);
 
 /**
  * 映射 DELETE 请求
- * @param pattern 请求路径
+ * @param path 请求路径
  */
-export const del = (pattern: string) => mapping('DELETE', pattern);
+export const del = (path: string) => mapping('DELETE', path);
 
 /**
  * 映射 OPTIONS 请求
- * @param pattern 请求路径
+ * @param path 请求路径
  */
-export const options = (pattern: string) => mapping('OPTIONS', pattern);
+export const options = (path: string) => mapping('OPTIONS', path);
 
 /**
  * 映射 PATCH 请求
- * @param pattern 请求路径
+ * @param path 请求路径
  */
-export const patch = (pattern: string) => mapping('PATCH', pattern);
+export const patch = (path: string) => mapping('PATCH', path);
 
 /**
  * 映射 HEAD 请求
- * @param pattern 请求路径
+ * @param path 请求路径
  */
-export const head = (pattern: string) => mapping('HEAD', pattern);
+export const head = (path: string) => mapping('HEAD', path);

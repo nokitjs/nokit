@@ -1,4 +1,5 @@
 import { controller, get, inject, config } from "../../";
+import { query, params } from "../../Controller";
 
 @controller('/')
 export class Test {
@@ -9,9 +10,12 @@ export class Test {
   @config('db')
   dbConf: any;
 
-  @get('/say')
-  say() {
-    return this.dbConf || 'x';
+  @get('/say/:name')
+  say(
+    @query('message') msg: string,
+    @params("name") name: string
+  ) {
+    return { name, msg };
   }
 
-}
+} 
