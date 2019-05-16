@@ -8,7 +8,7 @@
   "scripts": {
     "clean": "rm -rf ./lib",
     "build": "npm run clean && tsc",
-    "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' ./src/_example/src/index.ts"
+    "dev": "nodemon --watch 'src/**/*.{ts,nj}' --ignore 'src/**/*.spec.ts' --exec 'ts-node' ./src/_example/src/index.ts"
   },
   "keywords": [
     "nokit",
@@ -41,7 +41,9 @@
     "koa": "^2.7.0",
     "koa-compose": "^4.1.0",
     "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
     "ntils": "^4.0.8",
+    "nunjucks": "^3.2.0",
     "oneport": "^1.0.2",
     "reflect-metadata": "^0.1.13"
   },
@@ -51,7 +53,9 @@
     "@types/koa": "^2.0.48",
     "@types/koa-compose": "^3.2.3",
     "@types/koa-router": "^7.0.40",
+    "@types/koa-static": "^4.0.1",
     "@types/node": "^12.0.1",
+    "@types/nunjucks": "^3.1.1",
     "nodemon": "^1.19.0",
     "ts-node": "^8.1.0",
     "typescript": "^3.4.5"

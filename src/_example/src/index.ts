@@ -5,4 +5,4 @@ const application = new Application({
   port: 8080,
   root: resolve(__dirname, '../'),
 });
-application.run();
+application.run().catch(err => console.error(err));

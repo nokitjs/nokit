@@ -10,7 +10,7 @@ const confman = require("confman");
 export class ConfigLoader<T> extends AbstractLoader<T> {
   public async load(app: IApplication) {
     const { root } = app.options;
-    const configFile = resolve(root, this.pattern as string);
+    const configFile = resolve(root, this.path as string);
     const $config = confman.load(configFile);
     app.container.appendValues({ $config });
   }

@@ -10,6 +10,8 @@ import { IApplicationOptions } from './IApplicationOptions';
 import { ILoader } from '../Loader';
 import { Container } from '../IoC';
 import { ServiceLoader } from '../Service';
+import { StaticLoader } from '../Static';
+import { ViewLoader } from '../View';
 
 /**
  * 全局应用程序类，每一个应用都会由一个 Application 实例开始
@@ -47,7 +49,9 @@ export class Application extends EventEmitter implements IApplication {
     return [
       new ConfigLoader('./config'),
       new ServiceLoader('./src/**/*.service.{ts,js}'),
+      new ViewLoader('./views'),
       new ControllerLoader('./src/**/*.controller.{ts,js}'),
+      new StaticLoader('./public'),
     ];
   }
 

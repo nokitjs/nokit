@@ -11,7 +11,7 @@ export interface IControllerInfo {
  * 声明一个 Controller 类
  * @param path 请求路径
  */
-export function controller(path: string) {
+export function controller(path: string = '/') {
   return (target: any) => {
     Reflect.metadata(CTL_INFO, { path })(target);
   }

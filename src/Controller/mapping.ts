@@ -14,7 +14,7 @@ export interface IMappingInfo {
  * @param verb Http Method
  * @param path 请求路径
  */
-export function mapping(verb: string, path: string) {
+export function mapping(verb: string, path: string = '/') {
   return (target: any, method: string) => {
     const mappings = getAllMappingInfos(target);
     mappings.push({ verb, path, method });

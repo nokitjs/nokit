@@ -9,10 +9,10 @@ import { resolve } from "path";
 export abstract class AbstractLoader<T> implements ILoader<T> {
 
   /**
-   * 通过 pattern 声明一个加载器实例
-   * @param root 根路径
+   * 通过 path 声明一个加载器实例
+   * @param path 路径或匹配表达式
    */
-  constructor(protected pattern: string | string[]) { }
+  constructor(protected path: string | string[]) { }
 
   /**
    * 已加载的资源或类型列表
@@ -25,7 +25,7 @@ export abstract class AbstractLoader<T> implements ILoader<T> {
    */
   public async load<T>(app: IApplication) {
     const { root } = app.options;
-    const files = await globby(this.pattern, { cwd: root });
+    const files = await globby(this.path, { cwd: root });
     files.forEach(file => {
       const types = require(resolve(root, file));
       Object.keys(types).forEach(name => this.content.push(types[name]));
