@@ -40,6 +40,7 @@ export class ControllerLoader<T> extends IoCLoader<T> {
         const ctlInstance = new CtlType();
         app.container.applyInjection(ctlInstance);
         ctx.body = await this.execCtlMethod(ctx, ctlInstance, method);
+        ctx.preventCahce = true;
         return next();
       });
   }

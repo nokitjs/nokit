@@ -1,6 +1,12 @@
-import { controller, get, inject, config } from "../../";
-import { query, param } from "../../Controller";
-import { template } from "../../View";
+import {
+  config,
+  controller,
+  get,
+  inject,
+  param,
+  query,
+  template
+} from '../../';
 
 @controller('/test')
 export class TestController {
@@ -21,6 +27,6 @@ export class TestController {
     @param("name") name: string
   ) {
     return this.renderIndex({ name, msg });
-  }
+  } 
 
 } 

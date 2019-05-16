@@ -1,5 +1,4 @@
-import { provider } from "../..";
-import { inject } from "../../IoC";
+import { inject, provider } from '../..';
 
 @provider("test1")
 export class Test1Service {

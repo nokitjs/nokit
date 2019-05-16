@@ -1,5 +1,5 @@
-import { Application } from "../..";
-import { resolve } from "path";
+import { Application } from '../..';
+import { resolve } from 'path';
 
 const application = new Application({
   port: 8080,

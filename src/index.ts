@@ -6,3 +6,4 @@ export * from "./IoC";
 export * from "./Controller";
 export * from "./Service";
 export * from "./Config";
+export * from "./View";

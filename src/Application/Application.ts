@@ -12,6 +12,7 @@ import { Container } from '../IoC';
 import { ServiceLoader } from '../Service';
 import { StaticLoader } from '../Static';
 import { ViewLoader } from '../View';
+import { InfoLoader } from '../Info';
 
 /**
  * 全局应用程序类，每一个应用都会由一个 Application 实例开始
@@ -21,17 +22,17 @@ export class Application extends EventEmitter implements IApplication {
   /**
    * 对应的 koa 实例
    */
-  public server = new Koa();
+  public readonly server = new Koa();
 
   /**
    * IoC 容器实例
    */
-  public container = new Container();
+  public readonly container = new Container();
 
   /**
    * 应用路由
    */
-  public router = new Router();
+  public readonly router = new Router()
 
   /**
    * 全局应用构造函数
@@ -52,6 +53,7 @@ export class Application extends EventEmitter implements IApplication {
       new ViewLoader('./views'),
       new ControllerLoader('./src/**/*.controller.{ts,js}'),
       new StaticLoader('./public'),
+      new InfoLoader(null),
     ];
   }
 
