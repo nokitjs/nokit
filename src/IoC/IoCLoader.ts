@@ -1,5 +1,5 @@
-import { AbstractLoader } from "./AbstractLoader";
-import { IApplication } from "../Application/IApplication";
+import { AbstractLoader } from '../Loader/AbstractLoader';
+import { IApplication } from '../Application/IApplication';
 
 /**
  * IoC 加载器

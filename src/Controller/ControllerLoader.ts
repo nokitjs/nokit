@@ -2,7 +2,7 @@ import { Context, } from 'koa';
 import { getAllMappingInfos, IMappingInfo } from './mapping';
 import { getControllerInfo, IControllerInfo } from './controller';
 import { IApplication } from '../Application/IApplication';
-import { IoCLoader } from '../Loader';
+import { IoCLoader } from '../IoC';
 import { normalize } from "path";
 import { getCtxMappingInfos } from './context';
 
