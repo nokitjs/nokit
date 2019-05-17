@@ -1,4 +1,4 @@
-import { IoCLoader } from "../Loader";
+import { IoCLoader } from '../Loader';
 
 /**
  * service 加载器

@@ -3,16 +3,16 @@ import * as Koa from 'koa';
 import * as Router from 'koa-router';
 import { acquire } from '../common/oneport';
 import { ConfigLoader } from '../Config/ConfigLoader';
+import { Container } from '../IoC';
 import { ControllerLoader } from '../Controller';
 import { EventEmitter } from 'events';
 import { IApplication } from './IApplication';
 import { IApplicationOptions } from './IApplicationOptions';
 import { ILoader } from '../Loader';
-import { Container } from '../IoC';
+import { InfoLoader } from '../Info';
 import { ServiceLoader } from '../Service';
 import { StaticLoader } from '../Static';
 import { ViewLoader } from '../View';
-import { InfoLoader } from '../Info';
 
 /**
  * 全局应用程序类，每一个应用都会由一个 Application 实例开始

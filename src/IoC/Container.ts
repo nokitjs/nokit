@@ -1,12 +1,13 @@
 import { getProviderName } from "./provider";
 import { IInjectInfo, getPropInjectInfos, InjectTypes } from "./inject";
+import { IContainer } from "./IContainer";
 
 const { getByPath } = require('ntils');
 
 /**
  * IoC 容器 
  */
-export class Container {
+export class Container implements IContainer {
 
   /**
    * 所有已注册的可注入类型
@@ -42,46 +43,50 @@ export class Container {
   }
 
   /**
-   * 应用类型注入
-   * @param instance 实例
+   *  创建 Type 注入 getter
    * @param info 注入信息
    */
-  protected applyTypeInjection(instance: any, info: IInjectInfo) {
-    let refInstance: any;
-    Object.defineProperty(instance, info.member, {
-      enumerable: true,
-      get: () => {
-        if (!refInstance) refInstance = this.createInstance(info.name);
-        return refInstance;
-      }
-    });
+  protected createTypeGetter(info: IInjectInfo) {
+    let instance: any;
+    return () => {
+      if (!instance) instance = this.createInstance(info.name);
+      return instance;
+    };
   }
 
   /**
-   * 应用常量值注入
-   * @param instance 实例
+   * 创建 Value 注入 getter
    * @param info 注入信息
    */
-  protected applyValueInjection(instance: any, info: IInjectInfo) {
-    Object.defineProperty(instance, info.member, {
-      enumerable: true,
-      get: () => getByPath(this.values, info.name)
-    });
+  protected createValueGetter(info: IInjectInfo) {
+    return () => getByPath(this.values, info.name);
+  }
+
+  /**
+   * 创建注入的 getter
+   * @param info 注入信息
+   */
+  protected createInjectGetter(info: IInjectInfo) {
+    return info.options && info.options.type === InjectTypes.Value ?
+      this.createValueGetter(info) :
+      this.createTypeGetter(info);
   }
 
   /**
    * 在实例上应用注入 
    * @param instance 
    */
-  public applyInjection(instance: any) {
+  public injectInstance(instance: any) {
     const propInjectInfos = getPropInjectInfos(instance);
     propInjectInfos.forEach((info: IInjectInfo) => {
+      const getter = info.options && info.options.createGetter ?
+        info.options.createGetter(this, info, instance) :
+        this.createInjectGetter(info);
       delete instance[info.member];
-      return info.options && info.options.type === InjectTypes.Value ?
-        this.applyValueInjection(instance, info) :
-        this.applyTypeInjection(instance, info);
+      Object.defineProperty(instance, info.member, {
+        enumerable: true, get: getter,
+      });
     });
-    return instance;
   }
 
   /**
@@ -93,7 +98,7 @@ export class Container {
     const Type = this.types[name];
     if (!Type) return null;
     const instance = new Type();
-    this.applyInjection(instance);
+    this.injectInstance(instance);
     return instance as T;
   }
 

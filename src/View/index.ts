@@ -1,2 +1,2 @@
 export * from "./ViewLoader";
-export * from "./template";
+export * from "./render";

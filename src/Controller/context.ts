@@ -53,6 +53,13 @@ export const query = (name?: string) =>
   name ? ctx(`query.${name}`) : ctx('query');
 
 /**
+ * 获取请求头参数
+ * @param name 查询参数名
+ */
+export const header = (name?: string) =>
+  name ? ctx(`headers.${name}`) : ctx('headers');
+
+/**
  * 获取控制器方法的参数注入信息
  * @param target 控制器
  * @param member 控制器方法名

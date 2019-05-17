@@ -35,10 +35,10 @@ export class ControllerLoader<T> extends IoCLoader<T> {
     mapInfo: IMappingInfo) {
     const { path, verb, method } = mapInfo;
     const httpMethods = this.getHttpMethods(verb);
-    app.router.register(normalize(`${ctlInfo.path}/${path}`), httpMethods,
+    app.router.register(normalize(`/${ctlInfo.path}/${path}`), httpMethods,
       async (ctx: Context, next: Function) => {
         const ctlInstance = new CtlType();
-        app.container.applyInjection(ctlInstance);
+        app.container.injectInstance(ctlInstance);
         ctx.body = await this.execCtlMethod(ctx, ctlInstance, method);
         ctx.preventCahce = true;
         return next();

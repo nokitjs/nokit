@@ -1,8 +1,7 @@
-import { Middleware } from "koa";
-import * as compose from "koa-compose";
-
-import { ILoader } from "../Loader";
-import { IApplication } from "../Application";
+import * as compose from 'koa-compose';
+import { IApplication } from '../Application';
+import { ILoader } from '../Loader';
+import { Middleware } from 'koa';
 
 /**
  * 应用一个中间件，use 会将中间件转换为可配置的 loader

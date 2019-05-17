@@ -5,7 +5,7 @@ import {
   inject,
   param,
   query,
-  template
+  render
 } from '../../';
 
 @controller('/test')
@@ -17,16 +17,16 @@ export class TestController {
   @config('db')
   dbConf: any;
 
-
-  @template('index')
+  @render('index')
   renderIndex: Function;
 
   @get('/say/:name')
+  @render('index')
   say(
     @query('message') msg: string,
     @param("name") name: string
   ) {
-    return this.renderIndex({ name, msg });
-  } 
+    return { name, msg };
+  }
 
 } 

@@ -35,40 +35,40 @@ export function getAllMappingInfos(target: any) {
  * 映射 GET 请求
  * @param path 请求路径
  */
-export const get = (path: string) => mapping('GET', path);
+export const get = (path: string = "/") => mapping('GET', path);
 
 /**
  * 映射 POST 请求
  * @param path 请求路径
  */
-export const post = (path: string) => mapping('POST', path);
+export const post = (path: string = "/") => mapping('POST', path);
 
 /**
  * 映射 PUT 请求
  * @param path 请求路径
  */
-export const put = (path: string) => mapping('PUT', path);
+export const put = (path: string = "/") => mapping('PUT', path);
 
 /**
  * 映射 DELETE 请求
  * @param path 请求路径
  */
-export const del = (path: string) => mapping('DELETE', path);
+export const del = (path: string = "/") => mapping('DELETE', path);
 
 /**
  * 映射 OPTIONS 请求
  * @param path 请求路径
  */
-export const options = (path: string) => mapping('OPTIONS', path);
+export const options = (path: string = "/") => mapping('OPTIONS', path);
 
 /**
  * 映射 PATCH 请求
  * @param path 请求路径
  */
-export const patch = (path: string) => mapping('PATCH', path);
+export const patch = (path: string = "/") => mapping('PATCH', path);
 
 /**
  * 映射 HEAD 请求
  * @param path 请求路径
  */
-export const head = (path: string) => mapping('HEAD', path);
+export const head = (path: string = "/") => mapping('HEAD', path);

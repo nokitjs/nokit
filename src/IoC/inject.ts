@@ -1,4 +1,5 @@
 import { IOC_PROP_INJECT } from "./constants";
+import { IContainer } from "./IContainer";
 
 /**
  * 注入类型
@@ -13,6 +14,7 @@ export enum InjectTypes {
  */
 export interface IInjectOptions {
   type?: InjectTypes;
+  createGetter?: (container: IContainer, info: IInjectInfo, ins?: any) => any;
 }
 
 /**
