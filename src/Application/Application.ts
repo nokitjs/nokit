@@ -8,8 +8,9 @@ import { ControllerLoader } from '../Controller';
 import { EventEmitter } from 'events';
 import { IApplication } from './IApplication';
 import { IApplicationOptions } from './IApplicationOptions';
-import { ILoader } from '../Loader';
+import { ILoader, ILoaderOptions, AbstractLoader } from '../Loader';
 import { InfoLoader } from '../Info';
+import { resolve } from 'path';
 import { ServiceLoader } from '../Service';
 import { StaticLoader } from '../Static';
 import { ViewLoader } from '../View';
@@ -44,7 +45,18 @@ export class Application extends EventEmitter implements IApplication {
   }
 
   /**
-   * 获取所有可用 Loaders
+   * 创建一个 loader 实例
+   * @param name loader 名称
+   * @param defaultOptinos 默认选项
+   */
+  protected createLoaderInstance(name: string, defaultOptinos: ILoaderOptions) {
+    const loaderFile = resolve(this.options.root, name);
+    const Loader = require(loaderFile);
+    return new Loader(defaultOptinos);
+  }
+
+  /**
+   * 获取内建 loaders
    */
   protected getBuiltInLoaders(): ILoader<any>[] {
     return [
@@ -58,12 +70,29 @@ export class Application extends EventEmitter implements IApplication {
   }
 
   /**
+   * 获取项目 loaders
+   */
+  protected getProjectLoaders(): ILoader<any>[] {
+    return [];
+  }
+
+  /**
+   * 获取所有 loaders
+   */
+  protected getAllLoaders(): ILoader<any>[] {
+    return [
+      ...this.getBuiltInLoaders(),
+      ...this.getProjectLoaders(),
+      ...this.options.loaders,
+    ];
+  }
+
+  /**
    * 启动当前应用实例
    */
   public async run() {
-    const { port = await acquire(), loaders = [] } = this.options;
-    const builtInloaders = await this.getBuiltInLoaders();
-    for (let loader of builtInloaders) await loader.load(this);
+    const { port = await acquire() } = this.options;
+    const loaders = await this.getAllLoaders();
     for (let loader of loaders) await loader.load(this);
     this.server.use(this.router.routes());
     this.server.use(this.router.allowedMethods());
