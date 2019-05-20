@@ -1,5 +1,5 @@
 import * as compose from 'koa-compose';
-import { IApplication } from '../Application';
+import { IApplication } from '../Application/IApplication';
 import { ILoader } from '../Loader';
 import { Middleware } from 'koa';
 

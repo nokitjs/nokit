@@ -1,2 +1,4 @@
-db:
-  conn: 'xxx'
+loaders:
+  controller:
+  static:
+  view: 

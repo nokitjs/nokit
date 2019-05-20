@@ -1,5 +1,5 @@
 import { AbstractLoader } from '../Loader';
-import { IApplication } from '../Application';
+import { IApplication } from '../Application/IApplication';
 import { resolve } from 'path';
 
 const confman = require("confman");
