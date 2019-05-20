@@ -51,8 +51,8 @@ export class Application extends EventEmitter implements IApplication {
       new ConfigLoader({ path: './config' }),
       new InfoLoader(null),
       new ServiceLoader({ path: './src/**/*.service.{ts,js}' }),
-      new ViewLoader({ path: './views' }),
       new ControllerLoader({ path: './src/**/*.controller.{ts,js}' }),
+      new ViewLoader({ path: './views' }),
       new StaticLoader({ path: './public' }),
     ];
   }
