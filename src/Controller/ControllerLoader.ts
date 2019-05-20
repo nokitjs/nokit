@@ -41,7 +41,7 @@ export class ControllerLoader<T> extends IoCLoader<T> {
         app.container.injectInstance(ctlInstance);
         ctx.body = await this.execCtlMethod(ctx, ctlInstance, method);
         ctx.preventCahce = true;
-        return next();
+        await next();
       });
   }
 
@@ -66,6 +66,7 @@ export class ControllerLoader<T> extends IoCLoader<T> {
   private regCtlType(app: IApplication, CtlType: any) {
     const ctlInfo = getControllerInfo(CtlType);
     const mapInfos = getAllMappingInfos(CtlType);
+    if (!ctlInfo || !mapInfos || mapInfos.length < 1) return;
     mapInfos.forEach(mapInfo => this.regRoute(app, CtlType, ctlInfo, mapInfo));
   }
 

@@ -32,7 +32,8 @@ export class ViewLoader<T> extends AbstractLoader<T> {
 
   public async load(app: IApplication) {
     const { root } = app.options;
-    const viewRoot = resolve(root, this.path as string);
+    const { path } = this.options;
+    const viewRoot = resolve(root, path);
     const files = await globby('./**/*.nj', { cwd: viewRoot });
     const $views: any = {};
     const env = new Environment(new FileSystemLoader(viewRoot));
@@ -42,7 +43,7 @@ export class ViewLoader<T> extends AbstractLoader<T> {
       const template = compile(text, env, file as any);
       $views[trimTplName(file)] = (data: any) => template.render(data);
     }));
-    app.container.appendValues({ $views });
+    app.container.registerValues({ $views });
   }
 
 }

@@ -48,12 +48,12 @@ export class Application extends EventEmitter implements IApplication {
    */
   protected getBuiltInLoaders(): ILoader<any>[] {
     return [
-      new ConfigLoader('./config'),
-      new ServiceLoader('./src/**/*.service.{ts,js}'),
-      new ViewLoader('./views'),
-      new ControllerLoader('./src/**/*.controller.{ts,js}'),
-      new StaticLoader('./public'),
+      new ConfigLoader({ path: './config' }),
       new InfoLoader(null),
+      new ServiceLoader({ path: './src/**/*.service.{ts,js}' }),
+      new ViewLoader({ path: './views' }),
+      new ControllerLoader({ path: './src/**/*.controller.{ts,js}' }),
+      new StaticLoader({ path: './public' }),
     ];
   }
 

@@ -8,8 +8,8 @@ export interface IControllerInfo {
 }
 
 /**
- * 声明一个 Controller 类
- * @param path 请求路径
+ * 控制器注解，可用来声明一个 Controller 类
+ * @param path 请求路径，可少略，默认为 `/`
  */
 export function controller(path: string = '/') {
   return (target: any) => {

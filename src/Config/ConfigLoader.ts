@@ -15,9 +15,10 @@ export class ConfigLoader<T> extends AbstractLoader<T> {
    */
   public async load(app: IApplication) {
     const { root } = app.options;
-    const configFile = resolve(root, this.path as string);
+    const { path } = this.options;
+    const configFile = resolve(root, path);
     const $config = confman.load(configFile);
-    app.container.appendValues({ $config });
+    app.container.registerValues({ $config });
   }
 
 }

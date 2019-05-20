@@ -17,7 +17,8 @@ export class StaticLoader<T> extends AbstractLoader<T> {
    * @param app 应用实例
    */
   public async load(app: IApplication) {
-    const staticRoot = resolve(app.options.root, <string>this.path);
+    const { path } = this.options;
+    const staticRoot = resolve(app.options.root, path);
     app.server.use(async (ctx, next) => {
       await next();
       if (ctx.preventCahce) return;

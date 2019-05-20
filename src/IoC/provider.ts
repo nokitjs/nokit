@@ -28,6 +28,6 @@ export function provider(name: string, options: IProviderOptions = {}) {
  * 获取一个类型的 provider 名称
  * @param target 类型
  */
-export function getProviderName(target: any) {
+export function getProviderInfo(target: any) {
   return Reflect.getMetadata(IOC_PROVIDER, target) as IProviderInfo;
 }

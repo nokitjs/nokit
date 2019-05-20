@@ -13,9 +13,9 @@ export class InfoLoader<T> extends AbstractLoader<T> {
    * @param app 应用实例
    */
   public async load(app: IApplication) {
-    app.server.use((ctx, next) => {
+    app.server.use(async (ctx, next) => {
       ctx.set('Server', pkg.displayName);
-      next();
+      await next();
     });
   }
 

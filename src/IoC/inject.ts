@@ -32,6 +32,7 @@ export interface IInjectInfo {
  */
 export function inject(name: string, options: IInjectOptions = {}) {
   return (target: any, member: string | symbol) => {
+    if (!name) name = String(member);
     const injectInfo: IInjectInfo = { name, member, options };
     const injectList: IInjectInfo[] = Reflect
       .getMetadata(IOC_PROP_INJECT, target) || [];
