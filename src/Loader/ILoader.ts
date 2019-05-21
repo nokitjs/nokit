@@ -1,4 +1,4 @@
-import { IApplication } from "../Application/IApplication";
+import { IApplication } from '../Application/IApplication';
 
 /**
  * 加载器接口定义

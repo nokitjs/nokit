@@ -4,6 +4,7 @@ import { compile, Environment, FileSystemLoader } from 'nunjucks';
 import { IApplication } from '../Application/IApplication';
 import { readFile } from 'fs';
 import { resolve } from 'path';
+import { VIEW_KEY } from './constants';
 
 /**
  * 读取模板路径
@@ -35,15 +36,15 @@ export class ViewLoader<T> extends AbstractLoader<T> {
     const { path } = this.options;
     const viewRoot = resolve(root, path);
     const files = await globby('./**/*.nj', { cwd: viewRoot });
-    const $views: any = {};
+    const viewMap: any = {};
     const env = new Environment(new FileSystemLoader(viewRoot));
     await Promise.all(files.map(async (file) => {
       const text = await readTemplate(resolve(viewRoot, file));
       //@types/nunjucks 3.1.1 没有第三个 path 参数的类型定义
       const template = compile(text, env, file as any);
-      $views[trimTplName(file)] = (data: any) => template.render(data);
+      viewMap[trimTplName(file)] = (data: any) => template.render(data);
     }));
-    app.container.registerValues({ $views });
+    app.container.registerValues({ [VIEW_KEY]: viewMap });
   }
 
 }

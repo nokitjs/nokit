@@ -8,7 +8,9 @@ import { ControllerLoader } from '../Controller';
 import { EventEmitter } from 'events';
 import { IApplication } from './IApplication';
 import { IApplicationOptions } from './IApplicationOptions';
-import { ILoader, ILoaderOptions, AbstractLoader } from '../Loader';
+import { ILoader } from '../Loader';
+import { ILoaderConstructor } from '../Loader/ILoaderConstructor';
+import { ILoaderOptions } from '../Loader/ILoaderOptions';
 import { InfoLoader } from '../Info';
 import { resolve } from 'path';
 import { ServiceLoader } from '../Service';
@@ -33,7 +35,7 @@ export class Application extends EventEmitter implements IApplication {
   /**
    * 应用路由
    */
-  public readonly router = new Router()
+  public readonly router = new Router();
 
   /**
    * 全局应用构造函数
@@ -51,7 +53,7 @@ export class Application extends EventEmitter implements IApplication {
    */
   protected createLoaderInstance(name: string, defaultOptinos: ILoaderOptions) {
     const loaderFile = resolve(this.options.root, name);
-    const Loader = require(loaderFile);
+    const Loader: ILoaderConstructor<any> = require(loaderFile);
     return new Loader(defaultOptinos);
   }
 
@@ -83,7 +85,7 @@ export class Application extends EventEmitter implements IApplication {
     return [
       ...this.getBuiltInLoaders(),
       ...this.getProjectLoaders(),
-      ...this.options.loaders,
+      ...(this.options.loaders || []),
     ];
   }
 

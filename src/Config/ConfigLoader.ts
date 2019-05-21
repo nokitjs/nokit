@@ -1,4 +1,5 @@
 import { AbstractLoader } from '../Loader';
+import { CONFIG_KEY } from './constants';
 import { IApplication } from '../Application/IApplication';
 import { resolve } from 'path';
 
@@ -17,8 +18,8 @@ export class ConfigLoader<T> extends AbstractLoader<T> {
     const { root } = app.options;
     const { path } = this.options;
     const configFile = resolve(root, path);
-    const $config = confman.load(configFile);
-    app.container.registerValues({ $config });
+    const configObject = confman.load(configFile);
+    app.container.registerValues({ [CONFIG_KEY]: configObject });
   }
 
 }

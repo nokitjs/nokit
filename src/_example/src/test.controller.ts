@@ -1,5 +1,4 @@
 import {
-  config,
   controller,
   get,
   inject,
@@ -13,12 +12,6 @@ export class TestController {
 
   @inject('test1')
   service: any;
-
-  @config('db')
-  dbConf: any;
-
-  @render('index')
-  renderIndex: Function;
 
   @get('/say/:name')
   @render('index')

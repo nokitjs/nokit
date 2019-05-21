@@ -1,11 +1,8 @@
-import * as globby from "globby";
-import { ILoader } from "./ILoader";
-import { IApplication } from "../Application/IApplication";
-import { resolve } from "path";
-
-export interface ILoaderOptions {
-  [name: string]: any;
-}
+import * as globby from 'globby';
+import { IApplication } from '../Application/IApplication';
+import { ILoader } from './ILoader';
+import { ILoaderOptions } from './ILoaderOptions';
+import { resolve } from 'path';
 
 /**
  * 资源加载器抽象基类
@@ -23,7 +20,7 @@ export abstract class AbstractLoader<T> implements ILoader<T> {
   /**
    * 已加载的资源或类型列表
    */
-  public content: T[] = [];
+  protected content: T[] = [];
 
   /**
    * 执行加载

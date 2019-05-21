@@ -1,9 +1,10 @@
 import { getProviderInfo } from "./provider";
-import { IInjectInfo, getPropInjectInfos, InjectTypes } from "./inject";
+import { getPropInjectInfos } from "./inject";
 import { IContainer } from "./IContainer";
 import { IOC_SINGLETON } from "./constants";
+import { IInjectInfo } from "./IInjectInfo";
+import { injectTypeGetter } from "./InjectGetter";
 
-const { getByPath } = require('ntils');
 
 /**
  * IoC 容器 
@@ -44,48 +45,24 @@ export class Container implements IContainer {
   }
 
   /**
-   *  创建 Type 注入 getter
-   * @param info 注入信息
-   */
-  protected createTypeGetter(info: IInjectInfo) {
-    let instance: any;
-    return () => {
-      if (!instance) instance = this.createInstance(info.name);
-      return instance;
-    };
-  }
-
-  /**
-   * 创建 Value 注入 getter
-   * @param info 注入信息
-   */
-  protected createValueGetter(info: IInjectInfo) {
-    return () => getByPath(this.values, info.name);
-  }
-
-  /**
-   * 创建注入的 getter
-   * @param info 注入信息
-   */
-  protected createInjectGetter(info: IInjectInfo) {
-    return info.options && info.options.type === InjectTypes.Value ?
-      this.createValueGetter(info) :
-      this.createTypeGetter(info);
-  }
-
-  /**
    * 在实例上应用注入 
    * @param instance 
    */
   public injectInstance(instance: any) {
+    const container = this;
     const propInjectInfos = getPropInjectInfos(instance);
     propInjectInfos.forEach((info: IInjectInfo) => {
-      const getter = info.options && info.options.createGetter ?
-        info.options.createGetter(this, info, instance) :
-        this.createInjectGetter(info);
+      const getter = (info.options && info.options.getter) || injectTypeGetter;
+      const cacheKey = Symbol(String(info.member));
+      const originValue = instance[info.member];
       delete instance[info.member];
       Object.defineProperty(instance, info.member, {
-        enumerable: true, get: getter,
+        enumerable: true, get: () => {
+          if (!(cacheKey in instance)) {
+            instance[cacheKey] = getter({ container, info, originValue });
+          }
+          return instance[cacheKey];
+        },
       });
     });
   }
