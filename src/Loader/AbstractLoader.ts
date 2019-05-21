@@ -7,7 +7,7 @@ import { resolve } from 'path';
 /**
  * 资源加载器抽象基类
  */
-export abstract class AbstractLoader<T> implements ILoader<T> {
+export abstract class AbstractLoader<T = any> implements ILoader<T> {
 
   /**
    * 通过 path 声明一个加载器实例

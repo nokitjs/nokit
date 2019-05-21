@@ -6,7 +6,7 @@ const pkg = require('../../package.json');
 /**
  * 静态资源加载器
  */
-export class InfoLoader<T> extends AbstractLoader<T> {
+export class InfoLoader<T = any> extends AbstractLoader<T> {
 
   /**
    * 加载一个框架信息

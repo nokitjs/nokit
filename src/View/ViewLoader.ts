@@ -29,7 +29,7 @@ export function trimTplName(filename: string) {
 /**
  * 静态资源 加载器
  */
-export class ViewLoader<T> extends AbstractLoader<T> {
+export class ViewLoader<T = any> extends AbstractLoader<T> {
 
   public async load(app: IApplication) {
     const { root } = app.options;

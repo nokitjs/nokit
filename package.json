@@ -8,7 +8,7 @@
   "scripts": {
     "clean": "rm -rf ./lib",
     "build": "npm run clean && tsc",
-    "dev": "nodemon --watch 'src/**/*.{ts,nj}' --ignore 'src/**/*.spec.ts' --exec 'ts-node' ./src/_example/src/index.ts"
+    "dev": "nodemon --watch 'src/**/*.{ts,nj,yml}' --ignore 'src/**/*.spec.ts' --exec 'ts-node' ./src/_example/src/index.ts"
   },
   "keywords": [
     "nokit",

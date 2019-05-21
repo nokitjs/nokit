@@ -8,7 +8,7 @@ const confman = require("confman");
 /**
  * 配置加载器
  */
-export class ConfigLoader<T> extends AbstractLoader<T> {
+export class ConfigLoader<T = any> extends AbstractLoader<T> {
 
   /**
    * 加载应用配置

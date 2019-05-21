@@ -10,7 +10,7 @@ const etag = require('koa-etag');
 /**
  * 静态资源 加载器
  */
-export class StaticLoader<T> extends AbstractLoader<T> {
+export class StaticLoader<T = any> extends AbstractLoader<T> {
 
   /**
    * 加载静态资源相关模块

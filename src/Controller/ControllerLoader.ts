@@ -11,7 +11,7 @@ const { getByPath } = require('ntils');
 /**
  * Controller 加载器
  */
-export class ControllerLoader<T> extends IoCLoader<T> {
+export class ControllerLoader<T = any> extends IoCLoader<T> {
 
   /**
    * 获取请求方法
