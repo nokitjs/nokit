@@ -1,23 +1,20 @@
-import * as console from '../common/console';
-import * as Koa from 'koa';
-import * as Router from 'koa-router';
-import { acquire } from '../common/oneport';
-import { builtLoaders } from './builtInLoaders';
-import { CONFIG_KEY } from '../Config';
-import { ConfigLoader } from '../Config/ConfigLoader';
-import { Container } from '../IoC';
-import { EventEmitter } from 'events';
-import { IApplication } from './IApplication';
-import { IApplicationOptions } from './IApplicationOptions';
-import { ILoader } from '../Loader';
-import { ILoaderInfo } from '../Loader/ILoaderInfo';
-import { normalize } from 'path';
+import * as console from "../common/console";
+import * as Koa from "koa";
+import * as Router from "koa-router";
+import { acquire } from "../common/oneport";
+import { builtLoaders } from "./builtInLoaders";
+import { CONFIG_KEY, ConfigLoader } from "../ConfigLoader";
+import { Container } from "../IoCLoader";
+import { EventEmitter } from "events";
+import { IApplicationOptions } from "./IApplicationOptions";
+import { ILoader, ILoaderInfo } from "../AbstractLoader";
+import { normalize } from "path";
+import { IApplication } from "./IApplication";
 
 /**
  * 全局应用程序类，每一个应用都会由一个 Application 实例开始
  */
 export class Application extends EventEmitter implements IApplication {
-
   /**
    * 对应的 koa 实例
    */
@@ -53,7 +50,7 @@ export class Application extends EventEmitter implements IApplication {
    * 加载配置
    */
   protected loadConfig() {
-    const configLoader = new ConfigLoader({ path: './config' });
+    const configLoader = new ConfigLoader({ path: "./configs/config" });
     return configLoader.load(this);
   }
 
@@ -73,12 +70,12 @@ export class Application extends EventEmitter implements IApplication {
    * @param loaderInfo loader 信息
    */
   protected createLoaderInstance(loaderInfo: ILoaderInfo) {
-    const { name, loader, options } = (builtLoaders
-      .find(info => info.name === loaderInfo.name) || loaderInfo);
+    const { name, loader, options } =
+      builtLoaders.find(info => info.name === loaderInfo.name) || loaderInfo;
     const config = this.config.loaders && this.config.loaders[name];
     if (config === false) return;
     const Loader = loader ? loader : this.importLoader(name);
-    return new Loader(Object.assign({}, options, config));
+    return new Loader({ ...options, ...config });
   }
 
   /**
@@ -101,10 +98,8 @@ export class Application extends EventEmitter implements IApplication {
    * 获取所有 loaders
    */
   protected getAllLoaderInstances(): ILoader[] {
-    return [
-      ...this.getBuiltInLoaders(),
-      ...this.getConfigLoaders(),
-    ].map(info => this.createLoaderInstance(info))
+    return [...this.getBuiltInLoaders(), ...this.getConfigLoaders()]
+      .map(info => this.createLoaderInstance(info))
       .filter(instance => !!instance);
   }
 
@@ -113,7 +108,7 @@ export class Application extends EventEmitter implements IApplication {
    */
   public async run() {
     await this.loadConfig();
-    const { port = this.config.port || await acquire() } = this.options;
+    const { port = this.config.port || (await acquire()) } = this.options;
     const loaders = await this.getAllLoaderInstances();
     for (let loader of loaders) await loader.load(this);
     this.server.use(this.router.routes());
@@ -121,5 +116,4 @@ export class Application extends EventEmitter implements IApplication {
     this.server.listen(port);
     console.info("Application running:", `http://localhost:${port}`);
   }
-
 }

@@ -1,34 +1,34 @@
-import { ControllerLoader } from '../Controller';
-import { ILoaderInfo } from '../Loader/ILoaderInfo';
-import { InfoLoader } from '../Info';
-import { ServiceLoader } from '../Service';
-import { StaticLoader } from '../Static';
-import { ViewLoader } from '../View';
+import { ControllerLoader } from "../ControllerLoader";
+import { ILoaderInfo } from "../AbstractLoader/ILoaderInfo";
+import { InfoLoader } from "../InfoLoader";
+import { ServiceLoader } from "../ServiceLoader";
+import { StaticLoader } from "../StaticLoader";
+import { ViewLoader } from "../ViewLoader";
 
 export const builtLoaders: ILoaderInfo[] = [
   {
-    name: 'info',
+    name: "info",
     loader: InfoLoader,
-    options: null,
+    options: null
   },
   {
-    name: 'service',
+    name: "service",
     loader: ServiceLoader,
-    options: { path: './src/**/*.service.{ts,js}' },
+    options: { path: "./src/**/*.service.{ts,js}" }
   },
   {
-    name: 'controller',
+    name: "controller",
     loader: ControllerLoader,
-    options: { path: './src/**/*.controller.{ts,js}' },
+    options: { path: "./src/**/*.controller.{ts,js}" }
   },
   {
-    name: 'view',
+    name: "view",
     loader: ViewLoader,
-    options: { path: './views' },
+    options: { path: "./views" }
   },
   {
-    name: 'static',
+    name: "static",
     loader: StaticLoader,
-    options: { path: './public' },
-  },
+    options: { path: "./public" }
+  }
 ];

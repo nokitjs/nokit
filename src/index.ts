@@ -1,9 +1,9 @@
-import 'reflect-metadata'
+import "reflect-metadata";
 export * from "./Application";
-export * from "./Loader";
-export * from "./Middleware";
-export * from "./IoC";
-export * from "./Controller";
-export * from "./Service";
-export * from "./Config";
-export * from "./View";
+export * from "./AbstractLoader";
+export * from "./MiddlewareLoader";
+export * from "./IoCLoader";
+export * from "./ControllerLoader";
+export * from "./ServiceLoader";
+export * from "./ConfigLoader";
+export * from "./ViewLoader";

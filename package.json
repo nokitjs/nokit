@@ -7,6 +7,7 @@
   "typings": "./lib/index.d.ts",
   "scripts": {
     "clean": "rm -rf ./lib",
+    "lint": "tslint --project ./tsconfig.json --fix",
     "build": "npm run clean && tsc",
     "dev": "nodemon --watch 'src/**/*.{ts,nj,yml}' --ignore 'src/**/*.spec.ts' --exec 'ts-node' ./src/_example/src/index.ts"
   },
@@ -62,6 +63,8 @@
     "@types/nunjucks": "^3.1.1",
     "nodemon": "^1.19.0",
     "ts-node": "^8.1.0",
+    "tslint": "^5.16.0",
+    "tslint-config-dawn": "^1.0.2",
     "typescript": "^3.4.5"
   }
 }

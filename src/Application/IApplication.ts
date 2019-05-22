@@ -1,13 +1,12 @@
-import * as Koa from 'koa';
-import * as Router from 'koa-router';
-import { Container } from '../IoC';
-import { IApplicationOptions } from './IApplicationOptions';
+import * as Koa from "koa";
+import * as Router from "koa-router";
+import { Container } from "../IoCLoader";
+import { IApplicationOptions } from "./IApplicationOptions";
 
 /**
  * 全局应用接口定义
  */
 export interface IApplication {
-
   /**
    * 应用选项（实例化参数）
    */
@@ -27,5 +26,4 @@ export interface IApplication {
    * 应用的根路由实例
    */
   router: Router;
-
 }
