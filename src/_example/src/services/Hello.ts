@@ -6,6 +6,9 @@ export class Test1Service {
 
   @inject("test2")
   test2: any;
+
+  @inject()
+  conn: any;
 }
 
 @provider("test2")

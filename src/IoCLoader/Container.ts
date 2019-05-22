@@ -1,9 +1,9 @@
-import { getProviderInfo } from "./provider";
-import { getPropInjectInfos } from "./inject";
-import { IContainer, IEntity } from "./IContainer";
-import { IOC_SINGLETON, IOC_ENTITY_CLS, IOC_ENTITY_OBJ } from "./constants";
-import { IInjectInfo } from "./IInjectInfo";
 import { defaultInjectGetter } from "./InjectGetter";
+import { getPropInjectInfos } from "./inject";
+import { getProviderInfo } from "./provider";
+import { IContainer, IEntity } from "./IContainer";
+import { IInjectInfo } from "./IInjectInfo";
+import { IOC_ENTITY_CLS, IOC_ENTITY_OBJ, IOC_SINGLETON } from "./constants";
 
 /**
  * IoC 容器类
@@ -22,7 +22,7 @@ export class Container implements IContainer {
    */
   protected registerEntity(name: string | symbol, type: symbol, value: any) {
     if (this.entities[name]) {
-      throw new Error(`Entity name is duplicated: ${String(name)}`);
+      throw new Error(`IoC entity name is duplicated: ${String(name)}`);
     }
     this.entities[name] = { type, value };
   }
@@ -89,11 +89,12 @@ export class Container implements IContainer {
     const getter = (info.options && info.options.getter) || defaultInjectGetter;
     const cacheKey = Symbol(String(info.member));
     const originValue = instance[info.member];
+    const getterOptions = { container: this, info, originValue, instance };
     delete instance[info.member];
     const enumerable = true,
       get = () => {
         if (cacheKey in instance) return instance[cacheKey];
-        instance[cacheKey] = getter({ container: this, info, originValue });
+        instance[cacheKey] = getter.call(instance, getterOptions);
         return instance[cacheKey];
       };
     Object.defineProperty(instance, info.member, { enumerable, get });

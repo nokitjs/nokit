@@ -4,7 +4,7 @@ import { IApplication } from "../Application";
 /**
  * Setup 函数
  */
-export type ISetupFunction = (app?: IApplication) => Promise<void> | void;
+export type ISetupFunction = (app?: IApplication) => Promise<any> | any;
 
 /**
  * service 加载器

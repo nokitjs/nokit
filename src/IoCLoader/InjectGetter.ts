@@ -8,6 +8,7 @@ export interface IInjectGetterOptions {
   container: IContainer;
   info: IInjectInfo;
   originValue: any;
+  instance: any;
 }
 
 /**

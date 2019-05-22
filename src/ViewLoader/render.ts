@@ -6,12 +6,12 @@ import { VIEWS_ENTITY_KEY } from "./constants";
 const { getByPath } = require("ntils");
 
 export function renderInjectGetter(options: IInjectGetterOptions) {
-  const { container, info, originValue } = options;
+  const { container, info, originValue, instance } = options;
   const views = container.get(VIEWS_ENTITY_KEY);
   const render = getByPath(views, info.name);
   return !originValue || !isFunction(originValue)
     ? render
-    : (...args: any[]) => render(originValue(...args));
+    : (...args: any[]) => render(originValue.call(instance, ...args));
 }
 
 /**
