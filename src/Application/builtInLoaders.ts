@@ -18,6 +18,11 @@ export const builtLoaders: ILoaderInfo[] = [
     options: { path: "./src/setups/**/*.{ts,js}" }
   },
   {
+    name: "model",
+    loader: ServiceLoader,
+    options: { path: "./src/models/**/*.{ts,js}" }
+  },
+  {
     name: "service",
     loader: ServiceLoader,
     options: { path: "./src/services/**/*.{ts,js}" }
