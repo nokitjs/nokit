@@ -3,7 +3,7 @@ import { AbstractLoader } from "../AbstractLoader";
 import { compile, Environment, FileSystemLoader } from "nunjucks";
 import { IApplication } from "../Application/IApplication";
 import { readFile } from "fs";
-import { resolve } from "path";
+import { resolve, basename } from "path";
 import { VIEWS_ENTITY_KEY } from "./constants";
 
 /**
@@ -19,22 +19,14 @@ export function readTemplate(filename: string) {
 }
 
 /**
- * 修剪模板名称
- * @param filename 模板路径
- */
-export function trimTplName(filename: string) {
-  return filename.slice(0, filename.length - 3);
-}
-
-/**
  * 静态资源 加载器
  */
 export class ViewLoader<T = any> extends AbstractLoader<T> {
   public async load(app: IApplication) {
     const { root } = app.options;
-    const { path } = this.options;
+    const { path, extname = ".nj" } = this.options;
     const viewRoot = resolve(root, path);
-    const files = await globby("./**/*.nj", { cwd: viewRoot });
+    const files = await globby(`./**/*${extname}`, { cwd: viewRoot });
     const viewMap: any = {};
     const env = new Environment(new FileSystemLoader(viewRoot));
     await Promise.all(
@@ -42,7 +34,7 @@ export class ViewLoader<T = any> extends AbstractLoader<T> {
         const text = await readTemplate(resolve(viewRoot, file));
         // @types/nunjucks 3.1.1 没有第三个 path 参数的类型定义
         const template = compile(text, env, file as any);
-        viewMap[trimTplName(file)] = (data: any) => template.render(data);
+        viewMap[basename(file, extname)] = (data: any) => template.render(data);
       })
     );
     app.container.registerValue(VIEWS_ENTITY_KEY, viewMap);
