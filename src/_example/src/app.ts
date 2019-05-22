@@ -7,6 +7,6 @@ const application = new Application({
   root: resolve(__dirname, "../")
 });
 application
-  .run()
+  .launch()
   .then(({ port }) => info("Running:", `http://localhost:${port}`))
   .catch(err => error(err));

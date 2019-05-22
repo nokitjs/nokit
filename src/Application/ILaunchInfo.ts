@@ -1,6 +1,6 @@
 import { IApplication } from "./IApplication";
 
-export interface IRunInfo {
+export interface ILaunchInfo {
   app: IApplication;
   port: number;
 }

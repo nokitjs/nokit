@@ -9,7 +9,7 @@ import { IApplicationOptions } from "./IApplicationOptions";
 import { ILoader, ILoaderInfo } from "../AbstractLoader";
 import { normalize } from "path";
 import { IApplication } from "./IApplication";
-import { IRunInfo } from "./IRunInfo";
+import { ILaunchInfo } from "./ILaunchInfo";
 
 /**
  * 全局应用程序类，每一个应用都会由一个 Application 实例开始
@@ -106,7 +106,7 @@ export class Application extends EventEmitter implements IApplication {
   /**
    * 启动当前应用实例
    */
-  public async run(): Promise<IRunInfo> {
+  public async launch(): Promise<ILaunchInfo> {
     await this.loadConfig();
     const { port = this.config.port || (await acquire()) } = this.options;
     const loaders = await this.getAllLoaderInstances();
