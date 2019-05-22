@@ -6,9 +6,9 @@ import { IOC_PROP_INJECT } from "./constants";
  * 声明一个类成员，通过名称在容器中查找类型并实例化后注入
  * @param name 名称
  */
-export function inject(name: string, options: IInjectOptions = {}) {
+export function inject(name: string | symbol, options: IInjectOptions = {}) {
   return (target: any, member: string | symbol) => {
-    if (!name) name = String(member);
+    if (!name) name = member;
     const injectInfo: IInjectInfo = { name, member, options };
     const injectList: IInjectInfo[] =
       Reflect.getMetadata(IOC_PROP_INJECT, target) || [];

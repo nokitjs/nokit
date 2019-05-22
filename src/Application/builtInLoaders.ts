@@ -4,6 +4,7 @@ import { InfoLoader } from "../InfoLoader";
 import { ServiceLoader } from "../ServiceLoader";
 import { StaticLoader } from "../StaticLoader";
 import { ViewLoader } from "../ViewLoader";
+import { SetupLoader } from "../SetupLoader";
 
 export const builtLoaders: ILoaderInfo[] = [
   {
@@ -12,14 +13,19 @@ export const builtLoaders: ILoaderInfo[] = [
     options: null
   },
   {
+    name: "setup",
+    loader: SetupLoader,
+    options: { path: "./src/setups/**/*.{ts,js}" }
+  },
+  {
     name: "service",
     loader: ServiceLoader,
-    options: { path: "./src/**/*.service.{ts,js}" }
+    options: { path: "./src/services/**/*.{ts,js}" }
   },
   {
     name: "controller",
     loader: ControllerLoader,
-    options: { path: "./src/**/*.controller.{ts,js}" }
+    options: { path: "./src/controllers/**/*.{ts,js}" }
   },
   {
     name: "view",
@@ -29,6 +35,6 @@ export const builtLoaders: ILoaderInfo[] = [
   {
     name: "static",
     loader: StaticLoader,
-    options: { path: "./public" }
+    options: { path: "./assets" }
   }
 ];

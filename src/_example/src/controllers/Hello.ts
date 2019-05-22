@@ -1,7 +1,7 @@
-import { controller, get, inject, param, query, render } from "../../";
+import { controller, get, inject, param, query, render } from "../../..";
 
 @controller("/")
-export class TestController {
+export class HelloController {
   @inject("test1")
   service: any;
 

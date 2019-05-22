@@ -1,15 +1,15 @@
-import * as console from "../common/console";
 import * as Koa from "koa";
 import * as Router from "koa-router";
 import { acquire } from "../common/oneport";
 import { builtLoaders } from "./builtInLoaders";
-import { CONFIG_KEY, ConfigLoader } from "../ConfigLoader";
+import { CONFIG_ENTITY_KEY, ConfigLoader } from "../ConfigLoader";
 import { Container } from "../IoCLoader";
 import { EventEmitter } from "events";
 import { IApplicationOptions } from "./IApplicationOptions";
 import { ILoader, ILoaderInfo } from "../AbstractLoader";
 import { normalize } from "path";
 import { IApplication } from "./IApplication";
+import { IRunInfo } from "./IRunInfo";
 
 /**
  * 全局应用程序类，每一个应用都会由一个 Application 实例开始
@@ -34,7 +34,7 @@ export class Application extends EventEmitter implements IApplication {
    * 应用配置对象
    */
   public get config() {
-    return this.container.values[CONFIG_KEY] || {};
+    return this.container.get(CONFIG_ENTITY_KEY) || {};
   }
 
   /**
@@ -106,7 +106,7 @@ export class Application extends EventEmitter implements IApplication {
   /**
    * 启动当前应用实例
    */
-  public async run() {
+  public async run(): Promise<IRunInfo> {
     await this.loadConfig();
     const { port = this.config.port || (await acquire()) } = this.options;
     const loaders = await this.getAllLoaderInstances();
@@ -114,6 +114,6 @@ export class Application extends EventEmitter implements IApplication {
     this.server.use(this.router.routes());
     this.server.use(this.router.allowedMethods());
     this.server.listen(port);
-    console.info("Application running:", `http://localhost:${port}`);
+    return { app: this, port };
   }
 }

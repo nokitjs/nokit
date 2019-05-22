@@ -4,7 +4,7 @@ import { compile, Environment, FileSystemLoader } from "nunjucks";
 import { IApplication } from "../Application/IApplication";
 import { readFile } from "fs";
 import { resolve } from "path";
-import { VIEW_KEY } from "./constants";
+import { VIEWS_ENTITY_KEY } from "./constants";
 
 /**
  * 读取模板路径
@@ -45,6 +45,6 @@ export class ViewLoader<T = any> extends AbstractLoader<T> {
         viewMap[trimTplName(file)] = (data: any) => template.render(data);
       })
     );
-    app.container.registerValues({ [VIEW_KEY]: viewMap });
+    app.container.registerValue(VIEWS_ENTITY_KEY, viewMap);
   }
 }

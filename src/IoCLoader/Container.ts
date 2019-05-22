@@ -1,45 +1,83 @@
 import { getProviderInfo } from "./provider";
 import { getPropInjectInfos } from "./inject";
-import { IContainer } from "./IContainer";
-import { IOC_SINGLETON } from "./constants";
+import { IContainer, IEntity } from "./IContainer";
+import { IOC_SINGLETON, IOC_ENTITY_CLS, IOC_ENTITY_OBJ } from "./constants";
 import { IInjectInfo } from "./IInjectInfo";
-import { injectTypeGetter } from "./InjectGetter";
+import { defaultInjectGetter } from "./InjectGetter";
 
 /**
  * IoC 容器类
  */
 export class Container implements IContainer {
   /**
-   * 所有已注册的可注入类型
+   * 所有已注册的可注入实体
    */
-  public types: { [name: string]: any } = {};
+  public readonly entities: any = {};
 
   /**
-   * 所有已注册的可注入值
+   * 向容器中注册一个实体
+   * @param name 注册名称
+   * @param type 注册类型
+   * @param value 注册实体
    */
-  public values: any = {};
+  protected registerEntity(name: string | symbol, type: symbol, value: any) {
+    if (this.entities[name]) {
+      throw new Error(`Entity name is duplicated: ${String(name)}`);
+    }
+    this.entities[name] = { type, value };
+  }
+
+  /**
+   * 向容器注册一个实体类
+   * @param name 实例名称
+   * @param type 实体类
+   */
+  registerType(name: string | symbol, type: any): void {
+    this.registerEntity(name, IOC_ENTITY_CLS, type);
+  }
 
   /**
    * 在 IoC 容器中注册一组件类型
    * @param types 类型数组
    */
-  public register(types: any[]) {
+  public registerTypes(types: any[]): void {
     types.forEach(type => {
       const info = getProviderInfo(type);
       if (!info || !info.name) return;
-      if (this.types[info.name]) {
-        throw new Error(`Provider name is duplicated: ${info.name}`);
-      }
-      this.types[info.name] = type;
+      this.registerType(info.name, type);
     });
   }
 
   /**
-   * 添加 values
-   * @param values 要添加的 values
+   * 向容器注册一个实体值
+   * @param name 实例名称
+   * @param value 实体值
    */
-  public registerValues(values: any) {
-    Object.assign(this.values, values);
+  registerValue(name: string | symbol, value: any): void {
+    this.registerEntity(name, IOC_ENTITY_OBJ, value);
+  }
+
+  /**
+   * 添加 values
+   * @param map 要添加的 values
+   */
+  public registerValues(map: any): void {
+    Object.keys(map).forEach((name: string) => {
+      this.registerValue(name, map[name]);
+    });
+    Object.getOwnPropertySymbols(map).forEach((name: symbol) => {
+      this.registerValue(name, map[name]);
+    });
+  }
+
+  /**
+   * 向容器注册实体(类型 Array 或值 Map)
+   * @param types 类型
+   */
+  public register(entities: any[] | any): void {
+    return entities instanceof Array
+      ? this.registerTypes(entities)
+      : this.registerValues(entities);
   }
 
   /**
@@ -47,8 +85,8 @@ export class Container implements IContainer {
    * @param instance 将要执行注入的实例
    * @param info 注入信息
    */
-  private injectInstanceProp(instance: any, info: IInjectInfo) {
-    const getter = (info.options && info.options.getter) || injectTypeGetter;
+  private injectProp(instance: any, info: IInjectInfo) {
+    const getter = (info.options && info.options.getter) || defaultInjectGetter;
     const cacheKey = Symbol(String(info.member));
     const originValue = instance[info.member];
     delete instance[info.member];
@@ -65,10 +103,10 @@ export class Container implements IContainer {
    * 在实例上应用注入
    * @param instance
    */
-  public injectInstance(instance: any) {
+  public inject(instance: any) {
     const propInjectInfos = getPropInjectInfos(instance);
     propInjectInfos.forEach((info: IInjectInfo) =>
-      this.injectInstanceProp(instance, info)
+      this.injectProp(instance, info)
     );
   }
 
@@ -76,13 +114,16 @@ export class Container implements IContainer {
    * 通过类型名称创建一个实例
    * @param name 已注册的类型名称
    */
-  public createInstance<T>(name: string) {
-    if (!name) return null;
-    const type = this.types[name];
-    if (!type) return null;
-    if (type[IOC_SINGLETON]) return type[IOC_SINGLETON];
+  public get<T = any>(name: string | symbol) {
+    if (!name) return;
+    const entity: IEntity = this.entities[name];
+    if (!entity) return;
+    if (entity.type !== IOC_ENTITY_CLS) return entity.value as T;
+    const type = entity.value;
+    if (!type) return;
+    if (type[IOC_SINGLETON]) return type[IOC_SINGLETON] as T;
     const instance = new type();
-    this.injectInstance(instance);
+    this.inject(instance);
     const info = getProviderInfo(type);
     if (info && info.options && info.options.singleton) {
       type[IOC_SINGLETON] = instance;

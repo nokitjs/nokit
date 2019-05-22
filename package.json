@@ -8,8 +8,8 @@
   "scripts": {
     "clean": "rm -rf ./lib",
     "lint": "tslint --project ./tsconfig.json --fix",
-    "build": "npm run clean && tsc",
-    "dev": "nodemon --watch 'src/**/*.{ts,nj,yml}' --ignore 'src/**/*.spec.ts' --exec 'ts-node' ./src/_example/src/index.ts"
+    "build": "npm run clean && npm run lint && tsc",
+    "dev": "nodemon --watch 'src/**/*.{ts,nj,yml}' --ignore 'src/**/*.spec.ts' --exec 'ts-node' ./src/_example/src/app.ts"
   },
   "keywords": [
     "nokit",

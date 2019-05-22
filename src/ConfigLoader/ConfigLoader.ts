@@ -1,5 +1,5 @@
 import { AbstractLoader } from "../AbstractLoader";
-import { CONFIG_KEY } from "./constants";
+import { CONFIG_ENTITY_KEY } from "./constants";
 import { IApplication } from "../Application/IApplication";
 import { resolve } from "path";
 
@@ -18,6 +18,6 @@ export class ConfigLoader<T = any> extends AbstractLoader<T> {
     const { path } = this.options;
     const configFile = resolve(root, path);
     const configObject = confman.load(configFile);
-    app.container.registerValues({ [CONFIG_KEY]: configObject });
+    app.container.registerValue(CONFIG_ENTITY_KEY, configObject);
   }
 }

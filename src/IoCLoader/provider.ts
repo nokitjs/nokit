@@ -11,7 +11,7 @@ export interface IProviderOptions {
  * provider 信息
  */
 export interface IProviderInfo {
-  name: string;
+  name: string | symbol;
   options: IProviderOptions;
 }
 
@@ -19,7 +19,10 @@ export interface IProviderInfo {
  * 声明一个类，将其放入 IoC 容器内
  * @param name 名称
  */
-export function provider(name: string, options: IProviderOptions = {}) {
+export function provider(
+  name: string | symbol,
+  options: IProviderOptions = {}
+) {
   return (target: any) =>
     Reflect.metadata(IOC_PROVIDER, { name, options })(target);
 }
