@@ -24,7 +24,7 @@ export function readTemplate(filename: string) {
 export class ViewLoader<T = any> extends AbstractLoader<T> {
   public async load(app: IApplication) {
     const { root } = app.options;
-    const { path, extname = ".nj" } = this.options;
+    const { path, extname = ".html" } = this.options;
     const viewRoot = resolve(root, path);
     const files = await globby(`./**/*${extname}`, { cwd: viewRoot });
     const viewMap: any = {};
