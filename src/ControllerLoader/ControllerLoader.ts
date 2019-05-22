@@ -1,12 +1,11 @@
 import { Context } from "koa";
 import { getAllMappingInfos, IMappingInfo } from "./mapping";
+import { getByPath } from "../common/utils";
 import { getControllerInfo, IControllerInfo } from "./controller";
+import { getCtxMappingInfos } from "./context";
 import { IApplication } from "../Application/IApplication";
 import { IoCLoader } from "../IoCLoader";
 import { normalize } from "path";
-import { getCtxMappingInfos } from "./context";
-
-const { getByPath } = require("ntils");
 
 /**
  * Controller 加载器
