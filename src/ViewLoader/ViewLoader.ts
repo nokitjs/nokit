@@ -1,9 +1,8 @@
 import * as globby from "globby";
 import { AbstractLoader } from "../AbstractLoader";
+import { basename, resolve } from "path";
 import { compile, Environment, FileSystemLoader } from "nunjucks";
-import { IApplication } from "../Application/IApplication";
 import { readFile } from "fs";
-import { resolve, basename } from "path";
 import { VIEWS_ENTITY_KEY } from "./constants";
 
 /**
@@ -22,8 +21,11 @@ export function readTemplate(filename: string) {
  * 静态资源 加载器
  */
 export class ViewLoader<T = any> extends AbstractLoader<T> {
-  public async load(app: IApplication) {
-    const { root } = app.options;
+  /**
+   * 加载所有视图
+   */
+  public async load() {
+    const { root } = this.app.options;
     const { path, extname = ".html" } = this.options;
     const viewRoot = resolve(root, path);
     const files = await globby(`./**/*${extname}`, { cwd: viewRoot });
@@ -37,6 +39,6 @@ export class ViewLoader<T = any> extends AbstractLoader<T> {
         viewMap[basename(file, extname)] = (data: any) => template.render(data);
       })
     );
-    app.container.registerValue(VIEWS_ENTITY_KEY, viewMap);
+    this.app.container.registerValue(VIEWS_ENTITY_KEY, viewMap);
   }
 }

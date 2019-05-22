@@ -10,12 +10,15 @@ export type ISetupFunction = (app?: IApplication) => Promise<any> | any;
  * Setup 加载器
  */
 export class SetupLoader extends AbstractLoader<ISetupFunction> {
-  async load(app: IApplication) {
-    await super.load(app);
+  /**
+   * 执行加载
+   */
+  async load() {
+    await super.load();
     await Promise.all(
       this.content.map(async func => {
-        const value = await func(app);
-        app.container.registerValue(func.name, value);
+        const value = await func(this.app);
+        this.app.container.registerValue(func.name, value);
       })
     );
   }

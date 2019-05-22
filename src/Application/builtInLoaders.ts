@@ -15,22 +15,22 @@ export const builtLoaders: ILoaderInfo[] = [
   {
     name: "setup",
     loader: SetupLoader,
-    options: { path: "./src/setups/**/*.{ts,js}" }
+    options: { path: "./{src}/setups/**/*.{ext}" }
   },
   {
     name: "model",
     loader: ServiceLoader,
-    options: { path: "./src/models/**/*.{ts,js}" }
+    options: { path: "./{src}/models/**/*.{ext}" }
   },
   {
     name: "service",
     loader: ServiceLoader,
-    options: { path: "./src/services/**/*.{ts,js}" }
+    options: { path: "./{src}/services/**/*.{ext}" }
   },
   {
     name: "controller",
     loader: ControllerLoader,
-    options: { path: "./src/controllers/**/*.{ts,js}" }
+    options: { path: "./{src}/controllers/**/*.{ext}" }
   },
   {
     name: "view",

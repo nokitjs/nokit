@@ -1,5 +1,4 @@
 import { AbstractLoader } from "../AbstractLoader";
-import { IApplication } from "../Application/IApplication";
 
 const pkg = require("../../package.json");
 
@@ -9,10 +8,9 @@ const pkg = require("../../package.json");
 export class InfoLoader<T = any> extends AbstractLoader<T> {
   /**
    * 加载一个框架信息
-   * @param app 应用实例
    */
-  public async load(app: IApplication) {
-    app.server.use(async (ctx, next) => {
+  public async load() {
+    this.app.server.use(async (ctx, next) => {
       ctx.set("Server", pkg.displayName);
       await next();
     });

@@ -3,7 +3,6 @@ import { getAllMappingInfos, IMappingInfo } from "./mapping";
 import { getByPath } from "../common/utils";
 import { getControllerInfo, IControllerInfo } from "./controller";
 import { getCtxMappingInfos } from "./context";
-import { IApplication } from "../Application/IApplication";
 import { IoCLoader } from "../IoCLoader";
 import { normalize } from "path";
 
@@ -27,19 +26,18 @@ export class ControllerLoader<T = any[]> extends IoCLoader<T> {
    * @param mapInfo 映射信息
    */
   private regRoute(
-    app: IApplication,
     CtlType: any,
     ctlInfo: IControllerInfo,
     mapInfo: IMappingInfo
   ) {
     const { path, verb, method } = mapInfo;
     const httpMethods = this.getHttpMethods(verb);
-    app.router.register(
+    this.app.router.register(
       normalize(`/${ctlInfo.path}/${path}`),
       httpMethods,
       async (ctx: Context, next: Function) => {
         const ctlInstance = new CtlType();
-        app.container.inject(ctlInstance);
+        this.app.container.inject(ctlInstance);
         ctx.body = await this.execCtlMethod(ctx, ctlInstance, method);
         ctx.preventCahce = true;
         await next();
@@ -65,19 +63,18 @@ export class ControllerLoader<T = any[]> extends IoCLoader<T> {
    * @param app 应用实例
    * @param CtlType 控制器类
    */
-  private regCtlType(app: IApplication, CtlType: any) {
+  private regCtlType(CtlType: any) {
     const ctlInfo = getControllerInfo(CtlType);
     const mapInfos = getAllMappingInfos(CtlType);
     if (!ctlInfo || !mapInfos || mapInfos.length < 1) return;
-    mapInfos.forEach(mapInfo => this.regRoute(app, CtlType, ctlInfo, mapInfo));
+    mapInfos.forEach(mapInfo => this.regRoute(CtlType, ctlInfo, mapInfo));
   }
 
   /**
    * 加载所有 Controller
-   * @param app 应用实例
    */
-  public async load(app: IApplication) {
-    await super.load(app);
-    this.content.forEach((CtlType: any) => this.regCtlType(app, CtlType));
+  public async load() {
+    await super.load();
+    this.content.forEach((CtlType: any) => this.regCtlType(CtlType));
   }
 }

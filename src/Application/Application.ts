@@ -6,15 +6,21 @@ import { CONFIG_ENTITY_KEY, ConfigLoader } from "../ConfigLoader";
 import { Container } from "../IoCLoader";
 import { EventEmitter } from "events";
 import { IApplicationOptions } from "./IApplicationOptions";
-import { ILoader, ILoaderInfo } from "../AbstractLoader";
+import { ILoader, ILoaderInfo, ILoaderConstructor } from "../AbstractLoader";
 import { normalize } from "path";
 import { IApplication } from "./IApplication";
 import { ILaunchInfo } from "./ILaunchInfo";
+import { ENV_NAME } from "./constants";
 
 /**
  * 全局应用程序类，每一个应用都会由一个 Application 实例开始
  */
 export class Application extends EventEmitter implements IApplication {
+  /**
+   * 当前环境标识
+   */
+  public readonly env = process.env[ENV_NAME] || process.env.NODE_ENV;
+
   /**
    * 对应的 koa 实例
    */
@@ -50,15 +56,15 @@ export class Application extends EventEmitter implements IApplication {
    * 加载配置
    */
   protected loadConfig() {
-    const configLoader = new ConfigLoader({ path: "./configs/config" });
-    return configLoader.load(this);
+    const configLoader = new ConfigLoader(this, { path: "./configs/config" });
+    return configLoader.load();
   }
 
   /**
    * 加载一个 loader
    * @param name loader 名称
    */
-  protected importLoader(name: string) {
+  protected importLoader(name: string): ILoaderConstructor {
     const { root } = this.options;
     const path = normalize(`${root}/node_modules/${name}`);
     const loader = require(path);
@@ -75,7 +81,7 @@ export class Application extends EventEmitter implements IApplication {
     const config = this.config.loaders && this.config.loaders[name];
     if (config === false) return;
     const Loader = loader ? loader : this.importLoader(name);
-    return new Loader({ ...options, ...config });
+    return new Loader(this, { ...options, ...config });
   }
 
   /**
@@ -110,7 +116,7 @@ export class Application extends EventEmitter implements IApplication {
     await this.loadConfig();
     const { port = this.config.port || (await acquire()) } = this.options;
     const loaders = await this.getAllLoaderInstances();
-    for (let loader of loaders) await loader.load(this);
+    for (let loader of loaders) await loader.load();
     this.server.use(this.router.routes());
     this.server.use(this.router.allowedMethods());
     this.server.listen(port);

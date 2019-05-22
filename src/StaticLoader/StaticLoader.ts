@@ -1,7 +1,6 @@
 import * as compose from "koa-compose";
 import * as serve from "koa-static";
 import { AbstractLoader } from "../AbstractLoader";
-import { IApplication } from "../Application/IApplication";
 import { resolve } from "path";
 
 const conditional = require("koa-conditional-get");
@@ -13,17 +12,16 @@ const etag = require("koa-etag");
 export class StaticLoader<T = any> extends AbstractLoader<T> {
   /**
    * 加载静态资源相关模块
-   * @param app 应用实例
    */
-  public async load(app: IApplication) {
+  public async load() {
     const { path } = this.options;
-    const staticRoot = resolve(app.options.root, path);
-    app.server.use(async (ctx, next) => {
+    const staticRoot = resolve(this.app.options.root, path);
+    this.app.server.use(async (ctx, next) => {
       await next();
       if (ctx.preventCahce) return;
-      const fakedNext: any = () => {};
-      await compose([conditional(), etag()])(ctx, fakedNext);
+      const noopNext: any = () => {};
+      await compose([conditional(), etag()])(ctx, noopNext);
     });
-    app.server.use(serve(staticRoot));
+    this.app.server.use(serve(staticRoot));
   }
 }

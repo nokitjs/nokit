@@ -8,22 +8,27 @@ import { IApplicationOptions } from "./IApplicationOptions";
  */
 export interface IApplication {
   /**
+   * 当前环境标识（取值 NOKA_ENV || NODE_ENV）
+   */
+  readonly env: string;
+
+  /**
    * 应用选项（实例化参数）
    */
-  options: IApplicationOptions;
+  readonly options: IApplicationOptions;
 
   /**
    * 应用内部 server 实例（Koa）
    */
-  server: Koa;
+  readonly server: Koa;
 
   /**
    * 应用 Ioc 容器实例
    */
-  container: Container;
+  readonly container: Container;
 
   /**
    * 应用的根路由实例
    */
-  router: Router;
+  readonly router: Router;
 }
