@@ -5,6 +5,10 @@ import { VIEWS_ENTITY_KEY } from "./constants";
 
 const { getByPath } = require("ntils");
 
+/**
+ * 视图注入 Getter 函数
+ * @param options 注入选项
+ */
 export function renderInjectGetter(options: IInjectGetterOptions) {
   const { container, info, originValue, instance } = options;
   const views = container.get(VIEWS_ENTITY_KEY);

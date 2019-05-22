@@ -7,7 +7,7 @@ import { IApplication } from "../Application";
 export type ISetupFunction = (app?: IApplication) => Promise<any> | any;
 
 /**
- * service 加载器
+ * Setup 加载器
  */
 export class SetupLoader extends AbstractLoader<ISetupFunction> {
   async load(app: IApplication) {
