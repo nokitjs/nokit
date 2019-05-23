@@ -1,45 +1,37 @@
 import { ControllerLoader } from "../ControllerLoader";
-import { ILoaderInfo } from "../AbstractLoader/ILoaderInfo";
+import { ILoaderInfoMap } from "../AbstractLoader";
 import { InfoLoader } from "../InfoLoader";
 import { ServiceLoader } from "../ServiceLoader";
+import { SetupLoader } from "../SetupLoader";
 import { StaticLoader } from "../StaticLoader";
 import { ViewLoader } from "../ViewLoader";
-import { SetupLoader } from "../SetupLoader";
 
-export const builtLoaders: ILoaderInfo[] = [
-  {
-    name: "info",
-    loader: InfoLoader,
-    options: null
+export const builtLoaders: ILoaderInfoMap = {
+  info: {
+    loader: InfoLoader
   },
-  {
-    name: "setup",
+  setup: {
     loader: SetupLoader,
     options: { path: "./{src}/setups/**/*.{ext}" }
   },
-  {
-    name: "model",
+  model: {
     loader: ServiceLoader,
     options: { path: "./{src}/models/**/*.{ext}" }
   },
-  {
-    name: "service",
+  service: {
     loader: ServiceLoader,
     options: { path: "./{src}/services/**/*.{ext}" }
   },
-  {
-    name: "controller",
+  controller: {
     loader: ControllerLoader,
     options: { path: "./{src}/controllers/**/*.{ext}" }
   },
-  {
-    name: "view",
+  view: {
     loader: ViewLoader,
     options: { path: "./views" }
   },
-  {
-    name: "static",
+  static: {
     loader: StaticLoader,
     options: { path: "./assets" }
   }
-];
+};

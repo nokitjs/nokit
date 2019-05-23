@@ -59,7 +59,7 @@ export abstract class AbstractLoader<T = any> implements ILoader<T> {
    * @param app 全局应用程序实例
    */
   public async load<T>() {
-    const { root } = this.app.options;
+    const { root } = this.app;
     const { path } = this.options;
     const files = await this.glob(path, { cwd: root });
     files.forEach(file => {

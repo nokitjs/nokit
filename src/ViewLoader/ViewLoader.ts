@@ -25,7 +25,7 @@ export class ViewLoader<T = any> extends AbstractLoader<T> {
    * 加载所有视图
    */
   public async load() {
-    const { root } = this.app.options;
+    const { root } = this.app;
     const { path, extname = ".html" } = this.options;
     const viewRoot = resolve(root, path);
     const files = await globby(`./**/*${extname}`, { cwd: viewRoot });

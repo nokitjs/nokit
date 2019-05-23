@@ -12,7 +12,7 @@ export class ConfigLoader<T = any> extends AbstractLoader<T> {
    * 加载应用配置
    */
   public async load() {
-    const { root } = this.app.options;
+    const { root } = this.app;
     const { path } = this.options;
     const configFile = resolve(root, path);
     const configParser = new Parser({ env: this.app.env });

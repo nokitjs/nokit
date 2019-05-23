@@ -1,12 +1,7 @@
 import { Application } from "../..";
-import { resolve } from "path";
 
-const { info, error } = console;
-
-const application = new Application({
-  root: resolve(__dirname, "../")
-});
+const application = new Application();
 application
   .launch()
-  .then(({ port }) => info("Running:", `http://localhost:${port}`))
-  .catch(err => error(err));
+  .then(({ port }) => console.info("Running:", `http://localhost:${port}`))
+  .catch(err => console.error(err));
