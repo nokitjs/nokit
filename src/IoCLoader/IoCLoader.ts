@@ -9,6 +9,6 @@ export class IoCLoader<T = any[]> extends AbstractLoader<T> {
    */
   public async load<T>() {
     await super.load<T>();
-    this.app.container.registerTypes(this.content);
+    this.container.registerTypes(this.content);
   }
 }

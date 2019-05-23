@@ -18,6 +18,34 @@ export abstract class AbstractLoader<T = any> implements ILoader<T> {
   }
 
   /**
+   * Koa 实例
+   */
+  protected get server() {
+    return this.app.server;
+  }
+
+  /**
+   * IoC 容器
+   */
+  protected get container() {
+    return this.app.container;
+  }
+
+  /**
+   * 应用根目录
+   */
+  protected get root() {
+    return this.app.root;
+  }
+
+  /**
+   * 环境标识
+   */
+  protected get env() {
+    return this.app.env;
+  }
+
+  /**
    * 已加载的资源或类型列表
    */
   protected content: T[] = [];

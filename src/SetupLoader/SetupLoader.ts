@@ -18,7 +18,7 @@ export class SetupLoader extends AbstractLoader<ISetupFunction> {
     await Promise.all(
       this.content.map(async func => {
         const value = await func(this.app);
-        this.app.container.registerValue(func.name, value);
+        this.container.registerValue(func.name, value);
       })
     );
   }

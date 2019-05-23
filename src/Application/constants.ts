@@ -1,4 +1,4 @@
-const pkg = require("../../package.json");
+import { pkg } from "../common/utils";
 
 /**
  * ENV 环境变量名

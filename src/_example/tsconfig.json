@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
+    "outDir": "./lib/",
     "sourceMap": false,
     "declaration": true,
     "noImplicitAny": true,
@@ -17,6 +17,6 @@
     ]
   },
   "include": [
-    "app/**/*.ts"
+    "src/**/*.ts"
   ]
 }

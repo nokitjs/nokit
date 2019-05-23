@@ -15,8 +15,8 @@ export class ConfigLoader<T = any> extends AbstractLoader<T> {
     const { root } = this.app;
     const { path } = this.options;
     const configFile = resolve(root, path);
-    const configParser = new Parser({ env: this.app.env });
+    const configParser = new Parser({ env: this.env });
     const configObject = configParser.load(configFile);
-    this.app.container.registerValue(CONFIG_ENTITY_KEY, configObject);
+    this.container.registerValue(CONFIG_ENTITY_KEY, configObject);
   }
 }

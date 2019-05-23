@@ -25,9 +25,8 @@ export class ViewLoader<T = any> extends AbstractLoader<T> {
    * 加载所有视图
    */
   public async load() {
-    const { root } = this.app;
     const { path, extname = ".html" } = this.options;
-    const viewRoot = resolve(root, path);
+    const viewRoot = resolve(this.root, path);
     const files = await globby(`./**/*${extname}`, { cwd: viewRoot });
     const viewMap: any = {};
     const env = new Environment(new FileSystemLoader(viewRoot));
@@ -35,10 +34,11 @@ export class ViewLoader<T = any> extends AbstractLoader<T> {
       files.map(async file => {
         const text = await readTemplate(resolve(viewRoot, file));
         // @types/nunjucks 3.1.1 没有第三个 path 参数的类型定义
-        const template = compile(text, env, file as any);
+        const relativePath: any = file;
+        const template = compile(text, env, relativePath);
         viewMap[basename(file, extname)] = (data: any) => template.render(data);
       })
     );
-    this.app.container.registerValue(VIEWS_ENTITY_KEY, viewMap);
+    this.container.registerValue(VIEWS_ENTITY_KEY, viewMap);
   }
 }

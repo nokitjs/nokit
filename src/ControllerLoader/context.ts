@@ -13,7 +13,7 @@ export interface ICtxMappingInfo {
  * 从 ctx 上获取内容
  * @param name JSON Path
  */
-export function ctx(name: string) {
+export function ctx(name = ".") {
   return (target: any, member: string, index: number) => {
     const type = "ctx",
       list = getCtxMappingInfos(target, member);
@@ -31,6 +31,11 @@ export const req = () => ctx("request");
  * 响应对象
  */
 export const res = () => ctx("response");
+
+/**
+ * Cookie 信息
+ */
+export const cookie = () => ctx("cookies");
 
 /**
  * 路由参数

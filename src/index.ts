@@ -6,3 +6,4 @@ export * from "./ControllerLoader";
 export * from "./ServiceLoader";
 export * from "./ConfigLoader";
 export * from "./ViewLoader";
+export * from "./SessionLoader";

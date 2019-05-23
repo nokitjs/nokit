@@ -1,6 +1,7 @@
+import { pkg } from "./utils";
+
 const console = require("console3");
 const utils = require("ntils");
-const pkg = require("../../package.json");
 const prefix = `[${pkg.displayName}]`;
 
 export function time() {

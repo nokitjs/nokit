@@ -35,9 +35,9 @@ export class ControllerLoader<T = any[]> extends IoCLoader<T> {
     this.app.router.register(
       normalize(`/${ctlInfo.path}/${path}`),
       httpMethods,
-      async (ctx: Context, next: Function) => {
+      async (ctx: any, next: Function) => {
         const ctlInstance = new CtlType();
-        this.app.container.inject(ctlInstance);
+        this.container.inject(ctlInstance);
         ctx.body = await this.execCtlMethod(ctx, ctlInstance, method);
         ctx.preventCahce = true;
         await next();

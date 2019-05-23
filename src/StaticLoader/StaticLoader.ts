@@ -15,13 +15,13 @@ export class StaticLoader<T = any> extends AbstractLoader<T> {
    */
   public async load() {
     const { path } = this.options;
-    const staticRoot = resolve(this.app.root, path);
-    this.app.server.use(async (ctx, next) => {
+    const staticRoot = resolve(this.root, path);
+    this.server.use(async (ctx, next) => {
       await next();
       if (ctx.preventCahce) return;
       const noopNext: any = () => {};
       await compose([conditional(), etag()])(ctx, noopNext);
     });
-    this.app.server.use(serve(staticRoot));
+    this.server.use(serve(staticRoot));
   }
 }
