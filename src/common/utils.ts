@@ -8,3 +8,10 @@ export const pkg = require("../../package.json");
 export function getByPath(obj: any, path: string) {
   return utils.getByPath(obj, path);
 }
+
+/**
+ * 生成一个 UUID
+ */
+export function uuid(): string {
+  return utils.newGuid();
+}
