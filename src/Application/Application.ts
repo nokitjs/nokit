@@ -3,7 +3,7 @@ import * as Router from "koa-router";
 import { acquire } from "../common/oneport";
 import { builtLoaders } from "./builtInLoaders";
 import { CONF_RESERVEDS, ENV_NAME } from "./constants";
-import { CONFIG_ENTITY_KEY, ConfigLoader } from "../ConfigLoader";
+import { CONFIG_ENTITY_KEY } from "../ConfigLoader";
 import { Container } from "../IoCLoader";
 import { dirname, normalize, resolve } from "path";
 import { EventEmitter } from "events";
@@ -47,8 +47,6 @@ export class Application extends EventEmitter implements IApplication {
     return this.container.get(CONFIG_ENTITY_KEY) || {};
   }
 
-  private __root: string;
-
   /**
    * 是否是系统根目录
    * @param dir 目录
@@ -64,6 +62,11 @@ export class Application extends EventEmitter implements IApplication {
   private existsPackage(dir: string) {
     return existsSync(normalize(`${dir}/package.json`));
   }
+
+  /**
+   * 根目录缓存
+   */
+  private __root: string;
 
   /**
    * 应用根目录
@@ -86,14 +89,6 @@ export class Application extends EventEmitter implements IApplication {
    */
   constructor(protected options: IApplicationOptions = {}) {
     super();
-  }
-
-  /**
-   * 加载配置
-   */
-  protected loadConfig() {
-    const configLoader = new ConfigLoader(this, { path: "./configs/config" });
-    return configLoader.load();
   }
 
   /**
@@ -166,10 +161,9 @@ export class Application extends EventEmitter implements IApplication {
    * 启动当前应用实例
    */
   public async launch(): Promise<ILaunchInfo> {
-    await this.loadConfig();
-    const { port = this.config.port || (await acquire()) } = this.options;
     const loaders = await this.createAllLoaderInstances();
     for (let loader of loaders) await loader.load();
+    const { port = this.config.port || (await acquire()) } = this.options;
     this.server.use(this.router.routes());
     this.server.use(this.router.allowedMethods());
     this.server.listen(port);

@@ -1,6 +1,7 @@
+import { ConfigLoader } from "../ConfigLoader";
 import { ControllerLoader } from "../ControllerLoader";
+import { HeadersLoader } from "../HeadersLoader";
 import { ILoaderInfoMap } from "../AbstractLoader";
-import { InfoLoader } from "../InfoLoader";
 import { ModelLoader } from "../ModelLoader";
 import { ServiceLoader } from "../ServiceLoader";
 import { SessionLoader } from "../SessionLoader";
@@ -9,8 +10,12 @@ import { StaticLoader } from "../StaticLoader";
 import { ViewLoader } from "../ViewLoader";
 
 export const builtLoaders: ILoaderInfoMap = {
-  info: {
-    loader: InfoLoader
+  config: {
+    loader: ConfigLoader,
+    options: { path: "./configs/config" }
+  },
+  headers: {
+    loader: HeadersLoader
   },
   setup: {
     loader: SetupLoader,
