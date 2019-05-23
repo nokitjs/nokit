@@ -5,7 +5,7 @@ import { builtLoaders } from "./builtInLoaders";
 import { CONF_RESERVEDS, ENV_NAME } from "./constants";
 import { CONFIG_ENTITY_KEY, ConfigLoader } from "../ConfigLoader";
 import { Container } from "../IoCLoader";
-import { dirname, normalize } from "path";
+import { dirname, normalize, resolve } from "path";
 import { EventEmitter } from "events";
 import { existsSync } from "fs";
 import { IApplication } from "./IApplication";
@@ -104,13 +104,25 @@ export class Application extends EventEmitter implements IApplication {
   }
 
   /**
+   * 字符串是不是一个路戏
+   * @param str 字符串
+   */
+  private isPath(str: string) {
+    if (!str) return false;
+    return str.startsWith("/") || str.startsWith(".") || /^[a-z]+\:/i.test(str);
+  }
+
+  /**
    * 加载一个 loader
    * @param name loader 名称
    */
   protected importLoader(name: string): ILoaderConstructor {
+    name = String(name);
     const { root } = this.options;
-    const path = normalize(`${root}/node_modules/${String(name)}`);
-    const loader = require(path);
+    const loaderPath = this.isPath(name)
+      ? resolve(root, name)
+      : normalize(`${root}/node_modules/${name}`);
+    const loader = require(loaderPath);
     return loader.default || loader;
   }
 
