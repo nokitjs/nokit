@@ -1,5 +1,4 @@
 import { controller, get, inject, param, render, session } from "../../..";
-import { Session } from "koa-session";
 
 @controller("/")
 export class HelloController {
@@ -8,10 +7,11 @@ export class HelloController {
 
   @get("/say/:name")
   @render("index")
-  say(@param("name") name: string, @session() session: Session) {
+  say(@param("name") name: string, @session() session: any) {
     session.count = session.count || 0;
     session.count++;
     name += session.count;
+    this.aaa();
     return { name };
   }
 }

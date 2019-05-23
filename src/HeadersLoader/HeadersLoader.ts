@@ -4,11 +4,11 @@ import { pkg } from "../common/utils";
 const defaultOptions: { [key: string]: string } = { Server: pkg.displayName };
 
 /**
- * 静态资源加载器
+ * 响应头加载器
  */
 export class HeadersLoader<T = any> extends AbstractLoader<T> {
   /**
-   * 加载一个框架信息
+   * 配置默认响应头
    */
   public async load() {
     const headers = { ...defaultOptions, ...this.options };
