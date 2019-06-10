@@ -6,6 +6,6 @@ import { IoCLoader } from "../IoCLoader";
 export class ModelLoader<T = any> extends IoCLoader<T> {
   async load() {
     await super.load();
-    this.app.logger.info("Model loaded");
+    this.app.logger.info("Model ready");
   }
 }

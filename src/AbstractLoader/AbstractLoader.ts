@@ -1,8 +1,9 @@
 import * as globby from "globby";
+import { existsSync } from "fs";
+import { extname, resolve } from "path";
 import { IApplication } from "../Application/IApplication";
 import { ILoader } from "./ILoader";
 import { ILoaderOptions } from "./ILoaderOptions";
-import { resolve, extname } from "path";
 import { isArray } from "util";
 
 /**
@@ -89,6 +90,7 @@ export abstract class AbstractLoader<T = any> implements ILoader<T> {
   public async load<T>() {
     const { root } = this.app;
     const { path } = this.options;
+    if (!existsSync(root)) return;
     const files = await this.glob(path, { cwd: root });
     files.forEach(file => {
       const types = require(resolve(root, file));

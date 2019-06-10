@@ -1,10 +1,10 @@
 import { Application } from "../..";
 
-new Application()
+const application = new Application();
+
+application
   .launch()
-  .then(({ app, port }) => {
-    app.logger.info("Running:", `http://localhost:${port}`);
+  .then(({ port }) => {
+    application.logger.info("Running:", `http://localhost:${port}`);
   })
-  .catch(err => {
-    throw err;
-  });
+  .catch(err => console.error(err));

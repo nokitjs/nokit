@@ -6,6 +6,6 @@ import { IoCLoader } from "../IoCLoader";
 export class ServiceLoader<T = any> extends IoCLoader<T> {
   async load() {
     await super.load();
-    this.app.logger.info("Service loaded");
+    this.app.logger.info("Service ready");
   }
 }

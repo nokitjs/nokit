@@ -1,8 +1,8 @@
 import { Context } from "koa";
-import { getMappingInfos, IMappingInfo } from "./mapping";
 import { getByPath } from "../common/utils";
 import { getControllerInfo, IControllerInfo } from "./controller";
 import { getCtxInfos } from "./context";
+import { getMappingInfos, IMappingInfo } from "./mapping";
 import { IoCLoader } from "../IoCLoader";
 import { normalize } from "path";
 
@@ -67,7 +67,9 @@ export class ControllerLoader<T = any[]> extends IoCLoader<T> {
     const ctlInfo = getControllerInfo(CtlType);
     const mapInfos = getMappingInfos(CtlType);
     if (!ctlInfo || !mapInfos || mapInfos.length < 1) return;
-    mapInfos.forEach(mapInfo => this.regRoute(CtlType, ctlInfo, mapInfo));
+    mapInfos.forEach((mapInfo: IMappingInfo) =>
+      this.regRoute(CtlType, ctlInfo, mapInfo)
+    );
   }
 
   /**
@@ -76,6 +78,6 @@ export class ControllerLoader<T = any[]> extends IoCLoader<T> {
   public async load() {
     await super.load();
     this.content.forEach((CtlType: any) => this.regCtlType(CtlType));
-    this.app.logger.info("Controller loaded");
+    this.app.logger.info("Controller ready");
   }
 }

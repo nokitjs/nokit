@@ -13,7 +13,7 @@
     "noFallthroughCasesInSwitch": true,
     "maxNodeModuleJsDepth": 4,
     "lib": [
-      "esnext"
+      "esnext" 
     ]
   },
   "include": [

@@ -2,7 +2,7 @@ import * as globby from "globby";
 import { AbstractLoader } from "../AbstractLoader";
 import { basename, resolve } from "path";
 import { compile, Environment, FileSystemLoader } from "nunjucks";
-import { readFile } from "fs";
+import { existsSync, readFile } from "fs";
 import { VIEWS_ENTITY_KEY } from "./constants";
 
 /**
@@ -27,6 +27,7 @@ export class ViewLoader<T = any> extends AbstractLoader<T> {
   public async load() {
     const { path, extname = ".html" } = this.options;
     const viewRoot = resolve(this.root, path);
+    if (!existsSync(viewRoot)) return;
     const files = await globby(`./**/*${extname}`, { cwd: viewRoot });
     const viewMap: any = {};
     const env = new Environment(new FileSystemLoader(viewRoot));
@@ -40,6 +41,6 @@ export class ViewLoader<T = any> extends AbstractLoader<T> {
       })
     );
     this.container.registerValue(VIEWS_ENTITY_KEY, viewMap);
-    this.app.logger.info("View loaded");
+    this.app.logger.info("View ready");
   }
 }
