@@ -40,5 +40,6 @@ export class ViewLoader<T = any> extends AbstractLoader<T> {
       })
     );
     this.container.registerValue(VIEWS_ENTITY_KEY, viewMap);
+    this.app.logger.info("View loaded");
   }
 }

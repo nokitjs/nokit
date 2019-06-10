@@ -16,7 +16,7 @@ export interface ICtxMappingInfo {
 export function ctx(name = ".") {
   return (target: any, member: string, index: number) => {
     const type = "ctx",
-      list = getCtxMappingInfos(target, member);
+      list = getCtxInfos(target, member);
     list.push({ type, name, index });
     Reflect.metadata(CTL_PARAMETER, list)(target, member);
   };
@@ -70,7 +70,7 @@ export const header = (name?: string) =>
  * @param target 控制器
  * @param member 控制器方法名
  */
-export function getCtxMappingInfos(target: any, member: string) {
+export function getCtxInfos(target: any, member: string) {
   const list = Reflect.getMetadata(CTL_PARAMETER, target, member) || [];
   return list as ICtxMappingInfo[];
 }

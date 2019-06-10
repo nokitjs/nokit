@@ -1,4 +1,5 @@
 import { inject, provider } from "../../..";
+import { config } from "../../../ConfigLoader";
 
 @provider("test1")
 export class Test1Service {
@@ -17,6 +18,9 @@ export class Test2Service {
 
   @inject("db")
   db: any;
+
+  @config("aaa")
+  conf: any;
 
   find(opts: any) {
     this.db.find(opts);

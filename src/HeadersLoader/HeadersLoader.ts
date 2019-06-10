@@ -16,5 +16,6 @@ export class HeadersLoader<T = any> extends AbstractLoader<T> {
       for (let key in headers) ctx.set(key, headers[key]);
       await next();
     });
+    this.app.logger.info("Headers loaded");
   }
 }

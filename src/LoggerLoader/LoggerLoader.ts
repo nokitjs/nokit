@@ -1,31 +1,32 @@
-import * as log4js from "koa-log4";
 import { AbstractLoader } from "../AbstractLoader";
-// import { LOGGER_ENTITY_KEY } from "./constants";
+import { Logger, Level } from "hilog";
 import { mix } from "../common/utils";
+import { resolve } from "path";
+import { LOGGER_ENTITY_KEY } from "./constants";
 
 const defaultOptions: any = {
-  appenders: {
-    access: {
-      type: "console",
-      filename: "./access",
-      pattern: "-yyyy-MM-dd",
-      keepFileExt: true,
-      alwaysIncludePattern: true,
-      level: "trace",
-      maxLevel: "info"
-    },
+  writers: {
     error: {
       type: "console",
-      filename: "./error",
-      pattern: "-yyyy-MM-dd",
-      keepFileExt: true,
-      alwaysIncludePattern: true
+      categories: ["*"],
+      level: [Level.warn, Level.error]
+    },
+    app: {
+      type: "console",
+      categories: ["app"],
+      level: [Level.debug, Level.info]
+    },
+    ctx: {
+      type: "console",
+      categories: ["ctx"],
+      level: [Level.debug, Level.info]
+    },
+    access: {
+      type: "console",
+      categories: ["access"],
+      level: [Level.info],
+      format: "[:time] - :method :url :status #:pid"
     }
-  },
-  categories: {
-    default: { appenders: ['access', 'error'], level: 'all' },
-    // app: { appenders: ['access', 'error'], level: 'all' },
-    // ctx: { appenders: ['access', 'error'], level: 'all' }
   }
 };
 
@@ -37,10 +38,17 @@ export class LoggerLoader<T = any> extends AbstractLoader<T> {
    * 初始化日志模块
    */
   public async load() {
-    const options = mix({ ...defaultOptions }, this.options);
-    log4js.configure(options);
-    this.server.use(log4js.koaLogger(log4js.getLogger('access'), { level: 'auto' }));
-    // const getLogger = (category?: string) => log4js.getLogger(category);
-    // this.container.registerValue(LOGGER_ENTITY_KEY, getLogger);
+    const root = resolve(this.root, "./logs/");
+    const options = mix({ root, ...defaultOptions }, this.options);
+    await Logger.init(options);
+    const getLogger = (category?: string) => Logger.get(category);
+    this.container.registerValue(LOGGER_ENTITY_KEY, getLogger);
+    this.server.use(async (ctx, next) => {
+      ctx.logger = await getLogger("ctx");
+      await next();
+      const { method, url, status } = ctx;
+      getLogger("access").write(Level.info, { method, url, status }, "");
+    });
+    this.app.logger.info("Logger loaded");
   }
 }

@@ -1,3 +1,3 @@
-export function conn() {
+export function db() {
   return { name: "conn" };
 }

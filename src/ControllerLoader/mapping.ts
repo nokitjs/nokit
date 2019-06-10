@@ -16,7 +16,7 @@ export interface IMappingInfo {
  */
 export function mapping(verb: string, path = "/") {
   return (target: any, method: string) => {
-    const mappings = getAllMappingInfos(target);
+    const mappings = getMappingInfos(target);
     mappings.push({ verb, path, method });
     Reflect.metadata(CTL_MAPPING, mappings)(target.constructor);
   };
@@ -26,7 +26,7 @@ export function mapping(verb: string, path = "/") {
  * 获取所有路由映射
  * @param target 类或原型
  */
-export function getAllMappingInfos(target: any) {
+export function getMappingInfos(target: any) {
   const list = Reflect.getMetadata(CTL_MAPPING, target) || [];
   return list as IMappingInfo[];
 }

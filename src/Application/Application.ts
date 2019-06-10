@@ -15,6 +15,8 @@ import { ILoader } from "../AbstractLoader/ILoader";
 import { ILoaderConstructor } from "../AbstractLoader/ILoaderConstructor";
 import { ILoaderInfo, ILoaderInfoMap } from "../AbstractLoader/ILoaderInfo";
 import { isObject } from "util";
+import { LOGGER_ENTITY_KEY } from "../LoggerLoader/constants";
+import { ILogger } from "../LoggerLoader/ILogger";
 
 /**
  * 全局应用程序类，每一个应用都会由一个 Application 实例开始
@@ -45,6 +47,14 @@ export class Application extends EventEmitter implements IApplication {
    */
   public get config() {
     return this.container.get(CONFIG_ENTITY_KEY) || {};
+  }
+
+  /**
+   * 应用日志对象
+   */
+  public get logger() {
+    const getLogger = this.container.get(LOGGER_ENTITY_KEY);
+    return (getLogger && getLogger("app")) as ILogger;
   }
 
   /**

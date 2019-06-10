@@ -2,5 +2,9 @@ import { Application } from "../..";
 
 new Application()
   .launch()
-  .then(({ port }) => console.info("Running:", `http://localhost:${port}`))
-  .catch(err => console.error(err));
+  .then(({ app, port }) => {
+    app.logger.info("Running:", `http://localhost:${port}`);
+  })
+  .catch(err => {
+    throw err;
+  });

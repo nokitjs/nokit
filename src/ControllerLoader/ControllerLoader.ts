@@ -1,8 +1,8 @@
 import { Context } from "koa";
-import { getAllMappingInfos, IMappingInfo } from "./mapping";
+import { getMappingInfos, IMappingInfo } from "./mapping";
 import { getByPath } from "../common/utils";
 import { getControllerInfo, IControllerInfo } from "./controller";
-import { getCtxMappingInfos } from "./context";
+import { getCtxInfos } from "./context";
 import { IoCLoader } from "../IoCLoader";
 import { normalize } from "path";
 
@@ -52,7 +52,7 @@ export class ControllerLoader<T = any[]> extends IoCLoader<T> {
    * @param method 控制器方法
    */
   private async execCtlMethod(ctx: Context, ctlInstance: any, method: string) {
-    const parameters = getCtxMappingInfos(ctlInstance, method)
+    const parameters = getCtxInfos(ctlInstance, method)
       .sort((a, b) => (a.index || 0) - (b.index || 0))
       .map(info => getByPath(ctx, info.name));
     return ctlInstance[method](...parameters);
@@ -65,7 +65,7 @@ export class ControllerLoader<T = any[]> extends IoCLoader<T> {
    */
   private regCtlType(CtlType: any) {
     const ctlInfo = getControllerInfo(CtlType);
-    const mapInfos = getAllMappingInfos(CtlType);
+    const mapInfos = getMappingInfos(CtlType);
     if (!ctlInfo || !mapInfos || mapInfos.length < 1) return;
     mapInfos.forEach(mapInfo => this.regRoute(CtlType, ctlInfo, mapInfo));
   }
@@ -76,5 +76,6 @@ export class ControllerLoader<T = any[]> extends IoCLoader<T> {
   public async load() {
     await super.load();
     this.content.forEach((CtlType: any) => this.regCtlType(CtlType));
+    this.app.logger.info("Controller loaded");
   }
 }

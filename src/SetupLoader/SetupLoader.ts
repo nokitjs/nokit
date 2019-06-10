@@ -21,5 +21,6 @@ export class SetupLoader extends AbstractLoader<ISetupFunction> {
         this.container.registerValue(func.name, value);
       })
     );
+    this.app.logger.info("Setup loaded");
   }
 }

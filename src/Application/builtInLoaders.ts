@@ -1,14 +1,14 @@
-import { ConfigLoader } from '../ConfigLoader';
-import { ControllerLoader } from '../ControllerLoader';
-import { HeadersLoader } from '../HeadersLoader';
-import { ILoaderInfoMap } from '../AbstractLoader';
-import { LoggerLoader } from '../LoggerLoader';
-import { ModelLoader } from '../ModelLoader';
-import { ServiceLoader } from '../ServiceLoader';
-import { SessionLoader } from '../SessionLoader';
-import { SetupLoader } from '../SetupLoader';
-import { StaticLoader } from '../StaticLoader';
-import { ViewLoader } from '../ViewLoader';
+import { ConfigLoader } from "../ConfigLoader";
+import { ControllerLoader } from "../ControllerLoader";
+import { HeadersLoader } from "../HeadersLoader";
+import { ILoaderInfoMap } from "../AbstractLoader";
+import { LoggerLoader } from "../LoggerLoader";
+import { ModelLoader } from "../ModelLoader";
+import { ServiceLoader } from "../ServiceLoader";
+import { SessionLoader } from "../SessionLoader";
+import { SetupLoader } from "../SetupLoader";
+import { StaticLoader } from "../StaticLoader";
+import { ViewLoader } from "../ViewLoader";
 
 export const builtLoaders: ILoaderInfoMap = {
   config: {
@@ -16,7 +16,7 @@ export const builtLoaders: ILoaderInfoMap = {
     options: { path: "./configs/config" }
   },
   logger: {
-    loader: LoggerLoader,
+    loader: LoggerLoader
   },
   headers: {
     loader: HeadersLoader

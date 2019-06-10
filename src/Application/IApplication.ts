@@ -1,6 +1,7 @@
 import * as Koa from "koa";
 import * as Router from "koa-router";
 import { Container } from "../IoCLoader";
+import { ILogger } from "../LoggerLoader/ILogger";
 
 /**
  * 全局应用接口定义
@@ -35,4 +36,9 @@ export interface IApplication {
    * 应用的根路由实例
    */
   readonly router: Router;
+
+  /**
+   * 日志对象
+   */
+  readonly logger: ILogger;
 }

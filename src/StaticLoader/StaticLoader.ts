@@ -23,5 +23,6 @@ export class StaticLoader<T = any> extends AbstractLoader<T> {
       await compose([conditional(), etag()])(ctx, noopNext);
     });
     this.server.use(serve(staticRoot));
+    this.app.logger.info("Static loaded");
   }
 }
