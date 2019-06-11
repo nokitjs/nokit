@@ -1,13 +1,13 @@
-import { controller, get, inject, param, render, session } from "../../..";
+import { Controller, Get, Inject, Param, Render, Session } from "../../..";
 
-@controller("/")
+@Controller("/")
 export class HelloController {
-  @inject("test1")
+  @Inject("test1")
   service: any;
 
-  @get("/say/:name")
-  @render("index")
-  say(@param("name") name: string, @session() session: any) {
+  @Get("/say/:name")
+  @Render("index")
+  say(@Param("name") name: string, @Session() session: any) {
     session.count = session.count || 0;
     session.count++;
     name += session.count;

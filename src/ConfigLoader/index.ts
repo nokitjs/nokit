@@ -1,3 +1,3 @@
-export * from "./config";
+export * from "./Config";
 export * from "./ConfigLoader";
 export * from "./constants";

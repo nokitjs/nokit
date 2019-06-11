@@ -1,4 +1,4 @@
-import { provider, IProviderOptions } from "../IoCLoader";
+import { Provider, IProviderOptions } from "../IoCLoader";
 
 /**
  * 模型选项
@@ -11,5 +11,5 @@ export interface IModelOptions extends IProviderOptions {}
  * @param options 选项
  */
 export function model(name: string | symbol, options?: IModelOptions) {
-  return provider(name, options);
+  return Provider(name, options);
 }

@@ -1,3 +1,3 @@
 export * from "./ViewLoader";
-export * from "./render";
+export * from "./Render";
 export * from "./constants";

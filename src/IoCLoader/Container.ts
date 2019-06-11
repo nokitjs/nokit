@@ -1,6 +1,6 @@
 import { defaultInjectGetter } from "./InjectGetter";
-import { getPropInjectInfos } from "./inject";
-import { getProviderInfo } from "./provider";
+import { getPropInjectInfos } from "./Inject";
+import { getProviderInfo } from "./Provider";
 import { IContainer, IEntity } from "./IContainer";
 import { IInjectInfo } from "./IInjectInfo";
 import { IOC_ENTITY_CLS, IOC_ENTITY_OBJ, IOC_SINGLETON } from "./constants";

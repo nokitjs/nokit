@@ -1,25 +1,25 @@
-import { inject, provider } from "../../..";
-import { config } from "../../../ConfigLoader";
+import { Inject, Provider } from "../../..";
+import { Config } from "../../../ConfigLoader";
 
-@provider("test1")
+@Provider("test1")
 export class Test1Service {
   name = "I am Test1";
 
-  @inject("test2")
+  @Inject("test2")
   test2: any;
 
-  @inject()
+  @Inject()
   conn: any;
 }
 
-@provider("test2")
+@Provider("test2")
 export class Test2Service {
   name = "I am Test2";
 
-  @inject("db")
+  @Inject("db")
   db: any;
 
-  @config("aaa")
+  @Config("aaa")
   conf: any;
 
   find(opts: any) {

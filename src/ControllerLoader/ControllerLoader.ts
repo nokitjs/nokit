@@ -1,8 +1,8 @@
 import { Context } from "koa";
 import { getByPath } from "../common/utils";
-import { getControllerInfo, IControllerInfo } from "./controller";
-import { getCtxInfos } from "./context";
-import { getMappingInfos, IMappingInfo } from "./mapping";
+import { getControllerInfo, IControllerInfo } from "./Controller";
+import { getCtxInfos } from "./Context";
+import { getMappingInfos, IMappingInfo } from "./Mapping";
 import { IoCLoader } from "../IoCLoader";
 import { normalize } from "path";
 
