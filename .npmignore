@@ -14,3 +14,4 @@ packages/
 tsconfig.json
 tslint.json
 logs/
+*.db

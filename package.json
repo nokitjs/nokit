@@ -6,11 +6,11 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "clean": "rm -rf ./lib",
-    "lint": "tslint --project ./tsconfig.json --fix && cd packages/noka-example && npm run lint",
-    "build": "npm run clean && npm run lint && tsc && npm run copy",
-    "copy": "copyfiles --up 1 ./src/**/*.{json,yml,html,css,md} lib/",
-    "dev": "tsc -w & cd packages/noka-example && npm run dev"
+    "clean": "bash ./scripts/clean.sh",
+    "lint": "bash ./scripts/lint.sh",
+    "build": "bash ./scripts/build.sh",
+    "copy": "bash ./scripts/copy.sh",
+    "dev": "bash ./scripts/dev.sh"
   },
   "keywords": [
     "nokit",
@@ -51,6 +51,7 @@
     "nunjucks": "^3.2.0",
     "oneport": "^1.0.2",
     "reflect-metadata": "^0.1.13",
+    "sql.js": "^1.0.0",
     "typeorm": "^0.2.18"
   },
   "devDependencies": {

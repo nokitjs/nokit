@@ -7,7 +7,7 @@ export class HelloController {
   service: TestService;
 
   @Get("/")
-  @Render("index")
+  // @Render("index")
   async index() {
     const list = await this.service.create();
     return { name: "Index", list };

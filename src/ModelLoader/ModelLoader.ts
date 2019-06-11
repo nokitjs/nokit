@@ -10,8 +10,9 @@ export * from "typeorm";
 export class ModelLoader<T = any> extends IoCLoader<T> {
   private get defaultConnection() {
     return {
-      type: "sqlite",
-      database: this.normalizePattern("./data/store.db"),
+      type: "sqljs",
+      location: this.normalizePattern("./data/store.db"),
+      autoSave: true,
       synchronize: true,
       logging: false,
       entities: this.normalizePatterns([this.options.path])
