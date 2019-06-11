@@ -11,7 +11,6 @@ export class HelloController {
     session.count = session.count || 0;
     session.count++;
     name += session.count;
-    this.service();
     return { name };
   }
 }

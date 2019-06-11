@@ -12,8 +12,9 @@
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
     "maxNodeModuleJsDepth": 4,
+    "pretty": true,
     "lib": [
-      "esnext" 
+      "esnext"
     ]
   },
   "include": [

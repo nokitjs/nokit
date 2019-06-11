@@ -29,7 +29,7 @@ const defaultOptions: any = {
       type: "console",
       categories: ["access"],
       level: [Level.info],
-      format: "[:time] - :method :url :status :rtms #:pid",
+      format: "[:time] - :method :url :status :rtms :hostname #:pid",
       location: "./access-yyyy-MM-dd.log"
     }
   }
@@ -52,11 +52,11 @@ export class LoggerLoader<T = any> extends AbstractLoader<T> {
       ctx.logger = await getLogger("ctx");
       const startTime = Date.now();
       await next();
-      const rt = Date.now() - startTime;
       const { method, url, status, headers } = ctx;
       const ua = `"${headers["user-agent"]}"`;
+      const rt = Date.now() - startTime;
       const fields = { method, url, status, rt, ua };
-      getLogger("access").write(Level.info, fields, "");
+      getLogger("access").write(Level.info, fields);
     });
     this.server.on("error", (err, ctx) => {
       const { method, url, status, headers } = ctx;
