@@ -1,22 +1,16 @@
-import { Controller, Get, Inject, Param, Render } from "noka";
-import { TestService } from "../services/Hello";
+import { Controller, Get, Inject, Render } from "noka";
+import { ItemService } from "../services/Hello";
 
 @Controller("/")
 export class HelloController {
-  @Inject("test")
-  service: TestService;
+  @Inject("itemService")
+  itemService: ItemService;
 
   @Get("/")
-  // @Render("index")
-  async index() {
-    const list = await this.service.create();
-    return { name: "Index", list };
-  }
-
-  @Get("/hello/:name")
-  @Get("/hello")
   @Render("index")
-  async say(@Param("name") name = "World") {
-    return { name };
+  async index() {
+    await this.itemService.create();
+    const items = await this.itemService.list();
+    return { items };
   }
 }

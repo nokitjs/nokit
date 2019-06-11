@@ -1,7 +1,21 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>
-  Hello {{ name }}
-</h1>
+<h1>Items:</h1>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in items %}
+    <tr>
+      <td>{{ item.id }}</td>
+      <td>{{ item.name }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}

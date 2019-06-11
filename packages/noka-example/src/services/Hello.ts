@@ -1,16 +1,20 @@
-import { Provider, Connection, Conn } from "noka";
-import { Demo } from "../models/Example";
+import { Conn, Connection, Provider } from "noka";
+import { Item } from "../models/Item";
 
-@Provider("test")
-export class TestService {
+@Provider("itemService")
+export class ItemService {
   @Conn()
   conn: Connection;
 
   async create() {
-    const repo = this.conn.getRepository(Demo);
-    const demo = new Demo();
+    const repo = this.conn.getRepository(Item);
+    const demo = new Item();
     demo.name = "test";
-    await repo.save(demo);
-    return repo.find({});
+    return repo.save(demo);
+  }
+
+  async list() {
+    const repo = this.conn.getRepository(Item);
+    return repo.find({ skip: 0, take: 10 });
   }
 }

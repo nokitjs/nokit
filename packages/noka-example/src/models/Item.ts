@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "noka";
 
 @Entity()
-export class Demo {
+export class Item {
   @PrimaryGeneratedColumn()
   id: string;
 
