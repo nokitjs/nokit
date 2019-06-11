@@ -9,4 +9,7 @@ _*
 *.src.*
 *.d.ts
 coverage
-src/
+logs/
+tsconfig.json
+tslint.json
+lib/

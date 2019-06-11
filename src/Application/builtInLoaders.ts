@@ -23,22 +23,22 @@ export const builtLoaders: ILoaderInfoMap = {
   },
   setup: {
     loader: SetupLoader,
-    options: { path: "./{src}/setups/**/*.{ext}" }
+    options: { path: "./:src/setups/**/*:ext" }
   },
   model: {
     loader: ModelLoader,
-    options: { path: "./{src}/models/**/*.{ext}" }
+    options: { path: "./:src/models/**/*:ext" }
   },
   service: {
     loader: ServiceLoader,
-    options: { path: "./{src}/services/**/*.{ext}" }
+    options: { path: "./:src/services/**/*:ext" }
   },
   session: {
     loader: SessionLoader
   },
   controller: {
     loader: ControllerLoader,
-    options: { path: "./{src}/controllers/**/*.{ext}" }
+    options: { path: "./:src/controllers/**/*:ext" }
   },
   view: {
     loader: ViewLoader,

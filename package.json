@@ -7,10 +7,10 @@
   "typings": "./lib/index.d.ts",
   "scripts": {
     "clean": "rm -rf ./lib",
-    "lint": "tslint --project ./tsconfig.json --fix",
+    "lint": "tslint --project ./tsconfig.json --fix && cd packages/noka-example && npm run lint",
     "build": "npm run clean && npm run lint && tsc && npm run copy",
     "copy": "copyfiles --up 1 ./src/**/*.{json,yml,html,css,md} lib/",
-    "dev": "tsnd ./src/_example/src/app.ts"
+    "dev": "tsc -w & cd packages/noka-example && npm run dev"
   },
   "keywords": [
     "nokit",
@@ -67,6 +67,7 @@
     "ts-node-dev": "^1.0.0-pre.39",
     "tslint": "^5.16.0",
     "tslint-config-dawn": "^1.0.2",
-    "typescript": "^3.5.1"
+    "typescript": "^3.5.1",
+    "yarn": "^1.16.0"
   }
 }

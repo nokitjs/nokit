@@ -16,9 +16,10 @@ export interface IMappingInfo {
  */
 export function Mapping(verb: string, path = "/") {
   return (target: any, method: string) => {
-    const mappings = getMappingInfos(target);
+    const controller = target.constructor;
+    const mappings = getMappingInfos(controller);
     mappings.push({ verb, path, method });
-    Reflect.metadata(CTL_MAPPING, mappings)(target.constructor);
+    Reflect.metadata(CTL_MAPPING, mappings)(controller);
   };
 }
 

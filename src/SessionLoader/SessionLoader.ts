@@ -20,6 +20,6 @@ export class SessionLoader<T = any> extends AbstractLoader<T> {
     const options = { ...defaultOptions, ...this.options };
     this.server.keys = options.keys || SIGN_KEYS;
     this.server.use(session(options, this.server));
-    this.app.logger.info("Headers ready");
+    this.app.logger.info("Session ready");
   }
 }

@@ -1,16 +1,20 @@
-import { Controller, Get, Inject, Param, Render, Session } from "noka";
+import { Controller, Get, Inject, Param, Render } from "noka";
 
 @Controller("/")
 export class HelloController {
   @Inject("test1")
   service: any;
 
-  @Get("/say/:name")
+  @Get("/")
   @Render("index")
-  say(@Param("name") name: string, @Session() session: any) {
-    session.count = session.count || 0;
-    session.count++;
-    name += session.count;
+  index() {
+    return { name: "Index" };
+  }
+
+  @Get("/hello/:name")
+  @Get("/hello")
+  @Render("index")
+  say(@Param("name") name = "World") {
     return { name };
   }
 }

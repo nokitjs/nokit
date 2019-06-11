@@ -52,13 +52,13 @@ export abstract class AbstractLoader<T = any> implements ILoader<T> {
   protected content: T[] = [];
 
   /**
-   * 规范化匹配一个表达式字符串
-   * @param patterns 匹配表达式
+   * 将匹配一个表达式字符串规范化
+   * @param pattern 匹配表达式
    */
   private normalizePattern(pattern: string): string {
-    const ext = extname(__filename).slice(1);
-    const src = ext === "ts" ? "src" : "lib";
-    return pattern.replace("{src}", src).replace("{ext}", ext);
+    const ext = extname(this.app.entry);
+    const src = ext === ".ts" ? "src" : "lib";
+    return pattern.replace(":src", src).replace(":ext", ext);
   }
 
   /**
@@ -98,8 +98,8 @@ export abstract class AbstractLoader<T = any> implements ILoader<T> {
    */
   public async load<T>() {
     const { root } = this.app;
-    const { path } = this.options;
     if (!existsSync(root)) return;
+    const { path } = this.options;
     const moduleFiles = await this.glob(path, { cwd: root });
     moduleFiles.forEach(moduleFile => {
       const types = this.require(moduleFile);

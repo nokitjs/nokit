@@ -84,13 +84,20 @@ export class Application extends EventEmitter implements IApplication {
   public get root() {
     if (this.options.root) return this.options.root;
     if (this.__root) return this.__root;
-    let root = dirname(process.argv[1]);
+    let root = dirname(this.entry);
     while (!this.isSystemRootDir(root) && !this.existsPackage(root)) {
       root = dirname(root);
     }
     if (this.isSystemRootDir(root) || root === ".") root = process.cwd();
     this.__root = root;
     return this.__root;
+  }
+
+  /**
+   * 入口文件
+   */
+  get entry() {
+    return process.argv[1];
   }
 
   /**

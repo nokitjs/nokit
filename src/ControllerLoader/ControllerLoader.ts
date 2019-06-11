@@ -38,7 +38,7 @@ export class ControllerLoader<T = any[]> extends IoCLoader<T> {
       async (ctx: any, next: Function) => {
         const ctlInstance = new CtlType();
         this.container.inject(ctlInstance);
-        ctx.body = await this.execCtlMethod(ctx, ctlInstance, method);
+        ctx.body = await this.invokeCtlMethod(ctx, ctlInstance, method);
         ctx.preventCahce = true;
         await next();
       }
@@ -51,7 +51,11 @@ export class ControllerLoader<T = any[]> extends IoCLoader<T> {
    * @param ctlInstance 控制器实例
    * @param method 控制器方法
    */
-  private async execCtlMethod(ctx: Context, ctlInstance: any, method: string) {
+  private async invokeCtlMethod(
+    ctx: Context,
+    ctlInstance: any,
+    method: string
+  ) {
     const parameters = getCtxInfos(ctlInstance, method)
       .sort((a, b) => (a.index || 0) - (b.index || 0))
       .map(info => getByPath(ctx, info.name));
@@ -65,11 +69,11 @@ export class ControllerLoader<T = any[]> extends IoCLoader<T> {
    */
   private regCtlType(CtlType: any) {
     const ctlInfo = getControllerInfo(CtlType);
-    const mapInfos = getMappingInfos(CtlType);
-    if (!ctlInfo || !mapInfos || mapInfos.length < 1) return;
-    mapInfos.forEach((mapInfo: IMappingInfo) =>
-      this.regRoute(CtlType, ctlInfo, mapInfo)
-    );
+    const mapppingInfos = getMappingInfos(CtlType);
+    if (!ctlInfo || !mapppingInfos || mapppingInfos.length < 1) return;
+    mapppingInfos.forEach((mapInfo: IMappingInfo) => {
+      this.regRoute(CtlType, ctlInfo, mapInfo);
+    });
   }
 
   /**

@@ -11,3 +11,6 @@ _*
 coverage
 src/
 packages/
+tsconfig.json
+tslint.json
+logs/

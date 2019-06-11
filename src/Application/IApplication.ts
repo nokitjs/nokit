@@ -18,6 +18,11 @@ export interface IApplication {
   readonly root: string;
 
   /**
+   * 入口文件
+   */
+  readonly entry: string;
+
+  /**
    * 应用配置
    */
   readonly config: any;
