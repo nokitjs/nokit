@@ -4,6 +4,7 @@ import { getProviderInfo } from "./Provider";
 import { IContainer, IEntity } from "./IContainer";
 import { IInjectInfo } from "./IInjectInfo";
 import { IOC_ENTITY_CLS, IOC_ENTITY_OBJ, IOC_SINGLETON } from "./constants";
+import { isFunction } from "util";
 
 /**
  * IoC 容器类
@@ -118,16 +119,25 @@ export class Container implements IContainer {
   public get<T = any>(name: string | symbol) {
     if (!name) return;
     const entity: IEntity = this.entities[name];
+    // 不存在的 name，返回 undefined
     if (!entity) return;
-    if (entity.type !== IOC_ENTITY_CLS) return entity.value as T;
-    const type = entity.value;
-    if (!type) return;
-    if (type[IOC_SINGLETON]) return type[IOC_SINGLETON] as T;
-    const instance = new type();
+    const { type, value } = entity;
+    // 注册为非类或实际不是类的实体，直接返回
+    if (type !== IOC_ENTITY_CLS || !isFunction(value)) return value as T;
+    // 获取注册信息
+    const info = getProviderInfo(value);
+    // 声明为 static 的，直接返回
+    if (info && info.options && info.options.static) {
+      return value as T;
+    }
+    // 如果有单例 cache 的，返回 cache 的实例
+    if (value[IOC_SINGLETON]) return value[IOC_SINGLETON] as T;
+    // 创建新实例，并执行注入
+    const instance = new value();
     this.inject(instance);
-    const info = getProviderInfo(type);
+    // 如果有单例标记，将单例 cache
     if (info && info.options && info.options.singleton) {
-      type[IOC_SINGLETON] = instance;
+      value[IOC_SINGLETON] = instance;
     }
     return instance as T;
   }

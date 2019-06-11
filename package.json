@@ -50,7 +50,8 @@
     "ntils": "^4.0.8",
     "nunjucks": "^3.2.0",
     "oneport": "^1.0.2",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.18"
   },
   "devDependencies": {
     "@types/express": "^4.16.1",

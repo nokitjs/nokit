@@ -55,7 +55,7 @@ export abstract class AbstractLoader<T = any> implements ILoader<T> {
    * 将匹配一个表达式字符串规范化
    * @param pattern 匹配表达式
    */
-  private normalizePattern(pattern: string): string {
+  protected normalizePattern(pattern: string): string {
     const ext = extname(this.app.entry);
     const src = ext === ".ts" ? "src" : "lib";
     return pattern.replace(":src", src).replace(":ext", ext);
@@ -65,7 +65,7 @@ export abstract class AbstractLoader<T = any> implements ILoader<T> {
    * 规范化匹配表达式字符串
    * @param patterns 匹配表达式
    */
-  private normalizePatterns(patterns: string | string[]): string | string[] {
+  protected normalizePatterns(patterns: string | string[]): string | string[] {
     return isArray(patterns)
       ? patterns.map((pattern: string) => this.normalizePattern(pattern))
       : this.normalizePattern(patterns);

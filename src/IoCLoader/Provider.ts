@@ -5,6 +5,7 @@ import { IOC_PROVIDER } from "./constants";
  */
 export interface IProviderOptions {
   singleton?: boolean;
+  static?: boolean;
 }
 
 /**
