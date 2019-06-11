@@ -1,27 +1,16 @@
-import { Inject, Provider, Config } from "noka";
+import { Provider, Connection, Conn } from "noka";
+import { Demo } from "../models/Example";
 
-@Provider("test1")
-export class Test1Service {
-  name = "I am Test1";
+@Provider("test")
+export class TestService {
+  @Conn()
+  conn: Connection;
 
-  @Inject("test2")
-  test2: any;
-
-  @Inject()
-  conn: any;
-}
-
-@Provider("test2")
-export class Test2Service {
-  name = "I am Test2";
-
-  @Inject("db")
-  db: any;
-
-  @Config("aaa")
-  conf: any;
-
-  find(opts: any) {
-    this.db.find(opts);
+  async create() {
+    const repo = this.conn.getRepository(Demo);
+    const demo = new Demo();
+    demo.name = "test";
+    await repo.save(demo);
+    return repo.find({});
   }
 }

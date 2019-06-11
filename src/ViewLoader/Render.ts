@@ -14,7 +14,8 @@ export function renderInjectGetter(options: IInjectGetterOptions) {
   const render = getByPath(views, String(info.name));
   return !originValue || !isFunction(originValue)
     ? render
-    : (...args: any[]) => render(originValue.call(instance, ...args));
+    : async (...args: any[]) =>
+        render(await originValue.call(instance, ...args));
 }
 
 /**

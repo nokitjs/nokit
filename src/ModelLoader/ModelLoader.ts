@@ -2,6 +2,7 @@ import { createConnections } from "typeorm";
 import { IoCLoader } from "../IoCLoader";
 import { isArray } from "util";
 import { MODEL_CONN_ENTITY_KEY } from "./constants";
+export * from "typeorm";
 
 /**
  * 模型加载器
@@ -10,7 +11,7 @@ export class ModelLoader<T = any> extends IoCLoader<T> {
   private get defaultConnection() {
     return {
       type: "sqlite",
-      database: this.normalizePattern("./db/db.sql"),
+      database: this.normalizePattern("./data/store.db"),
       synchronize: true,
       logging: false,
       entities: this.normalizePatterns([this.options.path])

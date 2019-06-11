@@ -7,7 +7,7 @@ import { Inject } from "../IoCLoader";
  * 配置注入 Getter 函数
  * @param options 注入选项
  */
-export function configInjectGetter(options: IInjectGetterOptions) {
+function configInjectGetter(options: IInjectGetterOptions) {
   const { container, info } = options;
   const configObject = container.get(CONFIG_ENTITY_KEY);
   return getByPath(configObject, String(info.name));
