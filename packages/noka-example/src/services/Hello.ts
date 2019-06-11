@@ -1,5 +1,4 @@
-import { Inject, Provider } from "../../..";
-import { Config } from "../../../ConfigLoader";
+import { Inject, Provider, Config } from "noka";
 
 @Provider("test1")
 export class Test1Service {

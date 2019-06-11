@@ -10,3 +10,4 @@ _*
 *.d.ts
 coverage
 src/
+packages/

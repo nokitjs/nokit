@@ -1,4 +1,4 @@
-import { Application } from "../..";
+import { Application } from "noka";
 
 const application = new Application();
 

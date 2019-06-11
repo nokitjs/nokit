@@ -1,4 +1,4 @@
-import { Controller, Get, Inject, Param, Render, Session } from "../../..";
+import { Controller, Get, Inject, Param, Render, Session } from "noka";
 
 @Controller("/")
 export class HelloController {
