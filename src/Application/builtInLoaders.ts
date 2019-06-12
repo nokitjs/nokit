@@ -9,6 +9,7 @@ import { SessionLoader } from "../SessionLoader";
 import { SetupLoader } from "../SetupLoader";
 import { StaticLoader } from "../StaticLoader";
 import { ViewLoader } from "../ViewLoader";
+import { BodyLoader } from "../BodyLoader";
 
 export const builtLoaders: ILoaderInfoMap = {
   config: {
@@ -24,6 +25,9 @@ export const builtLoaders: ILoaderInfoMap = {
   setup: {
     loader: SetupLoader,
     options: { path: "./:src/setups/**/*:ext" }
+  },
+  body: {
+    loader: BodyLoader
   },
   model: {
     loader: ModelLoader,

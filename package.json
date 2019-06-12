@@ -41,6 +41,7 @@
     "globby": "^9.2.0",
     "hilog": "^1.0.2",
     "koa": "^2.7.0",
+    "koa-body": "^4.1.0",
     "koa-compose": "^4.1.0",
     "koa-conditional-get": "^2.0.0",
     "koa-etag": "^3.0.0",

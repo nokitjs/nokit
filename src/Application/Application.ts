@@ -109,10 +109,15 @@ export class Application extends EventEmitter implements IApplication {
   }
 
   /**
+   * 内建的 loaders
+   */
+  static loaders = builtLoaders;
+
+  /**
    * 获取内建的 loaders
    */
   protected getBuiltInLoaders(): ILoaderInfoMap {
-    return builtLoaders;
+    return Application.loaders;
   }
 
   /**
