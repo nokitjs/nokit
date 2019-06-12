@@ -15,6 +15,11 @@ export class ItemService {
 
   async list() {
     const repo = this.conn.getRepository(Item);
-    return repo.find({ skip: 0, take: 10 });
+    return repo
+      .createQueryBuilder("item")
+      .orderBy("item.id", "DESC")
+      .skip(0)
+      .limit(10)
+      .getMany();
   }
 }
